@@ -1,0 +1,55 @@
+.ContenedorPaginado{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.ButtonL{
+    font-family: 'Common Pixel', sans-serif;
+    font-size: 20px;
+    width: 40px;
+    height:45px;
+    border-width:1px;
+    color: rgb(255, 230, 2);
+    border-radius: 15px 30px;
+    border-color: rgb(253, 249, 19);;
+    background:rgba(50, 54, 255, 0.541);
+    font-size: 40px;
+}
+.ButtonL:hover{
+    background: rgba(243, 255, 87, 1);
+    color: blue;
+    border-color: 3px solid blue;
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
+    transform: scale(1.08);
+}
+
+.ButtonR{
+    font-family: 'Common Pixel', sans-serif;
+    font-size: 20px;
+    width: 40px;
+    height:45px;
+    border-width:1px;
+    color: rgb(255, 230, 2);
+    border-radius: 30px 15px;
+    border-color: rgb(253, 249, 19);;
+    background:rgba(50, 54, 255, 0.541);
+    font-size: 40px;
+}
+.ButtonR:hover{
+    background: rgba(243, 255, 87, 1);
+    color: blue;
+    border-color: 3px solid blue;
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
+    transform: scale(1.08);
+}
+
+
+.text{
+    font-family: 'ProggyCleanTTSZBP', sans-serif;
+    font-size: 40px;
+    margin-left: 16px;
+    margin-right: 16px;
+    color: rgb(241, 241, 41);
+}

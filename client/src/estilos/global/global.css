@@ -1,0 +1,9 @@
+body{
+    width: 100%;
+    height: 100vh;
+    background-image: url(https://www.itl.cat/pngfile/big/116-1163450_8-bit-wallpapers-youll-totally-want-for-your.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    cursor: url("https://cdn.custom-cursor.com/db/13574/32/minimal-pikachu-cursor.png"), auto;
+}
+
