@@ -3,6 +3,12 @@ import estilos from "../../estilos/About/About.module.css"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { getPokemons, getTypes } from "../../redux/actions/actions.js"
+import hacker from "../../estilos/Images/hacker.png"
+import linkedin from "../../estilos/Images/linkedin.png"
+import gmail from "../../estilos/Images/gmail.png"
+
+
+
 export function About(){
 
     const dispatch = useDispatch()
@@ -57,8 +63,8 @@ export function About(){
         <b> </b>
         <b className={estilos.b1}>Desarrollador: Owen Nicolas Perez Bonoris</b>
         <b> </b>
-        <b className={estilos.b2}><img src="https://cdn-icons.flaticon.com/png/512/3670/premium/3670167.png?token=exp=1658963588~hmac=3c1fd8c8ae567002718b41c30732465b" alt="icon" className={estilos.icon}/>  Linkedin: <a className={estilos.linkedin} href="https://www.linkedin.com/in/owen-bonoris-80b150168/">https://www.linkedin.com/in/owen-bonoris-80b150168/</a></b>
-        <b className={estilos.b3}><img src="https://cdn-icons.flaticon.com/png/512/2875/premium/2875435.png?token=exp=1658963842~hmac=13b08758d02146ee148b4960ce7f034e" alt="icon" className={estilos.icon}/>  Gmail: <a  className={estilos.linkedin} href="mailto:owenpbonoris@gmail.com?Subject=Interesad@%20en%20contratarte%20Owen">owenpbonoris@gmail.com</a></b>
+        <b className={estilos.b2}><img src={linkedin} alt="icon" className={estilos.icon}/>  Linkedin: <a className={estilos.linkedin} href="https://www.linkedin.com/in/owen-bonoris-80b150168/">https://www.linkedin.com/in/owen-bonoris-80b150168/</a></b>
+        <b className={estilos.b3}><img src={gmail} alt="icon" className={estilos.icon}/>  Gmail: <a  className={estilos.linkedin} href="mailto:owenpbonoris@gmail.com?Subject=Interesad@%20en%20contratarte%20Owen">owenpbonoris@gmail.com</a></b>
         <b> </b>
         <b className={estilos.b4}>Esta página ha sido creada para el Proyecto Individual</b>
         <b className={estilos.b5}>de la empresa SoyHenry en el Bootcamp de Desarrollo Web Full </b>
@@ -67,7 +73,7 @@ export function About(){
         <b className={estilos.b8}>utilizando JavaScript, React, Redux, Express, SQL - Sequelize, </b>
         <b className={estilos.b9}>CSS y un poco de Testing.</b>
         </div>
-        <img  className={estilos.Img}  alt="hackerpng" src="https://cdn-icons.flaticon.com/png/512/3518/premium/3518732.png?token=exp=1659029725~hmac=e64a8490ba590132ce22ab1de5e6cc1b"/>
+        <img  className={estilos.Img}  alt="hackerpng" src={hacker}/>
         </div> {/* contenedor imagen y texto */}
         </div>
         </div>

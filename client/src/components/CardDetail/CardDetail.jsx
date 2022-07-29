@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { getById, getPokemons, cleanDetails, getTypes} from "../../redux/actions/actions.js"
 import estilos from "../../estilos/CardDetail/CardDetail.module.css"
 import { Link } from "react-router-dom"
+// import Hacker from "../../estilos/Images/hacker.png"
+import sword from "../../estilos/Images/sword.png"
+import shield from "../../estilos/Images/shield.png"
+
 
 export function CardDetail(props){
 
@@ -47,8 +51,8 @@ export function CardDetail(props){
                                 </div>
                                 
                                 <div className={estilos.statsColumns}>
-                                <b className={estilos.statB}><img src={`https://cdn-icons.flaticon.com/png/512/2157/premium/2157084.png?token=exp=1658850231~hmac=a2d1da8671f454793dcca2371e7865cc`} alt="attack" className={estilos.icon}/>ATTACK: {pokemonbyname.attack}</b>
-                                <b className={estilos.statB}><img src={`https://cdn-icons.flaticon.com/png/512/4399/premium/4399403.png?token=exp=1658798977~hmac=caa2c1d101a2a3d40d1ce4d34137860a`} alt="defense" className={estilos.icon}/>DEFENSE: {pokemonbyname.defense}</b>
+                                <b className={estilos.statB}><img src={sword} alt="attack" className={estilos.icon}/>ATTACK: {pokemonbyname.attack}</b>
+                                <b className={estilos.statB}><img src={shield} alt="defense" className={estilos.icon}/>DEFENSE: {pokemonbyname.defense}</b>
                                 </div>
                                 <div className={estilos.statsColumns}>
                                 <b className={estilos.statB}><img src={`https://cdn-icons-png.flaticon.com/512/4516/4516746.png`} alt="height" className={estilos.icon}/>HEIGHT: {pokemonbyname.height}</b>
