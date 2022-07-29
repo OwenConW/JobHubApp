@@ -80,7 +80,7 @@ export default function Home(){
                 renderizar.length && typeof renderizar[0] !== "string"
                 ? <> {renderizar.slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)
                     .map(p => <Card key={key++} {...p}/>)}</>
-                :<div className={estilosHome.contenedorNoPokemons}><img className={estilosHome.NoPokemonsIMG} alt="nopokemonsimg" src="https://i.gifer.com/origin/7d/7dab25c7b14a249bbc4790176883d1c5_w200.gif"/><button onClick={handleClick} className={estilosHome.ShowAllButton}>SHOW ALL</button></div>
+                :!renderizar.name ? <div className={estilosHome.contenedorNoPokemons}><img className={estilosHome.NoPokemonsIMG} alt="nopokemonsimg" src="https://i.gifer.com/origin/7d/7dab25c7b14a249bbc4790176883d1c5_w200.gif"/><button onClick={handleClick} className={estilosHome.ShowAllButton}>SHOW ALL</button></div> : <><button onClick={handleClick} className={estilosHome.OnePokemon}>SHOW ALL</button></>
             }
             </div>
         </>

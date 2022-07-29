@@ -7,12 +7,11 @@ import { Link } from "react-router-dom"
 
 export default function Form(){
     
-    
     const pokemonCreado = useSelector(state => state.pokemonForm)
     const pokemon = useSelector(state => state.pokemonC)
     const pokemons = useSelector(state => state.pokemons)
-
     const tipos = useSelector(state => state.types)
+
     const [creado, setCreado] = useState({})
     const [names, setNames] = useState([])
 
@@ -54,6 +53,7 @@ export default function Form(){
     }
 
     const handleChange = (e) => {
+        dispatch(cleanForm())
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -76,6 +76,7 @@ export default function Form(){
             ...input,
             types: selected,
         })
+        // verifica cada cambio del input
         setErrors(validateInput({
             ...input,
             types: selected
@@ -85,10 +86,12 @@ export default function Form(){
     const handleSubmitC = (e) => {
         e.preventDefault()
         Object.keys(validateInput(input)).length 
+        // Si hay errores le pido que la revise
         ? alert("Please check the information!")
-        //Si hay errores le pido que la revise
+        // hay errores y el nombre no existe
         : !Object.keys(validateInput(input)).length  &&  !names.find(obj => obj.name.toLowerCase() === input.name.toLowerCase())
-        ? dispatch(createPokemon(input)) &&       setInput({
+        //dipatch y reseteo inputs
+        ? dispatch(createPokemon(input)) && setInput({
             name: "",
             hp: 0,
             attack: 0,
@@ -99,8 +102,10 @@ export default function Form(){
             weight: 0,
             types: []
         })
-        //Si no hay errores despacho la creacion
+        
         : alert(`${input.name} already exists!`)
+
+
         // names.some(obj => obj.name.toLowerCase() === input.name.toLowerCase()) 
         // ? alert("El nombre ingresado ya existe")
         // : dispatch(createPokemon(input))
@@ -189,7 +194,7 @@ export default function Form(){
                 }
 			</select>
             {
-                errors.types ? <p>{errors.types}</p> : <><p>ㅤ</p><br></br></>
+                errors.types ? <p className={estilos.errorType}>{errors.types}</p> : <p className={estilos.errorType}></p>
             }
             </div>
             </div>
@@ -203,12 +208,12 @@ export default function Form(){
             </div>
             <div className={estilos.response}>
             {
-                // muestra el pokemon creado junto al mensaje de que el mismo se creo
-               // create.pokemon && <div className={estilos.responseCard}> <h1>{create.message}</h1><Card key={create.pokemon.id * 100}  {...create.pokemon}></Card>  </div>
+                // muestra un boton para traer el pokemon junto al mensaje de que el mismo se creo
                pokemon.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemon.nombre} creado con éxito!`}</h1><button onClick={() => dispatch(getLasCreated(pokemon.nombre))} className={estilos.buttonGet}>{"GET PoKéMoN"}</button></div>
             }
             {
-               creado && creado.name && <div className={estilos.responseCard}><Card key={creado.id * 100} {...creado}></Card> </div>
+                // muestra el pokemon creado
+               creado && creado.name && <div className={estilos.responseCard}><Card key={creado.id * 100} {...creado}></Card> </div> 
             }
             </div>
             </div>

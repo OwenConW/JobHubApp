@@ -6,11 +6,12 @@
 
 .header{
     align-items: center;
+    height: 150px;
 }
 
 .ContenedorForm{
     width: 90%;
-    height: fit-content;
+    height: 750px;
     display: flex;
     justify-self: center;
     justify-content: space-between;
@@ -30,14 +31,13 @@
     color: rgb(255, 255, 0);
     -webkit-text-stroke: 3px rgb(13, 93, 223);
     letter-spacing: 10px;
-    font-size: 80px;
+    font-size: 60px;
     font-family: 'Pokemon Solid', sans-serif;
     margin: 0px;
     margin-bottom: 30px;
 }
 
 .Form{
-    margin-top: 20px;
     color: white;
     border-radius: 40px;
     width: 70%;
@@ -46,18 +46,17 @@
     justify-content: space-evenly;
     flex-direction: column;
     column-count: 2;
-    height: fit-content;
+    height: 100%;
     
 }
 
 .response{
-    margin-top: 5%;
     background-color: transparent;
     display: flex;
     justify-content: center;
     text-align: center;
     width: 30%;
-    height: 100%;
+    height: fit-content;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
     font-size: 30px;
     justify-items: center; 
@@ -97,9 +96,9 @@
     margin-top: 10px;
     margin-left: 10px;
     font-family: 'Common Pixel', sans-serif;
-    font-size: 20px;
-    width:150px;
-    height:45px;
+    font-size: 17px;
+    width:120px;
+    height:35px;
     border-width:1px;
     color: rgb(255, 230, 2);
     border-radius: 15px 30px;
@@ -112,7 +111,7 @@
     color: blue;
     border-color: 3px solid blue;
     cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
-    transform: scale(1.08);
+    transform: scale(1.08); 
 }
 
 
@@ -129,7 +128,7 @@
     justify-content: center;
     flex-direction: row;
     width: 100%;
-    height: 210px;
+    height: 168px;
 }
 
 .Second{
@@ -137,7 +136,7 @@
     justify-content: center;
     flex-direction: row;
     width: 100%;
-    height: 210px;
+    height: 168px;
 }
 
 .Third{
@@ -146,11 +145,11 @@
     flex-direction: row;
     width: 100%;
     overflow: hidden;
-    height: 210px;
+    height: 168px;
 }
 
 .chooseSection{
-    height: 810px;
+    height: 180px;
     width: 50%;
 }
 
@@ -164,14 +163,14 @@
     flex-direction: row;
     width: 100%;
     overflow: hidden;
-    height: 258px;
+    height: 168px;
 }
 
 
 .Label{
     font-family: 'ProggyCleanTTSZBP', sans-serif;
     color: black;
-    font-size: 40px;
+    font-size: 36px;
     display: flex;
     text-align: center;
     justify-content: center;
@@ -179,13 +178,13 @@
 
 .InputForm{
     margin-top: 10px;
-    height: 40px;
+    height: 26px;
     width: 50%;
     border: none;
     background-color: transparent;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
     text-align: center;
-    font-size: 60px;
+    font-size: 40px;
     text-align: center;  
 }
 input[type=number]::-webkit-inner-spin-button{
@@ -199,30 +198,30 @@ input[type=number]::-webkit-outer-spin-button{
 }
 
 .InputFormName{
-    margin-top: 20px;
-    height: 70px;
-    width: 50%;
-    border: none;
-    background-color: transparent;
-    font-family: 'ProggyCleanTTSZBP', sans-serif;
-    text-align: center;
-    font-size: 60px;
-    text-align: center;
-}
-.InputFormName:focus{
-    outline: none;
-    text-align: center; 
-    font-size: 60px;
-}
-.InputFormImage{
-    margin-top: 50px;
-    height: 40px;
+    margin-top: 27px;
+    height: 30px;
     width: 50%;
     border: none;
     background-color: transparent;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
     text-align: center;
     font-size: 40px;
+    text-align: center;
+}
+.InputFormName:focus{
+    outline: none;
+    text-align: center; 
+    font-size: 40px;
+}
+.InputFormImage{
+    margin-top: 40px;
+    height: 30px;
+    width: 50%;
+    border: none;
+    background-color: transparent;
+    font-family: 'ProggyCleanTTSZBP', sans-serif;
+    text-align: center;
+    font-size: 30px;
     text-align: center;
 }
 .InputFormImage:focus{
@@ -233,7 +232,7 @@ input[type=number]::-webkit-outer-spin-button{
 .SelectInput{
     width: 90%;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
     text-transform: capitalize;
     border-width:1px;
@@ -241,7 +240,7 @@ input[type=number]::-webkit-outer-spin-button{
     border-radius: 30px 30px;
     border-color: rgb(253, 249, 19);;
     background:rgba(0, 4, 255, 0.781);
-    height: 150px;
+    height: 100px;
 }
 .SelectInput:hover{
     cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
@@ -251,39 +250,45 @@ input[type=number]::-webkit-outer-spin-button{
 option:hover{
     background-color: rgb(250, 248, 108);
     color: rgba(0, 4, 255, 0.781);
-    font-size: 35px
+    font-size: 25px
 }
 
 option::selection{
     background-color: yellow;
     color: rgba(0, 4, 255, 0.781);
-    font-size: 40px
+    font-size: 25px
 }
 .warning{
-    font-size: 30px;;
+    font-size: 26px;;
     color: red;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
     border-bottom: 1px solid red;
     margin: 1px;
+ 
     margin-left: 15px;
     background-color: transparent;
     width: 100%;
     height: 96%;
 }
 
+.errorType{
+    margin: 0px;
+    font-size: 26px;
+    padding-bottom: 7px
+}
+
 .create{
-    margin-top: 20px;
-    margin-bottom: 20px;
     margin-left: 10px;
     font-family: 'Common Pixel', sans-serif;
     font-size: 20px;
     width: 100%;
-    height:45px;
+    height: 40px;
     border-width:1px;
     color: rgb(255, 230, 2);
     border-radius: 30px 30px;
     border-color: rgb(253, 249, 19);;
     background:rgb(50, 53, 255);
+    margin-top: 10px;
 }
 .create:hover{
     background: rgba(243, 255, 87, 1);

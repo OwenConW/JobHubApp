@@ -46,9 +46,9 @@
     font-family: 'ProggyCleanTTSZBP', sans-serif;
     text-align: center;
     margin-top: 30px;
-    font-size: 30px;
-    width: 200px;
-    height:45px;
+    font-size: 24px;
+    width: 150px;
+    height:35px;
     border-width:1px;
     color: rgb(255, 230, 2);
     border-radius: 30px 30px;
@@ -60,6 +60,30 @@
     cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
 .buttons:hover {
+    background: rgba(243, 255, 87, 1);
+    color: blue;
+    border-color: 3px solid blue;
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
+    transform: scale(1.08);
+}
+
+
+.OnePokemon{
+    font-family: 'Common Pixel', sans-serif;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 18px;
+    width: 150px;
+    height:35px;
+    border-width:1px;
+    color: rgb(255, 230, 2);
+    border-radius: 15px 30px;
+    border-color: rgb(253, 249, 19);;
+    background:rgba(50, 53, 255, 0.849);
+    text-transform: uppercase;
+}
+
+.OnePokemon:hover {
     background: rgba(243, 255, 87, 1);
     color: blue;
     border-color: 3px solid blue;

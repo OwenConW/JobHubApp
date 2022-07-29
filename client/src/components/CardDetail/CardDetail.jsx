@@ -55,11 +55,11 @@ export function CardDetail(props){
                                 <b className={estilos.statB}><img src={`https://cdn-icons-png.flaticon.com/512/3134/3134405.png`} alt="weight" className={estilos.icon}/>WEIGHT: {pokemonbyname.weight}</b>
                                 </div>
                             </div>
-                        <h1 className={estilos.tipos}><img src={`https://cdn-icons-png.flaticon.com/512/188/188942.png`} alt="types" className={estilos.icon}/>Types:</h1>
-                        {
+                        <h1 className={estilos.tipos}><img src={`https://cdn-icons-png.flaticon.com/512/362/362003.png`} alt="types" className={estilos.icon}/>TYPES:</h1>
+                        { 
                            pokemonbyname.id <= 40 && pokemonbyname.types 
                            ?  <> {pokemonbyname.types.map((t, i) =><h3 key={i} className={estilos.tiposCu}>{t}</h3>)}</>
-                           : pokemonbyname.types && <> {pokemonbyname.types.map((t, i) => <h3 key={i} className={estilos.tiposCu}>{t.name}</h3>)}</>
+                           : pokemonbyname.types && <> {pokemonbyname.types.map((t, i) => <><img src={`https://cdn-icons-png.flaticon.com/512/188/188942.png`} alt="tipos" className={estilos.icon}/><h3 key={i} className={estilos.tiposCu}>{t.name}</h3></>)}</>
                         }
                         </div>
                     </div>

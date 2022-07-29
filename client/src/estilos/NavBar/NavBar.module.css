@@ -1,7 +1,7 @@
 .contenedorNav{
     background: rgb(255,255,255);
     background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 79%);
-    padding: 10px
+    padding: 1px
 }
 
 .contenedorButtons{
@@ -10,7 +10,7 @@
     align-items: center;
 }
 .title{
-    font-size: 100px;
+    font-size: 80px;
     display: flex;
     justify-content: center;
     font-family: 'Pokemon Solid', sans-serif;
@@ -36,7 +36,7 @@
     height: 40px;
     margin-right: 0px;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
-    font-size: 50px;
+    font-size: 38px;
     color: yellow;
 }
 
@@ -51,7 +51,8 @@
     border-radius: 200px;
     background-image: url(http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/7dc876e7dba90a8.png);
     height: 60px;
-    width: 60px;
+    width: 50px;
+    margin-left: 3px;
     background-color: transparent;
     outline: transparent;
     border: none;
@@ -83,6 +84,7 @@ ul{
     text-decoration: none;
     color: white;
     font-family: 'Common Pixel', sans-serif;
+    font-size: 26px;
 }
 
 .NavLinkNavBar:hover{
@@ -94,9 +96,10 @@ ul{
 
 .BackButton{
     font-family: 'ProggyCleanTTSZBP', sans-serif;
-    font-size: 30px;
-    width: 200px;
-    height:47px;
+    font-size: 23px;
+    width: 160px;
+    height:37px;
+    margin-left: 8px;
     border-width:1px;
     color: rgb(255, 230, 2);
     border-radius: 15px 30px;
