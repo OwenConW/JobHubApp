@@ -246,10 +246,7 @@ input[type=number]::-webkit-outer-spin-button{
     text-transform: capitalize;
     border-width:1px;
     color: rgb(255, 230, 2);
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 10px;
     border-color: rgb(253, 249, 19);;
     background:rgba(0, 4, 255, 0.781);
     height: 100px;

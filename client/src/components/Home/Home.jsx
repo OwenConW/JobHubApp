@@ -37,6 +37,7 @@ export default function Home(){
     }
 
     useEffect(() => {
+        dispatch(getTypes())
         setRenderizar(() => pokemons)
         setPagina(1)
     }, [dispatch, pokemons])

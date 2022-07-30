@@ -23,16 +23,16 @@ export default function Card(props){
                 </div>
 
                 <div className={estilos.flip_card_back}>
-                {/* <button onClick={handleDelete}>BORRAR</button> */}
                 <Link to={`/pokemons/${props.id}`} className={estilos.Link}>
+                {/* <button onClick={handleDelete}>BORRAR</button> */}
                         <h1 className={estilos.name}>{props.name}</h1>
-                </Link>
                 <h1 className={estilos.tipos}>Types:</h1>
                 {
-                   props.id <= 40 && props.types 
-                   ?  <> {props.types.map((t, i) =><h3 key={i} className={estilos.tiposCu}>{t}</h3>)}</>
-                   : props.types && <> {props.types.map((t, i) => <h3 key={i} className={estilos.tiposCu}>{t.name}</h3>)}</>
+                    props.id <= 40 && props.types 
+                    ?  <> {props.types.map((t, i) =><h3 key={i} className={estilos.tiposCu}>{t}</h3>)}</>
+                    : props.types && <> {props.types.map((t, i) => <h3 key={i} className={estilos.tiposCu}>{t.name}</h3>)}</>
                 }
+                </Link>
                 </div>
             </div>
         </div>

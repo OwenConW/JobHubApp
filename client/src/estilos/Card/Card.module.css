@@ -81,6 +81,7 @@
 
 /* Estilos de atras*/
 .flip_card_back {
+  text-decoration: none;
   background: rgb(0,0,0);
   background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255, 241, 111, 0.63) 100%);
   color: black;
@@ -90,7 +91,10 @@
 
 /* Estilos del Link*/
 .Link{
-    text-decoration: none;
+  text-decoration: none;  
+}
+.Link:hover{
+  cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
 
 /* Estilos del nombre del Pokemon*/
@@ -108,12 +112,25 @@
 }
 
 .tipos{
+  text-decoration: none;
   font-family: 'ProggyCleanTTSZBP', sans-serif;
   font-size: 40px;
+  color: black
+}
+
+.tipos:hover{
+  cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
 
 .tiposCu{
+  color: black;
+  text-decoration: none;
   font-family: 'ProggyCleanTTSZBP', sans-serif;
   font-size: 40px;
+  margin-top: 20px;
   text-transform: capitalize;
+}
+
+.tiposCu:hover{
+  cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }

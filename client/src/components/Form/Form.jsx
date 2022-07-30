@@ -166,7 +166,7 @@ export default function Form(){
             }
             </div>
             <div className={errors.height ? estilos.warning :estilos.DivInput}>
-            <label className={estilos.Label}>* Height(cm):</label>
+            <label className={estilos.Label}>* Height(m):</label>
             <input className={estilos.InputForm} type="number" name="height" value={input.height}  onChange={handleChange}></input>
             {
                 errors.height ? <p>{errors.height}</p> : <p>ㅤ</p>
@@ -183,11 +183,13 @@ export default function Form(){
             <div className={estilos.Four}>
             <div className={estilos.chooseSection}>
             <div className={errors.types ? estilos.warning :estilos.DivInput}>
-            <label className={estilos.Label}>* Choose a type:</label>
+            <label className={estilos.Label}>* Choose a type (ctrl + click):</label>
             <select className={estilos.SelectInput}
 				id="types"
 				name="types"
 				multiple="multiple"
+                selectMultiple={true}
+                touchUi={false}
 				onChange={(e) => hanldeChangeType(e)}>
 				{
                     tipos.length ? tipos.map((t, i) => <option key={i} value={`${t}`}>{`${t}`}</option>) : false
@@ -199,7 +201,7 @@ export default function Form(){
             </div>
             </div>
             <div className={estilos.imageFormInput}>
-             <label className={estilos.Label}>Image:</label>
+             <label className={estilos.Label}>Image (.jpg):</label>
             <input className={estilos.InputFormImage} type="text" name="image" value={input.image} placeholder="Please enter an url..." onChange={handleChange}></input>
             </div>
             </div>
