@@ -7,6 +7,8 @@ import { Link } from "react-router-dom"
 
 export default function Form(){
     
+    const dispatch = useDispatch()
+
     const pokemonCreado = useSelector(state => state.pokemonForm)
     const pokemon = useSelector(state => state.pokemonC)
     const pokemons = useSelector(state => state.pokemons)
@@ -16,13 +18,12 @@ export default function Form(){
     const [names, setNames] = useState([])
 
     useEffect(() => {
+        dispatch(getPokemons())
         setCreado(() => pokemonCreado)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pokemonCreado])
+    }, [dispatch, pokemonCreado])
 
     useEffect(() => {
         dispatch(getTypes())
-        dispatch(getPokemons())
         setNames(() => pokemons)
         return () => {
             dispatch(cleanForm())
@@ -45,10 +46,8 @@ export default function Form(){
 
     const [errors, setErrors] = useState({})
 
-    const dispatch = useDispatch()
 
     const handleClickBack = () => {
-        dispatch(getPokemons())
         dispatch(getTypes())
     }
 

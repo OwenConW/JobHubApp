@@ -2,7 +2,7 @@ import React from "react"
 import estilos from "../../estilos/About/About.module.css"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { getPokemons, getTypes } from "../../redux/actions/actions.js"
+import { getTypes } from "../../redux/actions/actions.js"
 import hacker from "../../estilos/Images/hacker.png"
 import linkedin from "../../estilos/Images/linkedin.png"
 import gmail from "../../estilos/Images/gmail.png"
@@ -15,7 +15,6 @@ export function About(){
 
 
     const handleClickBack = () => {
-        dispatch(getPokemons())
         dispatch(getTypes())
     }
 

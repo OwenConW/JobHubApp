@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getById, getPokemons, cleanDetails, getTypes} from "../../redux/actions/actions.js"
+import { getById, cleanDetails, getTypes} from "../../redux/actions/actions.js"
 import estilos from "../../estilos/CardDetail/CardDetail.module.css"
 import { Link } from "react-router-dom"
 // import Hacker from "../../estilos/Images/hacker.png"
@@ -21,7 +21,6 @@ export function CardDetail(props){
     }, [])
 
     const handleBack = () => {
-        dispatch(getPokemons())
         dispatch(getTypes())
     }
 
