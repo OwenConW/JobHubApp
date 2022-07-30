@@ -13,7 +13,7 @@
     border-width:1px;
     color: rgb(255, 230, 2);
     border-radius: 15px 30px;
-    border-color: rgb(253, 249, 19);;
+    border: 1px solid rgb(253, 249, 19);
     background:rgba(50, 54, 255, 0.541);
     font-size: 30px;
 }
@@ -33,7 +33,7 @@
     border-width:1px;
     color: rgb(255, 230, 2);
     border-radius: 30px 15px;
-    border-color: rgb(253, 249, 19);;
+    border: 1px solid rgb(253, 249, 19);
     background:rgba(50, 54, 255, 0.541);
     font-size: 30px;
 }

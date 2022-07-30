@@ -209,7 +209,7 @@ export default function Form(){
             <div className={estilos.response}>
             {
                 // muestra un boton para traer el pokemon junto al mensaje de que el mismo se creo
-               pokemon.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemon.nombre} creado con éxito!`}</h1><button onClick={() => dispatch(getLasCreated(pokemon.nombre))} className={estilos.buttonGet}>{"GET PoKéMoN"}</button></div>
+               pokemon.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemon.nombre} creado con éxito!`}</h1><button onClick={() => dispatch(getLasCreated(pokemon.nombre))} className={estilos.buttonGet}>{"GET POKÉMON"}</button></div>
             }
             {
                 // muestra el pokemon creado

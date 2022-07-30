@@ -175,7 +175,7 @@ export function cleanDetails(){
 
 // export function deletePokemon(name, id){
 //     return function(dispatch){
-//         axios.delete(`http://localhost:3001/pokemons?id=${id}`)
+//         axios.delete(`/pokemons?id=${id}`)
 //         .then(res => {
 //             console.log("ACTION CREATER:", res.data)
 //             dispatch({

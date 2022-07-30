@@ -63,7 +63,7 @@ export function CardDetail(props){
                         { 
                            pokemonbyname.id <= 40 && pokemonbyname.types 
                            ?  <> {pokemonbyname.types.map((t, i) =><h3 key={i} className={estilos.tiposCu}>{t}</h3>)}</>
-                           : pokemonbyname.types && <> {pokemonbyname.types.map((t, i) => <><img src={`https://cdn-icons-png.flaticon.com/512/188/188942.png`} alt="tipos" className={estilos.icon}/><h3 key={i} className={estilos.tiposCu}>{t.name}</h3></>)}</>
+                           : pokemonbyname.types && <> {pokemonbyname.types.map((t, i) => <><h3 key={i} className={estilos.tiposCu}>{t.name}</h3></>)}</>
                         }
                         </div>
                     </div>

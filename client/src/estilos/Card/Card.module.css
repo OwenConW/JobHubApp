@@ -96,7 +96,7 @@
 /* Estilos del nombre del Pokemon*/
 .name{
   color: rgb(241, 241, 41);
-  -webkit-text-stroke: 3px rgb(13, 93, 223);
+  -webkit-text-stroke: 2px rgb(13, 93, 223);
   letter-spacing: 5px;
   font-size: 40px;
   font-family: 'Pokemon Solid', sans-serif;

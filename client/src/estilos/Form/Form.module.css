@@ -58,7 +58,7 @@
     width: 30%;
     height: fit-content;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     justify-items: center; 
     flex-direction: column;
 }
@@ -76,8 +76,8 @@
     margin-bottom: 20px;
     margin-left: 10px;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
-    font-size: 40px;
-    width: 50%;
+    font-size: 30px;
+    width: 38%;
     height:45px;
     border-width:1px;
     color: rgb(255, 230, 2);
@@ -102,7 +102,7 @@
     border-width:1px;
     color: rgb(255, 230, 2);
     border-radius: 15px 30px;
-    border-color: rgb(253, 249, 19);;
+    border: 1px solid rgb(253, 249, 19);
     background:rgba(50, 54, 255, 0.541);
 }
 
@@ -155,7 +155,9 @@
 
 .imageFormInput{
     width: 50%;
+    
 }
+
 
 .Four{
     display: flex;
@@ -174,6 +176,7 @@
     display: flex;
     text-align: center;
     justify-content: center;
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
 
 .InputForm{
@@ -186,7 +189,9 @@
     text-align: center;
     font-size: 40px;
     text-align: center;  
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
+
 input[type=number]::-webkit-inner-spin-button{
     display: none;
 }
@@ -207,11 +212,13 @@ input[type=number]::-webkit-outer-spin-button{
     text-align: center;
     font-size: 40px;
     text-align: center;
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
 .InputFormName:focus{
     outline: none;
     text-align: center; 
     font-size: 40px;
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
 .InputFormImage{
     margin-top: 40px;
@@ -223,10 +230,12 @@ input[type=number]::-webkit-outer-spin-button{
     text-align: center;
     font-size: 30px;
     text-align: center;
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
 .InputFormImage:focus{
     outline: none;
     text-align: center; 
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
 
 .SelectInput{
@@ -237,7 +246,10 @@ input[type=number]::-webkit-outer-spin-button{
     text-transform: capitalize;
     border-width:1px;
     color: rgb(255, 230, 2);
-    border-radius: 30px 30px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     border-color: rgb(253, 249, 19);;
     background:rgba(0, 4, 255, 0.781);
     height: 100px;
@@ -245,7 +257,28 @@ input[type=number]::-webkit-outer-spin-button{
 .SelectInput:hover{
     cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
 }
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #4d4d4d50 #7a7a7a7e;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
 
+  *::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #88888810;
+    border-radius: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #4d4d4d61;
+    border-radius: 5px;
+    border: 0px none #45454561;
+  }
 
 option:hover{
     background-color: rgb(250, 248, 108);

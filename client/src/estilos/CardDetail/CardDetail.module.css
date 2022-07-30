@@ -68,7 +68,7 @@
     border-width:1px;
     color: rgb(255, 230, 2);
     border-radius: 15px 30px;
-    border-color: rgb(253, 249, 19);;
+    border: 1px solid rgb(253, 249, 19);
     background:rgba(50, 54, 255, 0.541);
 }
 
@@ -166,13 +166,13 @@
 /* Estilos del nombre del Pokemon*/
 .name{
   color: rgb(241, 241, 41);
-  -webkit-text-stroke: 3px rgb(13, 93, 223);
+  -webkit-text-stroke: 2px rgb(13, 93, 223);
   letter-spacing: 11px;
   font-size: 80px;
   font-family: 'Pokemon Solid', sans-serif;
   text-transform: capitalize;
   margin: 0px;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 .id{
