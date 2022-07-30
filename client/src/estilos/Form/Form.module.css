@@ -180,7 +180,7 @@
 }
 
 .InputForm{
-    margin-top: 10px;
+    margin-top: 30px;
     height: 26px;
     width: 50%;
     border: none;
@@ -223,7 +223,7 @@ input[type=number]::-webkit-outer-spin-button{
 .InputFormImage{
     margin-top: 40px;
     height: 30px;
-    width: 50%;
+    width: 90%;
     border: none;
     background-color: transparent;
     font-family: 'ProggyCleanTTSZBP', sans-serif;
@@ -326,4 +326,11 @@ option::selection{
     border-color: 3px solid blue;
     cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
     transform: scale(1.01);
+}
+
+.aclaraciones{
+    font-size: 22px;
+    margin-top: 8px;
+    font-weight: 500;
+    margin-left: 40px;
 }

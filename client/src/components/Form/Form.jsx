@@ -183,7 +183,7 @@ export default function Form(){
             <div className={estilos.Four}>
             <div className={estilos.chooseSection}>
             <div className={errors.types ? estilos.warning :estilos.DivInput}>
-            <label className={estilos.Label}>* Choose a type (ctrl + click):</label>
+            <label className={estilos.Label}>* Choose a type: <b className={estilos.aclaraciones}>(ctrl + click)</b></label>
             <select className={estilos.SelectInput}
 				id="types"
 				name="types"
@@ -201,8 +201,8 @@ export default function Form(){
             </div>
             </div>
             <div className={estilos.imageFormInput}>
-             <label className={estilos.Label}>Image (.jpg):</label>
-            <input className={estilos.InputFormImage} type="text" name="image" value={input.image} placeholder="Please enter an url..." onChange={handleChange}></input>
+             <label className={estilos.Label}>Image:</label>
+            <input className={estilos.InputFormImage} type="text" name="image" value={input.image} placeholder="Please enter a .jpg or .png url..." onChange={handleChange}></input>
             </div>
             </div>
             <button type="submit" className={estilos.create}>CREATE</button>
