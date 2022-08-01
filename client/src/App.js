@@ -9,7 +9,7 @@ import normalize from "./estilos/global/normalize.css"
 // eslint-disable-next-line no-unused-vars
 import globales from "./estilos/global/global.css"
 import { About } from "./components/About/About.jsx"
-
+import { error } from "./components/error/error.jsx"
 
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
         <Route exact path="/create" component={Form}/>
         <Route exact path="/pokemons/:id" component={CardDetail}/>
         <Route exact path="/about" component={About}/>
+        <Route path="/:cualquiercosa" component={error}/>
     </Switch>
     </>
   );

@@ -116,7 +116,7 @@ export default function Form(){
         dispatch(cleanForm())
     }
 
-    const handleGetPokenon = () => {
+    const handleGetPokemon = () => {
         dispatch(getLasCreated(pokemon.nombre))
     }
 
@@ -224,7 +224,7 @@ export default function Form(){
             <div className={estilos.response}>
             {
                 // muestra un boton para traer el pokemon junto al mensaje de que el mismo se creo
-               pokemon.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemon.nombre} creado con éxito!`}</h1><button onClick={handleGetPokenon} className={estilos.buttonGet}>{"GET POKÉMON"}</button></div>
+               pokemon.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemon.nombre} creado con éxito!`}</h1><button onClick={handleGetPokemon} className={estilos.buttonGet}>{"GET POKÉMON"}</button></div>
             }
             {
                 // muestra el pokemon creado

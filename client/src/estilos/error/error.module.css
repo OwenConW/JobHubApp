@@ -1,0 +1,142 @@
+@import 'https://fonts.googleapis.com/css?family=Inconsolata';
+
+
+.padre {
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #000000;
+    background-image: radial-gradient(#ffffff34, #ffffff48), url(https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Inconsolata', Helvetica, sans-serif;
+    font-size: 2.5rem;
+    color: rgba(251, 255, 0, 0.8);
+    text-shadow:
+        0 0 1ex rgb(5, 134, 255),
+        0 0 2px rgba(255, 255, 255, 0.8); 
+
+}
+
+.padre .noise {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  opacity: .02;
+}
+
+.padre .overlay {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:
+      repeating-linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.486) 0,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 0.5) 100%);
+  background-size: auto 4px;
+  z-index: 1;
+}
+
+.padre .overlay::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      0deg,
+      transparent 0%,
+      rgba(168, 168, 168, 0.068) 2%,
+      rgba(255, 255, 255, 0.383) 3%,
+      rgba(186, 187, 186, 0.048) 3%,
+      transparent 100%);
+  background-repeat: no-repeat;
+  animation: scan 7.5s linear 0s infinite;
+}
+
+@keyframes scan {
+  0%        { background-position: 0 -100vh; }
+  35%, 100% { background-position: 0 100vh; }
+}
+
+
+
+.padre .terminal {
+  box-sizing: inherit;
+  position: absolute;
+  height: 100%;
+  width: 1700px;
+  max-width: 100%;
+  padding: 4rem;
+  text-transform: uppercase;
+}
+
+.padre .output {
+  color: rgba(251, 255, 0, 0.8);
+  text-shadow:
+      0 0 1px rgb(0, 81, 255),
+      0 0 2px rgba(255, 255, 255, 0.8);
+
+    
+}
+
+.padre .output::before {
+  content: "> ";
+}
+
+/*
+.input {
+  color: rgba(192, 255, 192, 0.8);
+  text-shadow:
+      0 0 1px rgba(51, 255, 51, 0.4),
+      0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.input::before {
+  content: "$ ";
+}
+*/
+
+.padre a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.padre a:hover{
+    cursor: url("https://cdn.custom-cursor.com/db/13573/32/minimal-pikachu-pointer.png"), auto;
+}
+
+.padre a::before {
+  content: "[";
+}
+
+.padre a::after {
+  content: "]";
+}
+
+.padre .errorcode {
+  color: white;
+}
+
+
+@keyframes typing {
+    from{width: 0%}
+    to{width: 100%}
+}
+
+@keyframes blink-caret{
+    from, to{ border-color: transparent}
+    50%{border-color: white;}
+}

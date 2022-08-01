@@ -41,15 +41,15 @@ export function About(){
         <b>{`Usage:`}</b>
         <b> </b>
         <b> </b>
-        <b>{`npm install        install all the dependencies in your project`}</b>
-        <b>{`npm install <foo>  add the <foo> dependency to your project`}</b>
-        <b>{`npm test           run this project's tests`}</b>
-        <b>{`npm run <foo>      run the script named <foo>`}</b>
-        <b>{`npm <command> -h   quick help on <command>`}</b>
-        <b>{`npm -l             display usage info for all commands`}</b>
+        <b>{`npm install      install all the dependencies in your project`}</b>
+        <b>{`npm install <foo>   add the <foo> dependency to your project`}</b>
+        <b>{`npm test        run this project's tests`}</b>
+        <b>{`npm run <foo>     run the script named <foo>`}</b>
+        <b>{`npm <command> -h    quick help on <command>`}</b>
+        <b>{`npm -l         display usage info for all commands`}</b>
         <b>{`npm help <term>    search for help on <term>`}</b>
-        <b>{`npm help npm       more involved overview`}</b>
-        <b>{`npm about          developer information`}</b>
+        <b>{`npm help npm      more involved overview`}</b>
+        <b>{`npm about       developer information`}</b>
         <b> </b>
         <b> </b>
         <b>More configuration info: npm help config</b>

@@ -174,7 +174,7 @@ background: linear-gradient(0deg, rgba(139,139,139,1) 0%, rgba(139,139,139,1) 0%
     overflow: hidden;
     margin-left: 25px;
     font-size: 20px;
-    font: 1.0rem Inconsolata, monospace;
+    font: 1.2rem Inconsolata, monospace;
     text-shadow: 0 0 5px #C8C8C8;
     /* animation: typing 2s steps(22), blink .5s step-end infinite alternate; */
 }
