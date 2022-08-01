@@ -130,11 +130,11 @@ export function getTypes(){
     }
 }
 
-export function sortPokemons(array){
+export function sortPokemons(arr){
     return async function(dispatch){
        dispatch({
         type: ORDER_POKEMONS,
-        payload : array,
+        payload : arr,
        })
     }
 }
@@ -160,17 +160,17 @@ export function cleanDetails(){
 
 
 
-export function updatePokemon(...args){
-    return function(dispatch){
-        return axios.put("/pokemons", {...args})
-        .then(res => {
-            dispatch({
-                type: UPDATE_POKEMON,
-                payload: res.data
-            })
-        })
-    }
-}
+// export function updatePokemon(...args){
+//     return function(dispatch){
+//         return axios.put("/pokemons", {...args})
+//         .then(res => {
+//             dispatch({
+//                 type: UPDATE_POKEMON,
+//                 payload: res.data
+//             })
+//         })
+//     }
+// }
 
 
 // export function deletePokemon(name, id){
