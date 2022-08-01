@@ -1,37 +1,39 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonByName, getTypes } from "../../redux/actions/actions.js"
 import Card from "../Card/Card.jsx";
 import { NavLink } from "react-router-dom"
 import { getPokemons} from "../../redux/actions/actions.js"
 import estilos from "../../estilos/NavBar/NavBar.module.css";
+
+
+
+
 export function NavBar(){
 
-    const [input, setInput] = useState("")
+  const dispatch = useDispatch()
+  
+  const [input, setInput] = useState("")
 
-    const dispatch = useDispatch()
+  const pokemons = useSelector(state => state.pokemons)
+  
+  
+  const handleChange = (e) => {
+    setInput(e.target.value)
+  }
 
-    const pokemons = useSelector(state => state.pokemons)
-        
-    useEffect(() => {
-    }, [pokemons])
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getPokemonByName(input));
+    setInput("");
+  }
 
-    const handleChange = (e) => {
-        setInput(e.target.value)
-    }
+  const handleClick = () => {
+    dispatch(getPokemons())
+    dispatch(getTypes())
+  }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(getPokemonByName(input));
-        setInput("");
-    }
-
-    const handleClick = () => {
-        dispatch(getPokemons())
-        dispatch(getTypes())
-     }
-
-    return (
+  return (
       <>
         <div className={estilos.contenedorNav}>
           <div className={estilos.contenedorButtons}>
@@ -63,9 +65,6 @@ export function NavBar(){
           </form>
         </div>
         <div className={estilos.response}>
-          {
-            pokemons.error && alert(pokemons.error) 
-          }
           {
             pokemons.name && <Card {...pokemons} /> 
           }

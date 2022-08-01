@@ -22,8 +22,6 @@ export default function Home(){
     const pokemons = useSelector(state => state.pokemons);
     const tipos = useSelector(state => state.types)
 
-    const [renderizar, setRenderizar] = useState([])
-
     let maximo = pokemons.length > 1 ? Math.ceil(pokemons.length / porPagina ) : 1
 
    
@@ -38,22 +36,20 @@ export default function Home(){
 
     useEffect(() => {
         dispatch(getTypes())
-        setRenderizar(() => pokemons)
         setPagina(1)
     }, [dispatch, pokemons])
     
     const handleClick = () => {
         dispatch(getPokemons())
         dispatch(getTypes())
-     }
+    }
 
-    //.slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)
     return( 
         <> 
             <NavBar></NavBar>
             <div >
             {
-                renderizar.length ? <div className={estilosHome.ContainerButtons}>
+                pokemons.length ? <div className={estilosHome.ContainerButtons}>
                     <button onClick={() => dispatch(sortPokemons(filtrados.orderA_z(pokemons)))} className={estilosHome.buttons}>A-Z</button>
                     <button onClick={() => dispatch(sortPokemons(filtrados.orderZ_a(pokemons)))} className={estilosHome.buttons}>Z-A</button>
                     <button onClick={() => dispatch(sortPokemons(filtrados.orderMax_MinAttack(pokemons)))} className={estilosHome.buttons}>Max Attack</button>
@@ -64,24 +60,24 @@ export default function Home(){
                     }
                     </select>
                     {
-                        renderizar.length && <button onClick={() =>dispatch(getPokemonsCreated())} className={estilosHome.buttons}>CREATED ONLY</button>
+                        pokemons.length && <button onClick={() =>dispatch(getPokemonsCreated())} className={estilosHome.buttons}>CREATED ONLY</button>
                     }
                     {
-                        renderizar.length && <button onClick={ () => dispatch(getPokemonsAPI())} className={estilosHome.buttons}>VANILLA ONLY</button>
+                        pokemons.length && <button onClick={ () => dispatch(getPokemonsAPI())} className={estilosHome.buttons}>VANILLA ONLY</button>
                     }
                 </div>
                 : false
             }
             {
-                renderizar.length ? <Paginado pagina={pagina} setPagina={setPagina} maximo={maximo}></Paginado> : false
+                pokemons.length ? <Paginado pagina={pagina} setPagina={setPagina} maximo={maximo}></Paginado> : false
             }
            </div>
             <div className={estilosCard.containerCard}>
             {
-                renderizar.length && typeof renderizar[0] !== "string"
-                ? <> {renderizar.slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)
+                pokemons.length
+                ? <> {pokemons.slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)
                     .map(p => <Card key={key++} {...p}/>)}</>
-                :!renderizar.name ? <div className={estilosHome.contenedorNoPokemons}><img className={estilosHome.NoPokemonsIMG} alt="nopokemonsimg" src="https://i.gifer.com/origin/7d/7dab25c7b14a249bbc4790176883d1c5_w200.gif"/><button onClick={handleClick} className={estilosHome.ShowAllButton}>SHOW ALL</button></div> : <><button onClick={handleClick} className={estilosHome.OnePokemon}>SHOW ALL</button></>
+                :!pokemons.name ? <div className={estilosHome.contenedorNoPokemons}><img className={estilosHome.NoPokemonsIMG} alt="nopokemonsimg" src="https://i.gifer.com/origin/7d/7dab25c7b14a249bbc4790176883d1c5_w200.gif"/><button onClick={handleClick} className={estilosHome.ShowAllButton}>SHOW ALL</button></div> : <><button onClick={handleClick} className={estilosHome.OnePokemon}>SHOW ALL</button></>
             }
             </div>
         </>

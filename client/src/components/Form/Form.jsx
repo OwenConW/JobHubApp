@@ -9,7 +9,16 @@ export default function Form(){
     
     const dispatch = useDispatch()
 
-    const pokemonCreado = useSelector(state => state.pokemonForm)
+    useEffect(() => {
+        dispatch(getPokemons())
+        dispatch(getTypes())
+        return () => {
+            dispatch(cleanForm())
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const pokemonCreado = useSelector(state => state.pokemonbyname)
     const pokemon = useSelector(state => state.pokemonC)
     const pokemons = useSelector(state => state.pokemons)
     const tipos = useSelector(state => state.types)
@@ -22,14 +31,6 @@ export default function Form(){
         setCreado(() => pokemonCreado)
     }, [dispatch, pokemonCreado])
 
-    useEffect(() => {
-        dispatch(getTypes())
-        setNames(() => pokemons)
-        return () => {
-            dispatch(cleanForm())
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
     const [input, setInput] = useState({
         name: "",
@@ -52,7 +53,6 @@ export default function Form(){
     }
 
     const handleChange = (e) => {
-        dispatch(cleanForm())
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -65,6 +65,7 @@ export default function Form(){
 
     
     function hanldeChangeType(e) {
+        setNames(() =>  pokemons)
         var selected = [];
         for (let option of document.getElementById('types').options) {
             if (option.selected) {
@@ -88,7 +89,7 @@ export default function Form(){
         // Si hay errores le pido que la revise
         ? alert("Please check the information!")
         // hay errores y el nombre no existe
-        : !Object.keys(validateInput(input)).length  &&  !names.find(obj => obj.name.toLowerCase() === input.name.toLowerCase())
+        : !Object.keys(validateInput(input)).length  && !names.find(obj => obj.name.toLowerCase() === input.name.toLowerCase())
         //dipatch y reseteo inputs
         ? dispatch(createPokemon(input)) && setInput({
             name: "",
@@ -101,7 +102,6 @@ export default function Form(){
             weight: 0,
             types: []
         })
-        
         : alert(`${input.name} already exists!`)
 
 
@@ -111,6 +111,9 @@ export default function Form(){
   
     }
 
+    const handleGetPokenon = () => {
+        dispatch(getLasCreated(pokemon.nombre))
+    }
 
     return (
         <>
@@ -124,10 +127,10 @@ export default function Form(){
             <form onSubmit={handleSubmitC} autoComplete="off">
         <div className={estilos.First}>
             <div className={ errors.name ? estilos.warning :estilos.DivInput}>
-            
+            {/* INPUT NAME */}
             <label className={estilos.Label}>* Name:</label>
         
-            <input  className={estilos.InputFormName} type="text" name="name" placeholder="Please enter a name..." value={input.name} onChange={handleChange}></input>
+            <input  className={estilos.InputFormName} type="text" name="name" placeholder="Please enter a name..." value={input.name} onChange={handleChange} onBlur={() => dispatch(cleanForm())} required></input>
             {
                 errors.name ? <p>{errors.name}</p> : <p>ㅤ</p>         
             }
@@ -135,22 +138,25 @@ export default function Form(){
             </div>
             <div className={estilos.Second}>
             <div className={errors.hp ? estilos.warning :estilos.DivInput}>
+            {/* INPUT HP */}
             <label className={estilos.Label}>* Health:</label>
-            <input className={estilos.InputForm} type="number" name="hp" value={input.hp}  onChange={handleChange}></input>
+            <input className={estilos.InputForm} type="number" name="hp" value={input.hp}  onChange={handleChange} required></input>
             {
                 errors.hp ? <p>{errors.hp}</p> : <p>ㅤ</p>         
             }
             </div>
             <div className={ errors.attack ? estilos.warning :estilos.DivInput}>
+            {/* INPUT ATTACK */}
             <label className={estilos.Label}>* Attack:</label>
-            <input  className={estilos.InputForm} type="number" name="attack" value={input.attack} onChange={handleChange}></input>
+            <input  className={estilos.InputForm} type="number" name="attack" value={input.attack} onChange={handleChange} required></input>
             {
                 errors.attack ? <p>{errors.attack}</p> : <p>ㅤ</p>
             }
             </div>
             <div className={errors.defense ? estilos.warning :estilos.DivInput}>
+            {/* INPUT DEFENSE */}
             <label className={estilos.Label}>* Defense:</label>
-            <input className={estilos.InputForm} type="number" name="defense" value={input.defense}  onChange={handleChange}></input>
+            <input className={estilos.InputForm} type="number" name="defense" value={input.defense}  onChange={handleChange} required></input>
             {
                 errors.defense ? <p>{errors.defense}</p> : <p>ㅤ</p>
             }
@@ -158,22 +164,25 @@ export default function Form(){
             </div>
             <div className={estilos.Third}>
             <div className={errors.speed ? estilos.warning :estilos.DivInput}>
+            {/* INPUT SPEED */}
             <label className={estilos.Label}>* Speed:</label>
-            <input className={estilos.InputForm} type="number" name="speed" value={input.speed}  onChange={handleChange}></input>
+            <input className={estilos.InputForm} type="number" name="speed" value={input.speed}  onChange={handleChange} required></input>
             {
                 errors.speed ? <p>{errors.speed}</p>: <p>ㅤ</p>
             }
             </div>
             <div className={errors.height ? estilos.warning :estilos.DivInput}>
-            <label className={estilos.Label}>* Height(m):</label>
-            <input className={estilos.InputForm} type="number" name="height" value={input.height}  onChange={handleChange}></input>
+            {/* INPUT HEIGHT */}
+            <label className={estilos.Label}>* Height(cm):</label>
+            <input className={estilos.InputForm} type="number" name="height" value={input.height}  onChange={handleChange} required></input>
             {
                 errors.height ? <p>{errors.height}</p> : <p>ㅤ</p>
             }
             </div>
             <div className={errors.weight ? estilos.warning :estilos.DivInput}>
+            {/* INPUT WEIGTH */}
             <label className={estilos.Label}>* Weight(kg):</label>
-            <input className={estilos.InputForm} type="number" name="weight" value={input.weight}  onChange={handleChange}></input>
+            <input className={estilos.InputForm} type="number" name="weight" value={input.weight}  onChange={handleChange} required></input>
             {
                 errors.weight ? <p>{errors.weight}</p> : <p>ㅤ</p>
             }
@@ -182,13 +191,12 @@ export default function Form(){
             <div className={estilos.Four}>
             <div className={estilos.chooseSection}>
             <div className={errors.types ? estilos.warning :estilos.DivInput}>
+            {/* INPUT TYPES */}
             <label className={estilos.Label}>* Choose a type: <b className={estilos.aclaraciones}>(ctrl + click)</b></label>
             <select className={estilos.SelectInput}
 				id="types"
 				name="types"
 				multiple="multiple"
-                selectMultiple={true}
-                touchUi={false}
 				onChange={(e) => hanldeChangeType(e)}>
 				{
                     tipos.length ? tipos.map((t, i) => <option key={i} value={`${t}`}>{`${t}`}</option>) : false
@@ -199,6 +207,7 @@ export default function Form(){
             }
             </div>
             </div>
+            {/* INPUT IMAGE */}
             <div className={estilos.imageFormInput}>
              <label className={estilos.Label}>Image:</label>
             <input className={estilos.InputFormImage} type="text" name="image" value={input.image} placeholder="Please enter a .jpg or .png url..." onChange={handleChange}></input>
@@ -210,7 +219,7 @@ export default function Form(){
             <div className={estilos.response}>
             {
                 // muestra un boton para traer el pokemon junto al mensaje de que el mismo se creo
-               pokemon.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemon.nombre} creado con éxito!`}</h1><button onClick={() => dispatch(getLasCreated(pokemon.nombre))} className={estilos.buttonGet}>{"GET POKÉMON"}</button></div>
+               pokemon.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemon.nombre} creado con éxito!`}</h1><button onClick={handleGetPokenon} className={estilos.buttonGet}>{"GET POKÉMON"}</button></div>
             }
             {
                 // muestra el pokemon creado
@@ -226,7 +235,7 @@ export default function Form(){
 // funcion validadora de los input del usuario
 function validateInput(input){
     let errors = {};
-    if(!input.name || /(?=.*[0-9])/.test(input.name) || input.name.length > 11){
+    if(!input.name || !/^[a-zA-Z]+$/.test(input.name) || input.name.length > 11){
         errors.name = "The name is required and can only contain letters";
     }
     if(input.hp <= 0 ||input.hp > 100){

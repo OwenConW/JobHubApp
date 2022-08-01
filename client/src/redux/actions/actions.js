@@ -11,7 +11,7 @@ export const ORDER_POKEMONS = "ORDER_POKEMONS";
 export const CLEAN_FORM = "CLEAN_FORM";
 export const CLEAN_DETAILS = "CLEAN_DETAILS";
 export const DELETE_POKEMON = "DELETE_POKEMON";
-// export const UPDATE_POKEMON = "UPDATE_POKEMON";
+export const UPDATE_POKEMON = "UPDATE_POKEMON";
 
 
 export function getPokemons(){
@@ -160,17 +160,17 @@ export function cleanDetails(){
 
 
 
-// export function updatePokemon(...args){
-//     return function(dispatch){
-//         return axios.put("/pokemons", {...args})
-//         .then(res => {
-//             dispatch({
-//                 type: UPDATE_POKEMON,
-//                 payload: res.data
-//             })
-//         })
-//     }
-// }
+export function updatePokemon(...args){
+    return function(dispatch){
+        return axios.put("/pokemons", {...args})
+        .then(res => {
+            dispatch({
+                type: UPDATE_POKEMON,
+                payload: res.data
+            })
+        })
+    }
+}
 
 
 // export function deletePokemon(name, id){

@@ -11,9 +11,9 @@ export default function Paginado({pagina, setPagina, maximo}){
 
     return(
         <div className={estilos.ContenedorPaginado}>
-            { <><button disabled={pagina === 1 || pagina < 1} onClick={previusPage} className={estilos.ButtonL} >{"<"}</button>
+            <><button disabled={pagina === 1 || pagina < 1} onClick={previusPage} className={estilos.ButtonL} >{"<"}</button>
             <b className={estilos.text}>{pagina} de {maximo}</b>
-            <button disabled={pagina === Math.ceil(maximo) || pagina > Math.ceil(maximo)} onClick={nextPage} className={estilos.ButtonR}>{">"}</button></>}
+            <button disabled={pagina === Math.ceil(maximo) || pagina > Math.ceil(maximo)} onClick={nextPage} className={estilos.ButtonR}>{">"}</button></>
         </div>
     )
 }

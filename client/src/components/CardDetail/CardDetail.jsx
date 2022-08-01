@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getById, cleanDetails, getTypes} from "../../redux/actions/actions.js"
+import { getById , cleanDetails, getTypes} from "../../redux/actions/actions.js"
 import estilos from "../../estilos/CardDetail/CardDetail.module.css"
 import { Link } from "react-router-dom"
 // import Hacker from "../../estilos/Images/hacker.png"
@@ -54,8 +54,15 @@ export function CardDetail(props){
                                 <b className={estilos.statB}><img src={shield} alt="defense" className={estilos.icon}/>DEFENSE: {pokemonbyname.defense}</b>
                                 </div>
                                 <div className={estilos.statsColumns}>
-                                <b className={estilos.statB}><img src={`https://cdn-icons-png.flaticon.com/512/4516/4516746.png`} alt="height" className={estilos.icon}/>HEIGHT: {pokemonbyname.height}</b>
-                                <b className={estilos.statB}><img src={`https://cdn-icons-png.flaticon.com/512/3134/3134405.png`} alt="weight" className={estilos.icon}/>WEIGHT: {pokemonbyname.weight}</b>
+                                    {
+                                        pokemonbyname.id <= 40 ?  <b className={estilos.statB}><img src={`https://cdn-icons-png.flaticon.com/512/4516/4516746.png`} alt="height" className={estilos.icon}/>HEIGHT: {pokemonbyname.height *10}cm</b> 
+                                        : <b className={estilos.statB}><img src={`https://cdn-icons-png.flaticon.com/512/4516/4516746.png`} alt="height" className={estilos.icon}/>HEIGHT: {pokemonbyname.height}cm</b> 
+                                    }
+                                    {
+                                        pokemonbyname.id <= 40 ? <b className={estilos.statB}><img src={`https://cdn-icons-png.flaticon.com/512/3134/3134405.png`} alt="weight" className={estilos.icon}/>WEIGHT: {pokemonbyname.weight / 10}kg</b> 
+                                        :<b className={estilos.statB}><img src={`https://cdn-icons-png.flaticon.com/512/3134/3134405.png`} alt="weight" className={estilos.icon}/>WEIGHT: {pokemonbyname.weight}kg</b> 
+                                    }
+                                
                                 </div>
                             </div>
                         <h1 className={estilos.tipos}><img src={`https://cdn-icons-png.flaticon.com/512/362/362003.png`} alt="types" className={estilos.icon}/>TYPES:</h1>

@@ -11,6 +11,7 @@ export default function Card(props){
     // const handleDelete = () => {
     //     dispatch(deletePokemon(props.name, props.id))
     // }
+
     return(
         <div className={estilos.flip_card}>
             <div className={estilos.flip_card_inner}>

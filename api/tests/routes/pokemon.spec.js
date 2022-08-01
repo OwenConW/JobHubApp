@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
 const { Pokemon, conn } = require('../../src/db.js');
+const request = require('supertest');
 
 const agent = session(app);
 const pokemon = {
@@ -30,6 +31,12 @@ describe('Pokemon routes', () => {
         agent.get('/pokemons').expect(200)
       })
     });
+    describe("POST /pokemons", () => {
+      it('should return status 404 and corresponding text if any of the mandatory parameters is not send', async () => {
+        agent.post("/pokemons", {}).expect(404);
+        
+      });
+    })
 });
 
 /*
