@@ -65,7 +65,6 @@ export default function Form(){
 
     
     function hanldeChangeType(e) {
-        setNames(() =>  pokemons)
         var selected = [];
         for (let option of document.getElementById('types').options) {
             if (option.selected) {
@@ -111,6 +110,12 @@ export default function Form(){
   
     }
 
+    const handleBlur = () => {
+        // dispatch(getPokemons())
+        setNames(() =>  pokemons)
+        dispatch(cleanForm())
+    }
+
     const handleGetPokenon = () => {
         dispatch(getLasCreated(pokemon.nombre))
     }
@@ -130,7 +135,7 @@ export default function Form(){
             {/* INPUT NAME */}
             <label className={estilos.Label}>* Name:</label>
         
-            <input  className={estilos.InputFormName} type="text" name="name" placeholder="Please enter a name..." value={input.name} onChange={handleChange} onBlur={() => dispatch(cleanForm())} required></input>
+            <input  className={estilos.InputFormName} type="text" name="name" placeholder="Please enter a name..." value={input.name} onChange={handleChange} onBlur={handleBlur} required></input>
             {
                 errors.name ? <p>{errors.name}</p> : <p>ㅤ</p>         
             }
