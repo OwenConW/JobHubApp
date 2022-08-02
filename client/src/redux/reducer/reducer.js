@@ -1,10 +1,10 @@
 import {CREATE_POKEMON, GET_POKEMONS, GET_POKEMON_BY_NAME, GET_TYPES, ORDER_POKEMONS, GET_POKEMON_BY_ID, CREATE_ONLY, LAST_CREATED, API_ONLY, CLEAN_FORM, CLEAN_DETAILS, /*DELETE_POKEMON,*/ UPDATE_POKEMON} from "../actions/actions.js"
-
+import * as sorts from "../../components/Filters-Orders/Filter.js"
 const initialState = {
     pokemons: [],
     types: [],
     pokemonC: {},
-    pokemonbyname: {}
+    pokemonbyname: {},
 }
 
 function rootReducer(state = initialState, action){
@@ -37,12 +37,12 @@ function rootReducer(state = initialState, action){
         case CREATE_ONLY:
             return{
                 ...state,
-                pokemons: [...action.payload.slice(40)]
+                pokemons: sorts.filterByDb(action.payload)
             }
         case API_ONLY:
             return{
                 ...state,
-                pokemons: [...action.payload.slice(0, 39)]
+                pokemons: sorts.filterByApi(action.payload)
             }
         case GET_TYPES:
             return{
@@ -50,10 +50,30 @@ function rootReducer(state = initialState, action){
                 types: action.payload
             }
         case ORDER_POKEMONS:
+            let change;
+            if(action.payload.code === "filter"){
+                change = sorts.filterByType(action.payload.tipo, state.pokemons)
+            }
+            if(action.payload.code === "AZ"){
+               change = sorts.orderA_z(state.pokemons)
+            }
+            if(action.payload.code === "ZA"){
+                change = sorts.orderZ_a(state.pokemons)
+            }
+            if(action.payload.code === "MIN_MAX"){
+                change = sorts.orderMin_MaxAttack(state.pokemons)
+            }
+            if(action.payload.code === "MAX_MIN"){
+                change = sorts.orderMax_MinAttack(state.pokemons)
+            }
             return{
                 ...state,
-                pokemons: [...action.payload]
+                pokemons: [...change]
             }
+            // return{
+            //     ...state,
+            //     pokemons: [...action.payload]
+            // }
         case CLEAN_FORM:
             return{
                 ...state,

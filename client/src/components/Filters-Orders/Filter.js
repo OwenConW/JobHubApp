@@ -12,6 +12,8 @@ function sortArrayA_Z(x, y){
     return 0
 }
 
+
+
 export function orderZ_a(array){
     return array.sort(sortArrayZ_A);
 }
@@ -50,6 +52,28 @@ function sortMax_Min(x, y){
     }
     return 0
 }
+
+export function filterByApi(arr){
+    // eslint-disable-next-line array-callback-return
+    return arr.filter(p => {      
+        if(!p.key){
+            return p     
+        }
+
+    })
+}
+
+export function filterByDb(arr){
+    // eslint-disable-next-line array-callback-return
+    return arr.filter(p => {      
+        if(p.key){
+            return p     
+        }
+
+    })
+}
+
+
 
 export function filterByType(str, arr){
     // eslint-disable-next-line array-callback-return

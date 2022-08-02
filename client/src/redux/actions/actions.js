@@ -10,7 +10,7 @@ export const GET_TYPES = "GET_TYPES";
 export const ORDER_POKEMONS = "ORDER_POKEMONS";
 export const CLEAN_FORM = "CLEAN_FORM";
 export const CLEAN_DETAILS = "CLEAN_DETAILS";
-export const DELETE_POKEMON = "DELETE_POKEMON";
+
 export const UPDATE_POKEMON = "UPDATE_POKEMON";
 
 
@@ -130,15 +130,22 @@ export function getTypes(){
     }
 }
 
-export function sortPokemons(arr){
+// export function sortPokemons(arr){
+//     return async function(dispatch){
+//        dispatch({
+//         type: ORDER_POKEMONS,
+//         payload : arr,
+//        })
+//     }
+// }
+export function sortPokemons(code, tipo){
     return async function(dispatch){
        dispatch({
         type: ORDER_POKEMONS,
-        payload : arr,
+        payload : {code, tipo}
        })
     }
 }
-
 
 export function cleanForm(){
     return async function(dispatch){
@@ -158,8 +165,6 @@ export function cleanDetails(){
     }
 }
 
-
-
 // export function updatePokemon(...args){
 //     return function(dispatch){
 //         return axios.put("/pokemons", {...args})
@@ -173,15 +178,3 @@ export function cleanDetails(){
 // }
 
 
-// export function deletePokemon(name, id){
-//     return function(dispatch){
-//         axios.delete(`/pokemons?id=${id}`)
-//         .then(res => {
-//             console.log("ACTION CREATER:", res.data)
-//             dispatch({
-//                 type: DELETE_POKEMON,
-//                 payload: res.data
-//             })
-//         })               
-//     }
-// }

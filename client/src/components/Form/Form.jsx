@@ -55,7 +55,7 @@ export default function Form(){
     const handleChange = (e) => {
         setInput({
             ...input,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value.toLowerCase()
         })
         setErrors(validateInput({
             ...input,
@@ -243,25 +243,25 @@ function validateInput(input){
     if(!input.name || !/^[a-zA-Z]+$/.test(input.name) || input.name.length > 11){
         errors.name = "The name is required and can only contain letters";
     }
-    if(input.hp <= 0 ||input.hp > 100){
+    if(input.hp <= 0 ||input.hp > 100 || !/^[0-9]*$/g.test(input.hp)){
         errors.hp = "Health must be between 1 and 100";
     }
-    if(input.attack <= 0 || input.attack > 300){
+    if(input.attack <= 0 || input.attack > 300 || !/^[0-9]*$/g.test(input.attack)){
         errors.attack = "Attack must be between 1 and 300";
     }
-    if(input.defense <= 0 || input.defense > 300){
+    if(input.defense <= 0 || input.defense > 300 || !/^[0-9]*$/g.test(input.defense)){
         errors.defense = "Defense must be between 1 and 300";
     }
-    if(input.speed <= 0 || input.speed > 200){
+    if(input.speed <= 0 || input.speed > 200 || !/^[0-9]*$/g.test(input.speed)){
         errors.speed = "Speed must be between 1 and 200";
     }
-    if(input.height <= 0 || input.height > 100){
+    if(input.height <= 0 || input.height > 100 || !/^[0-9]*$/g.test(input.height)){
         errors.height = "Height must be between 1 and 100";
     }
-    if(input.weight <= 0 || input.weight > 300){
+    if(input.weight <= 0 || input.weight > 300 || !/^[0-9]*$/g.test(input.weight)){
         errors.weight = "Weight must be between 1 and 300";
     }
-    if(!input.types.length || input.types.length > 3){
+    if(!input.types.length || input.types.length > 3 ){
         errors.types = "You must choose at least 1 type, but no more than 3"
     }
     return errors

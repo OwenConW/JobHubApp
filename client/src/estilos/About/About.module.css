@@ -10,6 +10,12 @@
     
 } 
 
+.Link{
+    text-decoration: none;
+    width: 3%;
+    margin-left: 3px;
+}
+
 .ContenedorScrips{
     width: 100%;
     display: flex;

@@ -24,7 +24,7 @@ export function NavBar(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getPokemonByName(input));
+    dispatch(getPokemonByName(input.toLowerCase()));
     setInput("");
   }
 

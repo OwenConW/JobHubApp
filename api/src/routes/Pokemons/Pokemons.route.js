@@ -1,6 +1,7 @@
 const { default: axios } = require('axios');
 const { Pokemon, Type, Op} = require("../../db.js")
 const { Router, response } = require('express');
+const { types } = require('pg');
 const router = Router();
 
 
@@ -119,33 +120,29 @@ router.get("/:idPokemon", async (req, res, next) => {
         }
 })
     
-router.post("/", (req, res, next) => {
-        const { name, hp, attack, defense, image, speed, height, weight, types } = req.body;
-        if(!name)return res.status(404).send(new Error("Please send a name"))
-        Pokemon.create({
-            name,
-            hp,
-            attack,
-            defense,
-            speed,
-            height,
-            weight, 
-            image
-        })
-        .then(pokemon => {
-            if(types.length){
-                types.map( t => {
-                    Type.findOne({where: {name: t}})
-                    .then(res => {
-                        res.addPokemon(pokemon)
-                    })
-                })
-            }
-            return res.json({nombre: name})
-        })
-        .catch(error => {
-            return res.status(404).send(error)
-        })
+router.post("/", async (req, res, next) => {
+    const { name, hp, attack, defense, image, speed, height, weight, types} = req.body
+    
+try{
+    if(!name) res.status(404).send("Please send a name")
+    const pokemon = await Pokemon.create({
+        name,
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight, 
+        image
+    })
+    if(types){
+        const tipos = await Type.findAll({where: {name: { [Op.or]: types}}})
+        await pokemon.addTypes(tipos)
+    }
+    return res.json({nombre: name})
+}catch(error){
+    res.status(404).send(error)
+}
 })
 
 router.delete("/", (req, res, next) => {
@@ -297,73 +294,61 @@ router.delete("/", (req, res, next) => {
 //#endregion
 //#region $$$$$$$$$$$$$$$$$$$$$$ PUT $$$$$$$$$$$$$$$$$$$$$$
 // router.put("/", async (req, res, next) => {
-//     const { name, hp, attack, defense, speed, height, weight } = req.body;
-//     const { actualname } = req.query
+//     const { name, hp, attack, defense, speed, height, weight, types} = req.body;
+//     const { id } = req.query
 //     try{
-//         await Pokemon.update({name, hp, attack, defense, speed, height, weight},{
-//             where: {
-//                 name: actualname
-//             }
-//         })
-//         const finallyPokemon = await Pokemon.findOne({
-//             where: {
-//                 name 
-//             }
-//         })
-//         return res.send(finallyPokemon)
-//     }catch(error){
-//         return res.send(error.message)
-//     }
-// })
-//#endregion
-//#region $$$$$$$$$$$$$$$$$$$$ ASYNC AWAIT POST $$$$$$$$$$$$$$$$$$$$$$$$$
-// router.post("/", async (req, res, next) => {
-//     const { name, hp, attack, defense, image, speed, height, weight, types} = req.body
-    
-// try{
-//     if(!name) res.status(404).send('No se puede crear un pokemon sin nombre.')
-//     const pokemon = await Pokemon.create({
-//         name,
-//         hp,
-//         attack,
-//         defense,
-//         speed,
-//         height,
-//         weight, 
-//         image
-//     })
-//     if(types){
-//         if(types.length > 0){
-//            let tiposAddPromises = types.map(async (t) => {
-//                 let tipeToAdd = await Type.findOne({where: {name: t}})
-//                 tipeToAdd.addPokemon(pokemon);
-//                 await Promise.all(tiposAddPromises);
-//             })
-//         }
-//     }
-//     return res.json({nombre: name})
-// }catch(error){
-//     res.status(404).send(error)
-// }
-// })
-//#endregion
-//#region $$$$$$$$$$$ DELETE $$$$$$$$$$$$$$$
-// router.delete("/", async (req, res, next) => {
-//     const { id } = req.query;
-//     try{
-//         await Pokemon.destroy({
-//             where: {
-//                 key: {
-//                     [Op.eq]: [parseInt(id) - 40],
-//                 },
-//             }
-//         })
-//         const pokemons = await Pokemon.findAll()
-//         return res.send(cache.slice(0,40).concat(pokemons).sort((a, b) => a.id - b.id))
+//         const pokemonToUpdate = await Pokemon.findOne({where: {key: id - 40}, include: Type});
+//         const TypesToDestroy = pokemonToUpdate.types.map(types => types.dataValues.id);
 
+//         await pokemonToUpdate.removeTypes(TypesToDestroy);
+
+//         const NewTypes = await Type.findAll({where: {name: { [Op.or]: types}}})
+//         await pokemonToUpdate.addTypes(NewTypes.map(type => type.dataValues.id))
+
+//         pokemonToUpdate.set({ 
+//             name, 
+//             hp,
+//             attack, 
+//             defense, 
+//             speed, height, 
+//             weight,
+//         })
+//         await pokemonToUpdate.save()
+//         res.status(200).send(`${name} has been updated`)
 //     }catch(error){
-//         return res.send(error.message)
+//         return res.status(400).send(error.message)
 //     }
-// } )
+// })
 //#endregion
+//#region $$$$$$$$$$$$$$$$$$$$ PROMISE POST $$$$$$$$$$$$$$$$$$$$$$$$$
+// router.post("/", (req, res, next) => {
+//         const { name, hp, attack, defense, image, speed, height, weight, types } = req.body;
+//         if(!name)return res.status(404).send("Please send a name")
+//         Pokemon.create({
+//             name,
+//             hp,
+//             attack,
+//             defense,
+//             speed,
+//             height,
+//             weight, 
+//             image
+//         })
+//         .then(pokemon => {
+//             if(types.length){
+//                 types.map( t => {
+//                     Type.findOne({where: {name: t}})
+//                     .then(res => {
+//                         res.addPokemon(pokemon)
+//                     })
+//                 })
+//             }
+//             return res.json({nombre: name})
+//         })
+//         .catch(error => {
+//             return res.status(404).send(error)
+//         })
+// })
+//#endregion
+
 module.exports = router;
