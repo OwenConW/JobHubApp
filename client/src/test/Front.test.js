@@ -34,12 +34,9 @@ describe('<CreatePokemon/>', () => {
 				</Provider>
 			);
 		});
-
-		
 		it('Debe renderizar un formulario', () => {
 			expect(CreatePokemon.find('form').length).toBe(1);
 		});
-
 		it('Debe renderizar un input con la propiedad "title" igual a "title', () => {
 			expect(CreatePokemon.find('input[name="name"]').length).toBe(1);
 		});

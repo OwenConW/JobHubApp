@@ -145,27 +145,6 @@ try{
 }
 })
 
-router.delete("/", (req, res, next) => {
-    const { id } = req.query
-    Pokemon.destroy({
-        where: {
-            key: {
-                [Op.eq]: [parseInt(id) - 40]
-            }
-        }
-    })
-    .then(() => {
-        return Pokemon.findAll()
-    })
-    .then((db) => {
-        return res.send(cache.slice(0, 40).concat(db).sort((a, b) => a.id - b.id))
-    })
-    .catch(error => {
-        return res.send(error.message)
-    })
-
-})
-
 //#region $$$$$$$$$$$$$$$$$$$$$$ PROMISE GET $$$$$$$$$$$$$$$$$$$$$$$$$ 
 
 // router.get("/", (req, res, next) => {

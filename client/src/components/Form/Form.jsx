@@ -1,37 +1,17 @@
 import React, { useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { createPokemon, getLasCreated, getTypes, getPokemons, cleanForm } from "../../redux/actions/actions.js"
+import { createPokemon, getLasCreated, getTypes, getAllPokemons, cleanForm, getPokemons} from "../../redux/actions/actions.js"
 import Card from "../Card/Card.jsx"
 import estilos from "../../estilos/Form/Form.module.css"
-import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 export default function Form(){
     
-    const dispatch = useDispatch()
+    const history = useHistory()
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getPokemons())
-        dispatch(getTypes())
-        return () => {
-            dispatch(cleanForm())
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    const pokemonCreado = useSelector(state => state.pokemonbyname)
-    const pokemon = useSelector(state => state.pokemonC)
-    const pokemons = useSelector(state => state.pokemons)
-    const tipos = useSelector(state => state.types)
-
-    const [creado, setCreado] = useState({})
-    const [names, setNames] = useState([])
-
-    useEffect(() => {
-        dispatch(getPokemons())
-        setCreado(() => pokemonCreado)
-    }, [dispatch, pokemonCreado])
-
-
+    const [creado, setCreado] = useState({});
+    const [names, setNames] = useState([]) ;
     const [input, setInput] = useState({
         name: "",
         hp: 0,
@@ -44,12 +24,33 @@ export default function Form(){
         types: []
        
     })
+    const [errors, setErrors] = useState({});
+    
+    const tipos = useSelector(state => state.types);
+    const toNames = useSelector(state => state.const);
+    const pokemonName = useSelector(state => state.pokemonC);
+    const pokemonCreado = useSelector(state => state.pokemonbyname);
+    
+    useEffect(() => {
+        dispatch(getAllPokemons());
+        dispatch(getTypes());
+        setNames(() => toNames);
+        return () => {
+            dispatch(cleanForm());
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    const [errors, setErrors] = useState({})
-
-
+    useEffect(() => {
+        dispatch(getAllPokemons());
+        setCreado(() => pokemonCreado);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pokemonCreado]);
+    
+    
     const handleClickBack = () => {
-        dispatch(getTypes())
+        dispatch(getTypes());
+        history.goBack()
     }
 
     const handleChange = (e) => {
@@ -63,7 +64,6 @@ export default function Form(){
         }))
     }
 
-    
     function hanldeChangeType(e) {
         var selected = [];
         for (let option of document.getElementById('types').options) {
@@ -83,12 +83,12 @@ export default function Form(){
     }
 
     const handleSubmitC = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         Object.keys(validateInput(input)).length 
         // Si hay errores le pido que la revise
         ? alert("Please check the information!")
         // hay errores y el nombre no existe
-        : !Object.keys(validateInput(input)).length  && !names.find(obj => obj.name.toLowerCase() === input.name.toLowerCase())
+        : !names.find(obj => obj.name.toLowerCase() === input.name.toLowerCase())
         //dipatch y reseteo inputs
         ? dispatch(createPokemon(input)) && setInput({
             name: "",
@@ -100,30 +100,30 @@ export default function Form(){
             height: 0,
             weight: 0,
             types: []
-        })
-        : alert(`${input.name} already exists!`)
-
-
+        }) 
+        : alert(`${input.name} already exists!`);
+        dispatch(getPokemons())
         // names.some(obj => obj.name.toLowerCase() === input.name.toLowerCase()) 
         // ? alert("El nombre ingresado ya existe")
         // : dispatch(createPokemon(input))
-  
+    }
+    
+    const handleGetPokemon = () => {
+        dispatch(getPokemons())
+        dispatch(getLasCreated(pokemonName.nombre));
     }
 
     const handleBlur = () => {
-        // dispatch(getPokemons())
-        setNames(() =>  pokemons)
-        dispatch(cleanForm())
+        // dispatch(getAllPokemons());
+        dispatch(cleanForm());
+        setNames(() =>  toNames);
     }
 
-    const handleGetPokemon = () => {
-        dispatch(getLasCreated(pokemon.nombre))
-    }
 
     return (
         <>
         <div className={estilos.header}>
-            <Link to={"/home"} className={estilos.Link}><button onClick={handleClickBack} className={estilos.BackButton}>GO HOME</button></Link>
+            <button onClick={handleClickBack} className={estilos.BackButton}>GO BACK</button>
             <h1 className={estilos.title}>CrEaTe PoKéMoN:</h1>
         </div>
         <div className={estilos.Padre}>
@@ -135,7 +135,7 @@ export default function Form(){
             {/* INPUT NAME */}
             <label className={estilos.Label}>* Name:</label>
         
-            <input  className={estilos.InputFormName} type="text" name="name" placeholder="Please enter a name..." value={input.name} onChange={handleChange} onBlur={handleBlur} required></input>
+            <input className={estilos.InputFormName} type="text" name="name" placeholder="Please enter a name..." value={input.name} onChange={handleChange} onBlur={handleBlur} required></input>
             {
                 errors.name ? <p>{errors.name}</p> : <p>ㅤ</p>         
             }
@@ -224,7 +224,7 @@ export default function Form(){
             <div className={estilos.response}>
             {
                 // muestra un boton para traer el pokemon junto al mensaje de que el mismo se creo
-               pokemon.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemon.nombre} creado con éxito!`}</h1><button onClick={handleGetPokemon} className={estilos.buttonGet}>{"GET POKÉMON"}</button></div>
+               pokemonName.nombre && <div className={estilos.responseCard}><h1>{`Pokémon ${pokemonName.nombre} creado con éxito!`}</h1><button onClick={handleGetPokemon} className={estilos.buttonGet}>{"GET POKÉMON"}</button></div>
             }
             {
                 // muestra el pokemon creado

@@ -10,9 +10,23 @@ export const GET_TYPES = "GET_TYPES";
 export const ORDER_POKEMONS = "ORDER_POKEMONS";
 export const CLEAN_FORM = "CLEAN_FORM";
 export const CLEAN_DETAILS = "CLEAN_DETAILS";
-
+export const ALL_POKEMONS = "ALL_POKEMONS";
 export const UPDATE_POKEMON = "UPDATE_POKEMON";
+export const UPDATE = "UPDATE";
 
+export function getAllPokemons(){
+    return async function(dispatch){
+        try{
+            const response = await axios.get(`/pokemons`)
+            dispatch({
+                type: ALL_POKEMONS,
+                payload: response.data
+            })
+        }catch(error){
+            console.log(error)
+        }
+    }
+}
 
 export function getPokemons(){
     return function(dispatch){
@@ -161,6 +175,16 @@ export function cleanDetails(){
         dispatch({
             type: CLEAN_DETAILS,
             payload: [],
+        })
+    }
+}
+
+
+export function updatePage(page){
+    return function(dispatch){
+        dispatch({
+            type: UPDATE,
+            payload: page,
         })
     }
 }

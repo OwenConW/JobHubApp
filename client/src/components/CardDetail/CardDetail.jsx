@@ -1,14 +1,16 @@
 import React, { useEffect } from "react"
+import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { getById , cleanDetails, getTypes} from "../../redux/actions/actions.js"
 import estilos from "../../estilos/CardDetail/CardDetail.module.css"
-import { Link } from "react-router-dom"
 // import Hacker from "../../estilos/Images/hacker.png"
 import sword from "../../estilos/Images/sword.png"
 import shield from "../../estilos/Images/shield.png"
 
 
 export function CardDetail(props){
+
+    const history = useHistory()
 
     const dispatch = useDispatch()
 
@@ -21,13 +23,14 @@ export function CardDetail(props){
     }, [])
 
     const handleBack = () => {
+        history.goBack()
         dispatch(getTypes())
     }
 
     const pokemonbyname = useSelector(state => state.pokemonbyname)
     return(
         <>
-            <Link to={"/home"} className={estilos.Link}><button onClick={handleBack} className={estilos.BackButton}>GO HOME</button></Link>
+        <button onClick={handleBack} className={estilos.BackButton}>GO BACK</button>
         <div className={estilos.contenedor}>
             {
                 pokemonbyname.name ? 

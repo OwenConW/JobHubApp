@@ -1,11 +1,18 @@
 import estilos from "../../estilos/Paginated/Paginado.module.css"
+import { useDispatch } from "react-redux"
+import { updatePage } from "../../redux/actions/actions"
+
 export default function Paginado({pagina, setPagina, maximo}){
 
+    const dispatch = useDispatch()
+
     const nextPage = () => {
+        dispatch(updatePage(parseInt(pagina) + 1))
         setPagina(parseInt(pagina) + 1)
     }
 
     const previusPage = () => {
+        dispatch(updatePage(parseInt(pagina) - 1))
         setPagina(parseInt(pagina) - 1)
     }
 

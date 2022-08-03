@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux"
-import { getPokemons, getTypes } from "../../redux/actions/actions.js"
+import { getPokemons, getTypes, getAllPokemons } from "../../redux/actions/actions.js"
 import estilos from "../../estilos/Landing/Landing.module.css"
 
 export class Landing extends Component{
     componentDidMount(){
         this.props.getPokemons()
         this.props.getTypes()
+        this.props.getAllPokemons()
     }
     render(){
         return(
@@ -32,7 +33,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         getPokemons: () => dispatch(getPokemons()),
-        getTypes: () => dispatch(getTypes())
+        getTypes: () => dispatch(getTypes()),
+        getAllPokemons: () => dispatch(getAllPokemons())
     }
 }
 

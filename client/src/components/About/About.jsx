@@ -1,6 +1,6 @@
 import React from "react"
 import estilos from "../../estilos/About/About.module.css"
-import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { getTypes } from "../../redux/actions/actions.js"
 import hacker from "../../estilos/Images/hacker.png"
@@ -9,20 +9,24 @@ import gmail from "../../estilos/Images/gmail.png"
 
 
 
+
 export function About(){
+
+    const history = useHistory()
 
     const dispatch = useDispatch()
 
 
     const handleClickBack = () => {
         dispatch(getTypes())
+        history.goBack()
     }
 
 
 
     return(
         <div className={estilos.Contenedor1}>
-        <Link to={"/home"} className={estilos.Link}><button onClick={handleClickBack} className={estilos.BackButton}>GO HOME</button></Link>
+        <button onClick={handleClickBack} className={estilos.BackButton}>GO BACK</button>
         <div className={estilos.container}>
         <div className={estilos.window}>  
         <div className={estilos.barraWindow}>    

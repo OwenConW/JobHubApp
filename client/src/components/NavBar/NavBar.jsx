@@ -7,8 +7,6 @@ import { getPokemons} from "../../redux/actions/actions.js"
 import estilos from "../../estilos/NavBar/NavBar.module.css";
 
 
-
-
 export function NavBar(){
 
   const dispatch = useDispatch()
@@ -24,8 +22,11 @@ export function NavBar(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getPokemonByName(input.toLowerCase()));
-    setInput("");
+    if(input.length){
+    dispatch(getPokemonByName(input.toLowerCase()))
+    setInput("") 
+    } 
+    
   }
 
   const handleClick = () => {

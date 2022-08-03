@@ -3,46 +3,64 @@ import { useDispatch, useSelector } from "react-redux";
 import  Card  from "../Card/Card.jsx";
 import { NavBar } from "../../components/NavBar/NavBar.jsx"
 import  Paginado from "../Paginated/Paginado.jsx"
-import { getPokemons, sortPokemons, getTypes, getPokemonsCreated, getPokemonsAPI} from "../../redux/actions/actions.js"
+import { getPokemons, sortPokemons, getTypes, getPokemonsCreated, getPokemonsAPI, getAllPokemons, updatePage } from "../../redux/actions/actions.js"
 import estilosCard from "../../estilos/Card/Card.module.css"
 import estilosHome from "../../estilos/Home/Home.module.css"
 // import * as filtrados from "../Filters-Orders/Filter.js"
 
-
 export default function Home(){
 
-    const [pagina, setPagina] = useState(1)
+    let key = 100;
+    const currentPage = useSelector(state => state.currentPage)
+
+    const [pagina, setPagina] = useState(currentPage)
     // eslint-disable-next-line no-unused-vars
     const [porPagina, setPorpagina] = useState(10)
     
-    let key = 100;
     const dispatch = useDispatch();
-    
     
     const pokemons = useSelector(state => state.pokemons);
     const tipos = useSelector(state => state.types)
 
     let maximo = pokemons.length > 1 ? Math.ceil(pokemons.length / porPagina ) : 1
 
-   
-    
     const handleTypes = () => {
         for (let option of document.getElementById('filter').options) {
-            if (option.selected) {
+            if (option.selected && option.value) {
+                dispatch(updatePage(1))
                 dispatch(sortPokemons("filter", option.value))
             }
         }
     }
 
     useEffect(() => {
+        dispatch(getAllPokemons())
         dispatch(getTypes())
-        setPagina(1)
-    }, [dispatch, pokemons])
+        setPagina(currentPage)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pokemons])
     
     const handleClick = () => {
-        dispatch(getPokemons())
-        dispatch(getTypes())
+        dispatch(getPokemons());
+        dispatch(getTypes());
+        dispatch(getAllPokemons())
     } 
+
+    const handleOrders = (e) => {
+        dispatch(updatePage(1))
+        dispatch(sortPokemons(e.target.name))
+    }
+
+    const handleClickAPI = () => {
+        dispatch(updatePage(1))
+        dispatch(getPokemonsAPI())
+    }
+
+
+    const handleClickDB = () => {
+        dispatch(updatePage(1))
+        dispatch(getPokemonsCreated())
+    }
 
     return( 
         <> 
@@ -65,20 +83,21 @@ export default function Home(){
                     {
                         pokemons.length && <button onClick={ () => dispatch(getPokemonsAPI())} className={estilosHome.buttons}>VANILLA ONLY</button>
                     } */}
-                     <button onClick={() => dispatch(sortPokemons("AZ"))} className={estilosHome.buttons}>A-Z</button>
-                    <button onClick={() => dispatch(sortPokemons("ZA"))} className={estilosHome.buttons}>Z-A</button>
-                    <button onClick={() => dispatch(sortPokemons("MAX_MIN"))} className={estilosHome.buttons}>Max Attack</button>
-                    <button onClick={() => dispatch(sortPokemons("MIN_MAX"))} className={estilosHome.buttons}>Min Attack</button>
-                    <select id="filter" name="filter" onClick={handleTypes} className={estilosHome.buttons}>
+                    <button name={"AZ"} onClick={handleOrders} className={estilosHome.buttons}>A-Z</button>
+                    <button name={"ZA"} onClick={handleOrders} className={estilosHome.buttons}>Z-A</button>
+                    <button name={"MAX_MIN"} onClick={handleOrders} className={estilosHome.buttons}>Max Attack</button>
+                    <button name={"MIN_MAX"} onClick={handleOrders} className={estilosHome.buttons}>Min Attack</button>
+                    <select id="filter" name="filter" onClick={handleTypes} className={estilosHome.buttons} defaultValue="ALL TYPES">
+                    <option value={"ALL TYPES"} className={estilosHome.selected}>{"ALL TYPES"}</option>) 
                     {
                      tipos && tipos.length && tipos.map((t,i) => <option key={i} value={`${t}`} className={estilosHome.selected}>{`${t}`}</option>) 
                     }
                     </select>
                     {
-                        pokemons.length && <button onClick={() =>dispatch(getPokemonsCreated())} className={estilosHome.buttons}>CREATED ONLY</button>
+                        pokemons.length && <button onClick={handleClickDB} className={estilosHome.buttons}>CREATED ONLY</button>
                     }
                     {
-                        pokemons.length && <button onClick={ () => dispatch(getPokemonsAPI())} className={estilosHome.buttons}>VANILLA ONLY</button>
+                        pokemons.length && <button onClick={handleClickAPI} className={estilosHome.buttons}>VANILLA ONLY</button>
                     }
                 </div>
                 : false
@@ -97,6 +116,6 @@ export default function Home(){
             </div>
         </>
         )
-    }
+}
     
-    
+

@@ -74,7 +74,6 @@ export function filterByDb(arr){
 }
 
 
-
 export function filterByType(str, arr){
     // eslint-disable-next-line array-callback-return
     return arr.filter(p => {      

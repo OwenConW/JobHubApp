@@ -1,18 +1,30 @@
-import {CREATE_POKEMON, GET_POKEMONS, GET_POKEMON_BY_NAME, GET_TYPES, ORDER_POKEMONS, GET_POKEMON_BY_ID, CREATE_ONLY, LAST_CREATED, API_ONLY, CLEAN_FORM, CLEAN_DETAILS, /*DELETE_POKEMON,*/ UPDATE_POKEMON} from "../actions/actions.js"
+import {CREATE_POKEMON, GET_POKEMONS, GET_POKEMON_BY_NAME, GET_TYPES, ORDER_POKEMONS, GET_POKEMON_BY_ID, CREATE_ONLY, LAST_CREATED, API_ONLY, CLEAN_FORM, CLEAN_DETAILS,  ALL_POKEMONS, UPDATE_POKEMON, UPDATE} from "../actions/actions.js"
 import * as sorts from "../../components/Filters-Orders/Filter.js"
 const initialState = {
+    const: [],
     pokemons: [],
     types: [],
     pokemonC: {},
     pokemonbyname: {},
+    currentPage: 1
 }
 
 function rootReducer(state = initialState, action){
     switch(action.type){
+        case UPDATE:
+            return{
+                ...state,
+                currentPage: action.payload
+            }
+        case ALL_POKEMONS:
+            return{
+                ...state,
+                const: [...action.payload]
+            }
         case GET_POKEMONS:
             return{
                 ...state,
-                pokemons: [...action.payload]
+                pokemons: [...action.payload],
             }
         case GET_POKEMON_BY_NAME:
             return{
@@ -52,7 +64,11 @@ function rootReducer(state = initialState, action){
         case ORDER_POKEMONS:
             let change;
             if(action.payload.code === "filter"){
-                change = sorts.filterByType(action.payload.tipo, state.pokemons)
+                if(action.payload.tipo === "ALL TYPES"){
+                    change = state.const
+                }else{
+                    change = sorts.filterByType(action.payload.tipo, state.pokemons)
+                }
             }
             if(action.payload.code === "AZ"){
                change = sorts.orderA_z(state.pokemons)
