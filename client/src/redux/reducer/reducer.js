@@ -65,23 +65,27 @@ function rootReducer(state = initialState, action){
             let change;
             if(action.payload.code === "filter"){
                 if(action.payload.tipo === "ALL TYPES"){
-                    change = state.const
+                    change = state.const;
                 }else{
-                    change = sorts.filterByType(action.payload.tipo, state.pokemons)
+                    change = sorts.filterByType(action.payload.tipo, state.pokemons);
                 }
             }
             if(action.payload.code === "AZ"){
-               change = sorts.orderA_z(state.pokemons)
+               change = sorts.orderA_z(state.pokemons);
             }
             if(action.payload.code === "ZA"){
-                change = sorts.orderZ_a(state.pokemons)
+                change = sorts.orderZ_a(state.pokemons);
             }
             if(action.payload.code === "MIN_MAX"){
-                change = sorts.orderMin_MaxAttack(state.pokemons)
+                change = sorts.orderMin_MaxAttack(state.pokemons);
             }
             if(action.payload.code === "MAX_MIN"){
-                change = sorts.orderMax_MinAttack(state.pokemons)
+                change = sorts.orderMax_MinAttack(state.pokemons);
             }
+            // if(action.payload.code === "TOP_5"){
+            //     change = sorts.filterByType("fire", state.pokemons);
+            //     change = sorts.orderMax_MinAttack(change).slice(0, 5);
+            // }
             return{
                 ...state,
                 pokemons: [...change]

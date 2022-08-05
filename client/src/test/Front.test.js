@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter, Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configure, mount } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -7,11 +7,10 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import isReact from 'is-react';
 
-import * as data from '../../../api/src/db';
 import * as actions from '../redux/actions/actions';
 
 import CreatePokemon from '../components/Form/Form';
-import axios from 'axios';
+
 
 configure({ adapter: new Adapter() });
 

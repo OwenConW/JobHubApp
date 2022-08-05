@@ -22,6 +22,8 @@ export function CardDetail(props){
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+
+    // Function que se encarga de volver para atras
     const handleBack = () => {
         history.goBack()
         dispatch(getTypes())
@@ -32,6 +34,7 @@ export function CardDetail(props){
         <>
         <button onClick={handleBack} className={estilos.BackButton}>GO BACK</button>
         <div className={estilos.contenedor}>
+            {/* Si en el estado de redux "pokemonbyname" hay nombre entonces mapeo la card */}
             {
                 pokemonbyname.name ? 
                     <div className={estilos.flip_card}>
@@ -69,6 +72,7 @@ export function CardDetail(props){
                                 </div>
                             </div>
                         <h1 className={estilos.tipos}><img src={`https://cdn-icons-png.flaticon.com/512/362/362003.png`} alt="types" className={estilos.icon}/>TYPES:</h1>
+                        {/* Me fijo en la id (db/api) y en si hay tipos para mapear cada uno de ellos */}
                         { 
                            pokemonbyname.id <= 40 && pokemonbyname.types 
                            ?  <> {pokemonbyname.types.map((t, i) =><h3 key={i} className={estilos.tiposCu}>{t}</h3>)}</>
@@ -79,7 +83,7 @@ export function CardDetail(props){
                 </div>
                 : <div className={estilos.contenedorNoPokemons}><img className={estilos.NoPokemonsIMG} alt="nopokemonsimg" src="https://i.gifer.com/origin/7d/7dab25c7b14a249bbc4790176883d1c5_w200.gif"/></div>
             }
-       
+            {/* Si en el estado de redux "pokemonbyname" no hay nombre entonces muestro un gif */}
         </div>
         </>
     )

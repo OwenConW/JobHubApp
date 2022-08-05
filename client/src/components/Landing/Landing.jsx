@@ -5,6 +5,7 @@ import { getPokemons, getTypes, getAllPokemons } from "../../redux/actions/actio
 import estilos from "../../estilos/Landing/Landing.module.css"
 
 export class Landing extends Component{
+
     componentDidMount(){
         this.props.getPokemons()
         this.props.getTypes()
@@ -13,6 +14,8 @@ export class Landing extends Component{
     render(){
         return(
             <div className={estilos.landing}>
+                {/* SI YA SE REALIZO LA LLAMADA Y SE LLENO EL ESTADO GLOBAL DE REDUX, SE RENDERIZA UN
+                "BOTON" (DIV) QUE PERMITE EL INGRESO AL HOME, SI NO UN ICONO DE CARGA*/}
                 {
                     this.props.pokemons.length >= 40
                     ? <Link to="/home"><div className={estilos.button}></div></Link> 
@@ -22,7 +25,7 @@ export class Landing extends Component{
         )
     }
 }
-//<Link to="/home"><button>GO HOME</button></Link>
+
 const mapStateToProps = (state) => {
     return{
         pokemons: state.pokemons,

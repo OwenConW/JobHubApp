@@ -7,6 +7,7 @@ const router = Router();
 
 const cache = []; 
 
+// Ruta para traer todo o por nombre
 router.get("/", async (req, res, next) => {
     const { name } = req.query;
 try{
@@ -78,6 +79,7 @@ return res.status(400).send(new Error('El pokemon ingresado no existe'))
 
 })
 
+// Ruta para traer pokemon por id
 router.get("/:idPokemon", async (req, res, next) => {
     const { idPokemon } = req.params;
     try{
@@ -119,7 +121,8 @@ router.get("/:idPokemon", async (req, res, next) => {
             next(error);
         }
 })
-    
+   
+// Ruta para crear pokemon
 router.post("/", async (req, res, next) => {
     const { name, hp, attack, defense, image, speed, height, weight, types} = req.body
     
@@ -145,6 +148,26 @@ try{
 }
 })
 
+//#region  $$$$$$$$$$$$$$$$$$$ DELETE $$$$$$$$$$$$$$$$$$$
+// Ruta para eliminar un pokemon de la db
+// router.delete("/", async (req, res, next) => {
+//     const { id } = req.query;
+//     try{
+//         await Pokemon.destroy({
+//             where: {
+//                 key: {
+//                     [Op.eq]: [parseInt(id) - 40],
+//                 },
+//             }
+//         })
+//         const pokemons = await Pokemon.findAll()
+//         return res.send(cache.slice(0,40).concat(pokemons).sort((a, b) => a.id - b.id))
+
+//     }catch(error){
+//         return res.send(error.message)
+//     }
+// } )
+//#endregion
 //#region $$$$$$$$$$$$$$$$$$$$$$ PROMISE GET $$$$$$$$$$$$$$$$$$$$$$$$$ 
 
 // router.get("/", (req, res, next) => {

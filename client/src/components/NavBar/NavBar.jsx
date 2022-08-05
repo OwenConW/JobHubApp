@@ -15,11 +15,12 @@ export function NavBar(){
 
   const pokemons = useSelector(state => state.pokemons)
   
-  
+  // Function que setea el estado local input a medida que se escribe en el input
   const handleChange = (e) => {
     setInput(e.target.value)
   }
 
+  // Function manejadora del boton de buscar pokemon
   const handleSubmit = (e) => {
     e.preventDefault();
     if(input.length){
@@ -29,6 +30,8 @@ export function NavBar(){
     
   }
 
+  // Function manejadora del boton limpiar filtros 
+  // que limpia el estado de pokemons que se muestra en pantalla
   const handleClick = () => {
     dispatch(getPokemons())
     dispatch(getTypes())
@@ -66,6 +69,7 @@ export function NavBar(){
           </form>
         </div>
         <div className={estilos.response}>
+          {/* Si el estado de redux tiene la prop name es porque se piso correctamente con la busqueda exitosa */}
           {
             pokemons.name && <Card {...pokemons} /> 
           }

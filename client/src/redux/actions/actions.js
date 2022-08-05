@@ -13,7 +13,11 @@ export const CLEAN_DETAILS = "CLEAN_DETAILS";
 export const ALL_POKEMONS = "ALL_POKEMONS";
 export const UPDATE_POKEMON = "UPDATE_POKEMON";
 export const UPDATE = "UPDATE";
+// export const DELETE_POKEMON = "DELETE_POKEMON";
 
+
+
+// ACCTION QUE TRAE TODOS LOS POKEMONS PARA REMPLAZARLOS Y NO ALTERARLOS NUNCA
 export function getAllPokemons(){
     return async function(dispatch){
         try{
@@ -28,6 +32,8 @@ export function getAllPokemons(){
     }
 }
 
+
+// ACTION QUE TRAE TODOS LOS POKEMONS PARA REMPLAZARLO
 export function getPokemons(){
     return function(dispatch){
         return axios.get(`/pokemons`)
@@ -43,6 +49,8 @@ export function getPokemons(){
     }
 }
 
+
+// ACTION QUE TRAE UN POKEMON POR NOMBRE
 export function getPokemonByName(name){
     return  function(dispatch){
         return axios.get(`/pokemons?name=${name}`) 
@@ -58,6 +66,8 @@ export function getPokemonByName(name){
     }
 }
 
+
+// ACTION QUE TRAE UN POKEMON POR ID 
 export const getById = (id) => {
     return async function(dispatch){
         return axios.get(`/pokemons/${id}`)
@@ -70,6 +80,8 @@ export const getById = (id) => {
     }
 }
 
+
+// ACTION QUE DESPACHA LA CREACION Y DEVULVE EL NOMBRE
 export function createPokemon(payload){
     return function(dispatch){
         return axios.post(`/pokemons`, payload)
@@ -85,6 +97,8 @@ export function createPokemon(payload){
        
     }
 }
+
+// ACTION QUE DESPACHA LA BUSQUEDA DEL POKEMON EN BASE AL NOMBRE DE LA ACTION ANTERIOR
 export function getLasCreated(name){
     return  function(dispatch){
         return axios.get(`/pokemons?name=${name}`) 
@@ -100,6 +114,8 @@ export function getLasCreated(name){
     }
 }
 
+
+// ACTION QUE DESPACHA LA ACTION PARA TRAER TODOS LOS POKEMONS PARA DSPS FILTRARLOS POR LOS DE LA DB
 export function getPokemonsCreated(){
     return function(dispatch){
         return axios.get(`/pokemons`)
@@ -115,6 +131,8 @@ export function getPokemonsCreated(){
     }
 }
 
+
+// ACTION QUE DESPACHA LA ACTION PARA TRAER TODOS LOS POKEMONS PARA DSPS FILTRARLOS POR LOS DE LA API
 export function getPokemonsAPI(){
     return function(dispatch){
         return axios.get(`/pokemons`)
@@ -130,6 +148,8 @@ export function getPokemonsAPI(){
     }
 }
 
+
+// ACTION QUE DESPACHA LA BUSQUEDA DE TODOS LOS TIPOS DE POKEMONS
 export function getTypes(){
     return function(dispatch){
         return axios.get(`/types`)
@@ -152,6 +172,10 @@ export function getTypes(){
 //        })
 //     }
 // }
+
+
+// ACTION QUE DESPACHA EL TIPO DE FILTRADO QUE SE VA A HACER Y EL 
+// TIPO DE POKEMON EN CASO DE QUE SE TRATE DE UN FILTRADO POR TIPO
 export function sortPokemons(code, tipo){
     return async function(dispatch){
        dispatch({
@@ -161,6 +185,8 @@ export function sortPokemons(code, tipo){
     }
 }
 
+
+// ACTION QUE DESPACHA LA LIMPIEZA DEL FORMULARIO
 export function cleanForm(){
     return async function(dispatch){
        dispatch({
@@ -170,6 +196,8 @@ export function cleanForm(){
     }
 }
 
+
+// ACTION QUE DESPACHA LA LIMPIEZA DE LOS DETALLES
 export function cleanDetails(){
     return function(dispatch){
         dispatch({
@@ -180,6 +208,7 @@ export function cleanDetails(){
 }
 
 
+// ACTION QUE ACTUALIZA LA PAGINA EN LA QUE SE ENCUENTRA EL USER
 export function updatePage(page){
     return function(dispatch){
         dispatch({
@@ -189,6 +218,20 @@ export function updatePage(page){
     }
 }
 
+// export function deletePokemon(id){
+//     return (dispatch) => {
+//         return axios.delete("/pokemons")
+//         .then(res => {
+//             dispatch({
+//                 type: DELETE, 
+//                 payload: res.data
+//             })
+//         })
+//     }
+// }
+
+
+// ACTION QUE ACTUALIZA UN POKEMON CREADO
 // export function updatePokemon(...args){
 //     return function(dispatch){
 //         return axios.put("/pokemons", {...args})

@@ -16,7 +16,10 @@ export default function Card(props){
         <div className={estilos.flip_card}>
             <div className={estilos.flip_card_inner}>
                 <div className={estilos.flip_card_front}>
-                    {props.image 
+
+                {/*Si hay imagen, veo el id para diferenciar de la db o de la api, si no hay img le pongo la default */}
+                {
+                    props.image 
                     ? props.id <= 40  ? <img src={props.image} className={estilos.img} alt="imagenpokemon"></img> : <img src={props.image} className={estilos.image} alt="imagenpokemond"></img>
                     : <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/800px-Pokebola-pokeball-png-0.png" alt="imagenpokemondefault" className={estilos.img}></img>
                 }
@@ -28,6 +31,8 @@ export default function Card(props){
                 {/* <button onClick={handleDelete}>BORRAR</button> */}
                         <h1 className={estilos.name}>{props.name}</h1>
                 <h1 className={estilos.tipos}>Types:</h1>
+
+                {/* mapeo los tipos fijandome la id y si hay tipos */}
                 {
                     props.id <= 40 && props.types 
                     ?  <> {props.types.map((t, i) =><h3 key={i} className={estilos.tiposCu}>{t}</h3>)}</>
