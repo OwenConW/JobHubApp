@@ -60,6 +60,7 @@ const {} = sequelize.models;
 
 // Aca vendrian las relaciones
 
+// PROBANDO.....
 
 
 module.exports = {
