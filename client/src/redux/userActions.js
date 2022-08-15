@@ -10,9 +10,9 @@ export const getChars = () => (dispatch) => {
 }
  
 export const getCharsById = (id) => (dispatch) => {
-    axios.get("/users/:id")
+    axios.get(`/users/${id}`)
     .then(res => {
-        dispatch(getUserById(id))
+        dispatch(getUserById(res.data))
     })
     .catch(e => console.log(e))
 }
