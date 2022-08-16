@@ -8,24 +8,45 @@ module.exports = (sequelize) => {
         allowNull: false,
         autoIncrement: true,
     },
-    Name: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    LastName: {
+    lastName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
-    DNI: {
+    dni: {
         type: DataTypes.INTEGER,
         unique: true,
         allowNull: false
     },
-    Mail: {
+    mail: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false
-    }
+        allowNull: false,
+    },
+    phone: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    province: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    coordinate: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false
+    },
+
   }, {
     timestamps: false
   });
