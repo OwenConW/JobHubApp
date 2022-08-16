@@ -103,7 +103,7 @@ const getAllProfessionals= async() => {
 }
 
 // GET PROFESIONAL BY ID
-const getAllPorById= async(id) => {
+const getProffesionalById= async(id) => {
     try{
         const users = await User.findByPk(id * 1)
         return users
@@ -121,6 +121,6 @@ module.export = {
     filterByName, 
     filterByJob,
     getAllProfessionals, 
-    getAllPorById
+    getProffesionalById
 }
 
