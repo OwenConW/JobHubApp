@@ -91,6 +91,27 @@ const filterByJob = async(job) => {
     }
 }
 
+// GET ALL PROFESIONALS 
+const getAllPro= async() => {
+    try{
+        const users = await User.findAll()
+        return users
+    }catch(e){
+        console.log(e)
+        return {error: e}
+    }
+}
+
+// GET PROFESIONAL BY ID
+const getAllProById= async(id) => {
+    try{
+        const users = await User.findByPk(id * 1)
+        return users
+    }catch(e){
+        console.log(e)
+        return {error: e}
+    }
+}
 
 module.export = {
     orderA_z,
@@ -98,7 +119,9 @@ module.export = {
     orderRating_Max_Min,
     orderRating_Min_Max,
     filterByName, 
-    filterByJob
+    filterByJob,
+    getAllPro, 
+    getAllProById
 }
 
 
