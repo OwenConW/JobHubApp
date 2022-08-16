@@ -26,6 +26,7 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false
     }
+    ///aca hay que seguir agregando campos
   }, {
     timestamps: false
   });
