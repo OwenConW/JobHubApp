@@ -10,11 +10,11 @@ module.exports = (sequelize) => {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     lastName: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     dni: {
         type: DataTypes.INTEGER,
@@ -24,27 +24,27 @@ module.exports = (sequelize) => {
     mail: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: true,
+        allowNull: false,
     },
     phone: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     province: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     coordinate: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true
+      allowNull: false
     },
 
   }, {
