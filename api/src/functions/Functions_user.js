@@ -12,7 +12,7 @@ const orderA_z = async() => {
         return users
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     }
 }
 
@@ -27,7 +27,7 @@ const orderZ_a = async() => {
         return users
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     }
 }
 
@@ -42,7 +42,7 @@ const orderRating_Max_Min = async() => {
         return users
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     }
 }
 
@@ -57,7 +57,7 @@ const orderRating_Min_Max = async() => {
         return users
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     }
 }
 
@@ -72,7 +72,7 @@ const filterByName = async(name) => {
         return user
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     }
 }
 
@@ -81,13 +81,12 @@ const filterByJob = async(job) => {
     try{
         const users = await Professional.findAll({
             where: {
-                name_job: {[Op.iLike]: job}
-            }
+                name_job: {[Op.or]: job}             }
         })
         return users
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     }
 }
 
@@ -98,7 +97,7 @@ const getAllProfessionals= async() => {
         return users
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     }
 }
 
@@ -109,7 +108,7 @@ const getProffesionalById= async(id) => {
         return users
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     } 
 }
 
