@@ -1,10 +1,10 @@
 const { Op } = require("sequelize");
-const { User } = require("../db")
+const { User, Professional } = require("../db")
 
 // ORDER A - Z 
 const orderA_z = async() => {
     try{
-        const users = await User.findAll({
+        const users = await Professional.findAll({
             order: [
                ["name", "ASC"] 
             ]
@@ -19,7 +19,7 @@ const orderA_z = async() => {
 // ORDER Z - A
 const orderZ_a = async() => {
     try{
-        const users = await User.findAll({
+        const users = await Professional.findAll({
             order: [
                ["name", "DESC"] 
             ]
@@ -34,7 +34,7 @@ const orderZ_a = async() => {
 // RATING + -
 const orderRating_Max_Min = async() => {
     try{
-        const users = await User.findAll({
+        const users = await Professional.findAll({
             order: [
                ["rating", "ASC"] 
             ]
@@ -49,7 +49,7 @@ const orderRating_Max_Min = async() => {
 // RATING - +
 const orderRating_Min_Max = async() => {
     try{
-        const users = await User.findAll({
+        const users = await Professional.findAll({
             order: [
                ["rating", "DESC"] 
             ]
@@ -64,7 +64,7 @@ const orderRating_Min_Max = async() => {
 // BY NAME
 const filterByName = async(name) => {
     try{
-        const user = await User.findAll({
+        const user = await Professional.findAll({
            where: {
                Name: {[Op.iLike]: name}
            }
@@ -79,9 +79,9 @@ const filterByName = async(name) => {
 // BY JOB
 const filterByJob = async(job) => {
     try{
-        const users = await User.findAll({
+        const users = await Professional.findAll({
             where: {
-                job: {[Op.iLike]: job}
+                name_job: {[Op.iLike]: job}
             }
         })
         return users
@@ -92,9 +92,9 @@ const filterByJob = async(job) => {
 }
 
 // GET ALL PROFESIONALS 
-const getAllPro= async() => {
+const getAllProfessionals= async() => {
     try{
-        const users = await User.findAll()
+        const users = await Professional.findAll()
         return users
     }catch(e){
         console.log(e)
@@ -103,14 +103,14 @@ const getAllPro= async() => {
 }
 
 // GET PROFESIONAL BY ID
-const getAllProById= async(id) => {
+const getAllPorById= async(id) => {
     try{
         const users = await User.findByPk(id * 1)
         return users
     }catch(e){
         console.log(e)
         return {error: e}
-    }
+    } 
 }
 
 module.export = {
@@ -120,10 +120,7 @@ module.export = {
     orderRating_Min_Max,
     filterByName, 
     filterByJob,
-    getAllPro, 
-    getAllProById
+    getAllProfessionals, 
+    getAllPorById
 }
-
-
-
 
