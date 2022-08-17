@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar/SearchBar';
 import estilos from './Catalog.module.scss';
+import Card from '../Card/Card';
 
 const Catalog = (props) => {
 	return (
@@ -11,17 +12,20 @@ const Catalog = (props) => {
 				</div>
 				<div>FILTROS!!!</div>
 			</aside>
-			<div>
+			<div className={estilos.professionals}>
 				<header className={estilos.header}>
 					<span>Catálogo de profesionales</span>
 				</header>
 				<div className={estilos.cardsContainer}>
-					<div>CARDS</div>
-					<div>CARDS</div>
-					<div>CARDS</div>
-					<div>CARDS</div>
-					<div>CARDS</div>
-					<div>CARDS</div>
+					<Card />
+					<Card />
+					<Card />
+					<Card />
+					<Card />
+					<Card />
+					<Card />
+					<Card />
+					<Card />
 				</div>
 			</div>
 		</div>
