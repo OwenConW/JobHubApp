@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 
 import Navbar from './components/Navbar/Navbar';
-import Catalogo from './components/Catalogo/Catalogo';
+import Catalog from './components/Catalog/Catalog';
 
 function App() {
 	return (
 		<div className="App">
 			<Navbar />
-			<Catalogo />
+			<Catalog />
 		</div>
 	);
 }
