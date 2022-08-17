@@ -8,6 +8,12 @@ module.exports = (sequelize) => {
 			allowNull: false,
 			autoIncrement: true,
 		},
+		id_professional: {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			allowNull: false,
+			autoIncrement: true,
+		},
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -16,15 +22,15 @@ module.exports = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		dni: {
-			type: DataTypes.INTEGER,
-			unique: true,
-			allowNull: false
-		},
 		mail: {
 			type: DataTypes.STRING,
 			unique: true,
 			allowNull: false,
+		},
+		dni: {
+			type: DataTypes.INTEGER,
+			unique: true,
+			allowNull: false
 		},
 		phone: {
 			type: DataTypes.INTEGER,
@@ -46,11 +52,7 @@ module.exports = (sequelize) => {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false
 		},
-		professional: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-			allowNull: false
-		},
+		
 		professions: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false,
