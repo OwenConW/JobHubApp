@@ -1,0 +1,39 @@
+.container {
+	display: flex;
+	flex-flow: row nowrap;
+	font-family: Poppins, sans-serif;
+
+	.aside {
+		display: flex;
+		flex-flow: column;
+		width: 50vw;
+		height: 100vh;
+	}
+
+	.header {
+		color: white;
+		width: 100%;
+		height: 20vh;
+		font-size: 34px;
+		background-image: url('./assets/header.svg');
+		text-align: center;
+
+		span {
+			line-height: 20vh;
+		}
+	}
+
+	.cardsContainer {
+		margin: 10px 0 10px 0;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+	}
+
+	.cardsContainer > div {
+		width: 40vw;
+		height: 20vh;
+		border: black 1px solid;
+		margin: 5px;
+	}
+}
