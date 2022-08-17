@@ -17,6 +17,60 @@
         background-color: #EEEEEE;
         box-shadow: 20px 0px 40px 0px rgba(0, 0, 0, 0.286);
 
+        .logo{
+            width: 65%;
+            margin-bottom: 20%;
+            img{
+                width: 100%;
+                filter: drop-shadow(5px 5px 5px rgba(34, 34, 34, 0.385));
+            }
+        }
+
+        .login_btn{
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40%;
+            height: 7%;
+            border-radius: 5px;
+            background-color: #2C666E;
+            color: #EEEEEE;
+
+            p{
+                font-size: 2.0rem;
+            }
+
+            &:hover{
+                transition: 0.5s;
+                scale: 1.02;
+                cursor: pointer;
+                color: #2C666E;
+                background-color: #d1d1d1;
+            }
+        }
+
+        .invite{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5%;
+
+            .link{
+                transition: 0.5s;
+                font-size: 1.6rem;
+                color: #464545bf;
+                text-decoration: underline;
+
+                &:hover{
+                    transition: 0.5s;
+                    scale: 1.02;
+                    cursor: pointer;
+                    color: #626161bf;
+                }
+            }
+        }
+
     }
 
     .description{
