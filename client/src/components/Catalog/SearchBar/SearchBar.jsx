@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getUsersByNameOrJob } from '../../../redux/userActions';
+import React from 'react';
 import estilos from './SearchBar.module.scss';
 
 const SearchBar = (props) => {
 	const { addFilterValue } = props;
-	const dispatch = useDispatch();
 
 	function handleChange(e) {
 		e.preventDefault()
