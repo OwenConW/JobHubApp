@@ -5,6 +5,8 @@ const functions = require("../../functions/Functions_user")
 
 const users = Router()
 
+
+// RUTA QUE TRAE TODOS LOS USUARIOS O FILTRA POR PROFESION Y/O RATING 
 users.get("/", (req, res, next) => {
     const {name, profession, rating} = req.query;
     functions.filterByQueris(name, profession, rating)
@@ -16,6 +18,44 @@ users.get("/", (req, res, next) => {
     })
 })
 
+
+
+// RUTA QUE BUSCA O CREA USUARIOS
+users.post("/", async (req, res, next) =>{
+    const { name, lastName, mail, dni, phone, country, province, city, coordinate, jobs } = req.body
+    const nameMinuscule = name.toLowerCase()
+    const lastNameMinuscule = lastName.toLowerCase()
+    try {
+        if( name &&  lastName && mail && country && province && city && coordinate && jobs ){
+            const [newUser, created] = await User.findOrCreate({
+                where:{
+                    mail,
+                },
+                defaults:{
+                    nameMinuscule,
+                    lastNameMinuscule,
+                    dni,
+                    phone,
+                    country,
+                    province,
+                    city,
+                    coordinate,
+                    jobs,
+                }
+            })
+            if(!created)  res.status(200).send(`The User cannot be created, the email "${mail}" has already been used`)
+            return res.status(201).send(`The User "${name}" updated successfully`)
+        } return res.status(200).send("Missing data")
+        
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+    
+})
+
+
+// RUTA QUE BUSCA USUARIOS POR ID
 users.get("/:id", (req, res, next) => {
     const { id } = req.params
     functions.getProffesionalById(id * 1)
@@ -26,5 +66,6 @@ users.get("/:id", (req, res, next) => {
         return res.status(404).send(e)
     })
 })
+
 
 module.exports = users;
