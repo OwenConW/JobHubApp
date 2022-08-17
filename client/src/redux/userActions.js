@@ -23,9 +23,9 @@ export const getCharsById = (id) => (dispatch) => {
 		.catch((e) => console.log(e));
 };
 
-export const getUsersByNameOrJob = (input) => (dispatch) => {
+export const filterProfessionals = (filters) => (dispatch) => {
 	axios
-		.get(`/users?search=${input}`)
+		.get(`/users?name=${filters.name}&profession=${filters.profession}&rating=${filters.rating}`)
 		.then((res) => {
 			dispatch(getFilteredProfessionals(res.data));
 		})

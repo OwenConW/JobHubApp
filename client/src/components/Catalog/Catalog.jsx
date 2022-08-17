@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { filterProfessionals } from '../../redux/userActions'
 import SearchBar from './SearchBar/SearchBar';
 import Filter from './Filter/Filter';
 
 const Catalog = (props) => {
 
 const [filters, setFilters] = useState() 
+
+const dispatch = useDispatch()
 
 function addFilterValue(targetName, value){
 	setFilters(prevState => ({
@@ -14,7 +18,8 @@ function addFilterValue(targetName, value){
 }
 
 function handleSubmit(e){
-	
+	e.preventDefault()
+	dispatch(filterProfessionals({...filters}))
 }
 
 useEffect(() => {

@@ -20,6 +20,6 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { getAllUsers, getUserById, actionGetUsersByNameOrJob } =
+export const { getAllUsers, getUserById, getFilteredProfessionals } =
 	userSlice.actions;
 export default userSlice.reducer;

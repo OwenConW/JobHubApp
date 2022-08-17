@@ -13,7 +13,7 @@ const SearchBar = (props) => {
 		<section className={`${estilos.searchBar}`}>
 				<input
 					type="text"
-					name="profession-name"
+					name="name"
 					placeholder="Search by job or name..."
 					onChange={handleChange}
 				/>

@@ -18,9 +18,6 @@ const filterByQueris = async(name, profession, rating) => {
     }
 }
 
-
-
-
 // GET PROFESIONAL BY ID
 const getProffesionalById= async(id) => {
     try{

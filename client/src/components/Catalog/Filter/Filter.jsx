@@ -33,7 +33,7 @@ useEffect(() => {
 
   return (
     <div>
-      <button type="button" value="ASC" name="rating-order" onClick={handleClick}>Rating ↑</button>
+      <button type="button" value="ASC" name="rating" onClick={handleClick}>Rating ↑</button>
       <select onChange={handleClick} name="profession" id="profression">
       <option key="all-professions"
               name="all-professions"
