@@ -15,7 +15,7 @@ export const userSlice = createSlice({
 			state.detail = action.payload;
 		},
 		getFilteredProfessionals: (state, action) => {
-			state.users = action.payload;
+			state.filteredProfessionals = action.payload;
 		},
 	},
 });
