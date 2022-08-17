@@ -4,15 +4,14 @@ module.exports = (sequelize) => {
 	sequelize.define('user', {
 		id: {
 			type: DataTypes.INTEGER,
-			primaryKey: true,
 			allowNull: false,
+			primaryKey: true,
 			autoIncrement: true,
 		},
 		id_professional: {
 			type: DataTypes.INTEGER,
-			primaryKey: true,
 			allowNull: false,
-			autoIncrement: true,
+			
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -53,7 +52,7 @@ module.exports = (sequelize) => {
 			allowNull: false
 		},
 		
-		professions: {
+		jobs: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false,
         },
