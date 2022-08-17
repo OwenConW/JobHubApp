@@ -5,7 +5,7 @@ import Filter from './Filter/Filter';
 const Catalog = (props) => {
 
 function addFilterValue(targetName, value){
-	console.log(targetName,"Value:", value);
+	console.log('targetName:',targetName,"| Value:", value);
 }
 
 	return (

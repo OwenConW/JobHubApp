@@ -33,6 +33,7 @@ useEffect(() => {
 
   return (
     <div>
+      <button type="button" value="ASC" name="rating-order" onClick={handleClick}>Rating ↑</button>
       <select onChange={handleClick} name="profession" id="profression">
         {placeHolderDb?.map(profession => {
           return (
