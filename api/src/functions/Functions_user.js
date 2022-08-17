@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
-const { User } = require("../db")
+const { User, Profession } = require("../db")
 
-
+// GET PROFESSIONAL BY NAME AND FILTER BY PROFESSION AND/OR RATING
 const filterByQueris = async(name, profession, rating) => {  
     try{
         let options = {};
@@ -20,9 +20,8 @@ const filterByQueris = async(name, profession, rating) => {
 
 
 
-
-// GET PROFESIONAL BY ID
-const getProffesionalById= async(id) => {
+// GET PROFESSIONAL BY ID
+const getProffesionalById = async(id) => {
     try{
         const users = await User.findByPk(id * 1)
         return users
@@ -33,8 +32,23 @@ const getProffesionalById= async(id) => {
 }
 
 
+
+// GET ALL JOBS
+const getAllJobs = async() => {
+    try{
+        const jobs = Profession.findAll()
+        return jobs;
+    }catch(e){
+        console.log(e)
+        throw new Error(e)
+    }
+}
+
+
+
 module.export = {
     filterByQueris,
-    getProffesionalById
+    getProffesionalById,
+    getAllJobs
 }
 
