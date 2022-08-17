@@ -1,42 +1,30 @@
 const { Op } = require("sequelize");
 const { User, Professional } = require("../db")
 
-// ORDER A - Z 
-const orderA_z = async() => {
+
+const filterByQueris = async(name, job, rating) => {  // "plomero", "ASC"
     try{
-        const users = await Professional.findAll({
-            order: [
-               ["name", "ASC"] 
-            ]
-        })
-        return users
+        let options = {};
+        let where = {};
+        name ? where.name = {[Op.iLike]: name} : null;
+        job ?  where.name_job = {[Op.or]: job} : null;
+        rating ?  options.order =  [["rating", rating]] : null;
+        options.where = where;
+        const user = await User.findAll(options)
+
     }catch(e){
-        console.log(e)
         throw new Error(e)
     }
 }
 
-// ORDER Z - A
-const orderZ_a = async() => {
-    try{
-        const users = await Professional.findAll({
-            order: [
-               ["name", "DESC"] 
-            ]
-        })
-        return users
-    }catch(e){
-        console.log(e)
-        throw new Error(e)
-    }
-}
+
 
 // RATING + -
 const orderRating_Max_Min = async() => {
     try{
         const users = await Professional.findAll({
             order: [
-               ["rating", "ASC"] 
+                ["rating", "ASC"] 
             ]
         })
         return users
@@ -81,7 +69,8 @@ const filterByJob = async(job) => {
     try{
         const users = await Professional.findAll({
             where: {
-                name_job: {[Op.or]: job}             }
+                name_job: {[Op.or]: job}             
+            }
         })
         return users
     }catch(e){
@@ -114,8 +103,6 @@ const getProffesionalById= async(id) => {
 
 
 module.export = {
-    orderA_z,
-    orderZ_a,
     orderRating_Max_Min,
     orderRating_Min_Max,
     filterByName, 
