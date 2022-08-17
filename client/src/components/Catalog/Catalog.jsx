@@ -6,7 +6,7 @@ import Filter from './Filter/Filter';
 
 const Catalog = (props) => {
 
-const [filters, setFilters] = useState() 
+const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
 
 const dispatch = useDispatch()
 
