@@ -35,6 +35,10 @@ useEffect(() => {
     <div>
       <button type="button" value="ASC" name="rating-order" onClick={handleClick}>Rating ↑</button>
       <select onChange={handleClick} name="profession" id="profression">
+      <option key="all-professions"
+              name="all-professions"
+              value="all-professions"
+              > All Professions </option>
         {placeHolderDb?.map(profession => {
           return (
             <option key={profession.id}

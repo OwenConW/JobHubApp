@@ -4,30 +4,22 @@ import { getUsersByNameOrJob } from '../../../redux/userActions';
 import estilos from './SearchBar.module.scss';
 
 const SearchBar = (props) => {
-	const [input, setInput] = useState('');
+	const { addFilterValue } = props;
 	const dispatch = useDispatch();
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		dispatch(getUsersByNameOrJob(input));
-		setInput('');
+	function handleChange(e) {
+		e.preventDefault()
+		addFilterValue(e.target.name, e.target.value)
 	}
 
 	return (
 		<section className={`${estilos.searchBar}`}>
-			<form onSubmit={(e) => handleSubmit(e)}>
 				<input
 					type="text"
+					name="profession-name"
 					placeholder="Search by job or name..."
-					value={input}
-					onChange={(e) => setInput(e.target.value)}
+					onChange={handleChange}
 				/>
-				<input
-					className={`${estilos.inButton}`}
-					type="submit"
-					value="SEARCH"
-				/>
-			</form>
 		</section>
 	);
 };

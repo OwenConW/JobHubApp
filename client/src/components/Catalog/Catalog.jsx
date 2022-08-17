@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar/SearchBar';
 import Filter from './Filter/Filter';
-import { useEffect } from 'react';
 
 const Catalog = (props) => {
 
@@ -14,11 +13,26 @@ function addFilterValue(targetName, value){
 	}))
 }
 
+function handleSubmit(e){
+
+}
+
+useEffect(() => {
+	console.log(filters);
+}, [filters])
+
 	return (
 		<div>
-			CATALOGO
-			<SearchBar addFilterValue={addFilterValue} />
-			<Filter addFilterValue={addFilterValue} />
+			<form onSubmit={handleSubmit}>
+				CATALOGO
+				<SearchBar addFilterValue={addFilterValue} />
+				<Filter addFilterValue={addFilterValue} />
+				<input
+					//className={`${estilos.inButton}`}
+					type="submit"
+					value="SEARCH"
+				/>
+			</form>
 		</div>
 	);
 };
