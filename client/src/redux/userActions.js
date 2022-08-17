@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
 	getAllUsers,
 	getUserById,
-	actionGetUsersByNameOrJob,
+	getFilteredProfessionals,
 } from './userSlice.js';
 
 export const getChars = () => (dispatch) => {
@@ -27,7 +27,7 @@ export const getUsersByNameOrJob = (input) => (dispatch) => {
 	axios
 		.get(`/users?search=${input}`)
 		.then((res) => {
-			dispatch(actionGetUsersByNameOrJob(res.data));
+			dispatch(getFilteredProfessionals(res.data));
 		})
 		.catch((e) => console.log(e));
 };
