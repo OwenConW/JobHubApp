@@ -8,16 +8,11 @@ const Catalog = (props) => {
 const [filters, setFilters] = useState() 
 
 function addFilterValue(targetName, value){
-	console.log('targetName:',targetName,"| Value:", value);
 	setFilters(prevState => ({
 		...prevState,
 		[targetName]: value
 	}))
 }
-
-useEffect(() => {
-	console.log(filters);
-}, [filters])
 
 	return (
 		<div>
