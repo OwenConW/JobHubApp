@@ -1,19 +1,21 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('client', {
+    sequelize.define('profession', {
         id: {
             type: DataTypes.INTEGER,
+            primaryKey: true,
             allowNull: false,
             autoIncrement: true,
         },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
 
-        activo: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true,
-            allowNull: false
         },
-        }, {
+
+    }, {
         timestamps: false
     });
 };
