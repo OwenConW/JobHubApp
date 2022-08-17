@@ -19,21 +19,27 @@ const placeHolderDb = [
   },
 ]
 
-
 function Filter(props) {
 
+const { addFilterValue } = props;
 
-  
+function handleClick(e){
+  addFilterValue(e.target.name, e.target.value)
+}
+
 useEffect(() => {
 //Call to professions from DB
 },[])
 
   return (
     <div>
-      <select name="profession" id="profression">
+      <select onChange={handleClick} name="profession" id="profression">
         {placeHolderDb?.map(profession => {
           return (
-            <option key={profession.id} value={profession.id}>{profession.name}</option>
+            <option key={profession.id}
+                    name={profession.name} 
+                    value={profession.id}
+                   > {profession.name} </option>
           )
         })}
       </select>
