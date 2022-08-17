@@ -112,6 +112,7 @@ const getProffesionalById= async(id) => {
     } 
 }
 
+
 module.export = {
     orderA_z,
     orderZ_a,
