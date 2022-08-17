@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUsersByNameOrJob } from '../../redux/userSlice';
-
-//import { findRecipes, showAllRecipes } from '../../Redux/actions/index.actions';
 import estilos from './SearchBar.module.scss';
 
 const SearchBar = (props) => {
@@ -30,7 +28,6 @@ const SearchBar = (props) => {
 					value="SEARCH"
 				/>
 			</form>
-			<button className={`${estilos.inButton}`}>Show All</button>
 		</section>
 	);
 };

@@ -13,12 +13,12 @@ export const userSlice = createSlice({
 		getUserById: (state, action) => {
 			state.detail = action.payload;
 		},
-		getUsersByNameOrJob: (state, action) => {
+		actionGetUsersByNameOrJob: (state, action) => {
 			state.users = action.payload;
 		},
 	},
 });
 
-export const { getAllUsers, getUserById, getUsersByNameOrJob } =
+export const { getAllUsers, getUserById, actionGetUsersByNameOrJob } =
 	userSlice.actions;
 export default userSlice.reducer;
