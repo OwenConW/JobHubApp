@@ -1,10 +1,11 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('orders', {
+    sequelize.define('review', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            primaryKey: true,
             autoIncrement: true,
         },
         id_user: {
