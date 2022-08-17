@@ -1,18 +1,16 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('jobs', {
+    sequelize.define('admin', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: false,
             autoIncrement: true,
         },
-        name: {
+        user_name: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
-
         },
 
     }, {
