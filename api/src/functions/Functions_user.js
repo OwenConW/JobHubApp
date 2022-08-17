@@ -1,129 +1,40 @@
 const { Op } = require("sequelize");
 const { User } = require("../db")
 
-// ORDER A - Z 
-const orderA_z = async() => {
-    try{
-        const users = await User.findAll({
-            order: [
-               ["name", "ASC"] 
-            ]
-        })
-        return users
-    }catch(e){
-        console.log(e)
-        return {error: e}
-    }
-}
 
-// ORDER Z - A
-const orderZ_a = async() => {
+const filterByQueris = async(name, profession, rating) => {  
     try{
-        const users = await User.findAll({
-            order: [
-               ["name", "DESC"] 
-            ]
-        })
-        return users
-    }catch(e){
-        console.log(e)
-        return {error: e}
-    }
-}
-
-// RATING + -
-const orderRating_Max_Min = async() => {
-    try{
-        const users = await User.findAll({
-            order: [
-               ["rating", "ASC"] 
-            ]
-        })
-        return users
-    }catch(e){
-        console.log(e)
-        return {error: e}
-    }
-}
-
-// RATING - +
-const orderRating_Min_Max = async() => {
-    try{
-        const users = await User.findAll({
-            order: [
-               ["rating", "DESC"] 
-            ]
-        })
-        return users
-    }catch(e){
-        console.log(e)
-        return {error: e}
-    }
-}
-
-// BY NAME
-const filterByName = async(name) => {
-    try{
-        const user = await User.findAll({
-           where: {
-               Name: {[Op.iLike]: name}
-           }
-        })
+        let options = {};
+        let where = {};
+        name ? where.name = {[Op.iLike]: name} : null;
+        profession ?  where.profession = {[Op.or]: profession} : null;
+        rating ?  options.order =  [["rating", rating]] : null;
+        options.where = where;
+        const user = await User.findAll(options)
         return user
     }catch(e){
         console.log(e)
-        return {error: e}
+        throw new Error(e)
     }
 }
 
-// BY JOB
-const filterByJob = async(job) => {
-    try{
-        const users = await User.findAll({
-            where: {
-                job: {[Op.iLike]: job}
-            }
-        })
-        return users
-    }catch(e){
-        console.log(e)
-        return {error: e}
-    }
-}
 
-// GET ALL PROFESIONALS 
-const getAllPro= async() => {
-    try{
-        const users = await User.findAll()
-        return users
-    }catch(e){
-        console.log(e)
-        return {error: e}
-    }
-}
+
 
 // GET PROFESIONAL BY ID
-const getAllProById= async(id) => {
+const getProffesionalById= async(id) => {
     try{
         const users = await User.findByPk(id * 1)
         return users
     }catch(e){
         console.log(e)
-        return {error: e}
-    }
+        throw new Error(e)
+    } 
 }
+
 
 module.export = {
-    orderA_z,
-    orderZ_a,
-    orderRating_Max_Min,
-    orderRating_Min_Max,
-    filterByName, 
-    filterByJob,
-    getAllPro, 
-    getAllProById
+    filterByQueris,
+    getProffesionalById
 }
-
-
-
 
