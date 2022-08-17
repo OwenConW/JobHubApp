@@ -11,6 +11,7 @@ function App() {
 			<Catalog />
 		</div>
 	);
+
 }
 
 export default App;
