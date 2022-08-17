@@ -23,6 +23,7 @@ const placeHolderDb = [
 function Filter(props) {
 
 
+  
 useEffect(() => {
 //Call to professions from DB
 },[])
