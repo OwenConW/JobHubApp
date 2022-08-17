@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getUsersByNameOrJob } from '../../redux/userSlice';
+import { getUsersByNameOrJob } from '../../../redux/userSlice';
 import estilos from './SearchBar.module.scss';
 
 const SearchBar = (props) => {
