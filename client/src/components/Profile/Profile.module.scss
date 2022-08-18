@@ -57,9 +57,11 @@
 
         .description {
           font-weight: 200;
+          text-align: justify;
           font-size: 1.7rem;
           line-height: 3rem;
           color: #000000;
+          width: 95%;
         }
       }
 
@@ -165,71 +167,97 @@
       align-items: center;
       justify-content: space-evenly;
 
-      .professionComponent {
-        background: #F0EDEE;
-        padding: 0px;
-        margin: 0px;
-        height: 30%;
-        width: 100%;
-        border-radius: 3%;
+
+    }
+
+    .addProfession {
+      height: 20%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+
+      div {
+        background-color: white;
+        border-radius: 50%;
+        padding: 0.7rem;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
 
+      img {
+        object-fit: cover;
+      }
+    }
+  }
 
-        .professionAndDescription {
-          height: 100%;
-          justify-content: center;
-          display: flex;
-          flex-direction: column;
-          width: 40%;
-          h1 {
-            font-weight: 300;
-            font-size: 2.8rem;
-            line-height: 3.5rem;
-          }
+  .bePremium {
+    height: 25%;
+    margin-bottom: 15.4%;
+    width: 90%;
+    display: flex;
+    align-content: space-around;
+    // justify-content: space-evenly;
+    border-radius: 10px;
+    background: #D9D9D9;
 
-          h2 {
-            font-weight: 300;
-            font-size: 1.5rem;
-            line-height: 2rem;
-          }
-        }
+    .premiumText {
+      width: 60%;
 
-        .professionStats {
-          height: 100%;
-          justify-content: center;
-          align-items: center;
-          display: flex;
-          flex-direction: column;
-          width: 25%;
-          h3 {
-            font-weight: 300;
-            font-size: 2.0rem;
-            line-height: 2.5rem;
-          }
-          h4 {
-            font-weight: 300;
-            font-size: 2.5rem;
-            line-height: 3.5rem;
-          }
+      h1 {
+        font-weight: 300;
+        margin-top: 2%;
+        margin-left: 4.9%;
+        font-size: 3.2rem;
+        line-height: 5.4rem;
+        color: #000000;
+      }
+
+      h4 {
+        margin-left: 4.9%;
+        margin-top: 2%;
+        text-align: justify;
+        font-weight: 200;
+        font-size: 1.7rem;
+        line-height: 2.5rem;
+        color: #000000;
+      }
+    }
+
+    .premiumRocketButton {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+
+      div {
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: 9%;
+        height: 40%;
+      }
+
+      span {
+        width: 43%;
+        background: #07393C;
+        border-radius: 10px;
+        margin-left: 4.9%;
+        margin-bottom: 3%;
+        color: #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          background-color: #d9d9d900;
+          font-weight: 100;
+          font-size: 1.7rem;
+          line-height: 2.8rem;
+          color: #ffffffc0;
         }
       }
     }
   }
 }
-
-
-
-
-
-
-// .boxHeader {
-
-//     font-family: 'Poppins';
-//     font-style: normal;
-//     font-weight: 300;
-//     font-size: 36px;
-//     line-height: 54px;
-//     color: #000000;
-// }
