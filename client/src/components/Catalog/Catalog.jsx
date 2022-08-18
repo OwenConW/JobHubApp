@@ -34,6 +34,10 @@ function handleSubmit(e){
 	dispatch(filterProfessionals({...filters}))
 }
 
+useEffect(() => {
+	console.log(filters);
+}, [filters])
+
 	return (
 		<>
         	<Navbar />

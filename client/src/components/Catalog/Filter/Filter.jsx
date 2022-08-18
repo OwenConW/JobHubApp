@@ -18,6 +18,14 @@ const placeHolderDb = [
     id: 4,
     name: "programador"
   },
+  {
+    id: 5,
+    name: "artista"
+  },
+  {
+    id: 6,
+    name: "carpintero"
+  },
 ]
 
 function Filter(props) {
@@ -43,7 +51,7 @@ useEffect(() => {
               type="button"
               onClick={handleClick}
                       name="profession"
-                      value={profession.id}
+                      value={profession.name}
                       > {profession.name} </button>
                   )
           })}
