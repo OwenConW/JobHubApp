@@ -16,6 +16,7 @@ const [filters, setFilters] = useState({name:"", profession:"", rating:""})
 const dispatch = useDispatch()
 
 function addFilterValue(targetName, value){
+
 	if (targetName === "rating" && filters.rating === "ASC") {
 		setFilters(prevState => ({
 			...prevState,
@@ -23,10 +24,15 @@ function addFilterValue(targetName, value){
 		}))
 		return
 	}
+
 	setFilters(prevState => ({
 		...prevState,
 		[targetName]: value
 	}))
+}
+
+function handleReset() {
+	setFilters({name:"", profession:"", rating:""})
 }
 
 function handleSubmit(e){
@@ -45,7 +51,7 @@ useEffect(() => {
 				<aside className={estilos.aside}>
 					<form onSubmit={handleSubmit} className={estilos.filtersFormMainContainer}>
 						<h1>FILTRAR</h1>
-						<SearchBar addFilterValue={addFilterValue} />
+						<SearchBar addFilterValue={addFilterValue} handleReset={handleReset}/>
 						<Filter addFilterValue={addFilterValue} />
 						<input
 							className={`${estilos.searchButton}`}
