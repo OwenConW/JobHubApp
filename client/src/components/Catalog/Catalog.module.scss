@@ -8,6 +8,16 @@
 		height: 100%;
 		display: flex;
 		flex-direction: column;
+		.showAllBtn {
+			background-color: #2C666E;
+			width: 80%;
+			color: white;
+			height: 30px;
+			border-radius: 3px;
+			margin-top: 20px;
+			align-self: center;
+		}
+		
 		.filtersFormMainContainer {
 			display: flex;
 			flex-direction: column;
@@ -15,15 +25,6 @@
 			align-items: center;
 			height: 90%;
 
-			.showAllBtn {
-				background-color: #2C666E;
-				width: 80%;
-				color: white;
-				height: 30px;
-				border-radius: 5px;
-				margin-top: 20px;
-			}
-			
 			.searchButton {
 					width: 80%;
 					height: 30px;

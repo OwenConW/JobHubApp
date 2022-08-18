@@ -12,10 +12,15 @@ import Navbar from "../Navbar/Navbar";
 const Catalog = (props) => {
 
 const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
+const [nameInputValue, setNameInputValue] = useState('')
 
 const dispatch = useDispatch()
 
 function addFilterValue(targetName, value){
+	
+	if (targetName === "name") {
+		setNameInputValue(value)
+	}
 
 	if (targetName === "rating" && filters.rating === "ASC") {
 		setFilters(prevState => ({
@@ -33,11 +38,14 @@ function addFilterValue(targetName, value){
 
 function handleReset() {
 	setFilters({name:"", profession:"", rating:""})
+	setNameInputValue('')
 }
 
 function handleSubmit(e){
 	e.preventDefault()
 	dispatch(filterProfessionals({...filters}))
+	setNameInputValue('')
+	e.target.reset()
 }
 
 useEffect(() => {
@@ -51,13 +59,19 @@ useEffect(() => {
 				<aside className={estilos.aside}>
 					<form onSubmit={handleSubmit} className={estilos.filtersFormMainContainer}>
 						<h1>FILTRAR</h1>
-						<SearchBar addFilterValue={addFilterValue} handleReset={handleReset}/>
+						<SearchBar addFilterValue={addFilterValue} handleReset={handleReset} valueState={nameInputValue}/>
 						<Filter addFilterValue={addFilterValue} />
 						<input
 							className={`${estilos.searchButton}`}
 							type="submit"
 							value="SEARCH"
 						/>
+						<input 
+						type='button' 
+						name='reset-btn' 
+						value="Mostrar todos"
+						onClick={handleReset}
+						className={estilos.showAllBtn} />
 					</form>
 				</aside>
 				<div className={estilos.professionals}>
