@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import s from './Profile.module.scss';
 import userImg from './assets/userimage.jpg'
 import configLogo from './assets/configLogo.svg'
