@@ -1,13 +1,21 @@
 import React from "react";
 import s from './Profile.module.scss';
 import userImg from './assets/userimage.jpg'
-import star from './assets/star.svg'
 import configLogo from './assets/configLogo.svg'
+import Navbar from "../Navbar/Navbar";
+import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
 
 let orders = [{ name: 'Nombre 1', profession: 'Diseñador', rating: 4.2 }, { name: 'Nombre 2', profession: 'Plomero', rating: 3 }, { name: 'Nombre 3', profession: 'Electricista', rating: 5 }]
 let jobs = [{ name: 'Electricista', description: 'descripcion de la tarea', rating: 4.2, reviews: 25 }, { name: 'Gasista', description: 'descripcion de la tarea', rating: 3.4, reviews: 10 }]
+
+
 const Profile = () => {
+  
+
   return (
+    <>
+    <Navbar />
+    
     <div className={s.container}>
       <div className={s.leftContainer}>
         <div className={s.profileInfo}>
@@ -25,7 +33,11 @@ const Profile = () => {
           <p className={s.orderText}>Mis ordenes recientes</p>
 
           <div className={s.lastOrders}>
-            {
+            <CardProfileMap/>
+            <CardProfileMap/>
+            <CardProfileMap/>
+
+            {/* {
               orders.map(order => {
                 return (
                   <div className={s.orders}>
@@ -41,7 +53,7 @@ const Profile = () => {
                   </div>
                 )
               })
-            }
+            } */}
           </div>
         </div>
         <div className={s.configBox}>
@@ -82,6 +94,7 @@ const Profile = () => {
 
 
     </div>
+    </>
   )
 }
 
