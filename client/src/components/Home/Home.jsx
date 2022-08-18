@@ -10,6 +10,7 @@ import s from './Home.module.scss';
 import { Link } from 'react-router-dom';
 
 const isAutenticated = false;
+const br = <br></br>;
 
 const Home = () => {
   return (
@@ -32,12 +33,12 @@ const Home = () => {
           </div>
         </aside>
         <div className={s.container2}>
-          <h1 className={s.titlemapa}>Utiliza nuestro sistema de búsqueda por ubicación</h1>
+          <h1 className={s.titlemapa}>Utiliza nuestro {br} sistema de {br} búsqueda por {br} ubicación</h1>
           {isAutenticated ?
             <Link to='/map' className={s.link}>
               <button className={s.button}>Buscar</button> 
             </Link>
-          : <Link to='/login' className={s.link}>
+          : <Link to='/' className={s.link}>
               <button className={s.button}>Iniciar Sesión</button> 
             </Link>
           }

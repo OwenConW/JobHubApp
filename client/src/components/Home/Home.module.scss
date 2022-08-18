@@ -19,11 +19,12 @@
         .presentation{
             padding-left: 3%;
             padding-right: 3%;
-            padding-bottom: 7.55%;  
+            padding-bottom: 3%;  
     
             .title{
                 padding-bottom: 1.6%;
-                font-weight: 600;
+                font-weight: 400;
+                font-size: 2.5rem;
             }
     
             .text{
@@ -34,8 +35,10 @@
     
         .destacados{
             .subtitle{
-                padding-left: 24%;
+                padding-left: 22%;
+                padding-bottom: 1.5%;
                 font-weight: 250;
+                font-size: 2.2rem;
             }
     
             .button{
@@ -63,31 +66,29 @@
 
 .container2{
     background-image: url(assets/mapa_fondo.svg);
-    // display: inline-block;
     width: 40%;
     min-height: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 
     .titlemapa{
-        padding-left: 12%;
-        padding-bottom: 10.25%;
-        padding-top: 6%;
+        margin-top: 12%;
+        margin-left: 12%;
+        margin-bottom: 8%;
         font-weight: 400;
-        font-size: 4.25rem;
+        font-size: 4.2rem;
         text-decoration: wavy;
         text-transform: capitalize;
     }
 
     .button{
-        margin-left: 38%;
-        width: 27%;
+        margin-left: 35%;
         padding-top: 1%;
         padding-bottom: 1%;
+        width: 33%;
         background: #2C666E;
         text-align: center;
+
         border-radius: 10px;
         border: 1px solid rgba(31, 29, 29, 0.25);
         color: #FFFFFF;
