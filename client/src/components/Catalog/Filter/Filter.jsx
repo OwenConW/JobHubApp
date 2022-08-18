@@ -29,12 +29,11 @@ const placeHolderDb = [
 ]
 
 function Filter(props) {
+	const { addFilterValue } = props;
 
-const { addFilterValue } = props;
-
-function handleClick(e){
-  addFilterValue(e.target.name, e.target.value)
-}
+	function handleClick(e) {
+		addFilterValue(e.target.name, e.target.value);
+	}
 
 useEffect(() => {
 //Call to professions from DB

@@ -8,18 +8,17 @@ module.exports = (sequelize) => {
 			primaryKey: true,
 			autoIncrement: true,
 		},
-		id_professional: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-			defaultValue: 0,
-		},
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		lastName: {
+		last_Name: {
 			type: DataTypes.STRING,
 			allowNull: false
+		},
+		image: {
+			type: DataTypes.STRING,
+			allowNull: false,
 		},
 		mail: {
 			type: DataTypes.STRING,
@@ -31,18 +30,25 @@ module.exports = (sequelize) => {
 			unique: true,
 			allowNull: false
 		},
+		postal_code: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
 		phone: {
 			type: DataTypes.INTEGER,
-			allowNull: true
+
 		},
+		plan_premium: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
+		},
+		
 		country: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		province: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
+
 		city: {
 			type: DataTypes.STRING,
 			allowNull: false
@@ -51,24 +57,7 @@ module.exports = (sequelize) => {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false
 		},
-		jobs: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false,
-        },
-		plan_premium: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-			allowNull: false
-		},
-		rating: {
-			type: DataTypes.FLOAT,
-			allowNull: false,
-			validate: {
-				min:0,
-				max:5
-			},
-			defaultValue: 0,
-		},
+		
 		active: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: true,
