@@ -12,10 +12,10 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        id_profession: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
+        // id_profession: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        // },
         id_user_client: {
             type: DataTypes.INTEGER,
             allowNull: false,

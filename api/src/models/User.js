@@ -8,18 +8,17 @@ module.exports = (sequelize) => {
 			primaryKey: true,
 			autoIncrement: true,
 		},
-		id_professional: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-			
-		},
+		// id_professional: {
+		// 	type: DataTypes.INTEGER,
+		// 	//allowNull: false,
+		// },
 		name: {
 			type: DataTypes.STRING,
-			allowNull: false,
+			//allowNull: false,
 		},
 		lastName: {
 			type: DataTypes.STRING,
-			allowNull: false
+			//allowNull: false
 		},
 		mail: {
 			type: DataTypes.STRING,
@@ -64,6 +63,7 @@ module.exports = (sequelize) => {
 		rating: {
 			type: DataTypes.FLOAT,
 			allowNull: false,
+			defaultValue: 0,
 			validate: {
 				min:0,
 				max:5
