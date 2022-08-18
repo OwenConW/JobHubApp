@@ -6,7 +6,7 @@ const filterByQueris = async(name, profession, rating) => {
     try{
         let options = {};
         let where = {};
-        name ? where.name = {[Op.substring]: name} : null;
+        name ? where.name = {[Op.substring]: name.toLowerCase()} : null;
         profession ?  where.jobs = {[Op.contains]: profession} : null;
         rating ?  options.order =  [["rating", rating]] : null;
         options.where = where;
