@@ -9,6 +9,7 @@ import Navbar from "../Navbar/Navbar";
 import s from './Home.module.scss';
 import { Link } from 'react-router-dom';
 
+const isAutenticated = false;
 
 const Home = () => {
   return (
@@ -32,13 +33,17 @@ const Home = () => {
         </div>
       </div>
       <div className={s.container2}>
-        <h1 className={s.title_mapa}>Utiliza nuestro sistema de búsqueda por ubicación</h1>
-        <Link to='/map' className={s.link}>
-          <button className={s.button}>Buscar</button>
-        </Link>
+        <h1 className={s.titlemapa}>Utiliza nuestro sistema de búsqueda por ubicación</h1>
+        {isAutenticated ?
+          <Link to='/map' className={s.link}>
+            <button className={s.button}>Buscar</button> 
+          </Link>
+        : <Link to='/login' className={s.link}>
+            <button className={s.button}>Iniciar Sesión</button> 
+          </Link>
+        }
       </div>
     </React.Fragment>    
-    
   )
 }
 

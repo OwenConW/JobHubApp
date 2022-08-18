@@ -3,6 +3,11 @@ import { useDispatch } from 'react-redux';
 import { filterProfessionals } from '../../redux/userActions'
 import SearchBar from './SearchBar/SearchBar';
 import Filter from './Filter/Filter';
+import estilos from './Catalog.module.scss';
+import Card from '../Card/Card';
+import Navbar from "../Navbar/Navbar";
+
+
 
 const Catalog = (props) => {
 
@@ -23,18 +28,39 @@ function handleSubmit(e){
 }
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				CATALOGO
-				<SearchBar addFilterValue={addFilterValue} />
-				<Filter addFilterValue={addFilterValue} />
-				<input
-					//className={`${estilos.inButton}`}
-					type="submit"
-					value="SEARCH"
-				/>
-			</form>
-		</div>
+		<>
+        	<Navbar />
+			<div className={estilos.container}>
+				<aside className={estilos.aside}>
+					<form onSubmit={handleSubmit}>
+						CATALOGO
+						<SearchBar addFilterValue={addFilterValue} />
+						<Filter addFilterValue={addFilterValue} />
+						<input
+							//className={`${estilos.inButton}`}
+							type="submit"
+							value="SEARCH"
+						/>
+					</form>
+				</aside>
+				<div className={estilos.professionals}>
+					<header className={estilos.header}>
+						<span>Catálogo de profesionales</span>
+					</header>
+					<div className={estilos.cardsContainer}>
+						<Card />
+						<Card />
+						<Card />
+						<Card />
+						<Card />
+						<Card />
+						<Card />
+						<Card />
+						<Card />
+					</div>
+				</div>
+			</div>
+		</>
 	);
 };
 
