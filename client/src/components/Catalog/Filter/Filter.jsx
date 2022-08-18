@@ -36,7 +36,7 @@ useEffect(() => {
     <div className={s.filterContainer}>
       <div className={s.allButtonsContainer}>
         <div className={s.professionsButtonsContainer}>
-          <button key={0} type="button" onClick={handleClick} name="profession" value="">All Professions</button>
+          <button key={0} type="button" onClick={handleClick} name="profession" value="">Todas las profesiones</button>
           {placeHolderDb?.map(profession => {
             return (
               <button key={profession.id}
