@@ -25,7 +25,7 @@ export const getCharsById = (id) => (dispatch) => {
 
 export const getUsersByNameOrJob = (input) => (dispatch) => {
 	axios
-		.get(`/users?search=${input}`)
+		.get(`/users?name=${input}`)
 		.then((res) => {
 			dispatch(actionGetUsersByNameOrJob(res.data));
 		})

@@ -8,7 +8,8 @@ const users = Router()
 
 // RUTA QUE TRAE TODOS LOS USUARIOS O FILTRA POR PROFESION Y/O RATING 
 users.get("/", (req, res, next) => {
-    const {name, profession, rating} = req.query;
+    const {name, rating} = req.query;
+    const { profession } = req.body
     functions.filterByQueris(name, profession, rating)
     .then(professionals => {
         return res.status(200).send(professionals)

@@ -15,6 +15,7 @@ export const userSlice = createSlice({
 		},
 		actionGetUsersByNameOrJob: (state, action) => {
 			state.users = action.payload;
+			console.log("array users",state.users)
 		},
 	},
 });
