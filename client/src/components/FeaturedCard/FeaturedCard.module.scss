@@ -1,0 +1,130 @@
+.container{
+    width: 25%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: #2C666E;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+    .background{
+        position: absolute;
+        height: 20%;
+        top: 8%;
+    }
+
+    .oficio{
+        margin-top: 1%;
+        font-size: 1.6rem;
+        font-weight: 200;
+        color: #F0EDEE;
+    }
+
+    .image{
+        border: 7px solid rgba(0, 0, 0, 0.126);
+        border-radius: 50%;
+        width: 130px;
+        height: 130px;
+        bottom: 58%;
+        position: absolute;
+
+        img{
+            border-radius: 50%;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .data{
+        width: 100%;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #F0EDEE;
+        border-radius: 0 0 5px 5px;
+        .name{
+            padding-top: 23%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h4{
+                font-size: 1.6rem;
+                font-weight: 400;
+            }
+
+            p{
+                font-size: 1.3rem;
+                font-weight: 300;
+                color: #666666;
+            }
+        }
+
+        .info{
+            width: 100%;
+            height: 35%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            .resenas{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                h4{
+                    font-weight: 350;
+                    font-size: 1.5rem;
+                }
+
+                p{
+                    font-size: 1.75rem;
+                    font-weight: 400;
+                    color: #07393C;
+                }
+            }
+
+            .calificacion{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                h4{
+                    font-weight: 300;
+                    font-size: 1.5rem;
+                }
+
+                .rating{
+                    display: flex;
+                    align-items: center;
+
+                    p{
+                        font-size: 1.6rem
+                    };
+                }
+            }
+        }
+    }
+
+    button{
+        position: absolute;
+        background-color:#07393C;
+        width: 4.5%;
+        height: 9%;
+        border-radius: 50%;
+        bottom: 25%;
+        img{
+            width: 50%;
+        }
+    }
+
+}

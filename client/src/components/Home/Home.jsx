@@ -2,8 +2,7 @@ import React from 'react';
 
 //components
 import Navbar from "../Navbar/Navbar";
-
-//assets
+import FeaturedCard from "../FeaturedCard/FeaturedCard";
 
 //styles and utilities
 import s from './Home.module.scss';
@@ -13,6 +12,13 @@ const isAutenticated = false;
 const br = <br></br>;
 
 const Home = () => {
+  
+  // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
+  // const dispatch = useDispatch()
+  // const bestProffesionals = useSelector((state) => state.getDestacados)
+
+  // useEffect(() => { dispatch(getDestacados()) }, [dispatch])  
+
   return (
     <>
       <Navbar />
@@ -27,6 +33,9 @@ const Home = () => {
           <div className={s.destacados}>
             <h1 className={s.subtitle}>Trabajadores destacados de la semana</h1>
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
+            <div className={s.cards}> 
+              <FeaturedCard className={s.card} /> 
+            </div>
             <Link to='/professionals' className={s.link}>
               <button className={s.button}>Explorar Catálogo</button>
             </Link>
