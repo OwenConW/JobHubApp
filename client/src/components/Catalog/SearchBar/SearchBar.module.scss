@@ -3,6 +3,14 @@
 	flex-direction: column;
 	gap: 2px;
 	align-items: center;
+		.showAllBtn {
+		background-color: #2C666E;
+		width: 80%;
+		color: white;
+		height: 30px;
+		border-radius: 5px;
+		margin-top: 20px;
+	}
 		h3 {
 			align-self:flex-start;
 	}
