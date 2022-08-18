@@ -29,10 +29,6 @@ function addFilterValue(targetName, value){
 	}))
 }
 
-useEffect(() => {
-	console.log(filters);
-}, [filters])
-
 function handleSubmit(e){
 	e.preventDefault()
 	dispatch(filterProfessionals({...filters}))
