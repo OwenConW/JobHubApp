@@ -42,6 +42,10 @@ const Catalog = (props) => {
 }
 
 useEffect(() => {
+ console.log(professionalsArray);
+}, [professionalsArray])
+
+useEffect(() => {
 	dispatch(getChars());
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
@@ -49,6 +53,7 @@ useEffect(() => {
 
 function handleReset() {
 	setFilters({name:"", profession:"", rating:""})
+	dispatch(getChars());
 	setNameInputValue('')
 }
 

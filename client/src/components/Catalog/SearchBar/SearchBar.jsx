@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import estilos from './SearchBar.module.scss';
 
 const SearchBar = (props) => {
-	const { addFilterValue, handleReset, valueState } = props;
+	const { addFilterValue, valueState } = props;
 
 
 	function handleChange(e) {
