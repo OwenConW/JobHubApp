@@ -32,8 +32,8 @@ users.post("/", async (req, res, next) =>{
                     mail,
                 },
                 defaults:{
-                    nameMinuscule,
-                    lastNameMinuscule,
+                    name: nameMinuscule,
+                    lastName: lastNameMinuscule,
                     dni,
                     phone,
                     country,
@@ -44,7 +44,7 @@ users.post("/", async (req, res, next) =>{
                 }
             })
             if(!created)  res.status(200).send(`The User cannot be created, the email "${mail}" has already been used`)
-            return res.status(201).send(`The User "${name}" updated successfully`)
+            return res.status(201).send(`The User "${name}" created successfully`)
         } return res.status(200).send("Missing data")
         
     } catch (error) {

@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-	sequelize.define('user', {
+	sequelize.define('User', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
 		id_professional: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-			
+			defaultValue: 0,
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
 			allowNull: false,
 		},
 		dni: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			unique: true,
 			allowNull: false
 		},
@@ -51,7 +51,6 @@ module.exports = (sequelize) => {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false
 		},
-		
 		jobs: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false,
@@ -68,6 +67,7 @@ module.exports = (sequelize) => {
 				min:0,
 				max:5
 			},
+			defaultValue: 0,
 		},
 		active: {
 			type: DataTypes.BOOLEAN,

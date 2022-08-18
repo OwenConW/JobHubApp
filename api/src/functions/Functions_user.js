@@ -46,7 +46,7 @@ const getAllJobs = async() => {
 
 
 
-module.export = {
+module.exports = {
     filterByQueris,
     getProffesionalById,
     getAllJobs
