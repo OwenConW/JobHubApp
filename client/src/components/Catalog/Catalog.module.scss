@@ -9,12 +9,20 @@
 		display: flex;
 		flex-direction: column;
 		.filtersFormMainContainer {
-			border: 1px solid black;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
 			align-items: center;
 			height: 80%;
+			
+			.searchButton {
+					width: 80%;
+					height: 30px;
+					border-radius: 3px;
+					transition: all 0.1s;
+					background-color: #2C666E;
+					color: white;
+			}
 		}
 	}
 

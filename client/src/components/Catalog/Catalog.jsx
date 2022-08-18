@@ -44,7 +44,7 @@ function handleSubmit(e){
 						<SearchBar addFilterValue={addFilterValue} />
 						<Filter addFilterValue={addFilterValue} />
 						<input
-							//className={`${estilos.inButton}`}
+							className={`${estilos.searchButton}`}
 							type="submit"
 							value="SEARCH"
 						/>

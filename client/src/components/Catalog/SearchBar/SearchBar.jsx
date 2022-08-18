@@ -15,7 +15,7 @@ const SearchBar = (props) => {
 				<input
 					type="text"
 					name="name"
-					placeholder="Search by job or name..."
+					placeholder="Search name..."
 					onChange={handleChange}
 				/>
 		</section>
