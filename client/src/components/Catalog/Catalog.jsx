@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { filterProfessionals } from '../../redux/userActions'
 import SearchBar from './SearchBar/SearchBar';
@@ -11,16 +11,27 @@ import Navbar from "../Navbar/Navbar";
 
 const Catalog = (props) => {
 
-const [filters, setFilters] = useState({name:"", profession:"all-professions", rating:""}) 
+const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
 
 const dispatch = useDispatch()
 
 function addFilterValue(targetName, value){
+	if (targetName === "rating" && filters.rating === "ASC") {
+		setFilters(prevState => ({
+			...prevState,
+			[targetName]: ""
+		}))
+		return
+	}
 	setFilters(prevState => ({
 		...prevState,
 		[targetName]: value
 	}))
 }
+
+useEffect(() => {
+	console.log(filters);
+}, [filters])
 
 function handleSubmit(e){
 	e.preventDefault()

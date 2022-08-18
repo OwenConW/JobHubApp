@@ -37,7 +37,7 @@ useEffect(() => {
       <select onChange={handleClick} name="profession" id="profression">
       <option key="all-professions"
               name="all-professions"
-              value="all-professions"
+              value=""
               > All Professions </option>
         {placeHolderDb?.map(profession => {
           return (
