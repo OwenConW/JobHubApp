@@ -8,15 +8,17 @@ import Navbar from "../Navbar/Navbar";
 //styles and utilities
 import s from './Home.module.scss';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const isAutenticated = false;
 
 const Home = () => {
+
+  const {isAuthenticated} = useAuth0();
+
+
   return (
     <React.Fragment>
-      <div className={s.navbar}>
-        <Navbar />
-      </div>
+      <Navbar />
       <div className={s.container1}>
         <div className={s.presentation}>
           <h1 className={s.title}>El buen servicio de un profesional está a tu alcance!</h1>
@@ -34,16 +36,16 @@ const Home = () => {
       </div>
       <div className={s.container2}>
         <h1 className={s.titlemapa}>Utiliza nuestro sistema de búsqueda por ubicación</h1>
-        {isAutenticated ?
+        {isAuthenticated ?
           <Link to='/map' className={s.link}>
-            <button className={s.button}>Buscar</button> 
+            <button className={s.button}>Buscar</button>
           </Link>
         : <Link to='/login' className={s.link}>
-            <button className={s.button}>Iniciar Sesión</button> 
+            <button className={s.button}>Iniciar Sesión</button>
           </Link>
         }
       </div>
-    </React.Fragment>    
+    </React.Fragment>
   )
 }
 

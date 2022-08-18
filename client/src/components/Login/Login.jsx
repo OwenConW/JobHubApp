@@ -1,21 +1,55 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+//auth0
+import { useAuth0 } from '@auth0/auth0-react';
 
 //style and utilities
 import s from './Login.module.scss';
 import logo from './assets/logo.svg';
 import background from './assets/background.svg';
+import axios from 'axios';
 
 const Login = () => {
+
+	const {user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+	const navigate = useNavigate();
+
+	const handleValidate = async (user, validate) => {
+		try{
+			if(validate && user){
+				console.log(user);
+				let response = await axios.get(`/verify?mail=${user.email}`);
+				console.log(response);
+				if(response.data.onboarding){
+					console.log(response.data);
+					navigate("../home", { replace: true });
+
+				}else{
+					console.log(response.data);
+					navigate("../verify", { replace: true });
+				}
+			}
+		}catch(e){
+			return e.message;
+		}
+	}
+
+	handleValidate(user, isAuthenticated);
+
 	return (
 		<div className={s.container}>
+
+			{isLoading ? 'Loading' : (
+			<>
 			<div className={s.login}>
 				<div className={s.logo}>
 					<img src={logo} alt="logo" />
 				</div>
-				<div className={s.login_btn}>
+				<div className={s.login_btn} onClick={() =>loginWithRedirect()}>
 					<p>Iniciar Sesión</p>
 				</div>
+
 
 				<div className={s.invite}>
 					<Link to="/home" className={s.link}>
@@ -39,6 +73,8 @@ const Login = () => {
 
 				<img src={background} alt="backg" />
 			</div>
+			</>)}
+
 		</div>
 	);
 };
