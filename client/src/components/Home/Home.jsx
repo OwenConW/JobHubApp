@@ -13,10 +13,8 @@ const isAutenticated = false;
 
 const Home = () => {
   return (
-    <React.Fragment>
-      <div className={s.navbar}>
-        <Navbar />
-      </div>
+    <>
+      <Navbar />
       <div className={s.container1}>
         <div className={s.presentation}>
           <h1 className={s.title}>El buen servicio de un profesional está a tu alcance!</h1>
@@ -43,7 +41,7 @@ const Home = () => {
           </Link>
         }
       </div>
-    </React.Fragment>    
+    </>    
   )
 }
 
