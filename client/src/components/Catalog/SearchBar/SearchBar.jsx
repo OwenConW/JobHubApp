@@ -14,21 +14,16 @@ const SearchBar = (props) => {
 	}
 
 	return (
-		<section className={`${estilos.searchBar}`}>
-			<form onSubmit={(e) => handleSubmit(e)}>
-				<input
-					type="text"
-					placeholder="Search by job or name..."
-					value={input}
-					onChange={(e) => setInput(e.target.value)}
-				/>
-				<input
-					className={`${estilos.inButton}`}
-					type="submit"
-					value="SEARCH"
-				/>
-			</form>
-		</section>
+		<form className={estilos.container} onSubmit={(e) => handleSubmit(e)}>
+			<input
+				type="text"
+				placeholder="Search by job or name..."
+				value={input}
+				onChange={(e) => setInput(e.target.value)}
+				className={estilos.searchInput}
+			/>
+			<input className={estilos.searchButton} type="submit" value="SEARCH" />
+		</form>
 	);
 };
 

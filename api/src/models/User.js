@@ -1,12 +1,17 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-	sequelize.define('user', {
+	sequelize.define('User', {
 		id: {
 			type: DataTypes.INTEGER,
-			primaryKey: true,
 			allowNull: false,
+			primaryKey: true,
 			autoIncrement: true,
+		},
+		id_professional: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -16,15 +21,15 @@ module.exports = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		dni: {
-			type: DataTypes.INTEGER,
-			unique: true,
-			allowNull: false
-		},
 		mail: {
 			type: DataTypes.STRING,
 			unique: true,
 			allowNull: false,
+		},
+		dni: {
+			type: DataTypes.STRING,
+			unique: true,
+			allowNull: false
 		},
 		phone: {
 			type: DataTypes.INTEGER,
@@ -46,12 +51,7 @@ module.exports = (sequelize) => {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false
 		},
-		professional: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-			allowNull: false
-		},
-		professions: {
+		jobs: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false,
         },
@@ -67,6 +67,7 @@ module.exports = (sequelize) => {
 				min:0,
 				max:5
 			},
+			defaultValue: 0,
 		},
 		active: {
 			type: DataTypes.BOOLEAN,
