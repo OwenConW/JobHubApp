@@ -8,15 +8,11 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        id_user: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
         id_profession: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        id_user_client: {
+        id_user_professional: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
@@ -28,6 +24,15 @@ module.exports = (sequelize) => {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,
 		},
+        id_user_client: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        date:{
+            type: DataTypes.DATE,
+            
+        }
+        
 
         }, {
         timestamps: false

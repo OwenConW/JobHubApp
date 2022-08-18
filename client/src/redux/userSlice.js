@@ -4,6 +4,7 @@ export const userSlice = createSlice({
 	name: 'users',
 	initialState: {
 		users: [],
+		filteredProfessionals: [],
 		detail: {},
 	},
 	reducers: {
@@ -13,12 +14,12 @@ export const userSlice = createSlice({
 		getUserById: (state, action) => {
 			state.detail = action.payload;
 		},
-		actionGetUsersByNameOrJob: (state, action) => {
-			state.users = action.payload;
+		getFilteredProfessionals: (state, action) => {
+			state.filteredProfessionals = action.payload;
 		},
 	},
 });
 
-export const { getAllUsers, getUserById, actionGetUsersByNameOrJob } =
+export const { getAllUsers, getUserById, getFilteredProfessionals } =
 	userSlice.actions;
 export default userSlice.reducer;
