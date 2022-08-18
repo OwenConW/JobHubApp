@@ -2,9 +2,14 @@ import React from 'react';
 import SearchBar from './SearchBar/SearchBar';
 import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
+import Navbar from "../Navbar/Navbar";
+
+
 
 const Catalog = (props) => {
 	return (
+		<>
+        	<Navbar />
 		<div className={estilos.container}>
 			<aside className={estilos.aside}>
 				<div>
@@ -29,6 +34,7 @@ const Catalog = (props) => {
 				</div>
 			</div>
 		</div>
+		</>
 	);
 };
 
