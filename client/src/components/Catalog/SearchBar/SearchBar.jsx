@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getUsersByNameOrJob } from '../../../redux/userSlice';
+import { actionGetUsersByNameOrJob } from '../../../redux/userSlice';
 import estilos from './SearchBar.module.scss';
 
 const SearchBar = (props) => {
@@ -9,7 +9,7 @@ const SearchBar = (props) => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		dispatch(getUsersByNameOrJob(input));
+		dispatch(actionGetUsersByNameOrJob(input));
 		setInput('');
 	}
 
