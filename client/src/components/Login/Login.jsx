@@ -4,6 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
 
+//redux
+import { setActive } from '../../redux/userActions';
+import { useDispatch } from 'react-redux';
+
 //style and utilities
 import s from './Login.module.scss';
 import logo from './assets/logo.svg';
@@ -12,21 +16,19 @@ import axios from 'axios';
 
 const Login = () => {
 
+	const dispatch = useDispatch();
 	const {user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 	const navigate = useNavigate();
 
 	const handleValidate = async (user, validate) => {
 		try{
 			if(validate && user){
-				console.log(user);
 				let response = await axios.get(`/verify?mail=${user.email}`);
-				console.log(response);
 				if(response.data.onboarding){
-					console.log(response.data);
+					dispatch(setActive(response.data));
 					navigate("../home", { replace: true });
 
 				}else{
-					console.log(response.data);
 					navigate("../verify", { replace: true });
 				}
 			}

@@ -3,7 +3,9 @@ import {
 	getAllUsers,
 	getUserById,
 	getFilteredProfessionals,
+	setActiveUser
 } from './userSlice.js';
+
 
 export const getChars = () => (dispatch) => {
 	axios
@@ -34,3 +36,7 @@ export const filterProfessionals = (filters) => (dispatch) => {
 		})
 		.catch((e) => console.log(e));
 };
+
+export const setActive = (data) => (dispatch) => {  //Action que setea el activeUser
+	dispatch(setActiveUser(data));
+}
