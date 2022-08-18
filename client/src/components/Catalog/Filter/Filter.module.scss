@@ -1,0 +1,15 @@
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+}
+
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 10px;
+  flex-wrap: wrap;
+}

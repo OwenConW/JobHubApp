@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import s from './Filter.module.scss';
 
 const placeHolderDb = [
   {
@@ -32,22 +33,21 @@ useEffect(() => {
 },[])
 
   return (
-    <div>
+    <div className={s.filterContainer}>
       <button type="button" value="ASC" name="rating" onClick={handleClick}>Rating ↑</button>
-      <select onChange={handleClick} name="profession" id="profression">
-      <option key="all-professions"
-              name="all-professions"
-              value=""
-              > All Professions </option>
+      <div className={s.buttonsContainer}>
+        <button key={0} type="button" onClick={handleClick} name="profession" value="">All Professions</button>
         {placeHolderDb?.map(profession => {
           return (
-            <option key={profession.id}
-                    name={profession.name} 
+            <button key={profession.id}
+                    type="button"
+                    onClick={handleClick}
+                    name="profession"
                     value={profession.id}
-                   > {profession.name} </option>
+                   > {profession.name} </button>
           )
         })}
-      </select>
+      </div>
     </div>
   )
 }
