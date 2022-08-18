@@ -1,42 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { filterProfessionals } from '../../redux/userActions'
+import { filterProfessionals } from '../../redux/userActions';
 import SearchBar from './SearchBar/SearchBar';
 import Filter from './Filter/Filter';
 import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
-import Navbar from "../Navbar/Navbar";
-
-
+import Navbar from '../Navbar/Navbar';
 
 const Catalog = (props) => {
+	const [filters, setFilters] = useState({
+		name: '',
+		profession: '',
+		rating: '',
+	});
 
-const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
+	const dispatch = useDispatch();
 
-const dispatch = useDispatch()
-
-function addFilterValue(targetName, value){
-	if (targetName === "rating" && filters.rating === "ASC") {
-		setFilters(prevState => ({
+	function addFilterValue(targetName, value) {
+		if (targetName === 'rating' && filters.rating === 'ASC') {
+			setFilters((prevState) => ({
+				...prevState,
+				[targetName]: '',
+			}));
+			return;
+		}
+		setFilters((prevState) => ({
 			...prevState,
-			[targetName]: ""
-		}))
-		return
+			[targetName]: value,
+		}));
 	}
-	setFilters(prevState => ({
-		...prevState,
-		[targetName]: value
-	}))
-}
 
-function handleSubmit(e){
-	e.preventDefault()
-	dispatch(filterProfessionals({...filters}))
-}
+	function handleSubmit(e) {
+		e.preventDefault();
+		dispatch(filterProfessionals({ ...filters }));
+	}
 
 	return (
 		<>
-        	<Navbar />
+			<Navbar />
 			<div className={estilos.container}>
 				<aside className={estilos.aside}>
 					<form onSubmit={handleSubmit}>
