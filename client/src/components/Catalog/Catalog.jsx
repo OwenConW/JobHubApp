@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterProfessionals } from '../../redux/userActions';
+import { filterProfessionals, getChars } from '../../redux/userActions';
 import SearchBar from './SearchBar/SearchBar';
 import Filter from './Filter/Filter';
 import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
 import Navbar from '../Navbar/Navbar';
 
-useEffect(() => {
-	dispatch(getChars());
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
 
 
 
@@ -44,6 +40,12 @@ const Catalog = (props) => {
 			[targetName]: value
 		}))
 }
+
+useEffect(() => {
+	dispatch(getChars());
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
 
 function handleReset() {
 	setFilters({name:"", profession:"", rating:""})
