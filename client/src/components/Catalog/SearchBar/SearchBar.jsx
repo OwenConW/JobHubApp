@@ -11,6 +11,7 @@ const SearchBar = (props) => {
 
 	return (
 		<section className={`${estilos.searchBar}`}>
+				<h3>Nombre</h3>
 				<input
 					type="text"
 					name="name"

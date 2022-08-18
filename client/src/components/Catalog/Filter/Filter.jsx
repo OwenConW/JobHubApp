@@ -34,19 +34,21 @@ useEffect(() => {
 
   return (
     <div className={s.filterContainer}>
-      <button type="button" value="ASC" name="rating" onClick={handleClick}>Rating ↑</button>
-      <div className={s.buttonsContainer}>
-        <button key={0} type="button" onClick={handleClick} name="profession" value="">All Professions</button>
-        {placeHolderDb?.map(profession => {
-          return (
-            <button key={profession.id}
-                    type="button"
-                    onClick={handleClick}
-                    name="profession"
-                    value={profession.id}
-                   > {profession.name} </button>
-          )
-        })}
+      <div className={s.allButtonsContainer}>
+        <div className={s.professionsButtonsContainer}>
+          <button key={0} type="button" onClick={handleClick} name="profession" value="">All Professions</button>
+          {placeHolderDb?.map(profession => {
+            return (
+              <button key={profession.id}
+              type="button"
+              onClick={handleClick}
+                      name="profession"
+                      value={profession.id}
+                      > {profession.name} </button>
+                  )
+          })}
+        </div>
+        <button className={s.ratingBtn} type="button" value="ASC" name="rating" onClick={handleClick}>Rating ↑</button>
       </div>
     </div>
   )

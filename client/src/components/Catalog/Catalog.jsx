@@ -29,10 +29,6 @@ function addFilterValue(targetName, value){
 	}))
 }
 
-useEffect(() => {
-	console.log(filters);
-}, [filters])
-
 function handleSubmit(e){
 	e.preventDefault()
 	dispatch(filterProfessionals({...filters}))
@@ -43,8 +39,8 @@ function handleSubmit(e){
         	<Navbar />
 			<div className={estilos.container}>
 				<aside className={estilos.aside}>
-					<form onSubmit={handleSubmit}>
-						CATALOGO
+					<form onSubmit={handleSubmit} className={estilos.filtersFormMainContainer}>
+						<h1>FILTRAR</h1>
 						<SearchBar addFilterValue={addFilterValue} />
 						<Filter addFilterValue={addFilterValue} />
 						<input
