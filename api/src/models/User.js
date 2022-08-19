@@ -16,39 +16,41 @@ module.exports = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		image: {
-			type: DataTypes.STRING,
-			allowNull: false,
-		},
-		mail: {
-			type: DataTypes.STRING,
-			unique: true,
-			allowNull: false,
-		},
+		description: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
 		dni: {
 			type: DataTypes.STRING,
 			unique: true,
 			allowNull: false
 		},
-		postal_code: {
+		image: {
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: false,
 		},
-		phone: {
-			type: DataTypes.INTEGER,
-
-		},
-		plan_premium: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-			allowNull: false
+		date_of_Birth:{
+            type: DataTypes.STRING,
+            allownull: false
+        },
+		mail: {
+			type: DataTypes.STRING,
+			unique: true,
+			allowNull: false,
+			validate: {
+                isEmail: {
+					msg: "El email tiene que ser un correo valido"
+                }
+            }
 		},
 		
+		phone: {
+			type: DataTypes.INTEGER,
+		},
 		country: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-
 		city: {
 			type: DataTypes.STRING,
 			allowNull: false
@@ -57,8 +59,37 @@ module.exports = (sequelize) => {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false
 		},
-		
-		active: {
+		rating: {
+			type: DataTypes.FLOAT,
+			allowNull: false,
+			defaultValue: -1,
+			validate: {
+				min:-1,
+				max:5
+			},
+		},
+		isPremium: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
+		},
+		isProfessional: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
+		},
+		isAdmin: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
+		},
+		isBanned: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
+		},
+
+		isActive: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: true,
 		},

@@ -8,15 +8,11 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        id_user_client: {
+        id_orders: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
         id_user_professional: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        id_profession: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
@@ -26,11 +22,14 @@ module.exports = (sequelize) => {
         },
         rating: {
 			type: DataTypes.FLOAT,
-			allowNull: false,
 			validate: {
 				min:0,
 				max:5
 			},
+		},
+        isActive: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true,
 		},
 
     }, {
