@@ -2,7 +2,7 @@ import React from 'react';
 
 //styles and utilities
 import s from './Card.module.scss';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import star from './assets/Star.svg';
 import details_interior from './assets/Det_interior.svg';
 
@@ -38,9 +38,11 @@ function Card(props) {
 						</div>
 					</div>
 					<div className={s.detail}>
+						<Link to={`/details/${id}`} className={s.detailLink}>
 						<div className={s.btn}>
 							<img src={details_interior} alt="details" />
 						</div>
+						</Link>
 					</div>
 				</div>
 				<div className={s.top}></div>
