@@ -28,9 +28,13 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        date:{
+        date_created:{
             type: DataTypes.DATE,
-            
+            allowNull: false,
+        },
+        apointment_date:{
+            type: DataTypes.DATE,
+            allowNull: false,
         }
         
 

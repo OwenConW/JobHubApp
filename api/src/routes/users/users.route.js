@@ -2,6 +2,7 @@ const { default: axios } = require('axios');
 const { Router } = require('express');
 const { User, Profession, Op} = require("../../db.js")
 const functions = require("../../functions/Functions_user");
+const Review = require('../../models/Review.js');
 // const Profession = require('../../models/Profession.js');
 
 const users = Router()
@@ -66,31 +67,6 @@ users.post("/", async (req, res, next) =>{
     
 })
 
-// RUTA QUE CREA TRABAJOS
-users.post("/createJobs", async (req, res, next) =>{
-    const { name } = req.body;
-    const jobsMinuscule = name.toLowerCase();
-    try {
-        const [newJob, created] = await Profession.findOrCreate({
-            where:{
-                name: jobsMinuscule,
-            },
-            defaults:{
-                name: jobsMinuscule,
-            }
-        })
-
-        if(!created)  res.status(200).send(`The Profession cannot be created, the Job "${jobsMinuscule}" has already exist`);
-        return res.status(201).send(`The Profession "${jobsMinuscule}" created successfully`);
-        
-    } catch (error) {
-        console.log(error)
-        next(error)
-    }
-    
-})
-
-// RUTA QUE CREA RESEÑAS
 
 
 // RUTA QUE BUSCA USUARIOS POR ID

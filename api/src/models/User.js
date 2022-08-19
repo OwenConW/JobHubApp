@@ -16,14 +16,27 @@ module.exports = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
+		description: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
 		image: {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+		date_of_Birth:{
+            type: DataTypes.STRING,
+            allownull: false
+        },
 		mail: {
 			type: DataTypes.STRING,
 			unique: true,
 			allowNull: false,
+			validate: {
+                isEmail: {
+					msg: "El email tiene que ser un correo valido"
+                }
+            }
 		},
 		dni: {
 			type: DataTypes.STRING,
@@ -58,6 +71,20 @@ module.exports = (sequelize) => {
 		active: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: true,
+		},
+		rating: {
+			type: DataTypes.FLOAT,
+			allowNull: false,
+			defaultValue: -1,
+			validate: {
+				min:-1,
+				max:5
+			},
+		},
+		isProfessional: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
 		},
 
 	}, {
