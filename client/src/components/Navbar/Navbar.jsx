@@ -1,14 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 
 //assets
 import logo from './assets/logo.svg';
 
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
-
-//redux
-import { useSelector } from 'react-redux';
 
 //styles and utilities
 import s from './Navbar.module.scss';
@@ -19,9 +15,7 @@ import userimage from './assets/userimage.jpg';
 import login from './assets/login.svg';
 
 const Navbar = () => {
-	const { isAuthenticated, user, logout } = useAuth0();
-
-	const activeUser = useSelector(store => store.users.activeUser);
+	const { isAuthenticated, logout } = useAuth0();
 
 	return (
 		<div className={s.container}>
