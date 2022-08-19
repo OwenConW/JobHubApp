@@ -13,7 +13,7 @@ router.use("/users", users);
 router.use("/verify", verify);
 router.use("/jobs", jobs);
 router.use("/mails", mails)
-router.use("/review", review);
+// router.use("/review", review);
 
 // router.use("/x", x)
 
