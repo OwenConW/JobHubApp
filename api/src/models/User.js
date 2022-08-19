@@ -56,12 +56,10 @@ module.exports = (sequelize) => {
 			defaultValue: false,
 			allowNull: false
 		},
-		
 		country: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-
 		city: {
 			type: DataTypes.STRING,
 			allowNull: false
@@ -70,7 +68,6 @@ module.exports = (sequelize) => {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false
 		},
-		
 		active: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: true,

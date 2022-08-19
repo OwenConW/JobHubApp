@@ -3,7 +3,9 @@ import {
 	getAllUsers,
 	getUserById,
 	getFilteredProfessionals,
+	setActiveUser
 } from './userSlice.js';
+
 
 export const getChars = () => (dispatch) => {
 	axios
