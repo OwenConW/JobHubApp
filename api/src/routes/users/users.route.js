@@ -2,6 +2,7 @@ const { default: axios } = require('axios');
 const { Router } = require('express');
 const { User, Profession, Op} = require("../../db.js")
 const functions = require("../../functions/Functions_user");
+const Review = require('../../models/Review.js');
 // const Profession = require('../../models/Profession.js');
 
 const users = Router()
@@ -66,7 +67,6 @@ users.post("/", async (req, res, next) =>{
     
 })
 
-// RUTA QUE CREA RESEÑAS
 
 
 // RUTA QUE BUSCA USUARIOS POR ID

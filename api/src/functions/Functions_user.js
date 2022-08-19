@@ -135,6 +135,7 @@ const getAllJobs = async() => {
 
 
 
+
 module.exports = {
     filterByQueris,
     getProffesionalById,
