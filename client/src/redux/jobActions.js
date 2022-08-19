@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { getAllJobs } from './userSlice'
+import { getAllJobs } from './jobSlice'
 
-export const getChars = () => (dispatch) => {
+export const actionGetAllJobs = () => (dispatch) => {
 	axios
 		.get('/jobs')
 		.then((res) => {

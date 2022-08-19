@@ -12,6 +12,6 @@ export const jobSlice = createSlice({
 	},
 });
 
-export const { getAllUsers } =
+export const { getAllJobs } =
 jobSlice.actions;
 export default jobSlice.reducer;
