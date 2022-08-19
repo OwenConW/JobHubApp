@@ -12,7 +12,10 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        
+        id_user_professional: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         feedback_client: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -23,6 +26,10 @@ module.exports = (sequelize) => {
 				min:0,
 				max:5
 			},
+		},
+        isActive: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true,
 		},
 
     }, {
