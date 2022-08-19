@@ -3,10 +3,10 @@ const users = require("./users/users.route")
 const verify = require("./verify/verify.route")
 const jobs = require("./jobs/jobs.route")
 const mails = require("./nodemailer/nodemailer.route")
-const review = require('./review/review.route');
+//const review = require('./review/review.route');
 
 // Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+
 const router = Router();
 
 router.use("/users", users);
@@ -17,7 +17,5 @@ router.use("/mails", mails)
 
 
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 
 module.exports = router;
