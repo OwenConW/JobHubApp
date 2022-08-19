@@ -3,7 +3,9 @@ import {
 	getAllUsers,
 	getUserById,
 	getFilteredProfessionals,
+	setActiveUser
 } from './userSlice.js';
+
 
 export const getChars = () => (dispatch) => {
 	axios
@@ -24,6 +26,7 @@ export const getCharsById = (id) => (dispatch) => {
 };
 
 export const filterProfessionals = (filters) => (dispatch) => {
+	console.log(filters.profession);
 	axios
 		.get(
 			`/users?name=${filters.name}&profession=${filters.profession}&rating=${filters.rating}`
