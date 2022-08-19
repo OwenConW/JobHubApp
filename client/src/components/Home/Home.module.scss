@@ -8,7 +8,7 @@
         min-height: 100%;
         display: flex;
 		flex-direction: column;
-        margin-top: 1.5%;
+        margin-top: 1%;
         background-color: #eaeaea;
         display: inline-block;
         
@@ -17,32 +17,39 @@
         }
        
         .presentation{
-            padding-left: 3%;
+            padding-left: 3.5%;
             padding-right: 3%;
-            padding-bottom: 3%;  
+            padding-bottom: 1.5%;  
     
             .title{
-                padding-bottom: 1.6%;
                 font-weight: 400;
                 font-size: 2.5rem;
             }
     
             .text{
                 font-weight: 300;
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
         }
     
         .destacados{
             .subtitle{
-                padding-left: 22%;
+                padding-left: 24%;
                 padding-bottom: 1.5%;
                 font-weight: 250;
                 font-size: 2.2rem;
             }
-    
+
+            .cards {
+                display: flex;
+                flex-wrap: wrap;
+                margin-left: 5.5%;
+                padding-bottom: 4%;
+                width: 100%;
+            }
+
             .button{
-                margin-left: 35%;
+                margin-left: 37%;
                 width: 27%;
                 padding-top: 1%;
                 padding-bottom: 1%;

@@ -1,18 +1,17 @@
 .container{
-    width: 25%;
-    height: 70%;
+    width: 220px;
+    height: 300px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    margin-right: 4%;
     background: #2C666E;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 
     .background{
-        position: absolute;
-        height: 20%;
-        top: 8%;
+        width: 70%;
+        height: 60%;
     }
 
     .oficio{
@@ -25,9 +24,9 @@
     .image{
         border: 7px solid rgba(0, 0, 0, 0.126);
         border-radius: 50%;
-        width: 130px;
-        height: 130px;
-        bottom: 58%;
+        width: 100px;
+        height: 100px;
+        margin-top: 4.5%;
         position: absolute;
 
         img{
@@ -48,7 +47,7 @@
         background-color: #F0EDEE;
         border-radius: 0 0 5px 5px;
         .name{
-            padding-top: 23%;
+            padding-top: 25%;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -73,6 +72,7 @@
             display: flex;
             justify-content: space-evenly;
             align-items: center;
+            padding-top: 3%;
 
             .resenas{
                 display: flex;
@@ -116,12 +116,12 @@
     }
 
     button{
-        position: absolute;
         background-color:#07393C;
-        width: 4.5%;
-        height: 9%;
+        margin-top: 3%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        width: 24%;
         border-radius: 50%;
-        bottom: 25%;
         img{
             width: 50%;
         }

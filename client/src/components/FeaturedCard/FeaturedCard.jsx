@@ -3,18 +3,20 @@ import s from './FeaturedCard.module.scss';
 import {motion} from 'framer-motion/dist/framer-motion.js';
 
 //assets
-import user from './assets/user.jpg';
+//FOTO del Proffesional
 import star from './assets/star.png';
 import background from './assets/backcard.svg';
 import sign from './assets/sign.svg';
 
+import user from './assets/user.jpg';
+
 const FeaturedCard = () => {
 
-  const name = <h4>Valentino Machuca</h4>;
+  const name = <h4>Jeremias Escobedo</h4>;
   const cuidad = <p>Pilar, Buenos Aires</p>;
 
   return (
-    <motion.div className={s.container}
+    <div className={s.container}
       transition={{duration: 1}}
       initial={{
         opacity:0,
@@ -25,15 +27,6 @@ const FeaturedCard = () => {
         scale:1,
       }}
     >
-      <motion.img src={background} alt="back" className={s.background} 
-        transition={{duration: 0.3, delay:1}}
-        initial={{
-          opacity:0,
-        }}
-        animate={{
-          opacity: 1,
-        }}
-      />
       <motion.div className={s.oficio}
         transition={{duration: 0.3, delay:1}}
         initial={{
@@ -44,7 +37,16 @@ const FeaturedCard = () => {
           opacity: 1,
           y:0,
         }}
-      >Profesion</motion.div>
+      >Electricista</motion.div>
+      <motion.img src={background} alt="back" className={s.background} 
+        transition={{duration: 0.3, delay:1}}
+        initial={{
+          opacity:0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+      />
       <div className={s.image}>
         <img src={user} alt="image_profile"/>
       </div>
@@ -96,7 +98,7 @@ const FeaturedCard = () => {
         > <img src={sign} alt="sign"/>
         </motion.button>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
