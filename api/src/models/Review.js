@@ -8,18 +8,11 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        id_user_client: {
+        id_orders: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        id_user_professional: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        id_profession: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
+        
         feedback_client: {
             type: DataTypes.STRING,
             allowNull: false,
