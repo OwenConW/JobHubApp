@@ -133,8 +133,6 @@ const getAllJobs = async() => {
     }
 }
 
-//UPDATE RATING FOR REVIEW
-
 
 
 
