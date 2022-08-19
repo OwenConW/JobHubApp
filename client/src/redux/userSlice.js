@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 export const userSlice = createSlice({
 	name: 'users',
 	initialState: {
-		activeUser: {},
 		users: [],
 		filteredProfessionals: [],
 		detail: {},
@@ -19,9 +18,6 @@ export const userSlice = createSlice({
 		getFilteredProfessionals: (state, action) => {
 			state.filteredProfessionals = action.payload;
 		},
-		setActiveUser: (state, action) => {
-			state.activeUser = action.payload //Seteo el activeUser RIcoooooooooooo
-		}
 	},
 });
 

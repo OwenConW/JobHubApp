@@ -19,10 +19,9 @@ import userimage from './assets/userimage.jpg';
 import login from './assets/login.svg';
 
 const Navbar = () => {
-	const { isAuthenticated, user } = useAuth0();
+	const { isAuthenticated, user, logout } = useAuth0();
 
 	const activeUser = useSelector(store => store.users.activeUser);
-
 
 	return (
 		<div className={s.container}>
@@ -45,15 +44,17 @@ const Navbar = () => {
 			<div className={s.profile}>
 				{isAuthenticated ? (
 					<div className={s.user}>
-						<Link to="/profile" className={s.link}>
-							{user.given_name}
+						<div className={s.link} onClick={() => logout()}>
+							Logout
+						</div>
+						<Link to={'/profile'} className={s.profileimg}>
+							<img src={userimage}/>
 						</Link>
-						<img src={userimage}/>
 					</div>
 				) : (
 					<div className={s.user}>
 						<Link to="/" className={s.link}>
-							Iniciar Sesión
+							Iniciar sesión
 						</Link>
 						<img src={login} alt="login" />
 					</div>

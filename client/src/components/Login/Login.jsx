@@ -1,32 +1,32 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+//localStorage
+import { setUserLocalStorage } from '../localStorage';
+
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
-
-//redux
-import { setActive } from '../../redux/userActions';
-import { useDispatch } from 'react-redux';
 
 //style and utilities
 import s from './Login.module.scss';
 import logo from './assets/logo.svg';
 import background from './assets/background.svg';
 import axios from 'axios';
+import Loader from '../Loader/Loader';
+import { useEffect } from 'react';
 
 const Login = () => {
 
-	const dispatch = useDispatch();
 	const {user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 	const navigate = useNavigate();
 
 	const handleValidate = async (user, validate) => {
-		console.log(user);
+
 		try{
 			if(validate && user){
 				let response = await axios.get(`/verify?mail=${user.email}`);
 				if(response.data.onboarding){
-					dispatch(setActive(response.data));
+					setUserLocalStorage(response.data.user);
 					navigate("../home", { replace: true });
 
 				}else{
@@ -38,12 +38,13 @@ const Login = () => {
 		}
 	}
 
+
 	handleValidate(user, isAuthenticated);
 
 	return (
 		<div className={s.container}>
 
-			{isLoading ? 'Loading' : (
+			{isLoading ? <Loader /> : (
 			<>
 			<div className={s.login}>
 				<div className={s.logo}>

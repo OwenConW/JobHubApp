@@ -1,9 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 
 //components
 import Navbar from "../Navbar/Navbar";
-
-//assets
 
 //styles and utilities
 import s from './Home.module.scss';
@@ -13,8 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 const Home = () => {
 
-  const {isAuthenticated} = useAuth0();
-
+  const { isAuthenticated } = useAuth0();
 
   return (
     <React.Fragment>

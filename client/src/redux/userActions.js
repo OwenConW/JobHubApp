@@ -36,7 +36,3 @@ export const filterProfessionals = (filters) => (dispatch) => {
 		})
 		.catch((e) => console.log(e));
 };
-
-export const setActive = (data) => (dispatch) => {  //Action que setea el activeUser
-	dispatch(setActiveUser(data));
-}
