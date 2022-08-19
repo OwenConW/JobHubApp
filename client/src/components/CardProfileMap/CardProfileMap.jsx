@@ -4,7 +4,6 @@ import userImg from './assets/userimage.jpg'
 import star from './assets/star.svg'
 
 let order = { name: 'Nombre 1', profession: 'Diseñador', rating: 4.2, img: userImg}
-let jobs = [{ name: 'Electricista', description: 'descripcion de la tarea', rating: 4.2, reviews: 25 }, { name: 'Gasista', description: 'descripcion de la tarea', rating: 3.4, reviews: 10 }]
 
 const CardProfileMap = () => {
     return (

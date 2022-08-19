@@ -15,7 +15,7 @@ router.use("/jobs", jobs);
 router.use("/mails", mails)
 // router.use("/review", review);
 
-// router.use("/x", x)
+
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);

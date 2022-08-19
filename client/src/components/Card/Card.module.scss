@@ -107,7 +107,14 @@
                 align-items: center;
                 width: 20%;
                 height: 100%;
-
+                
+                .detailLink{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                }
                 .btn{
                     transition: 0.5s;
                     display: flex;
