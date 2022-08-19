@@ -67,8 +67,6 @@ users.post("/", async (req, res, next) =>{
     
 })
 
-
-
 // RUTA QUE BUSCA USUARIOS POR ID
 users.get("/:id", (req, res, next) => {
     const { id } = req.params;

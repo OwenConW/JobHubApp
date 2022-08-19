@@ -1,23 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
+import s from './Filter.module.scss';
 
 const placeHolderDb = [
-	{
-		id: 1,
-		name: 'plomero',
-	},
-	{
-		id: 2,
-		name: 'electricista',
-	},
-	{
-		id: 3,
-		name: 'gasista',
-	},
-	{
-		id: 4,
-		name: 'programador',
-	},
-];
+  {
+    id: 1,
+    name: "plomero"
+  },
+  {
+    id: 2,
+    name: "electricista"
+  },
+  {
+    id: 3,
+    name: "gasista"
+  },
+  {
+    id: 4,
+    name: "programador"
+  },
+  {
+    id: 5,
+    name: "artista"
+  },
+  {
+    id: 6,
+    name: "carpintero"
+  },
+]
 
 function Filter(props) {
 	const { addFilterValue } = props;
@@ -26,34 +35,31 @@ function Filter(props) {
 		addFilterValue(e.target.name, e.target.value);
 	}
 
-	useEffect(() => {
-		//Call to professions from DB
-	}, []);
+useEffect(() => {
+//Call to professions from DB
+},[])
 
-	return (
-		<div>
-			<button type="button" value="ASC" name="rating" onClick={handleClick}>
-				Rating ↑
-			</button>
-			<select onChange={handleClick} name="profession" id="profression">
-				<option key="all-professions" name="all-professions" value="">
-					{' '}
-					All Professions{' '}
-				</option>
-				{placeHolderDb?.map((profession) => {
-					return (
-						<option
-							key={profession.id}
-							name={profession.name}
-							value={profession.name}>
-							{' '}
-							{profession.name}{' '}
-						</option>
-					);
-				})}
-			</select>
-		</div>
-	);
+  return (
+    <div className={s.filterContainer}>
+      <div className={s.allButtonsContainer}>
+        <div className={s.professionsButtonsContainer}>
+          <button key={0} type="button" onClick={handleClick} name="profession" value="">Todas las profesiones</button>
+          {placeHolderDb?.map(profession => {
+            return (
+              <button key={profession.id}
+              type="button"
+              onClick={handleClick}
+                      name="profession"
+                      value={profession.name}
+                      > {profession.name} </button>
+                  )
+          })}
+        </div>
+        <button className={s.ratingBtn} type="button" value="ASC" name="rating" onClick={handleClick}>Rating ↑</button>
+      </div>
+    </div>
+  )
 }
+
 
 export default Filter;

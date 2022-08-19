@@ -1,0 +1,41 @@
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 70%;
+    .allButtonsContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: space-between;
+      width: 70%;
+      height: 80%;
+      gap: 10px;
+        .ratingBtn {
+          background-color: #2C666E;
+          color: white;
+        }
+        button {
+          height: 30px;
+          border-radius: 3px;
+          transition: all 0.1s;
+        }
+        button:hover {
+          background-color: #2C666E;
+          transition: background-color 0.2s;
+          color: white;
+
+        }
+        .professionsButtonsContainer{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          height: 80%;
+        }
+    }
+}
+
+
+
+
