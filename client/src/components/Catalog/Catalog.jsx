@@ -12,6 +12,12 @@ const Catalog = (props) => {
 	let professionalsArray = useSelector(
 		(state) => state.users.filteredProfessionals
 	);
+	const [currentPage, setCurrentPage] = useState(1) 
+    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(10)  
+    const iOfLastProffesional = currentPage * proffesionalsPerPage
+    const iOfFirstProffesional = iOfLastProffesional - proffesionalsPerPage
+    const currentProffesionals = professionalsArray.slice(iOfFirstProffesional, iOfLastProffesional)
+	const paginado = (pageNumber) => {  setCurrentPage(pageNumber) }
 
 	const [filters, setFilters] = useState({
 		name: '',
@@ -44,10 +50,12 @@ const Catalog = (props) => {
 		e.preventDefault();
 		dispatch(filterProfessionals({ ...filters }));
 		e.target.reset();
+		setCurrentPage(1)
 	}
 
 	function handleShowAll() {
 		dispatch(getChars());
+		setCurrentPage(1)
 	}
 	return (
 		<>
