@@ -48,7 +48,7 @@ let params = useParams();
           </div>
 
           <div className={s.orderBox}>
-            <p className={s.orderText}>Mis ordenes recientes</p>
+            <p className={s.orderText}>Mejores Reseñas</p>
 
             <div className={s.lastOrders}>
               <CardReview />

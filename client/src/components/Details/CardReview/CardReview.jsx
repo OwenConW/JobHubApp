@@ -3,7 +3,7 @@ import s from './CardReview.module.scss';
 import userImg from './assets/userimage.jpg'
 import star from './assets/star.svg'
 
-let order = { name: 'Nombre 1', profession: 'Diseñador asdasd asdasd asdasds adsadas dasdasdsdasd asdasdsad', rating: 4.2, img: userImg }
+let order = { name: 'Nombre 1', description: 'Diseñador asdasd asdasd asdasds adsadas dasdasdsdasd asdasdsad', rating: 4.2, img: userImg }
 
 const CardReview = () => {
   return (
@@ -14,8 +14,7 @@ const CardReview = () => {
 
       <div className={s.orderDetail}>
         <h1>{order.name}</h1>
-        <div><h2>{order.profession}</h2></div>
-
+        <h2>{order.description}</h2>
       </div>
       <div className={s.orderDetail2}>
         <h3><img src={star} /> {order.rating}</h3>

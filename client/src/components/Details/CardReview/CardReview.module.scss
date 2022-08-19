@@ -10,8 +10,12 @@
 
     .imgDetail {
       width: 10%;
+      height: 80%;
+      margin-right: 2%;
+      background-color: red;
+      border-radius: 50%;
       img{
-        width: 80%;
+        width: 100%;
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
@@ -20,6 +24,9 @@
 
     .orderDetail {
       width: 70%;
+      display: flex;
+      flex-direction: column;
+     
 
       h1 {
         font-weight: 230;
@@ -27,20 +34,26 @@
         line-height: 3rem;
         color: #F0EDEE;
       }
-
-      h2 {
-        text-align: justify;
-        font-weight: 230;
-        font-size: 1.5rem;
-        line-height: 2rem;
-        color: rgba(217, 217, 217, 0.63);
-      }
-
+    
+        h2 {
+          height: 80%;
+        width: 80%;
+          text-overflow:ellipsis;
+          overflow:hidden;
+          white-space:nowrap;
+          text-align: justify;
+          font-weight: 230;
+          font-size: 1.5rem;
+          line-height: 2rem;
+          color: rgba(217, 217, 217, 0.63);
+        }
 
     }
 
     .orderDetail2 {
+      width: auto;
       h3 {
+        display: flex;
         font-weight: 230;
         font-size: 2.5rem;
         line-height: 5.4rem;

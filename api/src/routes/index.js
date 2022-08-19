@@ -10,7 +10,7 @@ const router = Router();
 router.use("/users", users);
 router.use("/verify", verify);
 router.use("/jobs", jobs);
-router.use("/review", review);
+// router.use("/review", review);
 // router.use("/x", x)
 
 // Configurar los routers

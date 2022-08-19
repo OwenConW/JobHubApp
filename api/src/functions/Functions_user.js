@@ -2,7 +2,6 @@ const { Op } = require("sequelize");
 const { User, Profession } = require("../db")
 
 // GET PROFESSIONAL BY NAME AND FILTER BY PROFESSION AND/OR RATING
-
 const filterByQueris = async(name, profession, rating) => {
     try{
         if(profession){
@@ -100,8 +99,6 @@ const filterByQueris = async(name, profession, rating) => {
         throw new Error(e)
     }
 }
-
-
 
 
 // GET PROFESSIONAL BY ID
