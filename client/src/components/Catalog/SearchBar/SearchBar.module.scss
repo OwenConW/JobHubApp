@@ -1,23 +1,14 @@
-.container {
-	min-height: 10vh;
+.searchBar {
 	display: flex;
-	flex-flow: column nowrap;
-	margin-top: 10px;
+	flex-direction: column;
+	gap: 2px;
 	align-items: center;
-
-	.searchInput {
-		height: 36px;
-		width: 90%;
-		text-align: center;
-		border-radius: 10px;
+		
+		h3 {
+			align-self:flex-start;
 	}
-
-	.searchButton {
-		margin-top: 10px;
-		margin-bottom: 10px;
-		height: 26px;
-		width: 50%;
-		border-radius: 10px;
-		border: solid grey 1px;
-	}
+		input {
+			height: 30px;
+			border-radius: 5px;
+		}
 }
