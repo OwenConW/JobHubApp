@@ -43,6 +43,7 @@ users.post("/", async (req, res, next) =>{
                     country,
                     city,
                     coordinate,
+                    
                 }
             })
             let jobFind = await Profession.findAll({

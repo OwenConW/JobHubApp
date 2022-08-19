@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
 			allowNull: false,
 		},
 		date_of_Birth:{
-            type: DataTypes.STRING(10),
+            type: DataTypes.STRING,
             allownull: false
         },
 		mail: {
@@ -47,7 +47,6 @@ module.exports = (sequelize) => {
 		phone: {
 			type: DataTypes.INTEGER,
 		},
-		
 		country: {
 			type: DataTypes.STRING,
 			allowNull: false
