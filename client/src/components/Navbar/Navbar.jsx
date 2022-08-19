@@ -1,7 +1,14 @@
 import React from 'react';
+import axios from 'axios';
 
 //assets
 import logo from './assets/logo.svg';
+
+//auth0
+import { useAuth0 } from '@auth0/auth0-react';
+
+//redux
+import { useSelector } from 'react-redux';
 
 //styles and utilities
 import s from './Navbar.module.scss';
@@ -10,9 +17,13 @@ import { Link } from 'react-router-dom';
 //UserTest
 import userimage from './assets/userimage.jpg';
 import login from './assets/login.svg';
-const isAutenticated = true;
 
 const Navbar = () => {
+	const { isAuthenticated, user } = useAuth0();
+
+	const activeUser = useSelector(store => store.users.activeUser);
+
+
 	return (
 		<div className={s.container}>
 			<div className={s.menu}>
@@ -32,16 +43,16 @@ const Navbar = () => {
 			</div>
 
 			<div className={s.profile}>
-				{isAutenticated ? (
+				{isAuthenticated ? (
 					<div className={s.user}>
 						<Link to="/profile" className={s.link}>
-							Mi perfil
+							{user.given_name}
 						</Link>
-						<img src={userimage} alt="user" />
+						<img src={userimage}/>
 					</div>
 				) : (
 					<div className={s.user}>
-						<Link to="/login" className={s.link}>
+						<Link to="/" className={s.link}>
 							Iniciar Sesión
 						</Link>
 						<img src={login} alt="login" />

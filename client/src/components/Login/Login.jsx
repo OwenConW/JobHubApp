@@ -21,6 +21,7 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	const handleValidate = async (user, validate) => {
+		console.log(user);
 		try{
 			if(validate && user){
 				let response = await axios.get(`/verify?mail=${user.email}`);
