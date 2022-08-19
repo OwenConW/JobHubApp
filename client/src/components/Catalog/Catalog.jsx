@@ -81,9 +81,8 @@ const Catalog = (props) => {
 								/>
 							))
 						) : (
-							<div>
-								-- NO ENCONTRAMOS PROFESIONALES QUE SE AJUSTEN A TU
-								BUSQUEDA --
+							<div className={estilos.notFind}>
+								-- NO ENCONTRAMOS PROFESIONALES QUE SE AJUSTEN A TU BUSQUEDA --
 							</div>
 						)}
 					</div>
