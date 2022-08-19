@@ -8,6 +8,10 @@
     background: #2C666E;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+    &:hover{
+        transition: 0.5s;
+        background: #3e909b;
+    }
 
     .background{
         width: 70%;
@@ -124,6 +128,10 @@
         border-radius: 50%;
         img{
             width: 50%;
+        }
+        &:hover{
+            transition: 0.5s;
+            background: #3e909b;
         }
     }
 
