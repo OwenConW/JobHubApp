@@ -67,50 +67,7 @@ users.post("/", async (req, res, next) =>{
     
 })
 
-// RUTA QUE CREA TRABAJOS
-users.post("/createJobs", async (req, res, next) =>{
-    const { name } = req.body;
-    const jobsMinuscule = name.toLowerCase();
-    try {
-        const [newJob, created] = await Profession.findOrCreate({
-            where:{
-                name: jobsMinuscule,
-            },
-            defaults:{
-                name: jobsMinuscule,
-            }
-        })
-        if(!created)  res.status(200).send(`The Profession cannot be created, the Job "${jobsMinuscule}" has already exist`);
-        return res.status(201).send(`The Profession "${jobsMinuscule}" created successfully`);
-        
-    } catch (error) {
-        console.log(error)
-        next(error)
-    }
-    
-})
 
-// RUTA QUE CREA RESEÑAS
-users.post("/review/:id", async (req, res, next) =>{
-    const { feedback_client, rating, id_user_client, id_profession } = req.body;
-    const { id } = req.params;
-    try {
-        const newReview = await Review.create({ 
-            id_user_client,
-            id_user_professional: id,
-            id_profession,
-            feedback_client,
-            rating,
-        });
-
-        (rating) 
-        
-    } catch (error) {
-        console.log(error)
-        next(error)
-    }
-    
-})
 
 // RUTA QUE BUSCA USUARIOS POR ID
 users.get("/:id", (req, res, next) => {
