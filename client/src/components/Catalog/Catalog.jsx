@@ -8,8 +8,6 @@ import Card from '../Card/Card';
 import Navbar from '../Navbar/Navbar';
 
 
-
-
 const Catalog = (props) => {
 	let professionalsArray = useSelector(
 		(state) => state.users.filteredProfessionals
@@ -49,7 +47,6 @@ useEffect(() => {
 	dispatch(getChars());
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
-
 
 function handleReset() {
 	setFilters({name:"", profession:"", rating:""})
