@@ -20,6 +20,11 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
+		dni: {
+			type: DataTypes.STRING,
+			unique: true,
+			allowNull: false
+		},
 		image: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -38,30 +43,14 @@ module.exports = (sequelize) => {
                 }
             }
 		},
-		dni: {
-			type: DataTypes.STRING,
-			unique: true,
-			allowNull: false
-		},
-		postal_code: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
+		
 		phone: {
 			type: DataTypes.INTEGER,
-
 		},
-		plan_premium: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-			allowNull: false
-		},
-		
 		country: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-
 		city: {
 			type: DataTypes.STRING,
 			allowNull: false
@@ -69,11 +58,6 @@ module.exports = (sequelize) => {
 		coordinate: {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false
-		},
-		
-		active: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: true,
 		},
 		rating: {
 			type: DataTypes.FLOAT,
@@ -84,10 +68,30 @@ module.exports = (sequelize) => {
 				max:5
 			},
 		},
+		isPremium: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
+		},
 		isProfessional: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,
 			allowNull: false
+		},
+		isAdmin: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
+		},
+		isBanned: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: false
+		},
+
+		isActive: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true,
 		},
 
 	}, {

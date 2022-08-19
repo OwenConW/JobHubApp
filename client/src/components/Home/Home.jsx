@@ -1,17 +1,20 @@
 import React from 'react';
+import axios from 'axios';
 
 //components
 import Navbar from "../Navbar/Navbar";
 import FeaturedCard from "../FeaturedCard/FeaturedCard";
 
+
 //styles and utilities
 import s from './Home.module.scss';
 import { Link } from 'react-router-dom';
-
-const isAutenticated = false;
-const br = <br></br>;
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Home = () => {
+
+  const { isAuthenticated } = useAuth0();
+  const br = <br></br>;
   
   // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
   // const dispatch = useDispatch()
@@ -44,7 +47,7 @@ const Home = () => {
         </aside>
         <div className={s.container2}>
           <h1 className={s.titlemapa}>Utiliza nuestro {br} sistema de {br} búsqueda por {br} ubicación</h1>
-          {isAutenticated ?
+          {isAuthenticated ?
             <Link to='/map' className={s.link}>
               <button className={s.button}>Buscar</button> 
             </Link>
