@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./Paginate.module.css";
+import s from './Paginate.module.scss';
 
 export default function Paginate({ proffesionalsPerPage, professionalsArray, paginado, currentPage }) {
     const pageNumbers = []
