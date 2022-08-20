@@ -1,14 +1,13 @@
 .professionComponent {
     background: #F0EDEE;
-    padding: 0px;
-    margin: 0px;
-    height: 35%;
-    width: 100%;
-    border-radius: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    min-height: 35%;
+    min-width: 100%;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-
 
     .professionAndDescription {
       height: 100%;

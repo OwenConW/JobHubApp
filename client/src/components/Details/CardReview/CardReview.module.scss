@@ -3,7 +3,11 @@
     height: 40%;
     background: #07393C;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    min-height: 35%;
+    min-width: 100%;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,8 +15,8 @@
     .imgDetail {
       width: 10%;
       height: 80%;
-      margin-right: 2%;
-      background-color: red;
+      margin-left: 3%;
+      margin-right: 3%;
       border-radius: 50%;
       img{
         width: 100%;
@@ -51,7 +55,8 @@
     }
 
     .orderDetail2 {
-      width: auto;
+      width: 15%;
+      margin-right: -5%;
       h3 {
         display: flex;
         font-weight: 230;

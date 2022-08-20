@@ -7,7 +7,8 @@ import userImg from './assets/userimage.jpg'
 
 import Navbar from "../Navbar/Navbar";
 import CardReview from './CardReview/CardReview.jsx'
-import CardProfessions from '../CardProfessions/CardProfessions.jsx'
+import ProfessionBox from "../ProfessionBox/ProfessionBox";
+import ReviewBox from "./ReviewBox/ReviewBox.jsx"
 import { getCharsById } from '../../redux/userActions';
 import { useParams } from "react-router-dom";
 
@@ -21,14 +22,14 @@ let params = useParams();
   const dispatch = useDispatch();
   
   const professional = useSelector((state) => state.users.detail)
-  
+  console.log('professional', professional)
   
   const id = params.id
   useEffect(() => {
     dispatch(getCharsById(id))
   }, [])
 
-  console.log('professional: ', professional)
+  // console.log('professional: ', professional)
 
   return (
     <>
@@ -43,7 +44,7 @@ let params = useParams();
             <div className={s.profileDetail}>
               <div className={s.name}>{professional.name} {professional.last_Name}</div>
               <div className={s.location}>{professional.city}, {professional.country}</div>
-              <div className={s.description}>Descripcion que quiera poner la persona a su perfil, quizas habria que agregarlo en la parte de db como parte del usuario </div>
+              <div className={s.description}> {professional.description}Descripcion que quiera poner la persona a su perfil, quizas habria que agregarlo en la parte de db como parte del usuario</div>
             </div>
           </div>
 
@@ -64,19 +65,13 @@ let params = useParams();
         <div className={s.rightContainer}>
           <div className={s.professionContainer}>
             <p className={s.professionText}>Oficios publicados</p>
-            <div className={s.professionList}>
-              <CardProfessions />
-              <CardProfessions />
-            </div>
+            <ProfessionBox professional={professional}/>
           </div>
           <div className={s.moreReviews}>
             <span className={s.premiumText}>
               <h1>Otras reseñas</h1>
-              
             </span>
-            <div>
-            <CardReview />
-            </div>
+            <ReviewBox/>
           </div>
         </div>
 
