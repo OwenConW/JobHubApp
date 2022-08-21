@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 //localStorage
-import { setUserLocalStorage } from '../localStorage';
+import { setUserLocalStorage } from '../../handlers/localStorage';
 
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
@@ -13,7 +13,6 @@ import logo from './assets/logo.svg';
 import background from './assets/background.svg';
 import axios from 'axios';
 import Loader from '../Loader/Loader';
-import { useEffect } from 'react';
 
 const Login = () => {
 
@@ -25,12 +24,13 @@ const Login = () => {
 		try{
 			if(validate && user){
 				let response = await axios.get(`/verify?mail=${user.email}`);
-				if(response.data.onboarding){
+				if(!response.data.onboarding){
 					setUserLocalStorage(response.data.user);
 					navigate("../home", { replace: true });
 
 				}else{
-					navigate("../verify", { replace: true });
+					setUserLocalStorage({mail: user.email});
+					navigate("../onboarding", { replace: true });
 				}
 			}
 		}catch(e){

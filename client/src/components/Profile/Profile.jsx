@@ -9,7 +9,7 @@ import rocket from './assets/Rocket.svg'
 import Navbar from "../Navbar/Navbar";
 import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
 import CardProfessions from '../CardProfessions/CardProfessions.jsx'
-import { getLocalStorage } from "../localStorage";
+import { getLocalStorage } from "../../handlers/localStorage";
 
 
 
@@ -19,7 +19,7 @@ const Profile = () => {
 
 let activeUser = getLocalStorage();
 
-      
+
   return (
     <>
     <Navbar />
