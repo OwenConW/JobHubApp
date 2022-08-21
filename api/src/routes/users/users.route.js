@@ -24,12 +24,14 @@ users.get("/", (req, res, next) => {
 
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
-    const { name, last_Name, mail, dni, image, phone, country, city, coordinate, jobs } = req.body;
+    // const { name, last_Name, mail, dni, image, phone, country, city, coordinate, jobs } = req.body;
+    const { name, last_Name, mail, dni, image, phone, country, city, coordinate } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
     //const jobsMinuscule = jobs.toLowerCase();
     try {
-        if( name &&  last_Name && mail && country  && city && coordinate && jobs ){
+        // if( name &&  last_Name && mail && country  && city && coordinate && jobs ){
+        if( name &&  last_Name && mail && country  && city && coordinate ){
             const [newUser, created] = await User.findOrCreate({
                 where:{
                     mail,
@@ -46,14 +48,15 @@ users.post("/", async (req, res, next) =>{
                     
                 }
             })
-            let jobFind = await Profession.findAll({
-                where:{
-                    name:{
-                        [Op.or]: jobs
-                    }
-                }
-            })
-            await newUser.addProfession(jobFind)
+            // let jobFind = await Profession.findAll({
+            //     where:{
+            //         name:{
+            //             [Op.or]: jobs
+            //         }
+            //     }
+            // })
+            // await newUser.addProfession(jobFind)
+            console.log(newUser);
 
             if(!created)  res.status(200).send(`The User cannot be created, the email "${mail}" has already been used`);
             return res.status(201).send(`The User "${name}" created successfully`);
