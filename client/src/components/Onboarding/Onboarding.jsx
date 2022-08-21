@@ -77,15 +77,17 @@ const Onboarding = () => {
     });
   }
 
-  const handleSubmit = async() => {
+  const handleSubmit = async(e) => {
+    e.preventDefault();
     let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${address.number},${address.street},${user.city},${user.country}&format=json`);
     setUser({
       ...user,
       coordinate: [response.data[0].lat, response.data[0].lon]
     }, async (currentUser) => {
+      console.log(currentUser);
       let response = await axios.post('/users', currentUser);
       console.log(response);
-      navigate("../", { replace: true });
+      navigate("../", { replace: true })
     })
   }
 
@@ -234,7 +236,7 @@ const Onboarding = () => {
                 </div>
               </div>
 
-              <input type="submit" className={s.submit} onClick={handleSubmit}/>
+              <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)}/>
           </form>
         </div>
       </div>)}

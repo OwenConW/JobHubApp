@@ -1,7 +1,6 @@
 import React from "react";
 
 import s from './Profile.module.scss';
-import userImg from './assets/userimage.jpg'
 import configLogo from './assets/configLogo.svg'
 import plusLogo from './assets/PlusLogo.svg'
 import rocket from './assets/Rocket.svg'
@@ -10,6 +9,7 @@ import Navbar from "../Navbar/Navbar";
 import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
 import CardProfessions from '../CardProfessions/CardProfessions.jsx'
 import { getLocalStorage } from "../../handlers/localStorage";
+import defaultimage from './assets/deafultimage.png'
 
 
 
@@ -28,12 +28,12 @@ let activeUser = getLocalStorage();
       <div className={s.leftContainer}>
         <div className={s.profileInfo}>
           <div className={s.profile_Img_container}>
-            <img src={userImg} className={s.profile_Img} />
+            {activeUser.image ? <img src={activeUser.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
           </div>
           <div className={s.profileDetail}>
             <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
             <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
-            <div className={s.description}>Descripcion que quiera poner la persona a su perfil, quizas habria que agregarlo en la parte de db como parte del usuario </div>
+            <div className={s.description}>{activeUser.description}</div>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ let activeUser = getLocalStorage();
             <div>Panel de configuración</div>
           </div>
         </div>
-        
+
         {/*----- CONTENEDOR DERECHO -----*/}
         <div className={s.rightContainer}>
           <div className={s.professionContainer}>
