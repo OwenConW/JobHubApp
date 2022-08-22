@@ -17,7 +17,7 @@ const CardReview = () => {
         <h2>{order.description}</h2>
       </div>
       <div className={s.orderDetail2}>
-        <h3><img src={star} /> {order.rating}</h3>
+        <h3><img src={star} alt='star'/> {order.rating}</h3>
       </div>
     </div>
   )

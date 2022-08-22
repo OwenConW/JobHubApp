@@ -80,7 +80,7 @@ const FeaturedCard = () => {
           <div className={s.calificacion}>
             <h4>Calificación</h4>
             <div className={s.rating}>
-              <img src={star} alt="image" />
+              <img src={star} alt="star" />
               <p>5.0</p>
             </div>
           </div>

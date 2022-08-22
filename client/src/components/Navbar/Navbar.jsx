@@ -44,7 +44,7 @@ const Navbar = () => {
 							Logout
 						</div>
 						<Link to={'/profile'} className={s.profileimg}>
-							{activeUser.image ? <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image ? <img src={activeUser.image} alt='user-profile'/> : <img src={defaultimage} alt='default-profile'/>}
 						</Link>
 					</div>
 				) : (

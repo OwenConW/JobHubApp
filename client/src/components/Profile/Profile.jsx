@@ -45,7 +45,7 @@ let activeUser = getLocalStorage();
       <div className={s.leftContainer}>
         <div className={s.profileInfo}>
           <div className={s.profile_Img_container}>
-            {activeUser.image ? <img src={activeUser.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
+            {activeUser.image ? <img src={activeUser.image} className={s.profile_Img} alt='profile'/> : <img src={defaultimage} className={s.profile_Img} alt='default'/>}
           </div>
           <div className={s.profileDetail}>
             <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
@@ -64,7 +64,7 @@ let activeUser = getLocalStorage();
             </div>
           </div>
           <div className={s.configBox}>
-            <img src={configLogo}></img>
+            <img src={configLogo} alt='config'></img>
             <div>Panel de configuración</div>
           </div>
         </div>

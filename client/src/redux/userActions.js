@@ -3,7 +3,6 @@ import {
 	getAllUsers,
 	getUserById,
 	getFilteredProfessionals,
-	setActiveUser
 } from './userSlice.js';
 
 
