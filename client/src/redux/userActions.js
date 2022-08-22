@@ -26,7 +26,7 @@ export const getCharsById = (id) => (dispatch) => {
 };
 
 export const filterProfessionals = (filters) => (dispatch) => {
-	console.log(filters.profession);
+	console.log('filters profession: ', filters.profession);
 	axios
 		.get(
 			`/users?name=${filters.name}&profession=${filters.profession}&rating=${filters.rating}`
