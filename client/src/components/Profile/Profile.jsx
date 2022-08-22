@@ -106,7 +106,7 @@ let activeUser = getLocalStorage();
           </div>
         </div>
 
-
+      </div>
       </div>
     </>
   )
