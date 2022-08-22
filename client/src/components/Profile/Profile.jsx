@@ -12,8 +12,6 @@ import CardProfessions from '../CardProfessions/CardProfessions.jsx'
 import { getLocalStorage } from "../../handlers/localStorage";
 
 
-
-
 const Profile = () => {
 
 

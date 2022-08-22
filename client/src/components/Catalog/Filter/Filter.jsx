@@ -1,50 +1,29 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actionGetAllJobs } from "../../../redux/jobActions"
 import s from './Filter.module.scss';
 
-const placeHolderDb = [
-  {
-    id: 1,
-    name: "plomero"
-  },
-  {
-    id: 2,
-    name: "electricista"
-  },
-  {
-    id: 3,
-    name: "gasista"
-  },
-  {
-    id: 4,
-    name: "programador"
-  },
-  {
-    id: 5,
-    name: "artista"
-  },
-  {
-    id: 6,
-    name: "carpintero"
-  },
-]
 
 function Filter(props) {
 	const { addFilterValue } = props;
+
+  const dispatch = useDispatch();
+  const professions = useSelector(state => state.jobs.jobs)
 
 	function handleClick(e) {
 		addFilterValue(e.target.name, e.target.value);
 	}
 
 useEffect(() => {
-//Call to professions from DB
-},[])
+  dispatch(actionGetAllJobs())
+},[dispatch])
 
   return (
     <div className={s.filterContainer}>
       <div className={s.allButtonsContainer}>
         <div className={s.professionsButtonsContainer}>
           <button key={0} type="button" onClick={handleClick} name="profession" value="">Todas las profesiones</button>
-          {placeHolderDb?.map(profession => {
+          {professions?.map(profession => {
             return (
               <button key={profession.id}
               type="button"
