@@ -10,6 +10,7 @@ import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
 import { getLocalStorage } from "../../handlers/localStorage";
 import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
+import axios from "axios";
 
 
 
@@ -34,40 +35,44 @@ const Profile = () => {
 
 
 
-let activeUser = getLocalStorage();
-
+  let activeUser = getLocalStorage();
+const handlePremium = async () => {
+  await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
+}
 
   return (
     <>
-    <Navbar />
-    {/*----- CONTENEDOR IZQUIERDO -----*/}
-    <div className={s.container}>
-      <div className={s.leftContainer}>
-        <div className={s.profileInfo}>
-          <div className={s.profile_Img_container}>
-            {activeUser.image ? <img src={activeUser.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
-          </div>
-          <div className={s.profileDetail}>
-            <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
-            <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
-            <div className={s.description}>{activeUser.description}</div>
-          </div>
-
-
-          <div className={s.orderBox}>
-            <p className={s.orderText}>Mis ordenes recientes</p>
-
-            <div className={s.lastOrders}>
-              <CardProfileMap />
-              <CardProfileMap />
-              <CardProfileMap />
+      <Navbar />
+      {/*----- CONTENEDOR IZQUIERDO -----*/}
+      <div className={s.container}>
+        <div className={s.leftContainer}>
+          <div className={s.profileInfo}>
+            <div className={s.profile_Img_container}>
+              {activeUser.image ? <img src={activeUser.image} className={s.profile_Img} /> : <img src={defaultimage} className={s.profile_Img} />}
             </div>
-          </div>
-          <div className={s.configBox}>
-            <img src={configLogo}></img>
-            <div>Panel de configuración</div>
-          </div>
+            <div className={s.profileDetail}>
+              <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
+              <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
+              <div className={s.description}>{activeUser.description}</div>
+            </div>
+
+            </div>
+            <div className={s.orderBox}>
+              <p className={s.orderText}>Mis ordenes recientes</p>
+
+              <div className={s.lastOrders}>
+                <CardProfileMap />
+                <CardProfileMap />
+                <CardProfileMap />
+              </div>
+            </div>
+            <div className={s.configBox}>
+              <img src={configLogo}></img>
+              <div>Panel de configuración</div>
+            </div>
+          
         </div>
+
 
         {/*----- CONTENEDOR DERECHO -----*/}
         <div className={s.rightContainer}>
@@ -99,14 +104,14 @@ let activeUser = getLocalStorage();
               <div>
                 <img src={rocket} alt='Premium Logo'></img>
               </div>
-              <span>
+              <span onClick={handlePremium}>
                 <button>Mejorar</button>
               </span>
             </div>
           </div>
         </div>
 
-        </div>
+
       </div>
     </>
   )
