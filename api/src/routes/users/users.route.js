@@ -11,6 +11,7 @@ const users = Router()
 // RUTA QUE TRAE TODOS LOS USUARIOS O FILTRA POR PROFESION Y/O RATING 
 users.get("/", (req, res, next) => {
     const {name, rating, profession } = req.query;
+    console.log('buenas como andan')
     functions.filterByQueris(name, profession, rating)
     .then(professionals => {
         return res.status(200).send(professionals);
@@ -25,7 +26,7 @@ users.get("/", (req, res, next) => {
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
     // const { name, last_Name, mail, dni, image, phone, country, city, coordinate, jobs } = req.body;
-    const { name, last_Name, mail, dni, image, phone, country, city, coordinate, description, isProfessional } = req.body;
+    const { name, last_Name, mail, dni, image, phone, country, city, coordinate, description, isProfessional, jobs } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
     //const jobsMinuscule = jobs.toLowerCase();
@@ -50,14 +51,14 @@ users.post("/", async (req, res, next) =>{
                     description
                 }
             })
-            // let jobFind = await Profession.findAll({
-            //     where:{
-            //         name:{
-            //             [Op.or]: jobs
-            //         }
-            //     }
-            // })
-            // await newUser.addProfession(jobFind)
+            let jobFind = await Profession.findAll({
+                where:{
+                    name:{
+                        [Op.or]: jobs
+                    }
+                }
+            })
+            await newUser.addProfession(jobFind)
             console.log(newUser);
 
             if(!created)  res.status(200).send(`The User cannot be created, the email "${mail}" has already been used`);
