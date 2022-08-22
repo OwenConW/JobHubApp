@@ -39,30 +39,30 @@ const Catalog = (props) => {
 			...prevState,
 			[targetName]: value
 		}))
-}
+    }
 
-// useEffect(() => {
-//  console.log(professionalsArray);
-// }, [professionalsArray])
+    // useEffect(() => {
+    //  console.log(professionalsArray);
+    // }, [professionalsArray])
 
-useEffect(() => {
-	dispatch(getChars());
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+    useEffect(() => {
+	    dispatch(getChars());
+	    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
-function handleReset() {
-	setFilters({name:"", profession:"", rating:""})
-	dispatch(getChars());
-	setNameInputValue('')
-}
+    function handleReset() {
+	    setFilters({name:"", profession:"", rating:""})
+	    dispatch(getChars());
+	    setNameInputValue('')
+    }
 
-function handleSubmit(e){
-	e.preventDefault()
-	dispatch(filterProfessionals({...filters}))
-	setNameInputValue('')
-	e.target.reset()
-}
+    function handleSubmit(e){
+	    e.preventDefault()
+	    dispatch(filterProfessionals({...filters}))
+	    setNameInputValue('')
+	    e.target.reset()
+    }
 
 	return (
 		<>
