@@ -51,15 +51,17 @@ users.post("/", async (req, res, next) =>{
                     description
                 }
             })
-            let jobFind = await Profession.findAll({
-                where:{
-                    name:{
-                        [Op.or]: jobs
+
+            if(jobs){
+                let jobFind = await Profession.findAll({
+                    where:{
+                        name:{
+                            [Op.or]: jobs
+                        }
                     }
-                }
-            })
-            await newUser.addProfession(jobFind)
-            console.log(newUser);
+                })
+                await newUser.addProfession(jobFind)
+            }
 
             if(!created)  res.status(200).send(`The User cannot be created, the email "${mail}" has already been used`);
             return res.status(201).send(`The User "${name}" created successfully`);
