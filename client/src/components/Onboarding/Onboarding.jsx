@@ -53,16 +53,27 @@ const Onboarding = () => {
   });
 
 
-  const [image, setImage] = useState("")
+  const [image, setImage] = useState("");
+  const [isUpload, setIsUpload] = useState({
+     done: '',
+     loading: false,
+  });
 
 
   const handleUpload = async () => {
+    setIsUpload({
+      ...isUpload,
+      loading: true,
+    });
     const formData = new FormData();
     formData.append("file", image);
-    formData.append("upload_preset", "jobhubapp");
-    const res = await axios.post("https://api.cloudinary.com/v1_1/owenconw/image/upload", formData);
+    formData.append("upload_preset", "jobhub");
+    const res = await axios.post("https://api.cloudinary.com/v1_1/jobhubapp/image/upload", formData);
     const file = await res.data;
-    console.log("file", file);
+    setIsUpload({
+      done:'Image upload!',
+      loading: false,
+    });
     setUser({
       ...user,
       image: file.secure_url
@@ -230,14 +241,16 @@ const Onboarding = () => {
                       type="file"
                       onChange={(event) => {
                       setImage(event.target.files[0])
-                  }}/>
+                  }} className={s.inputfile}/>
+                  {isUpload.loading ? <Loader/> :( isUpload.done ? '' :
                   <div className={s.uploadbtn} onClick={handleUpload}>
                     <p>Subir Imagen</p>
-                  </div>
+                  </div>)}
+                  {isUpload.done ? <p className={s.isupload}>{isUpload.done}</p> : ''}
                 </div>
               </div>
 
-              <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)}/>
+              <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length}/>
           </form>
         </div>
       </div>)}
