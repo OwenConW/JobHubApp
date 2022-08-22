@@ -8,6 +8,32 @@
 		height: 100%;
 		display: flex;
 		flex-direction: column;
+		.showAllBtn {
+			background-color: #2C666E;
+			width: 80%;
+			color: white;
+			height: 30px;
+			border-radius: 3px;
+			margin-top: 20px;
+			align-self: center;
+		}
+		
+		.filtersFormMainContainer {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+			height: 90%;
+
+			.searchButton {
+					width: 80%;
+					height: 30px;
+					border-radius: 3px;
+					transition: all 0.1s;
+					background-color: #2C666E;
+					color: white;
+			}
+		}
 	}
 
 	.professionals{

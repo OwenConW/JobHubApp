@@ -1,21 +1,29 @@
 import React from "react";
+
 import s from './Profile.module.scss';
 import userImg from './assets/userimage.jpg'
 import configLogo from './assets/configLogo.svg'
+import plusLogo from './assets/PlusLogo.svg'
+import rocket from './assets/Rocket.svg'
+
 import Navbar from "../Navbar/Navbar";
 import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
+import CardProfessions from '../CardProfessions/CardProfessions.jsx'
+import { getLocalStorage } from "../localStorage";
 
-let orders = [{ name: 'Nombre 1', profession: 'Diseñador', rating: 4.2 }, { name: 'Nombre 2', profession: 'Plomero', rating: 3 }, { name: 'Nombre 3', profession: 'Electricista', rating: 5 }]
-let jobs = [{ name: 'Electricista', description: 'descripcion de la tarea', rating: 4.2, reviews: 25 }, { name: 'Gasista', description: 'descripcion de la tarea', rating: 3.4, reviews: 10 }]
+
 
 
 const Profile = () => {
-  
 
+
+let activeUser = getLocalStorage();
+
+      
   return (
     <>
     <Navbar />
-    
+    {/*----- CONTENEDOR IZQUIERDO -----*/}
     <div className={s.container}>
       <div className={s.leftContainer}>
         <div className={s.profileInfo}>
@@ -23,77 +31,64 @@ const Profile = () => {
             <img src={userImg} className={s.profile_Img} />
           </div>
           <div className={s.profileDetail}>
-            <div className={s.name}>Nombre Usuario</div>
-            <div className={s.location}>Ciudad, Provincia</div>
+            <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
+            <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
             <div className={s.description}>Descripcion que quiera poner la persona a su perfil, quizas habria que agregarlo en la parte de db como parte del usuario </div>
           </div>
         </div>
 
-        <div className={s.orderBox}>
-          <p className={s.orderText}>Mis ordenes recientes</p>
 
-          <div className={s.lastOrders}>
-            <CardProfileMap/>
-            <CardProfileMap/>
-            <CardProfileMap/>
+          <div className={s.orderBox}>
+            <p className={s.orderText}>Mis ordenes recientes</p>
 
-            {/* {
-              orders.map(order => {
-                return (
-                  <div className={s.orders}>
-                    <div className={s.imgDetail}><img alt="imagen"></img></div>
-
-                    <div className={s.orderDetail}>
-                      <h1>{order.name}</h1>
-                      <h2>{order.profession}</h2>
-                    </div>
-                    <div className={s.orderDetail2}>
-                      <h3><img src={star} /> {order.rating}</h3>
-                    </div>
-                  </div>
-                )
-              })
-            } */}
+            <div className={s.lastOrders}>
+              <CardProfileMap />
+              <CardProfileMap />
+              <CardProfileMap />
+            </div>
+          </div>
+          <div className={s.configBox}>
+            <img src={configLogo}></img>
+            <div>Panel de configuración</div>
           </div>
         </div>
-        <div className={s.configBox}>
-          <img src={configLogo}></img>
-          <div>Panel de configuración</div>
-        </div>
-      </div>
-
-
-      <div className={s.rightContainer}>
         
-        <div className={s.professionContainer}>
-          <p className={s.professionText}>Mis oficios publicados</p>
-          <div className={s.professionList}>
-            {
-              jobs.map(job => {
-                return (
-                  <div className={s.professionComponent}>
-                    <div className={s.professionAndDescription}>
-                      <h1>{job.name}</h1>
-                      <h2>{job.description}</h2>
-                    </div>
-                    <div className={s.professionStats}>
-                      <h3>Reseñas</h3>
-                      <h4>{job.reviews}</h4>
-                    </div>
-                    <div className={s.professionStats}>
-                      <h3>Calificación</h3>
-                      <h4>{job.rating}</h4>
-                    </div>
-                  </div>
-                )
-              })
-            }
+        {/*----- CONTENEDOR DERECHO -----*/}
+        <div className={s.rightContainer}>
+          <div className={s.professionContainer}>
+            <p className={s.professionText}>Mis oficios publicados</p>
+            <div className={s.professionList}>
+              <CardProfessions />
+              <CardProfessions />
+            </div>
+            <div className={s.addProfession}>
+              <div>
+                <img src={plusLogo} alt='plus'></img>
+              </div>
+            </div>
+          </div>
+          <div className={s.bePremium}>
+            <div className={s.premiumText}>
+              <h1>Plan Premium</h1>
+              <h4>Obtenga los beneficios del plan premium:
+                mas visibilidad, opciones y recomendacion por parte de la aplicacion
+                para que tenga una mayor cantidad de clientes y despegue al proximo nivel
+              </h4>
+            </div>
+
+            <div className={s.premiumRocketButton}>
+              <div>
+                <img src={rocket} alt='Premium Logo'></img>
+              </div>
+              <span>
+                <button>Mejorar</button>
+              </span>
+            </div>
           </div>
         </div>
+
+
       </div>
-
-
-    </div>
     </>
   )
 }
