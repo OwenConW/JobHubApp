@@ -7,20 +7,13 @@ import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
 import Navbar from '../Navbar/Navbar';
 
-import Paginate from "../Paginate/Paginate";
-import { getChars } from '../../redux/userActions';
+
 
 
 const Catalog = (props) => {
 	let professionalsArray = useSelector(
 		(state) => state.users.filteredProfessionals
 	);
-	const [currentPage, setCurrentPage] = useState(1) 
-  const [proffesionalsPerPage, setProffesionalsPerPage] = useState(10)  
-  const iOfLastProffesional = currentPage * proffesionalsPerPage
-  const iOfFirstProffesional = iOfLastProffesional - proffesionalsPerPage
-  const currentProffesionals = professionalsArray.slice(iOfFirstProffesional, iOfLastProffesional)
-	const paginado = (pageNumber) => {  setCurrentPage(pageNumber) }
 
 	const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
 	const [nameInputValue, setNameInputValue] = useState('')
@@ -44,21 +37,9 @@ const Catalog = (props) => {
 
 		setFilters(prevState => ({
 			...prevState,
-			[targetName]: value,
-		}));
-	}
-
-	function handleSubmit(e) {
-		e.preventDefault();
-		dispatch(filterProfessionals({ ...filters }));
-		e.target.reset();
-		setCurrentPage(1);
-	}
-
-	function handleShowAll() {
-		dispatch(getChars());
-		setCurrentPage(1);
-	}
+			[targetName]: value
+		}))
+}
 
 useEffect(() => {
  console.log(professionalsArray);
@@ -74,6 +55,13 @@ function handleReset() {
 	setFilters({name:"", profession:"", rating:""})
 	dispatch(getChars());
 	setNameInputValue('')
+}
+
+function handleSubmit(e){
+	e.preventDefault()
+	dispatch(filterProfessionals({...filters}))
+	setNameInputValue('')
+	e.target.reset()
 }
 
 	return (
@@ -102,31 +90,23 @@ function handleReset() {
 					<header className={estilos.header}>
 						<span>Catálogo de profesionales</span>
 					</header>
-					<div className={estilos.paginate}>
-                        <Paginate 
-                            key = {1}
-                            proffesionalsPerPage={proffesionalsPerPage}
-                            professionalsArray={professionalsArray.length}   
-                            paginado={paginado}
-                            currentPage={currentPage}
-                        />
-                    </div>
 					<div className={estilos.cardsContainer}>
-						{professionalsArray.length > 0 ? currentProffesionals.map((p, i) => {
-							return (
+						{professionalsArray && professionalsArray.length ? (
+							professionalsArray.map((p, i) => (
 								<Card
 									key={i}
 									data={{
 										...p,
-									    image: 'https://api.time.com/wp-content/uploads/2017/12/terry-crews-person-of-year-2017-time-magazine-2.jpg', //modificar cuando este en la DB!!
-								    }}
-							    />
-							)
-						}) : 
-							<div className={estilos.notFind}>
-								-- NO ENCONTRAMOS PROFESIONALES QUE SE AJUSTEN A TU BUSQUEDA --
+										image: 'https://api.time.com/wp-content/uploads/2017/12/terry-crews-person-of-year-2017-time-magazine-2.jpg', //modificar cuando este en la DB!!
+									}}
+								/>
+							))
+						) : (
+							<div>
+								-- NO ENCONTRAMOS PROFESIONALES QUE SE AJUSTEN A TU
+								BUSQUEDA --
 							</div>
-						}
+						)}
 					</div>
 				</div>
 			</div>
