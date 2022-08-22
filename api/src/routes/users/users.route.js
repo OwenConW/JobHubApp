@@ -24,10 +24,8 @@ users.get("/", (req, res, next) => {
 
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
-
     // const { name, last_Name, mail, dni, image, phone, country, city, coordinate, jobs } = req.body;
-    const { name, last_Name, mail, dni, image, phone, country, city, coordinate, description } = req.body;
-
+    const { name, last_Name, mail, dni, image, phone, country, city, coordinate, description, isProfessional, jobs } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
     //const jobsMinuscule = jobs.toLowerCase();
@@ -48,19 +46,20 @@ users.post("/", async (req, res, next) =>{
                     country,
                     city,
                     coordinate,
+                    isProfessional,
                     description
                 }
             })
-            // let jobFind = await Profession.findAll({
-            //     where:{
-            //         name:{
-            //             [Op.or]: jobs
-            //         }
-            //     }
-            // })
-            // await newUser.addProfession(jobFind)
-            console.log(newUser);
-
+            if(jobs){
+                let jobFind = await Profession.findAll({
+                    where:{
+                        name:{
+                            [Op.or]: jobs
+                        }
+                    }
+                })
+                await newUser.addProfession(jobFind)
+            }
             if(!created)  res.status(200).send(`The User cannot be created, the email "${mail}" has already been used`);
             return res.status(201).send(`The User "${name}" created successfully`);
         } return res.status(200).send("Missing data");
@@ -71,6 +70,7 @@ users.post("/", async (req, res, next) =>{
     }
     
 })
+
 
 //RUTA PARA EDITAR EL USUARIO
 
@@ -106,6 +106,7 @@ users.post("/", async (req, res, next) =>{
 //         res.status(400).send(error)
 //     }
 // })
+
 
 
 // RUTA QUE BUSCA USUARIOS POR ID
