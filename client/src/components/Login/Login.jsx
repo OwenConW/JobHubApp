@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 //localStorage
-import { setUserLocalStorage } from '../../Helpers/localStorage';
+import { setUserLocalStorage } from '../localStorage';
 
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
