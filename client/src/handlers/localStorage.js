@@ -9,7 +9,3 @@ export const getLocalStorage = () => {
         return userActive;
     }
 }
-
-export const clearLocalStorage = () => {
-    clearLocalStorage();
-}
