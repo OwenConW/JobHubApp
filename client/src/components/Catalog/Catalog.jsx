@@ -41,9 +41,9 @@ const Catalog = (props) => {
 		}))
 }
 
-useEffect(() => {
- console.log(professionalsArray);
-}, [professionalsArray])
+// useEffect(() => {
+//  console.log(professionalsArray);
+// }, [professionalsArray])
 
 useEffect(() => {
 	dispatch(getChars());

@@ -11,6 +11,7 @@ const users = Router()
 // RUTA QUE TRAE TODOS LOS USUARIOS O FILTRA POR PROFESION Y/O RATING 
 users.get("/", (req, res, next) => {
     const {name, rating, profession } = req.query;
+    console.log('buenas como andan')
     functions.filterByQueris(name, profession, rating)
     .then(professionals => {
         return res.status(200).send(professionals);
@@ -50,6 +51,7 @@ users.post("/", async (req, res, next) =>{
                     description
                 }
             })
+
             if(jobs){
                 let jobFind = await Profession.findAll({
                     where:{
@@ -60,6 +62,7 @@ users.post("/", async (req, res, next) =>{
                 })
                 await newUser.addProfession(jobFind)
             }
+
             if(!created)  res.status(200).send(`The User cannot be created, the email "${mail}" has already been used`);
             return res.status(201).send(`The User "${name}" created successfully`);
         } return res.status(200).send("Missing data");
