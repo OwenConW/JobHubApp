@@ -2,22 +2,24 @@ import React from "react";
 import s from './CardProfessions.module.scss';
 
 
-let job = { name: 'Electricista', description: 'descripcion de la tarea', rating: 4.2, reviews: 25 }
 
-const CardProfessions = () => {
-return (
+const CardProfessions = (job) => {
+let profession = job.job
+    return (
     <div className={s.professionComponent}>
         <div className={s.professionAndDescription}>
-            <h1>{job.name}</h1>
-            <h2>{job.description}</h2>
+            <h1>{profession.name}</h1>
+            <h2>Descripción del trabajo</h2>
         </div>
         <div className={s.professionStats}>
             <h3>Reseñas</h3>
-            <h4>{job.reviews}</h4>
+            <h4>13</h4> 
+            {/*arriba irian en el h4 {profession.reviews} */}
         </div>
         <div className={s.professionStats}>
             <h3>Calificación</h3>
-            <h4>{job.rating}</h4>
+            <h4>3.2</h4>
+             {/*arriba irian en el h4 {profession.rating} */}
         </div>
     </div>
     )
