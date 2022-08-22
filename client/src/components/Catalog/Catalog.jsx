@@ -6,6 +6,7 @@ import Filter from './Filter/Filter';
 import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
 import Navbar from '../Navbar/Navbar';
+
 import Paginate from "../Paginate/Paginate";
 import { getChars } from '../../redux/userActions';
 
@@ -60,9 +61,14 @@ const Catalog = (props) => {
 	}
 
 useEffect(() => {
+ console.log(professionalsArray);
+}, [professionalsArray])
+
+useEffect(() => {
 	dispatch(getChars());
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
+
 
 function handleReset() {
 	setFilters({name:"", profession:"", rating:""})
