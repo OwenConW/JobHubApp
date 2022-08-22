@@ -56,7 +56,7 @@ const Onboarding = () => {
   const [image, setImage] = useState("")
 
 
-  const handleUpload = async () => {
+  /*const handleUpload = async () => {
     const formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", "jobhubapp");
@@ -67,7 +67,7 @@ const Onboarding = () => {
       ...user,
       image: file.secure_url
     })
-  }
+  }*/
 
 
   const handleChange = (e) => {
@@ -228,9 +228,7 @@ const Onboarding = () => {
                       onChange={(event) => {
                       setImage(event.target.files[0])
                   }}/>
-                  <div className={s.uploadbtn} onClick={handleUpload}>
-                    <p>Subir Imagen</p>
-                  </div>
+
                 </div>
               </div>
 
