@@ -24,7 +24,7 @@ users.get("/", (req, res, next) => {
 
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
-    const { name, last_Name, mail, dni, image, phone, country, city, coordinate, jobs } = req.body;
+    const { name, last_Name, mail, dni, image, phone, country, city, coordinate, jobs, isProfessional } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
     //const jobsMinuscule = jobs.toLowerCase();
@@ -43,7 +43,7 @@ users.post("/", async (req, res, next) =>{
                     country,
                     city,
                     coordinate,
-                    
+                    isProfessional
                 }
             })
             let jobFind = await Profession.findAll({

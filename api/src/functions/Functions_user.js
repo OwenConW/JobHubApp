@@ -8,13 +8,18 @@ const filterByQueris = async(name, profession, rating) => {
             let profesionals = await Profession.findAll({ 
                 include: {
                     model: User,
-                    attributes: ['id','name','last_Name','image','city', 'postal_code', 'country'],
+                    attributes: ['id','name','last_Name','image','city', 'coordinate', 'country', 'isActive', 'isProfessional'],
                     through: {attributes: []},
                 },
                 where: {
-                    name: {
-                        [Op.substring]: profession.toLowerCase(),
-                    },
+                    [Op.and]: [
+                        {name: {
+                            [Op.substring]: profession.toLowerCase(),
+                        }},
+                        {
+                            isActive: true  
+                        }
+                    ]
                 },
             })
             console.log(profesionals)
@@ -36,7 +41,8 @@ const filterByQueris = async(name, profession, rating) => {
                 return 0
             })
             :  professionalsFilters
-            return professionalsFilters
+            console.log(professionalsFilters)
+            return professionalsFilters.filter(obj => obj.isProfessional === true)
         }else{
             let options = {};
             let where = {};
@@ -53,7 +59,8 @@ const filterByQueris = async(name, profession, rating) => {
                 through: {attributes: []},
             }
             let user = await User.findAll(options) 
-            return user
+            console.log(user)
+            return user.filter(obj => obj.isProfessional === true)
         }
     }catch(e){
         console.log(e)
