@@ -22,7 +22,6 @@ const filterByQueris = async(name, profession, rating) => {
                     ]
                 },
             })
-            console.log(profesionals)
             let professionalsFilters = [...profesionals[0].Users.map(obj => {
                 return {
                     ...obj.dataValues,
@@ -58,8 +57,7 @@ const filterByQueris = async(name, profession, rating) => {
                 attributes: ['name'],
                 through: {attributes: []},
             }
-            let user = await User.findAll(options) 
-            console.log(user)
+            let user = await User.findAll(options)
             return user.filter(obj => obj.isProfessional === true)
         }
     }catch(e){
