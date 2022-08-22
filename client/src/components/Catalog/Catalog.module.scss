@@ -56,6 +56,10 @@
 			}
 		}
 
+		.paginate {
+			margin-top: 10px;
+		}
+
 		.cardsContainer {
 			overflow-y: scroll;
 			display: flex;
@@ -65,6 +69,11 @@
 			width: 100%;
 			height: 100%;
 			margin: 10px 0 10px 0;
+
+			.notFind {
+				font-size: 3rem;
+				font-weight: 250;
+			}
 		}
 	}
 }
