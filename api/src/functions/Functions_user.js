@@ -40,7 +40,6 @@ const filterByQueris = async(name, profession, rating) => {
                 return 0
             })
             :  professionalsFilters
-            console.log(professionalsFilters)
             return professionalsFilters.filter(obj => obj.isProfessional === true)
         }else{
             let options = {};
