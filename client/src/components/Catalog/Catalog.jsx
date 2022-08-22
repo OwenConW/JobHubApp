@@ -118,8 +118,7 @@ const Catalog = (props) => {
 							))
 						) : (
 							<div>
-								-- NO ENCONTRAMOS PROFESIONALES QUE SE AJUSTEN A TU
-								BUSQUEDA --
+								-- NO ENCONTRAMOS PROFESIONALES QUE SE AJUSTEN A TU BUSQUEDA --
 							</div>
 						)}
 					</div>
