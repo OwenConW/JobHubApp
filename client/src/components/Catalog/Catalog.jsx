@@ -96,8 +96,7 @@ function handleSubmit(e){
 								<Card
 									key={i}
 									data={{
-										...p,
-										image: 'https://api.time.com/wp-content/uploads/2017/12/terry-crews-person-of-year-2017-time-magazine-2.jpg', //modificar cuando este en la DB!!
+										...p
 									}}
 								/>
 							))

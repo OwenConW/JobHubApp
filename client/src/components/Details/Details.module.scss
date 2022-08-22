@@ -157,19 +157,7 @@
       color: #000000;
     }
 
-    .professionList {
-      height: 70%;
-      width: 80%;
-      margin-left: 4.8%;
-      display: flex;
-      flex-direction: column;
-      padding-left: 5%;
-      padding-right: 5%;
-      align-items: center;
-      justify-content: space-evenly;
-
-
-    }
+    
 
   }
 
@@ -180,39 +168,31 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: space-evenly;
     border-radius: 10px;
     background: #D9D9D9;
 
     .premiumText {
-      width: 40%;
+      width: 80%;
       height: 20%;
+
 
       h1 {
         font-weight: 300;
-        margin-top: 2%;
-        margin-left: 4.9%;
+        margin-top: 4%;
+        margin-left: 12%;
+        margin-bottom: 2%;
         font-size: 3.2rem;
-        line-height: 5.4rem;
+        line-height: 3.0rem;
         color: #000000;
       }
 
-      h4 {
-        margin-left: 4.9%;
-        margin-top: 2%;
-        text-align: justify;
-        font-weight: 200;
-        font-size: 1.7rem;
-        line-height: 2.5rem;
-        color: #000000;
-      }
     }
 
-    div{
+    .OtherReviews{
       width: 95%;
-      height: 60%;
+      height: 80%;
       margin-left: 2.5%;
-      
+      display: flex;
     }
   }
 }

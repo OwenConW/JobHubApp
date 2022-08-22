@@ -15,12 +15,12 @@ const Home = () => {
 
   const { isAuthenticated } = useAuth0();
   const br = <br></br>;
-  
+
   // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
   // const dispatch = useDispatch()
   // const bestProffesionals = useSelector((state) => state.getDestacados)
 
-  // useEffect(() => { dispatch(getDestacados()) }, [dispatch])  
+  // useEffect(() => { dispatch(getDestacados()) }, [dispatch]) 
 
   return (
     <>
