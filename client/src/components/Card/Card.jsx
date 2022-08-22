@@ -8,7 +8,7 @@ import details_interior from './assets/Det_interior.svg';
 
 // const Card = ({ id, name, lastName, city, province, rating, name_job, image }) => {
 function Card(props) {
-	let { id, name, lastName, city, province, rating, name_job, image } =
+	let { id, name, last_Name, city, country, name_job, image } =
 		props.data;
 
 	return (
@@ -30,10 +30,10 @@ function Card(props) {
 						</div>
 						<div className={s.userinfo}>
 							<h3>
-								{name} {lastName}
+								{name} {last_Name}
 							</h3>
 							<p>
-								{city}, {province}
+								{city}, {country}
 							</p>
 						</div>
 					</div>

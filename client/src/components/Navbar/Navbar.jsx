@@ -2,6 +2,7 @@ import React from 'react';
 
 //assets
 import logo from './assets/logo.svg';
+import defaultimage from './assets/deafultimage.png';
 
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
@@ -11,11 +12,12 @@ import s from './Navbar.module.scss';
 import { Link } from 'react-router-dom';
 
 //UserTest
-import userimage from './assets/userimage.jpg';
 import login from './assets/login.svg';
+import { getLocalStorage } from '../../handlers/localStorage';
 
 const Navbar = () => {
 	const { isAuthenticated, logout } = useAuth0();
+	const activeUser = getLocalStorage();
 
 	return (
 		<div className={s.container}>
@@ -42,7 +44,7 @@ const Navbar = () => {
 							Logout
 						</div>
 						<Link to={'/profile'} className={s.profileimg}>
-							<img src={userimage}/>
+							{activeUser.image ? <img src={activeUser.image}/> : <img src={defaultimage}/>}
 						</Link>
 					</div>
 				) : (
