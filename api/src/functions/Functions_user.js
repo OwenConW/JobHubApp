@@ -10,7 +10,7 @@ const filterByQueris = async(name, profession, rating) => {
             let profesionals = await Profession.findAll({ 
                 include: {
                     model: User,
-                    attributes: ['id','name','last_Name','image','city', 'postal_code', 'country'],
+                    attributes: ['id','name','last_Name','image','city', 'coordinate', 'country', 'isActive', 'isProfessional'],
                     through: {attributes: []},
                 },
                 where: {
