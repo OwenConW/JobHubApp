@@ -1,16 +1,20 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
-import estilos from './Map.module.css';
+import s from './Map.module.css';
+import preview from './asset/preview.png';
 
 const Map = () => {
 	return (
 		<>
 			<Navbar />
+			<div className={s.map}>
 			<img
-				src="https://www.comunidadbaratz.com/wp-content/uploads/El-International-Council-on-Archives-ha-creado-un-mapa-digital-geolocalizando-Archivos.jpg"
+				src={preview}
 				alt="mapa"
-				className={estilos.mapa}
+				className={s.mapa}
 			/>
+			<p>Característica en desarrollo...</p>
+			</div>
 		</>
 	);
 };
