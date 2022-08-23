@@ -8,7 +8,7 @@ const filterByQueris = async(name, profession, rating) => {
             let profesionals = await Profession.findAll({ 
                 include: {
                     model: User,
-                    attributes: ['id','name','last_Name','image','city', 'coordinate', 'country', 'isActive', 'isProfessional'],
+                    attributes: ['id','name','last_Name','image','city', 'coordinate', 'country', 'isActive', 'isProfessional', 'isAdmin', 'isBanned', 'isPremium'],
                     through: {attributes: []},
                 },
                 where: {
@@ -35,7 +35,16 @@ const filterByQueris = async(name, profession, rating) => {
                 return 0
             })
             :  professionalsFilters
-            return professionalsFilters.filter(obj => obj.isProfessional === true)
+            professionalsFilters = professionalsFilters.sort(function(x, y){  
+                if(x.isPremium){
+                    return -1 
+                }
+                if(!x.isPremium){
+                    return 1;
+                }
+                return 0
+            })
+            return professionalsFilters.filter(obj => obj.isProfessional === true && obj.isActive === true && obj.isBanned === false)
         }else{
             let options = {};
             let where = {};
@@ -52,7 +61,16 @@ const filterByQueris = async(name, profession, rating) => {
                 through: {attributes: []},
             }
             let user = await User.findAll(options) 
-            return user.filter(obj => obj.isProfessional === true)
+            user = user.sort(function(x, y){  
+                if(x.isPremium){
+                    return -1 
+                }
+                if(!x.isPremium){
+                    return 1;
+                }
+                return 0
+            })
+            return user.filter(obj => obj.isProfessional === true && obj.isActive === true && obj.isBanned === false)
         }
     }catch(e){
         console.log(e)
