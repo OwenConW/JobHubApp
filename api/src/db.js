@@ -65,14 +65,17 @@ User.belongsToMany(Profession, { through: "user_profession", timestamps: false }
 Profession.belongsToMany(User, { through: "user_profession", timestamps: false });
 
 User.belongsToMany(Orders, { through: "user_orders", timestamps: false });
-Orders.belongsToMany(User, { through: "user_orders", timestamps: false })
+Orders.belongsToMany(User, { through: "user_orders", timestamps: false });
+
+User.belongsToMany(Review, { through: "user_review", timestamps: false });
+Review.belongsToMany(User, { through: "user_review", timestamps: false })
 
 
-Profession.hasMany(Orders);
-Orders.belongsTo(Profession);
+// // Profession.hasMany(Orders);
+// // Orders.belongsTo(Profession);
 
-Profession.hasOne(Review);
-Review.hasOne(Profession );
+// // Profession.hasOne(Review);
+// // Review.hasOne(Profession );
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
