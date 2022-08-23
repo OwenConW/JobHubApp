@@ -12,3 +12,29 @@ body{
 html{
   font-size: 62.5%;
 }
+
+.leaflet-popup-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 100px;
+}
+
+.leaflet-popup-content p{
+  margin-left: 5%;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+}
+
+.leaflet-popup-content img{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

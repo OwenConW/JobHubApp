@@ -12,7 +12,7 @@ import s from './Login.module.scss';
 import logo from './assets/logo.svg';
 import background from './assets/background.svg';
 import axios from 'axios';
-import Loader from '../Loader/Loader';
+import Loader from './Loader/Loader';
 
 const Login = () => {
 
