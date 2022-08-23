@@ -1,0 +1,77 @@
+.modalContainer {
+  color: #ffffffc0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 10px solid black;
+  background: rgba(0, 0, 0, 0.50);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.9px);
+  -webkit-backdrop-filter: blur(3.9px);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+   h1 {
+    font-size: 4rem;
+    color:#ffffffc0;
+    text-shadow: 4px 4px  #07393C;
+   }
+}
+
+.benefitsContainer {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  li {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px  #07393C;
+  }
+}
+
+.buttonsContainer {
+ display: flex;
+ justify-content: center;
+ width: 50%;
+ gap: 30px;
+  .btnAccept {
+    color: #ffffffc0;
+    width: 30%;
+    height: 55px;
+    background: #07393C;
+    border-radius: 10px;
+    margin-left: 4.9%;
+    margin-bottom: 3%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+  }
+
+  .btnReject {
+    color: #ffffffc0;
+    width: 30%;
+    background: #bb3636;
+    border-radius: 10px;
+    margin-left: 4.9%;
+    margin-bottom: 3%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+  }
+
+  .btnAccept:hover, .btnReject:hover {
+    transition: transform 0.5s;
+    transform: scale(1.1);
+  }
+}
