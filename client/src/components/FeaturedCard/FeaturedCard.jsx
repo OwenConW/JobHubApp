@@ -23,8 +23,8 @@ const FeaturedCard = (id) => {
 
   const name = <h4>{professional.name} {professional.last_Name}</h4>;
   const cuidad = <p>{professional.city}, {professional.country}</p>;
-  {/* ESTE ARRAY NO SE SI ESTA BIEN */}
-  const jobs = <h4>{professional.professions.split(", ")}</h4>;
+  const jobs = professional.professions; 
+  const br = <br></br>;
 
   return (
     <div className={s.container}
@@ -48,7 +48,7 @@ const FeaturedCard = (id) => {
           opacity: 1,
           y:0,
         }}
-      >{jobs}
+      >{jobs ? jobs.map((job) => (<h4>{job} {br}</h4>)) : <h4>Jobs not Find</h4>}
       </motion.div>
       <motion.img src={background} alt="back" className={s.background} 
         transition={{duration: 0.3, delay:1}}
