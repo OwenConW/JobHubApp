@@ -1,6 +1,9 @@
 import React from 'react';
 import s from './FeaturedCard.module.scss';
 import {motion} from 'framer-motion/dist/framer-motion.js';
+import { getCharsById } from '../../redux/userActions';
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 //assets
 //FOTO del Proffesional
@@ -8,12 +11,16 @@ import star from './assets/star.png';
 import background from './assets/backcard.svg';
 import sign from './assets/sign.svg';
 
-import user from './assets/user.jpg';
-
 const FeaturedCard = () => {
 
-  const name = <h4>Jeremias Escobedo</h4>;
-  const cuidad = <p>Pilar, Buenos Aires</p>;
+  const dispatch = useDispatch();
+  const professional = useSelector((state) => state.users.detail)
+  let params = useParams();
+  const id = params.id
+  
+  useEffect(() => {
+    dispatch(getCharsById(id))
+  }, [])
 
   return (
     <div className={s.container}
