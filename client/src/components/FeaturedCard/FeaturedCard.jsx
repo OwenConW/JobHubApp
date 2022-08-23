@@ -12,19 +12,21 @@ import background from './assets/backcard.svg';
 import sign from './assets/sign.svg';
 import default_user from './assets/default_user.png';
 
-const FeaturedCard = (id) => {
+const FeaturedCard = (prop) => {
    
   const dispatch = useDispatch();
   const professional = useSelector((state) => state.users.detail)
-  
+  const { id_user } = prop.data.id;
+
   useEffect(() => {
-    dispatch(getCharsById(id))
+    dispatch(getCharsById(id_user))
   }, [])
 
   const name = <h4>{professional.name} {professional.last_Name}</h4>;
   const cuidad = <p>{professional.city}, {professional.country}</p>;
   const jobs = professional.professions; 
   const br = <br></br>;
+
 
   return (
     <div className={s.container}
@@ -73,7 +75,7 @@ const FeaturedCard = (id) => {
             opacity: 1,
             x:0,
           }}
-        >{name} {cuidad}
+        >{id_user} {cuidad}
         </motion.div>
         <motion.div className={s.info}
           transition={{duration: 0.3, delay:1}}
