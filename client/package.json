@@ -25,6 +25,7 @@
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.4.1",
     "sass": "^1.54.4",
+    "styled-components": "^5.3.5",
     "use-state-with-callback": "^3.0.2",
     "web-vitals": "^2.1.4"
   },
@@ -42,7 +43,7 @@
   },
   "browserslist": [
     ">0.2%",
-   "not dead",
-   "not op_mini all"
- ]
+    "not dead",
+    "not op_mini all"
+  ]
 }
