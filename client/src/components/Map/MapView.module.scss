@@ -1,0 +1,192 @@
+.container{
+    display: flex;
+    width:100%;
+    height: 90%;
+
+    .leftContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 25%;
+        height: 100%;
+        background-color: #ffffff;
+
+        .activeUser{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 40%;
+            background-color: #EEEEEE;
+
+            h3{
+                padding-top: 3%;
+                width: 100%;
+                height: 20%;
+                padding-left: 5%;
+                font-size: 3.2rem;
+                font-weight: 400;
+            }
+
+            .user{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;
+                height: 35%;
+
+                .profileImage{
+                    margin-left: 2%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 25%;
+                    height: 85%;
+
+                    img{
+                        border: 10px solid rgba(95, 94, 94, 0.212);
+                        object-fit: cover;
+                        border-radius: 50%;
+                        width: 60%;
+                        height: 70%;
+                    }
+                }
+
+                .name{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    width: 73%;
+                    height: 100%;
+                    font-size: 2.4rem;
+                    text-transform: capitalize;
+                    color: #222222;
+                }
+            }
+
+            .buscador{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 45%;
+
+                .searchbar{
+                    transition: 0.3s;
+                    width: 80%;
+                    height: 30%;
+                    border-radius: 10px;
+                    border: 2px solid #4c4c4c5c;
+                    font-family: Poppins;
+                    font-weight: 300;
+                    padding-left: 2%;
+                    font-size: 1.8rem;
+
+                    &:hover{
+                        transition: 0.3s;
+                        background-color: #b4b4b4;
+                        color: #FFFFFF;
+                    }
+
+                    &:focus{
+                        outline: none;
+                    }
+
+                    &:hover::placeholder{
+                        transition: 0.3s;
+                        font-weight: 300;
+                        color: #ffffff9b;
+                    }
+                }
+            }
+        }
+
+        .professionals{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 60%;
+            margin-top: 5%;
+            font-size: 1.8rem;
+            overflow-y: scroll;
+
+            h3{
+                font-weight: 300;
+                font-size: 2.2rem;
+            }
+
+            .link{
+                transition: 0.5s;
+                margin-bottom: 2%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                color: #373636;
+                width: 100%;
+                min-height: 25%;
+
+                .profileImage{
+                    margin-left: 2%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 25%;
+                    height: 60%;
+
+                    img{
+                        border: 10px solid rgba(95, 94, 94, 0.163);
+                        object-fit: cover;
+                        border-radius: 50%;
+                        width: 60%;
+                        height: 90%;
+                    }
+                }
+
+                .name{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    width: 73%;
+                    height: 100%;
+                    text-transform: capitalize;
+
+                    h3{
+                        font-size: 2.4rem;
+                        font-weight: 300;
+                        opacity: 1;
+                    }
+
+                    p{
+                        font-size: 1.8rem;
+                        font-weight: 200;
+                        opacity: 0.8;
+                    }
+                }
+
+                &:hover{
+                    cursor: pointer;
+                    transition: 0.5s;
+                    background-color: #363636;
+                    color: #b4b4b4;
+                }
+            }
+        }
+    }
+
+    .mapContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+        height: 100%;
+
+        .map{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

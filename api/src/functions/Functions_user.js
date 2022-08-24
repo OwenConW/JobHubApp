@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { User, Profession } = require("../db")
+const { User, Profession, Review } = require("../db")
 
 // GET PROFESSIONAL BY NAME AND FILTER BY PROFESSION AND/OR RATING
 const filterByQueris = async(name, profession, rating) => {
@@ -8,7 +8,7 @@ const filterByQueris = async(name, profession, rating) => {
             let profesionals = await Profession.findAll({ 
                 include: {
                     model: User,
-                    attributes: ['id','name','last_Name','image','city', 'coordinate', 'country', 'isActive', 'isProfessional'],
+                    attributes: ['id','name','last_Name','image','city', 'coordinate', 'country', 'isActive', 'isProfessional', 'isAdmin', 'isBanned', 'isPremium'],
                     through: {attributes: []},
                 },
                 where: {
@@ -35,7 +35,16 @@ const filterByQueris = async(name, profession, rating) => {
                 return 0
             })
             :  professionalsFilters
-            return professionalsFilters.filter(obj => obj.isProfessional === true)
+            professionalsFilters = professionalsFilters.sort(function(x, y){  
+                if(x.isPremium){
+                    return -1 
+                }
+                if(!x.isPremium){
+                    return 1;
+                }
+                return 0
+            })
+            return professionalsFilters.filter(obj => obj.isProfessional === true && obj.isActive === true && obj.isBanned === false)
         }else{
             let options = {};
             let where = {};
@@ -52,7 +61,16 @@ const filterByQueris = async(name, profession, rating) => {
                 through: {attributes: []},
             }
             let user = await User.findAll(options) 
-            return user.filter(obj => obj.isProfessional === true)
+            user = user.sort(function(x, y){  
+                if(x.isPremium){
+                    return -1 
+                }
+                if(!x.isPremium){
+                    return 1;
+                }
+                return 0
+            })
+            return user.filter(obj => obj.isProfessional === true && obj.isActive === true && obj.isBanned === false)
         }
     }catch(e){
         console.log(e)
@@ -65,11 +83,18 @@ const filterByQueris = async(name, profession, rating) => {
 const getProffesionalById = async(id) => {
     try{
         const users = await User.findByPk(id * 1, {
-            include: {
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-            }
+            include:[
+                {
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                },
+                {
+                    model: Review,
+                    attributes: ['id_orders','feedback_client', 'rating'],
+                    through: {attributes: []},
+                }
+            ]
         })
         return users
     }catch(e){
@@ -91,12 +116,29 @@ const getAllJobs = async() => {
     }
 }
 
+// UPDATE RATING
+const updateRating = async(id, rating) => {
+    try {
+        await User.update({
+            rating,
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 
 
 module.exports = {
     filterByQueris,
     getProffesionalById,
-    getAllJobs
+    getAllJobs,
+    updateRating
 }
 

@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch, useSelector } from 'react-redux';
 
 //components
 import Navbar from "../Navbar/Navbar";
@@ -7,9 +10,10 @@ import FeaturedCard from "../FeaturedCard/FeaturedCard";
 
 
 //styles and utilities
+import { getLeadingProfessionals } from '../../redux/userActions';
 import s from './Home.module.scss';
-import { Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+
+
 
 const Home = () => {
 
@@ -17,10 +21,10 @@ const Home = () => {
   const br = <br></br>;
 
   // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
-  // const dispatch = useDispatch()
-  // const bestProffesionals = useSelector((state) => state.getDestacados)
+  const dispatch = useDispatch()
+  const bestProffesionals = useSelector((state) => state.users.detail)
 
-  // useEffect(() => { dispatch(getDestacados()) }, [dispatch]) 
+  useEffect(() => { dispatch(getLeadingProfessionals()) }, [dispatch]) 
 
   return (
     <>
@@ -35,10 +39,21 @@ const Home = () => {
           <div className={s.destacados}>
             <h1 className={s.subtitle}>Trabajadores destacados de la semana</h1>
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
-            <div className={s.cards}> 
-              <FeaturedCard className={s.card} /> 
-              <FeaturedCard className={s.card} />
-              <FeaturedCard className={s.card} />
+            <div className={s.cards}>
+              {bestProffesionals.length ? (bestProffesionals.map((prop, i) => (
+                i < 3 && 
+								  <FeaturedCard
+                    key= {i}
+									  data={{
+										  ...prop
+									  }}
+								  />
+                )))
+              : (
+							  <div className={s.notFind}>
+								  -- Estamos actualizando los profesionales de la semana --
+							  </div>
+						  )} 
             </div>
             <Link to='/professionals' className={s.link}>
               <button className={s.button}>Explorar Catálogo</button>
