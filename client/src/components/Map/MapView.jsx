@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 //map
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { oficioStyle } from './AllMarkers/styles';
 
 import { userIcon } from './mapIcons';
 import { getLocalStorage } from '../../handlers/localStorage';
@@ -80,7 +81,7 @@ const MapView = () => {
 								<option value="15">15 Km</option>
 							</select>
 						</div>
-						{closeUsers ? closeUsers.map(user => {
+						{closeUsers.length ? closeUsers.map(user => {
 							return(
 								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
 								<div className={s.profileImage}>
@@ -89,10 +90,11 @@ const MapView = () => {
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
 									<p>{user.professions[0].name}</p>
+									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser.coordinate, user.coordinate)).toFixed(2)} KM</p>
 								</div>
 								</Link>
 							)
-						}) : 'No hay profesionales para mostrarte.'}
+						}) : 'No hay profesionales cercanos a tí.'}
 					</div>
 				</div>
 
@@ -106,8 +108,8 @@ const MapView = () => {
 						/>
 
 						<Marker position={[activeUser.coordinate[0], activeUser.coordinate[1]]} icon={userIcon}>
-							<Popup>
-								<p>Usted está aquí</p>
+							<Popup className='professional-popup'>
+								<p style={oficioStyle}>{activeUser.name}</p>
 							</Popup>
 						</Marker>
 
