@@ -4,6 +4,7 @@ import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
 import plusLogo from './assets/PlusLogo.svg'
 import rocket from './assets/Rocket.svg'
+import { Link }from "react-router-dom"
 
 import Navbar from "../Navbar/Navbar";
 import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
@@ -11,7 +12,7 @@ import { getLocalStorage } from "../../handlers/localStorage";
 import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import axios from "axios";
-
+import Chat from "../Chat/ChatEnVivo/Chat"
 
 
 //ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
@@ -33,8 +34,6 @@ import axios from "axios";
 
 const Profile = () => {
 
-
-
   let activeUser = getLocalStorage();
 const handlePremium = async () => {
   await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
@@ -48,10 +47,9 @@ const handlePremium = async () => {
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             <div className={s.profile_Img_container}>
-              {activeUser.image ? <img src={activeUser.image} className={s.profile_Img} /> : <img src={defaultimage} className={s.profile_Img} />}
             </div>
             <div className={s.profileDetail}>
-              <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
+              <div className={s.name}>{activeUser.name} {activeUser.last_Name}<Link to={`/chat/${5}`}><button>MD</button></Link></div>
               <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
               <div className={s.description}>{activeUser.description}</div>
             </div>
