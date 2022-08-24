@@ -3,14 +3,16 @@ import Navbar from '../Navbar/Navbar';
 import s from './MapView.module.scss';
 import AllMarkers from './AllMarkers/AllMarkers';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //map
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { oficioStyle } from './AllMarkers/styles';
 
 import { userIcon } from './mapIcons';
 import { getLocalStorage } from '../../handlers/localStorage';
+import { useAuth0 } from '@auth0/auth0-react';
 
 //distances
 import pitagorasDistance from '../../handlers/pitagorasDistance';
@@ -20,6 +22,8 @@ const MapView = () => {
 	const [distance, setDistance] = useState(1);
 	const [users, setUsers] = useState([]);
 	const [closeUsers, setCloseUsers] = useState([]);
+	const { isAuthenticated } = useAuth0();
+	const navigate = useNavigate();
 
 	const closeToOne = (coords1, coords2) => {
 		if(pitagorasDistance(coords1, coords2) < distance){ //distancia en kilometros
@@ -30,6 +34,7 @@ const MapView = () => {
 	}
 
     useEffect(() => {
+
         const fetchData = async () => {
             let response = await axios.get('/users');
             setUsers([
@@ -41,14 +46,14 @@ const MapView = () => {
     }, []);
 
 	useEffect(() => {
-		let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate));
 
-		setCloseUsers([...aux]);
+			let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate));
+			setCloseUsers([...aux]);
 
 	}, [users, distance]);
 
 	return (
-		<>
+			isAuthenticated ? (<>
 			<Navbar />
 			<div className={s.container}>
 				<div className={s.leftContainer}>
@@ -80,7 +85,7 @@ const MapView = () => {
 								<option value="15">15 Km</option>
 							</select>
 						</div>
-						{closeUsers ? closeUsers.map(user => {
+						{closeUsers.length ? closeUsers.map(user => {
 							return(
 								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
 								<div className={s.profileImage}>
@@ -89,10 +94,11 @@ const MapView = () => {
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
 									<p>{user.professions[0].name}</p>
+									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser.coordinate, user.coordinate)).toFixed(2)} KM</p>
 								</div>
 								</Link>
 							)
-						}) : 'No hay profesionales para mostrarte.'}
+						}) : 'No hay profesionales cercanos a tí.'}
 					</div>
 				</div>
 
@@ -106,8 +112,8 @@ const MapView = () => {
 						/>
 
 						<Marker position={[activeUser.coordinate[0], activeUser.coordinate[1]]} icon={userIcon}>
-							<Popup>
-								<p>Usted está aquí</p>
+							<Popup className='professional-popup'>
+								<p style={oficioStyle}>{activeUser.name}</p>
 							</Popup>
 						</Marker>
 
@@ -115,7 +121,7 @@ const MapView = () => {
 					</MapContainer>
 				</div>
 			</div>
-		</>
+			</>) : navigate('../')
 	);
 };
 
