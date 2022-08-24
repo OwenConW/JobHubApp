@@ -69,11 +69,11 @@ const handlePremium = async () => {
             </div>
             <div className={s.configBox}>
               <div className={s.configImg}>
-              <Link to='/ProfileConfig'>
+              <Link to='/ProfileConfig/edit'>
               <img src={configLogo} ></img>
                  </Link>
                  </div>
-              <Link to='/ProfileConfig' className={s.configText}>Panel de configuración</Link>
+              <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>
             </div>
           
         </div>
@@ -85,7 +85,7 @@ const handlePremium = async () => {
             <p className={s.professionText}>Mis oficios publicados</p>
             <ProfessionBox professional={activeUser} />
             <div className={s.addProfession}>
-              <Link to='/ProfileConfig'>
+              <Link to='/ProfileConfig/professions'>
                 <div>
                 <img src={plusLogo} alt='plus'></img>
                 </div>

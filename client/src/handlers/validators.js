@@ -2,7 +2,7 @@ export function validators(userInput, addressInput) {
     let errors = {};
   // Verificacion de campos vacios
     for (const key in userInput) {
-        if(key === 'phone' || key === 'mail' || key === 'date_of_Birth' || key === 'image' || key === 'description' || key === 'isPremium') continue;
+        if(key === 'phone' || key === 'mail' || key === 'date_of_Birth' || key === 'image' || key === 'description' || key === 'isPremium' || key === 'isProfessional' || key === 'isAdmin'|| key === 'isBanned') continue;
         if (!userInput[key]) {
           errors[key] = "Este campo es obligatorio";
         }

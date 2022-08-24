@@ -5,6 +5,7 @@ import s from './CardProfessions.module.scss';
 
 const CardProfessions = (job) => {
 let profession = job.job
+// console.log('QUE TRAE PROFESSION EN CADA CARD: ', profession)
     return (
     <div className={s.professionComponent}>
         <div className={s.professionAndDescription}>

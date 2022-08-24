@@ -12,22 +12,29 @@ export const getLocalStorage = () => {
 
 
         let userActive = {
-            name: "Martin",
-            last_Name: "Morales",
-            description: "Ideal para descontracturarse. Humor hardcore gay antifascista  ►Contacto maritobaracus@gmail.com",
-            mail: "test2@gmail.com",
-            dni: "83.332.125",
-            image: "not image",
-            phone: "1656158172",
-            country: "Rusia",
-            // postal_code: "1406",
-            city: "Moscu",
-            coordinate: ["421", "-22"],
-            isProfessional: true,
-            professions: [{ name: "extraterrestre" }, { name: "sovietico" }, { name: "militar" }, { name: "armamentista" }, { name: "electricista" }, { name: "gasista" }, { name: "programador" }],
-            isPremium: false,
-            street: 'Directorio',
-            address: 4500
+            
+                id: 2,
+                name: "Martin",
+                last_Name: "Morales",
+                description: "Mejor corredor de la historia ",
+                dni: "81.321.442",
+                image: "https://static.dw.com/image/17910578_303.jpg",
+                date_of_Birth: null,
+                mail: "schumis@hotmail.com",
+                phone: "1656158172",
+                country: "argentina",
+                city: "Buenos aires",
+                coordinate: [ "421","-22" ],
+                street: "Directorio",
+                address: "5000",
+                rating: -1,
+                isPremium: false,
+                isProfessional: true,
+                isAdmin: false,
+                isBanned: false,
+                isActive: true,
+                professions: ["carpintero", "programador"],
+                reviews: []
         }
 
 

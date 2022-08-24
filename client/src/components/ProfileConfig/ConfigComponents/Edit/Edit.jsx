@@ -3,7 +3,8 @@ import s from './Edit.module.scss'
 import { getLocalStorage } from '../../../../handlers/localStorage';
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { validators } from "../../../../handlers/validators";
+import { validators } from "../../../../handlers/validators.js";
+import { changeValidator } from "../../../../handlers/ChangeValidator.js";
 
 const Edit = () => {
   let activeUser = getLocalStorage()
@@ -11,20 +12,28 @@ const Edit = () => {
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
   const [user, setUser] = useState({
+    id: activeUser.id,
     name: activeUser.name,
     last_Name: activeUser.last_Name,
     description: activeUser.description,
-    mail: activeUser.mail,
     dni: activeUser.dni,
     image: activeUser.image,
+    date_of_Birth: activeUser.date_of_Birth,
+    mail: activeUser.mail,
     phone: activeUser.phone,
     country: activeUser.country,
     city: activeUser.city,
     coordinate: activeUser.coordinate,
-    professions: activeUser.professions,
-    isPremium: activeUser.isPremium,
     street: activeUser.street,
-    address: activeUser.address
+    address: activeUser.address,
+    rating: activeUser.rating,
+    isPremium: activeUser.isPremium,
+    isProfessional: activeUser.isProfessional,
+    isAdmin: activeUser.isAdmin,
+    isBanned: activeUser.isBanned,
+    isActive: activeUser.isActive,
+    professions: activeUser.professions,
+    reviews: activeUser.reviews
   })
 
   //HandleChange de inputs
@@ -35,8 +44,10 @@ const Edit = () => {
     });
   }
 
+  // Control del estado user
   useEffect(() => {
-    // console.log(user)
+    // console.log(user),
+    // console.log(changeValidator(activeUser, user))
   }, [user])
 
 
@@ -74,8 +85,8 @@ const Edit = () => {
   });
 
   const [address, setAddress] = useState({
-    street:user.street,
-    number:user.address,
+    street: user.street,
+    number: user.address,
   });
 
 
@@ -86,15 +97,34 @@ const Edit = () => {
     dni: '',
     city: '',
   });
+
+  // VALIDATOR de DATOS
   useEffect(() => {
     setErrors(validators(user, address));
     console.log(errors)
   }, [user, address]);
 
+  const clickToBeProffessional = (event) => {
+    user.isProfessional ?
+      setUser({
+        ...user,
+        [event.target.name]: false
+      }) :
+      setUser({
+        ...user,
+        [event.target.name]: true
+      })
+  }
+
+  const handleSubmit = () => {
+
+  }
   // console.log('entre a Edit')
   // console.log('activeuser: ', activeUser)
   return (
     <div className={s.container}>
+
+
 
       <div className={s.inputDiv}>
         <div>Nombre</div>
@@ -108,10 +138,7 @@ const Edit = () => {
         {errors.last_Name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.last_Name ? <p className={s.error}>{errors.last_Name}</p> : '')}
       </div>
 
-      <div className={s.descriptionDiv}>
-        <div>Descripcion</div>
-        <textarea className={s.description} placeholder="Descripcion personal" name='description' value={user.description} onChange={(event) => handleChange(event)}></textarea>
-      </div>
+
 
       {/*VER DESPUES COMO ES EL TEMA DE CAMBIO DE MAIL*/}
       {/* <div className={s.inputDiv}>
@@ -162,6 +189,17 @@ const Edit = () => {
         <input placeholder="Tu direccion" name='address' value={user.address} onChange={(event) => handleChange(event)}></input>
       </div>
 
+      <div className={s.inputDiv}>
+        <div>Ser Profesional</div>
+        <input type="checkbox" name='isProfessional' checked={user.isProfessional} onClick={clickToBeProffessional}></input>
+      </div>
+
+      <div className={s.descriptionDiv}>
+        <div>Descripcion</div>
+        <textarea className={s.description} placeholder="Descripcion personal" name='description' value={user.description} onChange={(event) => handleChange(event)}></textarea>
+      </div>
+
+      <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={changeValidator(activeUser, user) || Object.keys(errors).length} />
 
     </div>
   )

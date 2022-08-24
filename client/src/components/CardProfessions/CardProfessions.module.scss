@@ -2,8 +2,10 @@
   background: #F0EDEE;
   margin-top: 3%;
   margin-bottom: 3%;
-  min-height: 35%;
-  min-width: 100%;
+  height: 35%;
+  max-height: 150px;
+  width: 100%;
+  max-width: 600px;
   border-radius: 1rem;
   display: flex;
   align-items: center;
@@ -51,8 +53,8 @@
     }
   }
 
-  &:hover {
-    transition: 0.5s;
-    scale: 1.04;
-  }
+  // &:hover {
+  //   transition: 0.5s;
+  //   scale: 1.04;
+  // }
 }

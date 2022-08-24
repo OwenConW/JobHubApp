@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
-
 import s from './ProfileConfig.module.scss';
 
 
@@ -13,20 +12,25 @@ import ConfigPages from "./ConfigComponents/ConfigPages";
 
 
 const ProfileConfig = () => {
+  //tomo los datos del usuario
   let activeUser = getLocalStorage();
+  
 
-  const [configPage, setConfigPage] = useState('edit')
+  // id para conditional render
+  let params = useParams();
+  let id = params.id;
+
+  const [configPage, setConfigPage] = useState(id)
 
   const paginado = (event) => {
     setConfigPage(event.target.name)
   }
 
-  useEffect((event) => {
-    // console.log('localStorage: ', activeUser)
-    // console.log('configpage: ', configPage)
-
+  useEffect(() => {
+    
   }, [configPage])
 
+  
   return (
     <>
       <Navbar />
@@ -65,7 +69,6 @@ const ProfileConfig = () => {
           <div className={s.rightContainer}>
             <ConfigPages configPage={configPage} />
           </div>
-
         </div>
       </div>
     </>

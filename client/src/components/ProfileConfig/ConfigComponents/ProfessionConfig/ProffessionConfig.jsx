@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { validators } from "../../../../handlers/validators";
 import { actionGetAllJobs } from "../../../../redux/jobActions";
 import { useDispatch, useSelector } from "react-redux";
+import CardProfessions from "../../../CardProfessions/CardProfessions";
 
 const ProfessionConfig = () => {
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ const ProfessionConfig = () => {
   let activeUser = getLocalStorage()
 
   const allProfessions = useSelector((state) => state.jobs.jobs)
-  console.log('allProfessions', allProfessions)
+  // console.log('allProfessions', allProfessions)
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
   const [user, setUser] = useState({
@@ -44,8 +45,6 @@ const ProfessionConfig = () => {
   }, [])
 
 
-  // console.log('entre a Edit')
-  // console.log('activeuser: ', activeUser)
   return (
     <div className={s.container}>
     
@@ -64,6 +63,20 @@ const ProfessionConfig = () => {
 
         </select>
       </div>
+
+      <div className={s.professionList}>
+        {activeUser.professions && activeUser.professions.length ? (
+        activeUser.professions.map(job => (
+          <duv className={s.individualProfession}> 
+          <CardProfessions job={job} />
+          </duv>
+        ))
+      ) : (
+        <div>
+          AUN NO TIENES PROFESIONES
+        </div>
+      )}
+    </div>
 
 
     </div>

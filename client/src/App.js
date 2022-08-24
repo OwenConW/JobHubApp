@@ -23,7 +23,7 @@ function App() {
         		<Route exact path="/profile" element={<Profile />}/>
 				<Route exact path="/details/:id" element={<Details />}/>
 				<Route exact path="/onboarding" element={<Onboarding />}/>
-				<Route exact path="/ProfileConfig" element={<ProfileConfig />}/>
+				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
 			</Routes>
 		</div>
 	);
