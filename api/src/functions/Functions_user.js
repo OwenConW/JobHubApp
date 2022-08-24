@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { User, Profession } = require("../db")
+const { User, Profession, Review } = require("../db")
 
 // GET PROFESSIONAL BY NAME AND FILTER BY PROFESSION AND/OR RATING
 const filterByQueris = async(name, profession, rating) => {
@@ -83,11 +83,18 @@ const filterByQueris = async(name, profession, rating) => {
 const getProffesionalById = async(id) => {
     try{
         const users = await User.findByPk(id * 1, {
-            include: {
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-            }
+            include:[
+                {
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                },
+                {
+                    model: Review,
+                    attributes: ['id_orders','feedback_client', 'rating'],
+                    through: {attributes: []},
+                }
+            ]
         })
         return users
     }catch(e){
@@ -109,12 +116,29 @@ const getAllJobs = async() => {
     }
 }
 
+// UPDATE RATING
+const updateRating = async(id, rating) => {
+    try {
+        await User.update({
+            rating,
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 
 
 module.exports = {
     filterByQueris,
     getProffesionalById,
-    getAllJobs
+    getAllJobs,
+    updateRating
 }
 
