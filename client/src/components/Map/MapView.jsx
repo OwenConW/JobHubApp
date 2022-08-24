@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 //map
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { oficioStyle } from './AllMarkers/styles';
 
@@ -118,6 +118,7 @@ const MapView = () => {
 						</Marker>
 
 						<AllMarkers/>
+						<Circle center={[activeUser.coordinate[0], activeUser.coordinate[1]]} pathOptions={{fillColor: 'grey', color: '#07393C'}} radius={distance * 1000} />
 					</MapContainer>
 				</div>
 			</div>
