@@ -116,12 +116,29 @@ const getAllJobs = async() => {
     }
 }
 
+// UPDATE RATING
+const updateRating = async(id, rating) => {
+    try {
+        await User.update({
+            rating,
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 
 
 module.exports = {
     filterByQueris,
     getProffesionalById,
-    getAllJobs
+    getAllJobs,
+    updateRating
 }
 

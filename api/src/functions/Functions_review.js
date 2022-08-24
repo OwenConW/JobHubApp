@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { User, Review } = require("../db")
+const { updateRating } = require("../functions/Functions_user.js")
 
 
 
@@ -32,7 +33,26 @@ const getAllReview = async () =>{
     }
 }
 
+//FUNCION PARA BUSCAR Y PROMEDIAR EL RATING
+// const searchRating = async (id, rating) =>{
+//     try {
+//         const ratingValue = await User.findByPk(id)
+//         if(ratingValue.rating === -1) return await updateRating(id, rating)
+//         const avgRating = await User.findAll({
+//             attributes: [User.fn('AVG', User.col('rating')), 'avgRating']
+//         })
+//         console.log('ESTO ES LO QUE ME DEVUELVE LA FUNCION AVG RATING', avgRating)
+            
+//         ;
+        
+//     } catch (error) {
+//         console.log(error)
+//         throw error
+//     }
+// }
+
 module.exports = {
     updateReview,
-    getAllReview
+    getAllReview,
+    // searchRating
 }

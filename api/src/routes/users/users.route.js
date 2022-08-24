@@ -1,9 +1,9 @@
 const { default: axios } = require('axios');
 const { Router } = require('express');
-const { User, Profession, Op} = require("../../db.js")
+const { User, Profession, Review, Op} = require("../../db.js")
 const functions = require("../../functions/Functions_user");
-const Review = require('../../models/Review.js');
-// const Profession = require('../../models/Profession.js');
+//const Review = require('../../models/Review.js');
+//const Profession = require('../../models/Profession.js');
 
 const users = Router()
 
@@ -25,10 +25,10 @@ users.get("/", (req, res, next) => {
 
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
-    const { name, last_Name, date_of_Bird, mail, dni, image, phone, country, city, coordinate, description, isProfessional, profession } = req.body;
+    const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, description, isProfessional, profession } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
-    //const jobsMinuscule = jobs.toLowerCase();
+    
     try {
         if( name &&  last_Name && mail && country  && city && coordinate ){
             const [newUser, created] = await User.findOrCreate({
@@ -38,7 +38,7 @@ users.post("/", async (req, res, next) =>{
                 defaults:{
                     name: nameMinuscule,
                     last_Name: lastNameMinuscule,
-                    date_of_Bird,
+                    date_of_Birth,
                     image,
                     dni,
                     phone,

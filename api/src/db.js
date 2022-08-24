@@ -68,7 +68,7 @@ User.belongsToMany(Orders, { through: "user_orders", timestamps: false });
 Orders.belongsToMany(User, { through: "user_orders", timestamps: false });
 
 User.belongsToMany(Review, { through: "user_review", timestamps: false });
-Review.belongsToMany(User, { through: "user_review", timestamps: false })
+Review.belongsToMany(User, { through: "user_review", timestamps: false });
 
 
 // // Profession.hasMany(Orders);

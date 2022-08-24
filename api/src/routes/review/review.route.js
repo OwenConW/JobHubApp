@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Op } = require("sequelize");
+const { Op, fn } = require("sequelize");
 const functions = require("../../functions/Functions_review");
 const { User, Review, Profession} = require("../../db.js")
 
@@ -51,13 +51,13 @@ review.put("/:id", async (req, res, next)=> {
 })
 
 // RUTA PARA TRAER TODAS LAS RESEÑAS
-review.get("/", async (req, res, next)=>{
+review.get("/:id", async (req, res, next)=>{
     try{
         const allReview = await functions.getAllReview();
         res.status(200).json(allReview);
     } catch (error) {
         console.log(error)
-        next(error)
+        throw error
     }
 
 })
