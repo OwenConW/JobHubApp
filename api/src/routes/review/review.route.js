@@ -43,9 +43,10 @@ review.put("/:id", async (req, res, next)=> {
     const { id } = req.params;
     const { feedback_client, rating } = req.body;
     try {
-        await functions.searchRating(id, rating);
+        
         await functions.updateReview(id, feedback_client, rating);
         res.status(201).send(`The Review  was successfully modified`);
+        
     } catch (error) {
         console.log(error)
         next(error)
@@ -57,11 +58,11 @@ review.put("/:id", async (req, res, next)=> {
 review.get("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
-        const allReview = await functions.getAllReview();
+        const allReview = await functions.getAllReview(id);
         res.status(200).json(allReview);
     } catch (error) {
         console.log(error)
-        throw error
+        next(error)
     }
 
 })

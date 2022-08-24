@@ -6,6 +6,7 @@ const { updateRating } = require("../functions/Functions_user.js")
 
 //FUNCION PARA ACTUALIZAR REVIEW
 const updateReview = async (id, feedback_client, rating) =>{
+
     try {
         await Review.update({
             feedback_client, 
@@ -23,10 +24,19 @@ const updateReview = async (id, feedback_client, rating) =>{
 }
 
 //FUNCION PARA TRAER TODAS LAS REVIERW
-const getAllReview = async () =>{
+const getAllReview = async (id) =>{
     try {
-        let allReview = await Review.findAll()
-        return allReview
+        const ratingById = await User.findByPk(id,{
+            attributes: ['name', 'last_Name'],
+            include:[
+                {
+                    model: Review,
+                    attributes: ['feedback_client','rating'],
+                    through: {attributes: []}
+                }
+            ]
+        })
+        return ratingById
     } catch (error) {
         console.log(error)
         throw error
@@ -35,7 +45,8 @@ const getAllReview = async () =>{
 
 //FUNCION PARA BUSCAR Y PROMEDIAR EL RATING
 const searchRating = async (id, rating) =>{
-    const ratingUpload = parseInt(rating)
+    
+    console.log('lo que llega de las rutas', rating)
     try {
         const ratingValue = await User.findByPk(id,{
             include:[
@@ -46,14 +57,18 @@ const searchRating = async (id, rating) =>{
                 }
             ]
         })
+        
         if(ratingValue.rating === -1) return await updateRating(id, ratingUpload)
-        let catidadReview= ratingValue.reviews.length
+        let catidadReview= ratingValue.dataValues.reviews.length
+        console.log('CANTIDAD DE REVIEW DESPIES DEL UPDATE', catidadReview)
         const reviewNumber = parseInt(catidadReview)
         
-        let ratingOld = ratingValue.reviews.length && ratingValue.reviews.map(obj=>obj.rating).reduce( (a,p)=> a + p, 0 )
+        let ratingOld = ratingValue.dataValues.reviews.length && ratingValue.dataValues.reviews.map(obj=>obj.rating).reduce( (a,p)=> a + p, 0 )
         const ratingTotalOld = parseInt(ratingOld)
-        
-        let ratingNew = (ratingTotalOld + ratingUpload) / (reviewNumber + 1)
+        console.log('CANTIDAD TOTAL RATING', ratingOld)
+
+        let ratingNew = ratingTotalOld  / reviewNumber 
+        console.log('CANTIDAD TOTAL RATING FINAL', ratingNew)
         return await updateRating(id, (ratingNew + "").slice(0,3))
         
     } catch (error) {
