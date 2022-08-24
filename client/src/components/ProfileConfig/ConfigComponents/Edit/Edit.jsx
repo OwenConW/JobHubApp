@@ -46,8 +46,6 @@ const Edit = () => {
 
   // Control del estado user
   useEffect(() => {
-    // console.log(user),
-    // console.log(changeValidator(activeUser, user))
   }, [user])
 
 
@@ -84,10 +82,6 @@ const Edit = () => {
     loading: false
   });
 
-  const [address, setAddress] = useState({
-    street: user.street,
-    number: user.address,
-  });
 
 
   const [errors, setErrors] = useState({
@@ -96,13 +90,15 @@ const Edit = () => {
     description: '',
     dni: '',
     city: '',
+    address: '',
+    street: ''
   });
 
   // VALIDATOR de DATOS
   useEffect(() => {
-    setErrors(validators(user, address));
-    console.log(errors)
-  }, [user, address]);
+    setErrors(validators(user));
+    // console.log(errors)
+  }, [user]);
 
   const clickToBeProffessional = (event) => {
     user.isProfessional ?
@@ -154,6 +150,7 @@ const Edit = () => {
       <div className={s.inputDiv}>
         <div>DNI</div>
         <input placeholder="dni" name='dni' value={user.dni} onChange={(event) => handleChange(event)}></input>
+        {errors.dni === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.dni ? <p className={s.error}>{errors.dni}</p> : '')}
       </div>
 
 
@@ -182,11 +179,13 @@ const Edit = () => {
       <div className={s.inputDiv}>
         <div>Calle</div>
         <input placeholder="Calle" name='street' value={user.street} onChange={(event) => handleChange(event)}></input>
+        {errors.street === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.street ? <p className={s.error}>{errors.street}</p> : '')}
       </div>
 
       <div className={s.inputDiv}>
         <div>Número</div>
         <input placeholder="Tu direccion" name='address' value={user.address} onChange={(event) => handleChange(event)}></input>
+        {errors.address === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.address ? <p className={s.error}>{errors.address}</p> : '')}
       </div>
 
       <div className={s.inputDiv}>

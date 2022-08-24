@@ -1,11 +1,16 @@
 import React from "react";
 import s from './ProfessionConfig.module.scss'
-import { getLocalStorage } from '../../../../handlers/localStorage';
 import { useState, useEffect } from "react";
-import { validators } from "../../../../handlers/validators";
-import { actionGetAllJobs } from "../../../../redux/jobActions";
 import { useDispatch, useSelector } from "react-redux";
+
+//Nuestros Archivos
+import { getLocalStorage } from '../../../../handlers/localStorage';
+import { actionGetAllJobs } from "../../../../redux/jobActions";
 import CardProfessions from "../../../CardProfessions/CardProfessions";
+import { changeValidator, PremiumValidator } from "../../../../handlers/ChangeValidator";
+
+//Agregados
+import deleteIcon from './assets/Recycle Bin Full.png'
 
 const ProfessionConfig = () => {
   const dispatch = useDispatch()
@@ -17,18 +22,28 @@ const ProfessionConfig = () => {
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
   const [user, setUser] = useState({
+    id: activeUser.id,
     name: activeUser.name,
     last_Name: activeUser.last_Name,
     description: activeUser.description,
-    mail: activeUser.mail,
     dni: activeUser.dni,
     image: activeUser.image,
+    date_of_Birth: activeUser.date_of_Birth,
+    mail: activeUser.mail,
     phone: activeUser.phone,
     country: activeUser.country,
     city: activeUser.city,
     coordinate: activeUser.coordinate,
+    street: activeUser.street,
+    address: activeUser.address,
+    rating: activeUser.rating,
+    isPremium: activeUser.isPremium,
+    isProfessional: activeUser.isProfessional,
+    isAdmin: activeUser.isAdmin,
+    isBanned: activeUser.isBanned,
+    isActive: activeUser.isActive,
     professions: activeUser.professions,
-    isPremium: activeUser.isPremium
+    reviews: activeUser.reviews
   })
 
   //HandleChange de inputs
@@ -44,15 +59,41 @@ const ProfessionConfig = () => {
     dispatch(actionGetAllJobs())
   }, [])
 
+  const deleteProfession = (event) => {
+    setUser({
+      ...user,
+      professions: user.professions.filter(profession => profession !== event.target.name)
+    })
+  }
+
+  const addProfession = (event) => {
+    if (user.professions.includes(event.target.name)) return
+    setUser({
+      ...user,
+      professions: [...user.professions, event.target.value]
+    })
+  }
+
+
+  const handleSubmit = () => {
+    
+  }
+
+  useEffect(() => {
+    // console.log(user)
+    console.log(user.professions)
+  }, [user])
+
+
 
   return (
     <div className={s.container}>
-    
+
       <div className={s.inputDiv}>
         <div>Profesiones</div>
-        <select name='professions' value={user.professions} onChange={(event) => handleChange(event)}>
+        <select name='professions' value={user.professions} onChange={(event) => addProfession(event)} disabled={PremiumValidator(user.isPremium, user.professions)}>
 
-          <option key={'none'} value='none'>Profesiones</option>
+          <option key={'none'} value=''>Profesiones</option>
           {
             allProfessions.map(profession => {
               return (
@@ -63,21 +104,24 @@ const ProfessionConfig = () => {
 
         </select>
       </div>
+      { PremiumValidator(user.isPremium, user.professions) ? <div className={s.premiumSpam}>Contrate premium para mas profesiones!</div> : <></> }
 
       <div className={s.professionList}>
-        {activeUser.professions && activeUser.professions.length ? (
-        activeUser.professions.map(job => (
-          <duv className={s.individualProfession}> 
-          <CardProfessions job={job} />
-          </duv>
-        ))
-      ) : (
-        <div>
-          AUN NO TIENES PROFESIONES
-        </div>
-      )}
-    </div>
+        {user.professions && user.professions.length ? (
+          user.professions.map(job => (
+            <duv className={s.individualProfession}>
+              <CardProfessions job={job} />
+              <img src={deleteIcon} name={job} onClick={deleteProfession} />
+            </duv>
+          ))
+        ) : (
+          <div>
+            AUN NO TIENES PROFESIONES
+          </div>
+        )}
+      </div>
 
+      <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={changeValidator(activeUser, user)} />
 
     </div>
   )
