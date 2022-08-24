@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { getLocalStorage } from '../../handlers/localStorage';
 import s from './Onboarding.module.scss';
-import Loader from '../Loader/Loader';
+import Loader from '../Login/Loader/Loader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

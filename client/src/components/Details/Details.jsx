@@ -22,9 +22,9 @@ let params = useParams();
 
   const dispatch = useDispatch();
 
-  const professional = useSelector((state) => state.users.detail)
-  const id = params.id
-  
+  const professional = useSelector((state) => state.users.detail);
+  const id = params.id;
+
   useEffect(() => {
     dispatch(getCharsById(id))
   }, [])
@@ -75,7 +75,6 @@ let params = useParams();
             <ReviewBox/>
           </div>
         </div>
-
 
       </div>
     </>
