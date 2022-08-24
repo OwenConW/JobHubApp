@@ -3,7 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import s from './MapView.module.scss';
 import AllMarkers from './AllMarkers/AllMarkers';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //map
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -12,6 +12,7 @@ import { oficioStyle } from './AllMarkers/styles';
 
 import { userIcon } from './mapIcons';
 import { getLocalStorage } from '../../handlers/localStorage';
+import { useAuth0 } from '@auth0/auth0-react';
 
 //distances
 import pitagorasDistance from '../../handlers/pitagorasDistance';
@@ -21,6 +22,8 @@ const MapView = () => {
 	const [distance, setDistance] = useState(1);
 	const [users, setUsers] = useState([]);
 	const [closeUsers, setCloseUsers] = useState([]);
+	const { isAuthenticated } = useAuth0();
+	const navigate = useNavigate();
 
 	const closeToOne = (coords1, coords2) => {
 		if(pitagorasDistance(coords1, coords2) < distance){ //distancia en kilometros
@@ -31,6 +34,7 @@ const MapView = () => {
 	}
 
     useEffect(() => {
+
         const fetchData = async () => {
             let response = await axios.get('/users');
             setUsers([
@@ -42,14 +46,14 @@ const MapView = () => {
     }, []);
 
 	useEffect(() => {
-		let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate));
 
-		setCloseUsers([...aux]);
+			let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate));
+			setCloseUsers([...aux]);
 
 	}, [users, distance]);
 
 	return (
-		<>
+			isAuthenticated ? (<>
 			<Navbar />
 			<div className={s.container}>
 				<div className={s.leftContainer}>
@@ -117,7 +121,7 @@ const MapView = () => {
 					</MapContainer>
 				</div>
 			</div>
-		</>
+			</>) : navigate('../')
 	);
 };
 
