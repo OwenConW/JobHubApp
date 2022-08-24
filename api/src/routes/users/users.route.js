@@ -25,7 +25,7 @@ users.get("/", (req, res, next) => {
 
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
-    const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, description, isProfessional, profession } = req.body;
+    const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
     
@@ -46,6 +46,8 @@ users.post("/", async (req, res, next) =>{
                     country,
                     city,
                     coordinate,
+                    street,
+                    address,
                     isProfessional,
                 }
             })

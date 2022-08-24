@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Op, fn } = require("sequelize");
+const { Op, fn, col } = require("sequelize");
 const functions = require("../../functions/Functions_review");
 const { User, Review, Profession} = require("../../db.js")
 
@@ -24,6 +24,8 @@ review.post("/:id", async (req, res, next) =>{
         })
         let idFind = await User.findByPk(id)
         await newReview.addUser(idFind)
+        await functions.searchRating(id, rating);
+    
 
         if(!created)  res.status(200).send(`The Review cannot be created, the Review has already exist`);
         return res.status(201).send(`The Review  created successfully`);
@@ -41,6 +43,7 @@ review.put("/:id", async (req, res, next)=> {
     const { id } = req.params;
     const { feedback_client, rating } = req.body;
     try {
+        await functions.searchRating(id, rating);
         await functions.updateReview(id, feedback_client, rating);
         res.status(201).send(`The Review  was successfully modified`);
     } catch (error) {
@@ -52,6 +55,7 @@ review.put("/:id", async (req, res, next)=> {
 
 // RUTA PARA TRAER TODAS LAS RESEÑAS
 review.get("/:id", async (req, res, next)=>{
+    const {id} = req.params;
     try{
         const allReview = await functions.getAllReview();
         res.status(200).json(allReview);
