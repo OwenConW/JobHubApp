@@ -34,25 +34,36 @@ const getAllReview = async () =>{
 }
 
 //FUNCION PARA BUSCAR Y PROMEDIAR EL RATING
-// const searchRating = async (id, rating) =>{
-//     try {
-//         const ratingValue = await User.findByPk(id)
-//         if(ratingValue.rating === -1) return await updateRating(id, rating)
-//         const avgRating = await User.findAll({
-//             attributes: [User.fn('AVG', User.col('rating')), 'avgRating']
-//         })
-//         console.log('ESTO ES LO QUE ME DEVUELVE LA FUNCION AVG RATING', avgRating)
-            
-//         ;
+const searchRating = async (id, rating) =>{
+    const ratingUpload = parseInt(rating)
+    try {
+        const ratingValue = await User.findByPk(id,{
+            include:[
+                {
+                    model: Review,
+                    attributes: [ 'rating'],
+                    through: {attributes: []},
+                }
+            ]
+        })
+        if(ratingValue.rating === -1) return await updateRating(id, ratingUpload)
+        let catidadReview= ratingValue.reviews.length
+        const reviewNumber = parseInt(catidadReview)
         
-//     } catch (error) {
-//         console.log(error)
-//         throw error
-//     }
-// }
+        let ratingOld = ratingValue.reviews.length && ratingValue.reviews.map(obj=>obj.rating).reduce( (a,p)=> a + p, 0 )
+        const ratingTotalOld = parseInt(ratingOld)
+        
+        let ratingNew = (ratingTotalOld + ratingUpload) / (reviewNumber + 1)
+        return await updateRating(id, (ratingNew + "").slice(0,3))
+        
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
 
 module.exports = {
     updateReview,
     getAllReview,
-    // searchRating
+    searchRating
 }
