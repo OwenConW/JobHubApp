@@ -15,10 +15,10 @@ const Catalog = (props) => {
 	);
 
 	const [currentPage, setCurrentPage] = useState(1) 
-    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(10)  
-    const iOfLastRecipe = currentPage * proffesionalsPerPage
-    const iOfFirstRecipe = iOfLastRecipe - proffesionalsPerPage
-    const currentProffesionals = professionalsArray.slice(iOfFirstRecipe, iOfLastRecipe) 
+	const [proffesionalsPerPage, setProffesionalsPerPage] = useState(10)  
+	const iOfLastRecipe = currentPage * proffesionalsPerPage
+	const iOfFirstRecipe = iOfLastRecipe - proffesionalsPerPage
+	const currentProffesionals = professionalsArray.slice(iOfFirstRecipe, iOfLastRecipe) 
 	const paginado = (pageNumber) => {  setCurrentPage(pageNumber) }
 	const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
 	const [nameInputValue, setNameInputValue] = useState('')
@@ -46,10 +46,6 @@ const Catalog = (props) => {
 		}))
     }
 
-    // useEffect(() => {
-    //  console.log(professionalsArray);
-    // }, [professionalsArray])
-
     useEffect(() => {
 	    dispatch(getChars());
 	    // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,14 +55,14 @@ const Catalog = (props) => {
     function handleReset() {
 	    setFilters({name:"", profession:"", rating:""})
 	    dispatch(getChars());
-		setCurrentPage(1)
+			setCurrentPage(1)
 	    setNameInputValue('')
     }
 
     function handleSubmit(e){
 	    e.preventDefault()
 	    dispatch(filterProfessionals({...filters}))
-		setCurrentPage(1)
+			setCurrentPage(1)
 	    setNameInputValue('')
 	    e.target.reset()
     }

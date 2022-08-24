@@ -27,7 +27,7 @@ function PremiumModal(props) {
           <li>Beneficio 2 Lorem ipsum dolor sit amet consectetur adipisicing.</li>
           <li>Beneficio 3 Lorem ipsum dolor sit amet consectetur.</li>
           <li>Beneficio 4 Lorem, ipsum dolor.</li>
-          <li>Beneficio 4 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis!.</li>
+          <li>Beneficio 5 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis!.</li>
         </ul>
 
       <div className={s.buttonsContainer}>

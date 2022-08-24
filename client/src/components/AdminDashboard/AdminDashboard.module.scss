@@ -1,0 +1,13 @@
+.searchByNameContainer {
+  width: 40%;
+
+  .cardsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: 300px;
+    margin: 10px 0 10px 0;
+}
+}
