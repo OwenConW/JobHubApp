@@ -34,44 +34,62 @@
   }
 }
 
-.buttonsContainer {
- display: flex;
- justify-content: center;
- width: 50%;
- gap: 30px;
-  .btnAccept {
-    color: #ffffffc0;
-    width: 30%;
-    height: 55px;
-    background: #07393C;
-    border-radius: 10px;
-    margin-left: 4.9%;
-    margin-bottom: 3%;
-    margin-top: 5%;
+.errorDisplay {
+  display: none;
+}
+
+.fetchingMessagesAndButtonsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .errorAndBtnsContainer {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    transition: 0.5s;
   }
 
-  .btnReject {
-    color: #ffffffc0;
-    width: 30%;
-    background: #bb3636;
-    border-radius: 10px;
-    margin-left: 4.9%;
-    margin-bottom: 3%;
-    margin-top: 5%;
+  .buttonsContainer {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    transition: 0.5s;
-  }
-
-  .btnAccept:hover, .btnReject:hover {
-    transition: transform 0.5s;
-    transform: scale(1.1);
-  }
+    width: 50%;
+    gap: 30px;
+    
+     .btnAccept {
+       color: #ffffffc0;
+       width: 50%;
+       height: 55px;
+       background: #07393C;
+       border-radius: 10px;
+       margin-left: 4.9%;
+       margin-bottom: 3%;
+       margin-top: 5%;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       transition: 0.5s;
+     }
+   
+     .btnReject {
+       color: #ffffffc0;
+       width: 50%;
+       background: #bb3636;
+       border-radius: 10px;
+       margin-left: 4.9%;
+       margin-bottom: 3%;
+       margin-top: 5%;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       transition: 0.5s;
+     }
+   
+     .btnAccept:hover, .btnReject:hover {
+       transition: transform 0.5s;
+       transform: scale(1.1);
+     }
+   }
 }
