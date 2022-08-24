@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const AccordionItem = ({
   showDescription,
   ariaExpanded,
@@ -23,7 +24,7 @@ const AccordionItem = ({
     <dd>
       <p
         id={`faq${index + 1}_desc`}
-        data-qa="faq__desc"
+        data-qa='faq__desc'
         className={`faq__desc ${showDescription}`}
       >
         {item.answer}

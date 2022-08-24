@@ -10,7 +10,7 @@ import MapView from './components/Map/MapView';
 
 import Details from './components/Details/Details'
 import Onboarding from "./components/Onboarding/Onboarding";
-
+import Faq from './components/Faq/Faq';
 
 function App() {
 	return (
@@ -23,6 +23,7 @@ function App() {
         		<Route exact path="/profile" element={<Profile />}/>
 				<Route exact path="/details/:id" element={<Details />}/>
 				<Route exact path="/onboarding" element={<Onboarding />}/>
+				<Route exact path="/faq" element={<Faq />}/>
 			</Routes>
 		</div>
 	);
