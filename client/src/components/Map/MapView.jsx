@@ -22,6 +22,11 @@ const MapView = () => {
 	const [distance, setDistance] = useState(1);
 	const [users, setUsers] = useState([]);
 	const [closeUsers, setCloseUsers] = useState([]);
+	const [search, setSearch] = useState({
+		value: '',
+		searchUsers: []
+	});
+
 	const { isAuthenticated } = useAuth0();
 	const navigate = useNavigate();
 
@@ -46,11 +51,39 @@ const MapView = () => {
     }, []);
 
 	useEffect(() => {
-
 			let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate));
 			setCloseUsers([...aux]);
 
 	}, [users, distance]);
+
+	useEffect(() => {
+		setDistance(1);
+	}, [search.searchUsers]);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setSearch({
+			...search,
+			searchUsers: []
+		});
+		try{
+			let response = await axios.get(`/users?profession=${search.value}`);
+			setSearch({
+				...search,
+				searchUsers: [...response.data]
+			});
+		}catch(e){
+			console.log(e);
+		}
+	}
+
+	const handleReset = () => {
+
+		setSearch({
+			searchUsers: [],
+			value: '',
+		});
+	}
 
 	return (
 			isAuthenticated ? (<>
@@ -69,11 +102,36 @@ const MapView = () => {
 						</div>
 
 						<div className={s.buscador}>
-							<input type="text" className={s.searchbar} placeholder='Busca algún profesional...'/>
+							<form onSubmit={e => handleSubmit(e)} className={s.form}>
+								<input type="text" className={s.searchbar} value={search.value} placeholder='Busca una profesión' onChange={(e) => setSearch({
+									...search,
+									value: e.target.value
+								})}/>
+								<input type="submit" className={s.submit} value='Buscar'/>
+								<input type="button" onClick={handleReset} className={s.reset} value='Cercanos'/>
+							</form>
 						</div>
-
 					</div>
 					<div className={s.professionals}>
+						{ search.searchUsers.length ? (
+						<>
+						<h3>Busqueda</h3>
+						{search.searchUsers.map(user => {
+							return(
+								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
+								<div className={s.profileImage}>
+									<img src={user.image} alt="userprofile" />
+								</div>
+								<div className={s.name}>
+									<h3>{user.name} {user.last_Name}</h3>
+									<p>{user.profession[0].name}</p>
+									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser.coordinate, user.coordinate)).toFixed(2)} km</p>
+								</div>
+								</Link>
+							)
+						})}
+						</>) : (
+						<>
 						<h3>Profesionales cercanos</h3>
 						<div className={s.distances}>
 							<select name="distance" onChange={(e) => {
@@ -99,11 +157,13 @@ const MapView = () => {
 								</Link>
 							)
 						}) : 'No hay profesionales cercanos a tí.'}
+						</>
+						)}
 					</div>
 				</div>
 
 				<div className={s.mapContainer}>
-					<MapContainer center={[activeUser.coordinate[0], activeUser.coordinate[1]]} zoom={16} scrollWheelZoom={true} className={s.map}>
+					<MapContainer center={[activeUser.coordinate[0], activeUser.coordinate[1]]} zoom={15} scrollWheelZoom={true} className={s.map}>
 						<TileLayer
 								noWrap={true}
 								minZoom={3}
