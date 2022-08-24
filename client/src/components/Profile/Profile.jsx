@@ -13,6 +13,7 @@ import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PremiumModal from "./premiumModal/PremiumModal";
+import { useEffect } from "react";
 
 
 
