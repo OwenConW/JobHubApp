@@ -118,6 +118,10 @@
                 font-size: 2.2rem;
             }
 
+            select{
+                margin-bottom: 20px;
+            }
+
             .link{
                 transition: 0.5s;
                 margin-bottom: 2%;
@@ -172,6 +176,12 @@
                     transition: 0.5s;
                     background-color: #363636;
                     color: #b4b4b4;
+
+                    .profileImage{
+                        img{
+                            border: 10px solid rgba(223, 222, 222, 0.163);
+                        }
+                    }
                 }
             }
         }

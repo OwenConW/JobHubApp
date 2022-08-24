@@ -34,7 +34,7 @@ export const oficioStyle = {
     color: 'grey',
     textTransform: 'capitalize',
     fontWeight: '300',
-    fontSize: '2.2rem',
+    fontSize: '2.0rem',
     marginLeft: '1%',
 }
 
