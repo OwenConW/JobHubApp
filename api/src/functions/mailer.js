@@ -13,6 +13,8 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+// se tienen q cambiar estas nasheee
+
 
 transporter.verify().then(() => {
     console.log("Ya se pueden mandar mails!!!!")
