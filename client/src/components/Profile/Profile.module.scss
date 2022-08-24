@@ -110,14 +110,26 @@
       justify-content: left;
       align-items: center;
 
-      img {
+
+      .configImg {
         margin-left: 5%;
         width: 3.5%;
       }
 
-      div {
-        margin-left: 1%;
-        font-size: 1.5rem;
+      .configText {
+        margin-left: 4%;
+        
+          transition: 0.5s;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: black;
+          text-decoration: none;
+          font-size: 1.6rem;
+          margin-inline: 3%;
+           
+      
       }
     }
 
