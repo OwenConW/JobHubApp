@@ -1,19 +1,32 @@
 import React from 'react';
 import s from './FeaturedCard.module.scss';
-import {motion} from 'framer-motion/dist/framer-motion.js';
+import { motion } from 'framer-motion/dist/framer-motion.js';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getCharsById } from '../../redux/userActions';
 
 //assets
-//FOTO del Proffesional
 import star from './assets/star.png';
 import background from './assets/backcard.svg';
 import sign from './assets/sign.svg';
+import default_user from './assets/default_user.png';
 
-import user from './assets/user.jpg';
+const FeaturedCard = (prop) => {
+   
+  const dispatch = useDispatch();
+  const professional = useSelector((state) => state.users.detail)
+  const { id_user } = prop.data.id;
 
-const FeaturedCard = () => {
+  useEffect(() => {
+    dispatch(getCharsById(id_user))
+  }, [])
 
-  const name = <h4>Jeremias Escobedo</h4>;
-  const cuidad = <p>Pilar, Buenos Aires</p>;
+  const name = <h4>{professional.name} {professional.last_Name}</h4>;
+  const cuidad = <p>{professional.city}, {professional.country}</p>;
+  const jobs = professional.professions; 
+  const br = <br></br>;
+
 
   return (
     <div className={s.container}
@@ -37,7 +50,8 @@ const FeaturedCard = () => {
           opacity: 1,
           y:0,
         }}
-      >Electricista</motion.div>
+      >{jobs ? jobs.map((job) => (<h4>{job} {br}</h4>)) : <h4>Jobs not Find</h4>}
+      </motion.div>
       <motion.img src={background} alt="back" className={s.background} 
         transition={{duration: 0.3, delay:1}}
         initial={{
@@ -48,7 +62,7 @@ const FeaturedCard = () => {
         }}
       />
       <div className={s.image}>
-        <img src={user} alt="image_profile"/>
+        {professional.image ? <img src={professional.image}/> : <img src={default_user} alt="img user not found"/>}
       </div>
       <div className={s.data}>
         <motion.div className={s.name}
@@ -61,7 +75,8 @@ const FeaturedCard = () => {
             opacity: 1,
             x:0,
           }}
-        >{name} {cuidad}</motion.div>
+        >{id_user} {cuidad}
+        </motion.div>
         <motion.div className={s.info}
           transition={{duration: 0.3, delay:1}}
           initial={{
@@ -75,13 +90,14 @@ const FeaturedCard = () => {
         >
           <div className={s.resenas}>
             <h4>Reseñas</h4>
-            <p>90</p>
+            {/* ACA FALTA SABER COMO RECIBIRÁ EL NRO DE RESEÑAS TOTALES */}
+            <p>{professional.resenas}</p>
           </div>
           <div className={s.calificacion}>
             <h4>Calificación</h4>
             <div className={s.rating}>
               <img src={star} alt="image" />
-              <p>5.0</p>
+              <p>{professional.rating}</p>
             </div>
           </div>
         </motion.div>
