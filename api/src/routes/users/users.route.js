@@ -2,8 +2,8 @@ const { default: axios } = require('axios');
 const { Router } = require('express');
 const { User, Profession, Review, Op} = require("../../db.js")
 const functions = require("../../functions/Functions_user");
-//const Review = require('../../models/Review.js');
-//const Profession = require('../../models/Profession.js');
+// const Review = require('../../models/Review.js');
+// const Profession = require('../../models/Profession.js');
 
 const users = Router()
 
@@ -13,8 +13,6 @@ users.get("/", (req, res, next) => {
     const {name, rating, profession } = req.query;
     functions.filterByQueris(name, profession, rating)
     .then(professionals => {
-        res.set('Access-Control-Expose-Headers', 'X-Total-Count')
-        res.set('X-Total-Count', professionals)
         return res.status(200).send(professionals);
     })
     .catch(e => {
@@ -52,7 +50,7 @@ users.post("/", async (req, res, next) =>{
                     isProfessional,
                 }
             })
-
+            console.log(profession)
             if(profession){
                 let jobFind = await Profession.findAll({
                     where:{
@@ -77,31 +75,32 @@ users.post("/", async (req, res, next) =>{
 
 
 //RUTA PARA EDITAR EL USUARIO
-
 users.put('/:id', async (req, res) => {
     const { id } = req.params
-    const { name, last_Name, description, image, date_of_Birth, mail, dni,  phone, country, city, coordinate, professions } = req.body;
+    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
     try {
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
-        
-        const oldJobs = userUpdated.professions.map(profession => profession.dataValues.id)
-        await userUpdated.removeProfession(oldJobs)
-        
-        const professionDB = await Profession.findAll()
-        await userUpdated.addProfessions(professionDB.map(job => job.dataValues.id))
+        const oldProfession = userUpdated.professions.map(obj => obj.dataValues.id)
+        await userUpdated.removeProfession(oldProfession)
+
+        const professionDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
+        await userUpdated.addProfession(professionDB.map(obj => obj.dataValues.id))
 
         userUpdated.set({
             name,
             last_Name,
+            date_of_Bird,
             image,
-            mail,
-            date_of_Birth,
             dni,
-            description,
+            mail,
             phone,
+            description,
             country,
             city,
             coordinate,
+            street,
+            address,
+            isProfessional,
         })
         await userUpdated.save()
         res.status(200).send(`The user "${name}" updated successfully`)
@@ -114,6 +113,7 @@ users.put('/:id', async (req, res) => {
 
 
 // RUTA QUE BUSCA USUARIOS POR ID
+
 users.get("/:id", (req, res, next) => {
     const { id } = req.params;
     functions.getProffesionalById(id * 1)
@@ -125,5 +125,30 @@ users.get("/:id", (req, res, next) => {
     })
 })
 
+// RUTA PARA PASAR UN USUARIO A PREMIUM
+users.put('/premium/:id', async (req, res) => {
+    const { id } = req.params;
+    const { isPremium } = req.body
+    try {
+        functions.updatePremium(id, isPremium)
+        res.status(200).send(`The user is now premium`)
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
+//RUTA PARA ELIMINAR LOGICAMENTE AL USUARIO
+users.put('/destroy/:id', async (req, res) => {
+    const { id } = req.params;
+    const { isActive } = req.body
+    try {
+        functions.destroyUser( id, isActive )
+        res.status(200).send(`The user was successfully deleted`)
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
 
 module.exports = users;

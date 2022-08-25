@@ -8,7 +8,8 @@ import { fetchingMercadopagoLink,
 export const actionFetchingMercadopagoLink = (mail) => (dispatch) => {
   dispatch(fetchingMercadopagoLink())
 	axios
-		.get(`/pagos/premium?mail=${mail}`)
+    // MAIL HARCODEWADO
+		.get(`/pagos/premium?mail=test_user_67073490@testuser.com`)
 		.then((res) => {
 			dispatch(fetchingMercadopagoLinkSuccess(res.data));
 		})

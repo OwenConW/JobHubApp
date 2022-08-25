@@ -67,36 +67,61 @@
 
             .buscador{
                 display: flex;
-                justify-content: center;
+                justify-content: space-around;
                 align-items: center;
                 width: 100%;
                 height: 45%;
 
-                .searchbar{
-                    transition: 0.3s;
-                    width: 80%;
-                    height: 30%;
-                    border-radius: 10px;
-                    border: 2px solid #4c4c4c5c;
-                    font-family: Poppins;
-                    font-weight: 300;
-                    padding-left: 2%;
-                    font-size: 1.8rem;
+                .form{
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
 
-                    &:hover{
+                    .searchbar{
                         transition: 0.3s;
-                        background-color: #b4b4b4;
-                        color: #FFFFFF;
-                    }
-
-                    &:focus{
-                        outline: none;
-                    }
-
-                    &:hover::placeholder{
-                        transition: 0.3s;
+                        width: 50%;
+                        height: 30%;
+                        border-radius: 10px;
+                        border: 2px solid #4c4c4c5c;
+                        font-family: Poppins;
                         font-weight: 300;
-                        color: #ffffff9b;
+                        padding-left: 2%;
+                        font-size: 1.8rem;
+
+                        &:hover{
+                            transition: 0.3s;
+                            background-color: #b4b4b4;
+                            color: #FFFFFF;
+                        }
+
+                        &:focus{
+                            outline: none;
+                        }
+
+                        &:hover::placeholder{
+                            transition: 0.3s;
+                            font-weight: 300;
+                            color: #ffffff9b;
+                        }
+                    }
+
+                    .submit, .reset{
+                        transition: 0.5s;
+                        border-radius: 5px;
+                        width: 15%;
+                        height: 30%;
+                        background-color: #ffffff9b;
+                        color: #22312b;
+
+                        &:hover{
+                            transition: 0.5s;
+                            cursor: pointer;
+                            scale: 1.02;
+                            color: #ffffff9b;
+                            background-color: #545454;
+                        }
                     }
                 }
             }
@@ -116,6 +141,10 @@
             h3{
                 font-weight: 300;
                 font-size: 2.2rem;
+            }
+
+            select{
+                margin-bottom: 20px;
             }
 
             .link{
@@ -172,6 +201,12 @@
                     transition: 0.5s;
                     background-color: #363636;
                     color: #b4b4b4;
+
+                    .profileImage{
+                        img{
+                            border: 10px solid rgba(223, 222, 222, 0.163);
+                        }
+                    }
                 }
             }
         }
