@@ -28,9 +28,17 @@ conversation.get("/:userId", async(req, res, next) => {
     try{
         const conversation = await Conversation.findAll({
             where: {
-                emisor_id: {
-                    [Op.eq]: userId * 1
-                },
+                [Op.or]: [{
+                    emisor_id: {
+                        [Op.eq]: userId * 1
+                    }
+                },{
+                    receptor_id:{
+                        [Op.eq]: userId * 1
+                    }  
+                }
+
+                ]
             },
         })
         return res.send(conversation)
