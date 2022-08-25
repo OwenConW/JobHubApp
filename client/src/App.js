@@ -7,7 +7,6 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Catalog from './components/Catalog/Catalog';
 import MapView from './components/Map/MapView';
-
 import Details from './components/Details/Details'
 import Onboarding from "./components/Onboarding/Onboarding";
 import Faq from './components/Faq/Faq';
