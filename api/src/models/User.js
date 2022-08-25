@@ -59,6 +59,14 @@ module.exports = (sequelize) => {
 			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false
 		},
+		street: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		address: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
 		rating: {
 			type: DataTypes.FLOAT,
 			allowNull: false,

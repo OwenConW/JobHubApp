@@ -71,11 +71,6 @@ User.belongsToMany(Review, { through: "user_review", timestamps: false });
 Review.belongsToMany(User, { through: "user_review", timestamps: false });
 
 
-// // Profession.hasMany(Orders);
-// // Orders.belongsTo(Profession);
-
-// // Profession.hasOne(Review);
-// // Review.hasOne(Profession );
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -1,24 +1,22 @@
-export function validators(userInput, addressInput) {
+export function validators(userInput) {
     let errors = {};
   // Verificacion de campos vacios
     for (const key in userInput) {
-        if(key === 'phone' || key === 'mail' || key === 'date_of_Birth' || key === 'image' || key === 'description') continue;
+        if(key === 'phone' || key === 'mail' || key === 'date_of_Birth' || key === 'image' || key === 'description' || key === 'isPremium' || key === 'isProfessional' || key === 'isAdmin'|| key === 'isBanned') continue;
         if (!userInput[key]) {
           errors[key] = "Este campo es obligatorio";
         }
     }
 
     //street number
-    if (!addressInput.number) {
-        errors.number = "Este campo es obligatorio";
-    }else if(!/^\d{1,5}$/g.test(addressInput.number)){
-        errors.number = "Debe ser un numero de maximo 5 cifras.";
+    if(!userInput.address){
+      errors.address = "Este campo es obligatorio";
+    }else if(!/^\d{1,5}$/g.test(userInput.address)){
+      errors.address = "Debe ser un numero de maximo 5 cifras.";
     }
 
     //street
-    if (!addressInput.street) {
-        errors.street = "Este campo es obligatorio";
-    }else if (/[^a-zA-Z0-9\s]/g.test(addressInput.street)) {
+    if (/[^a-zA-Z0-9\s]/g.test(userInput.street)) {
         errors.street = "No debe contener caracteres especiales";
     }
 

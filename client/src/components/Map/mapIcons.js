@@ -32,7 +32,7 @@ export const userIcon = L.icon({
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: [70, 70],
+    iconSize: [60, 60],
     popupAnchor: [0, -43],
     className: 'leaflet-venue-icon'
 });
