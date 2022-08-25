@@ -10,11 +10,9 @@ verify.get("/", (req, res, next) => {
     if(mail){
         User.findOne({where: {mail}})
         .then(user => {
-            console.log(user);
             return user ? res.send({user: user, onboarding: false}) : res.send({onboarding: true})
         })
         .catch(e => {
-            console.log(e)
             return res.status(404).send(e)
         })
     }else{

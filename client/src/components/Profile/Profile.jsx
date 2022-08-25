@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { Link } from 'react-router-dom';
+
 import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
 import plusLogo from './assets/PlusLogo.svg'
@@ -14,7 +16,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PremiumModal from "./premiumModal/PremiumModal";
 import { useEffect } from "react";
-
 
 
 //ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
@@ -38,10 +39,15 @@ const Profile = () => {
   
   const [modalActive, setModalActive] = useState(false)
 
-  //let activeUser = getLocalStorage();
   const handlePremiumModal = async () => {
+
   setModalActive(!modalActive)
-}
+
+  }
+
+  let activeUser = getLocalStorage();
+  
+  // await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
 
   return (
     <>
@@ -71,8 +77,12 @@ const Profile = () => {
               </div>
             </div>
             <div className={s.configBox}>
-              <img src={configLogo}></img>
-              <div>Panel de configuración</div>
+              <div className={s.configImg}>
+              <Link to='/ProfileConfig/edit'>
+              <img src={configLogo} ></img>
+                 </Link>
+                 </div>
+              <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>
             </div>
           
         </div>
@@ -84,9 +94,11 @@ const Profile = () => {
             <p className={s.professionText}>Mis oficios publicados</p>
             <ProfessionBox professional={activeUser} />
             <div className={s.addProfession}>
-              <div>
+              <Link to='/ProfileConfig/professions'>
+                <div>
                 <img src={plusLogo} alt='plus'></img>
-              </div>
+                </div>
+              </Link>
             </div>
           </div>
           <div className={s.bePremium}>
@@ -114,7 +126,6 @@ const Profile = () => {
             </div>
           </div>
         </div>
-
 
       </div>
     </>

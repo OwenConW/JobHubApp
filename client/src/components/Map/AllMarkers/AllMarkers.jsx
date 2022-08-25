@@ -21,8 +21,6 @@ const AllMarkers = () => {
         fetchData();
     }, []);
 
-    console.log(users);
-
     const Markers = users.map(user => {
         let iconMarker;
         if(user.professions[0].name === 'electricista'){
