@@ -4,14 +4,12 @@ import s from './CardProfessions.module.scss';
 
 
 const CardProfessions = (job) => {
-
     let profession = job.job
 
     if(typeof(profession) === "string"){
         let job = profession
         profession = {name: job}
     }
-
 
     return (
     <div className={s.professionComponent}>

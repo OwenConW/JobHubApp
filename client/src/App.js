@@ -25,7 +25,6 @@ function App() {
 				<Route exact path="/onboarding" element={<Onboarding />}/>
         <Route exact path="/faq" element={<Faq />}/>
 				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
-
 			</Routes>
 		</div>
 	);

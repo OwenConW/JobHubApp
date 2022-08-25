@@ -33,7 +33,7 @@ export const getLocalStorage = () => {
         //         isAdmin: false,
         //         isBanned: false,
         //         isActive: true,
-        //         professions: [],
+        //         professions: ["carpintero", "programador"],
         //         reviews: []
         // }
 
