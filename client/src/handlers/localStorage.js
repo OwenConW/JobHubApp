@@ -28,12 +28,12 @@ export const getLocalStorage = () => {
                 street: "Directorio",
                 address: "5000",
                 rating: -1,
-                isPremium: false,
+                isPremium: true,
                 isProfessional: true,
                 isAdmin: false,
                 isBanned: false,
                 isActive: true,
-                professions: ["carpintero", "programador"],
+                professions: [],
                 reviews: []
         }
 

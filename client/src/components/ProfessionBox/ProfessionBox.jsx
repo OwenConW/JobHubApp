@@ -3,6 +3,7 @@ import s from './ProfessionBox.module.scss'
 import CardProfessions from '../CardProfessions/CardProfessions.jsx'
 
 const ProfessionBox = (professional) => {
+
   let jobs = professional.professional.professions
 
   return (

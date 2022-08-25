@@ -67,7 +67,7 @@ const ProfessionConfig = () => {
   }
 
   const addProfession = (event) => {
-    if (user.professions.includes(event.target.name)) return
+    if (user.professions.includes(event.target.value)) return
     setUser({
       ...user,
       professions: [...user.professions, event.target.value]
@@ -110,7 +110,7 @@ const ProfessionConfig = () => {
         {user.professions && user.professions.length ? (
           user.professions.map(job => (
             <duv className={s.individualProfession}>
-              <CardProfessions job={job} />
+              <CardProfessions job={{name: job}} />
               <img src={deleteIcon} name={job} onClick={deleteProfession} />
             </duv>
           ))

@@ -12,16 +12,30 @@ import { getLocalStorage } from "../../handlers/localStorage";
 import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCharsById } from '../../redux/userActions'
 
 
 
 const Profile = () => {
-
+  // const dispatch = useDispatch()
   let activeUser = getLocalStorage();
-  
-const handlePremium = async () => {
-  await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
-}
+
+  const handlePremium = async () => {
+    await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
+  }
+
+  console.log(activeUser.professions)
+
+  // useEffect(() => {
+  //   dispatch(getCharsById(activeUser.id))
+  // }, [activeUser])
+
+  // const user = useSelector((state) => state.users.details)
+
+  // console.log("user", user)
+
 
   return (
     <>
@@ -39,25 +53,25 @@ const handlePremium = async () => {
               <div className={s.description}>{activeUser.description}</div>
             </div>
 
-            </div>
-            <div className={s.orderBox}>
-              <p className={s.orderText}>Mis ordenes recientes</p>
+          </div>
+          <div className={s.orderBox}>
+            <p className={s.orderText}>Mis ordenes recientes</p>
 
-              <div className={s.lastOrders}>
-                <CardProfileMap />
-                <CardProfileMap />
-                <CardProfileMap />
-              </div>
+            <div className={s.lastOrders}>
+              <CardProfileMap />
+              <CardProfileMap />
+              <CardProfileMap />
             </div>
-            <div className={s.configBox}>
-              <div className={s.configImg}>
+          </div>
+          <div className={s.configBox}>
+            <div className={s.configImg}>
               <Link to='/ProfileConfig/edit'>
-              <img src={configLogo} ></img>
-                 </Link>
-                 </div>
-              <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>
+                <img src={configLogo} ></img>
+              </Link>
             </div>
-          
+            <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>
+          </div>
+
         </div>
 
 
@@ -69,7 +83,7 @@ const handlePremium = async () => {
             <div className={s.addProfession}>
               <Link to='/ProfileConfig/professions'>
                 <div>
-                <img src={plusLogo} alt='plus'></img>
+                  <img src={plusLogo} alt='plus'></img>
                 </div>
               </Link>
             </div>

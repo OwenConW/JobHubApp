@@ -51,7 +51,7 @@ users.post("/", async (req, res, next) =>{
                     isProfessional,
                 }
             })
-
+            console.log(profession)
             if(profession){
                 let jobFind = await Profession.findAll({
                     where:{
@@ -114,6 +114,7 @@ users.put('/:id', async (req, res) => {
 
 
 // RUTA QUE BUSCA USUARIOS POR ID
+
 users.get("/:id", (req, res, next) => {
     const { id } = req.params;
     functions.getProffesionalById(id * 1)
