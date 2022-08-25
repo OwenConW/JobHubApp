@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: end;
-  margin: -5% 10% 1% 30%;
+  margin: -5% 8% 1% 35%;
 
   &__title {
     font-size: 4.5rem;
@@ -17,7 +17,14 @@
     max-width: 350px;
     width: 100%;
     margin-left: -55%;
-    border-bottom: 1px solid $light-grayish-blue;
+    border-bottom: 1px solid $dark-grayish-green;
+    border-bottom-width: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3%;
+    padding-bottom: 1%;
   }
 
   &__question-button {
@@ -31,13 +38,12 @@
     cursor: pointer;
     font-size: 1.7rem;
 
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding-top: 8%;
 
     &::after {
       content: url(../assets/icon-arrow-down.svg);
-      margin-left: 8%;
-      margin-right: -20%;
+      margin-left: 0%;
+      margin-right: -10%;
       transform: rotate(90deg);
     }
 
@@ -47,7 +53,7 @@
   }
 
   &__desc {
-    margin: 0% -15% 0% -10%;
+    margin: 0% -75% 0% -50%;
     padding-right: 17px;
     height: 0;
     font-size: 2rem;

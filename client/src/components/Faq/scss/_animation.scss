@@ -1,6 +1,13 @@
 .faq__desc.show-description {
-  height: 2rem;
-  margin-bottom: 15px;
+  transition: 0.6s;
+  height: max-content;
+  padding-top: 3%;
+  padding-bottom: 2%;
+  margin-bottom: 4%;
+  -webkit-transition: 0.6s;
+  -moz-transition: 0.6s;
+  -ms-transition: 0.6s;
+  -o-transition: 0.6s;
 }
 
 /* Arrows */
