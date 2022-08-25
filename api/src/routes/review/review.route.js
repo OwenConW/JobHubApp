@@ -43,6 +43,7 @@ review.put("/:id", async (req, res, next)=> {
     const { id } = req.params;
     const { feedback_client, rating } = req.body;
     try {
+        //FALTA AGREGAR LA FUNCION PARA EDITAR EL RATING ACTUALIZADO AL PROMEDIO
         
         await functions.updateReview(id, feedback_client, rating);
         res.status(201).send(`The Review  was successfully modified`);
