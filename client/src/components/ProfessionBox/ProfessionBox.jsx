@@ -10,7 +10,7 @@ const ProfessionBox = (professional) => {
         {jobs && jobs.length ? (
         jobs.map(job => (
           <div className={s.individualProfession}>
-          <CardProfessions job={job} />
+          <CardProfessions job={job.name} />
           </div>
         ))
       ) : (

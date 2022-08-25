@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+
 import { Link } from 'react-router-dom';
 
 import s from './Profile.module.scss';
@@ -12,20 +13,46 @@ import { getLocalStorage } from "../../handlers/localStorage";
 import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import PremiumModal from "./premiumModal/PremiumModal";
+import { useEffect } from "react";
 
 
+//ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
+let activeUser = {
+  name: "lionel test nuevo",
+  last_Name: "messi",
+  description: "hola mi nombre es lio messi trucho y esto es disney CHANNEL",
+  mail: "test_user_8943112@testuser.com",
+  dni: "83.332.125",
+  image: "not image",
+  phone: "1656158172",
+  country: "Rusia",
+  // postal_code: "1406",
+  city: "Moscu",
+  coordinate: ["421", "-22"],
+  professions: [{ name: "extraterrestre" }, { name: "sovietico" }, { name: "militar" }, { name: "armamentista" }, { name: "electricista" }, { name: "gasista" }, { name: "programador" }],
+  isPremium: false
+}
 
 const Profile = () => {
+  
+  const [modalActive, setModalActive] = useState(false)
+
+  const handlePremiumModal = async () => {
+
+  setModalActive(!modalActive)
+
+  }
 
   let activeUser = getLocalStorage();
   
-const handlePremium = async () => {
-  await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
-}
+  // await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
 
   return (
     <>
       <Navbar />
+      {modalActive ? <PremiumModal name={activeUser.name} mail={activeUser.mail} handlePremiumModal={handlePremiumModal} /> : null}
       {/*----- CONTENEDOR IZQUIERDO -----*/}
       <div className={s.container}>
         <div className={s.leftContainer}>
@@ -93,13 +120,12 @@ const handlePremium = async () => {
               <div>
                 <img src={rocket} alt='Premium Logo'></img>
               </div>
-              <span onClick={handlePremium}>
+              <span onClick={handlePremiumModal}>
                 <button>Mejorar</button>
               </span>
             </div>
           </div>
         </div>
-
 
       </div>
     </>

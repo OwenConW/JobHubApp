@@ -4,7 +4,7 @@ import s from './CardProfessions.module.scss';
 
 
 const CardProfessions = (job) => {
-let profession = job
+    let profession = job
     return (
     <div className={s.professionComponent}>
         <div className={s.professionAndDescription}>
