@@ -55,6 +55,8 @@
     border-radius: 5px;
     cursor: pointer;
     background-color: #2C666E;
+    color: white;
+    font-size: 20px;
 }
 
 .chatOnline{

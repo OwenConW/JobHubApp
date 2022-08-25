@@ -12,7 +12,7 @@ import { getLocalStorage } from "../../handlers/localStorage";
 import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import axios from "axios";
-import Chat from "../Chat/ChatEnVivo/Chat"
+import Chat from "../LiveChat/Chat/Chat"
 
 
 //ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
@@ -49,7 +49,7 @@ const handlePremium = async () => {
             <div className={s.profile_Img_container}>
             </div>
             <div className={s.profileDetail}>
-              <div className={s.name}>{activeUser.name} {activeUser.last_Name}<Link to={`/chat/${5}`}><button>MD</button></Link></div>
+              <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
               <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
               <div className={s.description}>{activeUser.description}</div>
             </div>

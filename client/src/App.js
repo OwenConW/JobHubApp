@@ -7,9 +7,9 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Catalog from './components/Catalog/Catalog';
 import MapView from './components/Map/MapView';
-import Chat from "./components/Chat/ChatEnVivo/Chat.jsx"
 import Details from './components/Details/Details'
 import Onboarding from "./components/Onboarding/Onboarding";
+import Chat from "./components/LiveChat/Chat/Chat.jsx"
 
 
 function App() {

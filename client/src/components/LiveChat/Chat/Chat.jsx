@@ -10,10 +10,14 @@ import * as functions from "../../../handlers/localStorage"
 import "./Chat.css"
 import axios from "axios"
 import { io } from "socket.io-client"
-
+import { useNavigate } from "react-router"
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Chat = (props) => {
 
+    const navigate = useNavigate()
+
+    const { isAuthenticated } = useAuth0();
     const [conversations, setConversations] = useState([])
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState([])
@@ -43,9 +47,9 @@ const Chat = (props) => {
 
     useEffect(() => {
         socket.current.emit("addUser", currentUser.id)
-        // socket.current.on("getUsers", users => {
-            
-        // })
+        socket.current.on("getUsers", users => {
+            console.log(users)
+         })
     }, [currentUser])
 
 
@@ -98,61 +102,61 @@ const Chat = (props) => {
     }, [currentChat])
 
     useEffect(() => {
-        
-    }, [currentChat])
-
-    useEffect(() => {
         scrollRef.current?.scrollIntoView({behavior: "smooth"})
     }, [messages])
 
     return (
   
         <>
-        <NavBar/>
-        <div className="messenger">
-            <div className="chatMenu">
-                <div className="chatMenuWrapper">
-                    <input placeholder="Buscar profesionales..." className="chatMenuInput"/>
-                    {conversations && conversations.length && conversations.map((c, i) => (
-                        <div onClick={() => {
-                            setCurrentChat(c)
-                        }}>
-                        <Conversation key={i} conversations={c} currentUser={currentUser}/>
+         <NavBar/>{
+             isAuthenticated ? (
+                <div className="messenger">
+                <div className="chatMenu">
+                    <div className="chatMenuWrapper">
+                        <input placeholder="Buscar profesionales..." className="chatMenuInput"/>
+                        {conversations && conversations.length && conversations.map((c, i) => (
+                            <div onClick={() => {
+                                setCurrentChat(c)
+                            }}>
+                            <Conversation key={i} conversations={c} currentUser={currentUser}/>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="chatBox">
+                    <div className="chatBoxWrapper">
+                        {
+                            currentChat ?
+                            <>
+                            <div className="chatBoxTop">
+                            {
+                                messages.map(m => (
+                                    <div ref={scrollRef}>
+                                    <Message message={m} own={m.sender === currentUser.id} current={currentUser}/>
+                                    </div>
+                                ))
+                            }
                         </div>
-                    ))}
+                        <div className="chatBoxBottom">
+                            <textarea placeholder="Escribe algo..." 
+                            className="chatMessageInput"
+                            onChange={e => setNewMessage(e.target.value)}
+                            value={newMessage}>
+                            </textarea>
+                            <button className="chatSubmitButton" onClick={handleSubmit}>Enviar</button>
+                        </div>
+                        </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
+                    </div>  
+                </div>
+                <div className="chatOnline">
+                    <div className="chatOnlineWrapper">
+                        <ChatOnline/>
+                    </div>   
                 </div>
             </div>
-            <div className="chatBox">
-                <div className="chatBoxWrapper">
-                    {
-                        currentChat ?
-                        <>
-                        <div className="chatBoxTop">
-                        {
-                            messages.map(m => (
-                                <div ref={scrollRef}>
-                                <Message message={m} own={m.sender === currentUser.id} current={currentUser}/>
-                                </div>
-                            ))
-                        }
-                    </div>
-                    <div className="chatBoxBottom">
-                        <textarea placeholder="Escribe algo..." 
-                        className="chatMessageInput"
-                        onChange={e => setNewMessage(e.target.value)}
-                        value={newMessage}>
-                        </textarea>
-                        <button className="chatSubmitButton" onClick={handleSubmit}>Enviar</button>
-                    </div>
-                    </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
-                </div>  
-            </div>
-            <div className="chatOnline">
-                <div className="chatOnlineWrapper">
-                    <ChatOnline/>
-                </div>   
-            </div>
-        </div>
+             ): navigate("/")
+         }
+              
         </>
     )
 }

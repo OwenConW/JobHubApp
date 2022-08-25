@@ -29,7 +29,8 @@ export default function Conversation({conversations, currentUser}){
                 src={user?.image || "https://geekflare.com/wp-content/plugins/wp-user-avatars/wp-user-avatars/assets/images/mystery.jpg"}
                 alt=""
                 />
-                <span className="conversationName">{user?.name}</span></>
+                <span className="conversationName">{user?.name}</span>        
+                </>     
             }
         </div>
     )
