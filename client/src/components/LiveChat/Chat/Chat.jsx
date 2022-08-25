@@ -108,8 +108,7 @@ const Chat = (props) => {
     return (
   
         <>
-         <NavBar/>{
-             isAuthenticated ? (
+         <NavBar/>
                 <div className="messenger">
                 <div className="chatMenu">
                     <div className="chatMenuWrapper">
@@ -153,63 +152,9 @@ const Chat = (props) => {
                         <ChatOnline/>
                     </div>   
                 </div>
-            </div>
-             ): navigate("/")
-         }
-              
+            </div>    
         </>
     )
 }
 
 export default Chat
-
-// let {id} = useParams()
-    
-// useEffect(() =>{
-//     console.log(id)
-//     const res = functions.getLocalStorage()
-//     Object.keys(res).lenght ? setUser(res.name) : setUser("Invitado")
-//     // socket.emit("join", {id1: props.match.params.query})
-// }, [])
-
-// const [user, setUser] = useState("")
-// const [message, setMessage] = useState("")
-// const [messagesSent, setMessagesSent] = useState([]);
-
-// useEffect(() => {
-//     socket.emit("conectado", user)
-// }, [user])
-
-// useEffect(() => {
-//     socket.on("mensajes", mensaje => {
-//         setMessagesSent([...messagesSent, mensaje])
-//     })
-//     return () => {
-//         socket.off()
-//     }
-// }, [messagesSent])
-
-// const divRef = useRef(null)
-
-// useEffect(() => {
-//     divRef.current.scrollIntoView({ behavior: "smooth"})
-// })
-
-// const handleSubmit = (e) => {
-//     e.preventDefault()
-//     socket.emit("mensaje", user, message)
-//     setMessage("")
-// }
-
-
-/* <div className="chat">
-{messagesSent.map((e, i) => <div key={i}><b>{`${e.nombre}:    `}</b><b>{e.mensaje}</b></div>)}
-<div ref={divRef}></div>
-</div>
-<div>
-<form onSubmit={handleSubmit} className="form">
-<label>Escriba su mensaje:</label>
-<input value={message} onChange={(e) => setMessage(e.target.value) }></input>
-<button type="submit">Enviar</button>
-</form>
-</div> */
