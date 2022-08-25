@@ -13,11 +13,7 @@ import { getLocalStorage } from "../../handlers/localStorage";
 import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import axios from "axios";
-<<<<<<< HEAD
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { getCharsById } from '../../redux/userActions'
-=======
 import { useNavigate } from "react-router-dom";
 import PremiumModal from "./premiumModal/PremiumModal";
 import { useEffect } from "react";
@@ -43,37 +39,15 @@ let activeUser = {
 const Profile = () => {
   
   const [modalActive, setModalActive] = useState(false)
->>>>>>> 5dc41d7a0e4856da199a1b285f8e70565ab451d8
 
   const handlePremiumModal = async () => {
-
   setModalActive(!modalActive)
-
-<<<<<<< HEAD
-const Profile = () => {
-  // const dispatch = useDispatch()
+  }
   let activeUser = getLocalStorage();
 
-  const handlePremium = async () => {
-    await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
-  }
-
-  console.log(activeUser.professions)
-
-  // useEffect(() => {
-  //   dispatch(getCharsById(activeUser.id))
-  // }, [activeUser])
-
-  // const user = useSelector((state) => state.users.details)
-
-  // console.log("user", user)
-
-  }
-
-  let activeUser = getLocalStorage();
   
-  // await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
 
+  
   return (
     <>
       <Navbar />
