@@ -56,10 +56,6 @@ const MapView = () => {
 
 	}, [users, distance]);
 
-	useEffect(() => {
-		setDistance(1);
-	}, [search.searchUsers]);
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setSearch({
@@ -136,7 +132,7 @@ const MapView = () => {
 						<div className={s.distances}>
 							<select name="distance" onChange={(e) => {
 								setDistance(e.target.value);
-							}}>
+							}} value={distance}>
 								<option value="1">1 Km</option>
 								<option value="5">5 Km</option>
 								<option value="10">10 Km</option>
