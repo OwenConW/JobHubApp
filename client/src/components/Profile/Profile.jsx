@@ -38,7 +38,7 @@ const Profile = () => {
   setModalActive(!modalActive)
   }
   let activeUser = getLocalStorage();
-
+  console.log(activeUser)
   return (
     <>
       <Navbar />
@@ -48,6 +48,7 @@ const Profile = () => {
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             <div className={s.profile_Img_container}>
+              <img src={activeUser.image} className={s.profile_Img}></img>
             </div>
             <div className={s.profileDetail}>
               <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>

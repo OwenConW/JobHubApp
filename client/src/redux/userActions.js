@@ -46,3 +46,4 @@ export const filterProfessionals = (filters) => (dispatch) => {
 		})
 		.catch((e) => console.log(e));
 };
+
