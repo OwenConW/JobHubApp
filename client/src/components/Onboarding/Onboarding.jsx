@@ -42,6 +42,8 @@ const Onboarding = () => {
     description: '',
     dni: '',
     city: '',
+    address: '',
+    street: ''
   });
 
   const [errorGeometry, setErrorGeometry] = useState({
