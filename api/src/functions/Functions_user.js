@@ -132,6 +132,22 @@ const updateRating = async(id, rating) => {
     }
 }
 
+// UPDATE ISPREMIUM
+const updatePremium = async(id, isPremium) => {
+    try {
+        await User.update({
+            isPremium,
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 
 
@@ -139,6 +155,7 @@ module.exports = {
     filterByQueris,
     getProffesionalById,
     getAllJobs,
-    updateRating
+    updateRating,
+    updatePremium,
 }
 

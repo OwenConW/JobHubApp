@@ -125,5 +125,18 @@ users.get("/:id", (req, res, next) => {
     })
 })
 
+// RUTA PARA PASAR UN USUARIO A PREMIUM
+users.put('/premium/:id', async (req, res) => {
+    const { id } = req.params;
+    const { isPremium } = req.body
+    
+    try {
+        functions.updatePremium(id, isPremium)
+        res.status(200).send(`The user is now premium`)
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 
 module.exports = users;
