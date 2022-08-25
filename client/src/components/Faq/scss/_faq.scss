@@ -42,14 +42,20 @@
 
     &::after {
       content: url(../assets/icon-arrow-down.svg);
+      transition: 0.5s;
       margin-left: 0%;
       margin-right: -10%;
       transform: rotate(90deg);
     }
 
     &:hover {
+      transition: 0.5s;
       color: $page-color;
-    }
+      -webkit-transition: 0.5s;
+      -moz-transition: 0.5s;
+      -ms-transition: 0.5s;
+      -o-transition: 0.5s;
+}
   }
 
   &__desc {
