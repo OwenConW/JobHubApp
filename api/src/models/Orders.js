@@ -8,10 +8,6 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        id_profession: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
         id_user_professional: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -28,8 +24,13 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        allowReview: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
         date_created:{
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             allowNull: false,
         },
         apointment_date:{
