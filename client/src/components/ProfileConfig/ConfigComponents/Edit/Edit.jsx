@@ -8,7 +8,6 @@ import { changeValidator } from "../../../../handlers/ChangeValidator.js";
 
 const Edit = () => {
   let activeUser = getLocalStorage()
-  const email = activeUser.mail
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
   const [user, setUser] = useState({
@@ -46,6 +45,7 @@ const Edit = () => {
 
   // Control del estado user
   useEffect(() => {
+    // console.log('USUARIO:', user)
   }, [user])
 
 
@@ -97,7 +97,7 @@ const Edit = () => {
   // VALIDATOR de DATOS
   useEffect(() => {
     setErrors(validators(user));
-    // console.log(errors)
+    console.log(errors)
   }, [user]);
 
   const clickToBeProffessional = (event) => {

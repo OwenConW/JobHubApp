@@ -13,6 +13,7 @@ import { getLocalStorage } from "../../handlers/localStorage";
 import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import axios from "axios";
+import { getCharsById } from '../../redux/userActions'
 import { useNavigate } from "react-router-dom";
 import PremiumModal from "./premiumModal/PremiumModal";
 import { useEffect } from "react";
@@ -40,15 +41,13 @@ const Profile = () => {
   const [modalActive, setModalActive] = useState(false)
 
   const handlePremiumModal = async () => {
-
   setModalActive(!modalActive)
-
   }
-
   let activeUser = getLocalStorage();
-  
-  // await axios.get(`/mails/premiumspam?mail=${activeUser.mail}&name=${activeUser.name}`)
 
+  
+
+  
   return (
     <>
       <Navbar />
@@ -66,25 +65,25 @@ const Profile = () => {
               <div className={s.description}>{activeUser.description}</div>
             </div>
 
-            </div>
-            <div className={s.orderBox}>
-              <p className={s.orderText}>Mis ordenes recientes</p>
+          </div>
+          <div className={s.orderBox}>
+            <p className={s.orderText}>Mis ordenes recientes</p>
 
-              <div className={s.lastOrders}>
-                <CardProfileMap />
-                <CardProfileMap />
-                <CardProfileMap />
-              </div>
+            <div className={s.lastOrders}>
+              <CardProfileMap />
+              <CardProfileMap />
+              <CardProfileMap />
             </div>
-            <div className={s.configBox}>
-              <div className={s.configImg}>
+          </div>
+          <div className={s.configBox}>
+            <div className={s.configImg}>
               <Link to='/ProfileConfig/edit'>
-              <img src={configLogo} ></img>
-                 </Link>
-                 </div>
-              <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>
+                <img src={configLogo} ></img>
+              </Link>
             </div>
-          
+            <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>
+          </div>
+
         </div>
 
 
@@ -96,7 +95,7 @@ const Profile = () => {
             <div className={s.addProfession}>
               <Link to='/ProfileConfig/professions'>
                 <div>
-                <img src={plusLogo} alt='plus'></img>
+                  <img src={plusLogo} alt='plus'></img>
                 </div>
               </Link>
             </div>

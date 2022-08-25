@@ -29,6 +29,7 @@
             margin-left: 10px;
             font-size: 1.4rem;
             // line-height: 3rem;
+            min-width: 192px;
             padding: 8px;
             border-radius: 0.5rem;
             background: rgba(255, 255, 255, 0.596);
@@ -37,6 +38,7 @@
         }
 
         select {
+            min-width: 192px;
             width: 122%;
             margin-left: 10px;
             font-size: 1.4rem;

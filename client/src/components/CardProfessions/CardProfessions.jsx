@@ -4,11 +4,17 @@ import s from './CardProfessions.module.scss';
 
 
 const CardProfessions = (job) => {
-    let profession = job
+    let profession = job.job
+
+    if(typeof(profession) === "string"){
+        let job = profession
+        profession = {name: job}
+    }
+
     return (
     <div className={s.professionComponent}>
         <div className={s.professionAndDescription}>
-            <h1>{profession.job}</h1>
+            <h1 key={profession.name}>{profession.name}</h1>
         </div>
         <div className={s.professionStats}>
             <h3>Reseñas</h3>
