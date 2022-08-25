@@ -27,6 +27,16 @@ const Chat = (props) => {
     const socket = useRef()
     const currentUser = functions.getLocalStorage()
     const scrollRef = useRef()
+    
+
+    if(!isAuthenticated) navigate("/")
+
+
+    useEffect(() => {
+        return () => {
+            socket.current.emit("QuitFromChat", currentUser.id)
+        }
+    }, [])
 
 
     useEffect(() => {
@@ -38,7 +48,7 @@ const Chat = (props) => {
                 crearedAt: Date.now()
             })
         })
-    }, [])
+    }, [socket, currentUser])
 
     useEffect(() => {
         arriveMessage && (currentChat?.receptor_id === arriveMessage.sender || currentChat?.emisor_id === arriveMessage.sender )  &&
@@ -87,7 +97,7 @@ const Chat = (props) => {
             }
         }
         getConversations()
-    }, [currentUser.id])
+    }, [currentUser.id, currentChat])
   
     useEffect(() => {
         const getMessages = async () => {
@@ -109,6 +119,7 @@ const Chat = (props) => {
   
         <>
          <NavBar/>
+            {
                 <div className="messenger">
                 <div className="chatMenu">
                     <div className="chatMenuWrapper">
@@ -153,6 +164,7 @@ const Chat = (props) => {
                     </div>   
                 </div>
             </div>    
+            }
         </>
     )
 }
