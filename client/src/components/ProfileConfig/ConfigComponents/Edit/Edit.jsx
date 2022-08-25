@@ -7,8 +7,9 @@ import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
 
 const Edit = () => {
-  let activeUser = getLocalStorage()
-
+  let localSt = getLocalStorage()
+  let activeUser = {...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1)}
+  
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
   const [user, setUser] = useState({
     id: activeUser.id,
