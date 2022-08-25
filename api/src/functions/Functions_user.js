@@ -17,7 +17,7 @@ const filterByQueris = async(name, profession, rating) => {
                     },
                 },
             })
-            let professionalsFilters = [...profesionals[0].Users.map(obj => {
+            let professionalsFilters = [...profesionals[0].users.map(obj => {
                 return {
                     ...obj.dataValues,
                     profession: [{name: profession}]

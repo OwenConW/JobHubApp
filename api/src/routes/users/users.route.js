@@ -11,9 +11,10 @@ const users = Router()
 // RUTA QUE TRAE TODOS LOS USUARIOS O FILTRA POR PROFESION Y/O RATING 
 users.get("/", (req, res, next) => {
     const {name, rating, profession } = req.query;
-    console.log('buenas como andan')
     functions.filterByQueris(name, profession, rating)
     .then(professionals => {
+        res.set('Access-Control-Expose-Headers', 'X-Total-Count')
+        res.set('X-Total-Count', professionals)
         return res.status(200).send(professionals);
     })
     .catch(e => {
@@ -77,38 +78,38 @@ users.post("/", async (req, res, next) =>{
 
 //RUTA PARA EDITAR EL USUARIO
 
-// users.put('/:id', async (req, res) => {
-//     const { id } = req.params
-//     const { name, last_Name, description, image, date_of_Birth, mail, dni,  phone, country, city, coordinate, jobs } = req.body;
-//     try {
-//         const userUpdated = await User.findOne({ where: { id }, include: Profession })
-
-//         const oldJobs = userUpdated.jobs.map(job => job.dataValues.id)
-//         await userUpdated.removeProfession(oldJobs)
+users.put('/:id', async (req, res) => {
+    const { id } = req.params
+    const { name, last_Name, description, image, date_of_Birth, mail, dni,  phone, country, city, coordinate, professions } = req.body;
+    try {
+        const userUpdated = await User.findOne({ where: { id }, include: Profession })
         
-//         const professionDB = await Profession.findAll({ where: { name: { [Op.or]: jobs } } })
-//         await userUpdated.addTypes(professionDB.map(job => job.dataValues.id))
+        const oldJobs = userUpdated.professions.map(profession => profession.dataValues.id)
+        await userUpdated.removeProfession(oldJobs)
+        
+        const professionDB = await Profession.findAll()
+        await userUpdated.addProfessions(professionDB.map(job => job.dataValues.id))
 
-//         userUpdated.set({
-//             name,
-//             last_Name,
-//             image,
-//             mail,
-//             date_of_Birth,
-//             dni,
-//             description,
-//             phone,
-//             country,
-//             city,
-//             coordinate,
-//         })
-//         await userUpdated.save()
-//         res.status(200).send(`The user "${name}" updated successfully`)
-//     } catch (error) {
-//         console.log(error);
-//         res.status(400).send(error)
-//     }
-// })
+        userUpdated.set({
+            name,
+            last_Name,
+            image,
+            mail,
+            date_of_Birth,
+            dni,
+            description,
+            phone,
+            country,
+            city,
+            coordinate,
+        })
+        await userUpdated.save()
+        res.status(200).send(`The user "${name}" updated successfully`)
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error)
+    }
+})
 
 
 
