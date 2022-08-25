@@ -40,6 +40,11 @@ const Navbar = () => {
 			<div className={s.profile}>
 				{isAuthenticated ? (
 					<div className={s.user}>
+						<div className={s.link}>
+							<Link to={`/chat`}>
+								MD
+							</Link>
+						</div>
 						<div className={s.link} onClick={() => logout()}>
 							Logout
 						</div>

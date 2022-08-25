@@ -6,17 +6,11 @@ import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
 import plusLogo from './assets/PlusLogo.svg'
 import rocket from './assets/Rocket.svg'
-
 import Navbar from "../Navbar/Navbar";
 import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
 import { getLocalStorage } from "../../handlers/localStorage";
-import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
-import axios from "axios";
-import { getCharsById } from '../../redux/userActions'
-import { useNavigate } from "react-router-dom";
 import PremiumModal from "./premiumModal/PremiumModal";
-import { useEffect } from "react";
 
 
 //ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
@@ -45,9 +39,6 @@ const Profile = () => {
   }
   let activeUser = getLocalStorage();
 
-  
-
-  
   return (
     <>
       <Navbar />
@@ -57,7 +48,6 @@ const Profile = () => {
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             <div className={s.profile_Img_container}>
-              {activeUser.image ? <img src={activeUser.image} className={s.profile_Img} /> : <img src={defaultimage} className={s.profile_Img} />}
             </div>
             <div className={s.profileDetail}>
               <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
