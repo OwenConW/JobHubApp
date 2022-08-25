@@ -14,21 +14,21 @@ import PremiumModal from "./premiumModal/PremiumModal";
 
 
 //ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
-let activeUser = {
-  name: "lionel test nuevo",
-  last_Name: "messi",
-  description: "hola mi nombre es lio messi trucho y esto es disney CHANNEL",
-  mail: "test_user_8943112@testuser.com",
-  dni: "83.332.125",
-  image: "not image",
-  phone: "1656158172",
-  country: "Rusia",
-  // postal_code: "1406",
-  city: "Moscu",
-  coordinate: ["421", "-22"],
-  professions: [{ name: "extraterrestre" }, { name: "sovietico" }, { name: "militar" }, { name: "armamentista" }, { name: "electricista" }, { name: "gasista" }, { name: "programador" }],
-  isPremium: false
-}
+// let activeUser = {
+//   name: "lionel test nuevo",
+//   last_Name: "messi",
+//   description: "hola mi nombre es lio messi trucho y esto es disney CHANNEL",
+//   mail: "test_user_8943112@testuser.com",
+//   dni: "83.332.125",
+//   image: "not image",
+//   phone: "1656158172",
+//   country: "Rusia",
+//   // postal_code: "1406",
+//   city: "Moscu",
+//   coordinate: ["421", "-22"],
+//   professions: [{ name: "extraterrestre" }, { name: "sovietico" }, { name: "militar" }, { name: "armamentista" }, { name: "electricista" }, { name: "gasista" }, { name: "programador" }],
+//   isPremium: false
+// }
 
 const Profile = () => {
   
