@@ -148,6 +148,23 @@ const updatePremium = async(id, isPremium) => {
     }
 }
 
+//UPDATE ISACTIVE
+const destroyUser = async(id, isActive) => {
+    try {
+        await User.update({
+            isActive
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+
 
 
 
@@ -157,5 +174,6 @@ module.exports = {
     getAllJobs,
     updateRating,
     updatePremium,
+    destroyUser,
 }
 

@@ -45,8 +45,6 @@ const getAllReview = async (id) =>{
 
 //FUNCION PARA BUSCAR Y PROMEDIAR EL RATING
 const searchRating = async (id, rating) =>{
-    
-    console.log('lo que llega de las rutas', rating)
     try {
         const ratingValue = await User.findByPk(id,{
             include:[
@@ -57,18 +55,15 @@ const searchRating = async (id, rating) =>{
                 }
             ]
         })
-        
-        if(ratingValue.rating === -1) return await updateRating(id, ratingUpload)
+
+        if(ratingValue.rating === -1) return await updateRating(id, rating)
         let catidadReview= ratingValue.dataValues.reviews.length
-        console.log('CANTIDAD DE REVIEW DESPIES DEL UPDATE', catidadReview)
         const reviewNumber = parseInt(catidadReview)
-        
+
         let ratingOld = ratingValue.dataValues.reviews.length && ratingValue.dataValues.reviews.map(obj=>obj.rating).reduce( (a,p)=> a + p, 0 )
         const ratingTotalOld = parseInt(ratingOld)
-        console.log('CANTIDAD TOTAL RATING', ratingOld)
 
         let ratingNew = ratingTotalOld  / reviewNumber 
-        console.log('CANTIDAD TOTAL RATING FINAL', ratingNew)
         return await updateRating(id, (ratingNew + "").slice(0,3))
         
     } catch (error) {
@@ -76,6 +71,7 @@ const searchRating = async (id, rating) =>{
         throw error
     }
 }
+
 
 module.exports = {
     updateReview,

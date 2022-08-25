@@ -7,8 +7,9 @@ const review = Router()
 
 // RUTA QUE CREA RESEÑAS
 review.post("/:id", async (req, res, next) =>{
-    const { id_orders, id_user_client ,feedback_client, rating  } = req.body;
+    let { id_orders, id_user_client ,feedback_client, rating  } = req.body;
     const { id } = req.params;
+    id_user_client = parseInt(id_user_client)
     try {
         if( id_orders && id_user_client && feedback_client && rating ){
         const [newReview, created] = await Review.findOrCreate({
@@ -41,11 +42,11 @@ review.post("/:id", async (req, res, next) =>{
 // RUTA PARA EDITAR LAS REVIEW
 review.put("/:id", async (req, res, next)=> {
     const { id } = req.params;
-    const { feedback_client, rating } = req.body;
+    const { feedback_client, rating, id_user_professional } = req.body;
     try {
         //FALTA AGREGAR LA FUNCION PARA EDITAR EL RATING ACTUALIZADO AL PROMEDIO
-        
         await functions.updateReview(id, feedback_client, rating);
+        await functions.searchRating(id_user_professional, rating)
         res.status(201).send(`The Review  was successfully modified`);
         
     } catch (error) {

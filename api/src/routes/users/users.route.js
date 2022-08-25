@@ -129,14 +129,26 @@ users.get("/:id", (req, res, next) => {
 users.put('/premium/:id', async (req, res) => {
     const { id } = req.params;
     const { isPremium } = req.body
-    
     try {
         functions.updatePremium(id, isPremium)
         res.status(200).send(`The user is now premium`)
     } catch (error) {
         console.log(error);
+        next (error)
     }
 })
 
+//RUTA PARA ELIMINAR LOGICAMENTE AL USUARIO
+users.put('/destroy/:id', async (req, res) => {
+    const { id } = req.params;
+    const { isActive } = req.body
+    try {
+        functions.destroyUser( id, isActive )
+        res.status(200).send(`The user was successfully deleted`)
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
 
 module.exports = users;
