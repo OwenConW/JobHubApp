@@ -10,7 +10,7 @@ import MapView from './components/Map/MapView';
 import ProfileConfig from './components/ProfileConfig/ProfileConfig';
 import Details from './components/Details/Details'
 import Onboarding from "./components/Onboarding/Onboarding";
-
+import Faq from './components/Faq/Faq';
 
 function App() {
 	return (
@@ -20,10 +20,12 @@ function App() {
 				<Route exact path="/home" element={<Home />} />
 				<Route exact path="/professionals" element={<Catalog />} />
 				<Route exact path="/map" element={<MapView />} />
-        		<Route exact path="/profile" element={<Profile />}/>
+        <Route exact path="/profile" element={<Profile />}/>
 				<Route exact path="/details/:id" element={<Details />}/>
 				<Route exact path="/onboarding" element={<Onboarding />}/>
+        <Route exact path="/faq" element={<Faq />}/>
 				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
+
 			</Routes>
 		</div>
 	);
