@@ -19,6 +19,11 @@ const Navbar = () => {
 	const { isAuthenticated, logout } = useAuth0();
 	const activeUser = getLocalStorage();
 
+	const handleLogout = () => {
+        logout();
+        localStorage.clear();
+    }
+
 	return (
 		<div className={s.container}>
 			<div className={s.menu}>
@@ -45,7 +50,7 @@ const Navbar = () => {
 								MD
 							</Link>
 						</div>
-						<div className={s.link} onClick={() => logout()}>
+						<div className={s.link} onClick={handleLogout}>
 							Logout
 						</div>
 						<Link to={'/profile'} className={s.profileimg}>
