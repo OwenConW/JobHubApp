@@ -12,7 +12,7 @@ export default function Conversation({conversations, currentUser}){
         : conversations.emisor_id
         const getUser = async () => {
             try{
-                const res = await axios.get(`http://localhost:3001/users/${friendId}`)
+                const res = await axios.get(`/users/${friendId}`)
                 setUser(res.data)
             }catch(e){
                 console.log(e)

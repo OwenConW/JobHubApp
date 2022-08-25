@@ -30,7 +30,7 @@ const Chat = (props) => {
 
 
     useEffect(() => {
-        socket.current = io("ws://localhost:3001");
+        socket.current = io("ws://localhost:3001"); //"ws://jobhub-pg.herokuapp.com/"
         socket.current.on("getMessage", data => {
             setArriveMessage({
                 sender: data.senderId,
@@ -68,7 +68,7 @@ const Chat = (props) => {
         })
 
         try{
-            const res = await axios.post("http://localhost:3001/messages", message)
+            const res = await axios.post("/messages", message)
             setMessages([...messages, res.data])
             setNewMessage("")
         }catch(e){
@@ -80,7 +80,7 @@ const Chat = (props) => {
     useEffect(() => {
         const getConversations = async () => {
             try{
-                const res = await axios.get(`http://localhost:3001/conversation/${currentUser.id}`)
+                const res = await axios.get(`/conversation/${currentUser.id}`)
                 setConversations(res.data)
             }catch(e){
                 console.log(e)
@@ -92,7 +92,7 @@ const Chat = (props) => {
     useEffect(() => {
         const getMessages = async () => {
             try{
-                const res = await axios.get(`http://localhost:3001/messages/${currentChat.id}`)
+                const res = await axios.get(`/messages/${currentChat.id}`)
                 setMessages(res.data)
             }catch(e){
                 console.log(e)

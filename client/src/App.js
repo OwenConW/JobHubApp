@@ -10,7 +10,8 @@ import MapView from './components/Map/MapView';
 import Details from './components/Details/Details'
 import Onboarding from "./components/Onboarding/Onboarding";
 import Chat from "./components/LiveChat/Chat/Chat.jsx"
-
+import ProfileConfig from './components/ProfileConfig/ProfileConfig';
+import Faq from './components/Faq/Faq';
 
 function App() {
 	return (
@@ -24,6 +25,8 @@ function App() {
 				<Route exact path="/details/:id" element={<Details />}/>
 				<Route exact path="/onboarding" element={<Onboarding />}/>
 				<Route exact path="/chat" element={<Chat/>}/>
+        		<Route exact path="/faq" element={<Faq />}/>
+				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
 			</Routes>
 			
 		</div>

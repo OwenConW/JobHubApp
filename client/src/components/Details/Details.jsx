@@ -29,7 +29,6 @@ let params = useParams();
     dispatch(getCharsById(id))
   }, [])
 
-  // console.log('professional: ', professional)
 
   return (
     <>
