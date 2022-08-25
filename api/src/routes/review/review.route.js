@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Op, fn, col } = require("sequelize");
+const { Op } = require("sequelize");
 const functions = require("../../functions/Functions_review");
 const { User, Review, Profession} = require("../../db.js")
 
