@@ -75,6 +75,13 @@ io.on("connection", socket => {
       })
     })
 
+    socket.on("QuitFromChat", (id) => {
+      const user = getUser(id)
+      removeUser(user.socketId)
+      io.emit("getUsers", users)
+    })
+
+
     socket.on("disconnect", () => {
       console.log("User disconected")
       removeUser(socket.id)
