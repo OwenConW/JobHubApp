@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { editUser } from "../../../redux/adminActions";
+import { useDispatch, useSelector } from "react-redux";
+import { editUser } from "../../../../../redux/adminActions";
 import s from './EditModal.module.scss';
 
 
 function EditModal(props) {
+  const { editModalActive, handleEditOpenModal } = props;
   
   const [userData, setUserData] = useState({...props, professions: ["plomero"]})
   const dispatch = useDispatch()
+  const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
+  const fetchingAdminEditUserFailure = useSelector(state => state.fetching.fetchingAdminEditUserFailure)
 
   function handleChange(e){
     setUserData({...userData, [e.target.name]: e.target.value})
@@ -18,13 +21,19 @@ function EditModal(props) {
   }
 
   function handleEdit(e){
+    if(e.target.name === "cancel-btn") return handleEditOpenModal(!editModalActive) 
     dispatch(editUser(userData.id , userData))
   }
+  
+  useEffect(() => {
+    if (fetchingAdminEditUserSuccess) {
+      handleEditOpenModal(!editModalActive)   
+    }
+  },[fetchingAdminEditUserSuccess])
 
   useEffect(() => {
     console.log(userData);
-  },[userData])
-
+  }, [userData])
 
   return (
     <div className={s.modalMainContainer}>
@@ -69,6 +78,10 @@ function EditModal(props) {
           <div>
             <label htmlFor="phone">Telefono</label>
             <input type="text" name="phone" value={userData.phone} onChange={handleChange}/>
+          </div>
+          <div>
+            <label htmlFor="description">Descripción</label>
+            <input type="textarea" name="description" value={userData.description} onChange={handleChange}/>
           </div>
           <div>
             <label htmlFor="street">Calle</label>
@@ -121,7 +134,7 @@ function EditModal(props) {
               )
             })}
           </div> */}
-          <button>Cancelar</button>
+          <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>
           <button onClick={handleEdit}>Editar</button>
         </div>
       </div>

@@ -23,7 +23,14 @@ users.get("/", (req, res, next) => {
 //RUTA QUE TRAE TODOS LOS USUARIOS SIN FILTRO
 users.get("/all", async (req, res, next)=>{
     try {
-        const allUsers = await User.findAll()
+        const allUsers = await User.findAll({
+           include: {
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        })
+
         res.status(200).json(allUsers)
     
     } catch (error) {
@@ -83,54 +90,14 @@ users.post("/", async (req, res, next) =>{
     
 })
 
-
-//RUTA PARA EDITAR EL USUARIO
-// users.put('/:id', async (req, res) => {
-//     const { id } = req.params
-//     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
-//     try {
-//         const userUpdated = await User.findOne({ where: { id }, include: Profession })
-//         const oldProfession = userUpdated.professions.map(obj => obj.dataValues.id)
-//         await userUpdated.removeProfession(oldProfession)
-
-//         const professionDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
-//         await userUpdated.addProfession(professionDB.map(obj => obj.dataValues.id))
-
-//         userUpdated.set({
-//             name,
-//             last_Name,
-//             date_of_Bird,
-//             image,
-//             dni,
-//             mail,
-//             phone,
-//             description,
-//             country,
-//             city,
-//             coordinate,
-//             street,
-//             address,
-//             isProfessional,
-//         })
-//         await userUpdated.save()
-//         res.status(200).send(`The user "${name}" updated successfully`)
-//     } catch (error) {
-//         console.log(error);
-//         res.status(400).send(error)
-//     }
-// })
-
-// RUTAAAAAAAAAAAAAAAAAAAAAAA PUT
 //RUTA PARA EDITAR EL USUARIO
 users.put('/:id', async (req, res) => {
     const { id } = req.params
     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
     try {
-
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
         const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
         await userUpdated.removeProfession(oldProfessions)
-
         if(professions.length > 0){
             const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: professions } } })
             await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
@@ -161,18 +128,49 @@ users.put('/:id', async (req, res) => {
     }
 })
 
+users.put('/admin/:id', async (req, res) => {
+    const { id } = req.params
+    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, professions, isProfessional,  isPremium, isActive, isBanned, isAdmin} = req.body;
+    try {
+        const userUpdated = await User.findOne({ where: { id }, include: Profession })
+        const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
+        await userUpdated.removeProfession(oldProfessions)
+        if(professions.length > 0){
+            const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: professions } } })
+            await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
+        }
+
+        userUpdated.set({
+            name,
+            last_Name,
+            date_of_Bird,
+            image,
+            dni,
+            mail,
+            phone,
+            description,
+            country,
+            city,
+            coordinate,
+            street,
+            address,
+            isProfessional,
+            isPremium,
+            isActive,
+            isBanned,
+            isAdmin
+
+        })
+        await userUpdated.save()
+        let userUpdated2 = await User.findOne({ where: { id }, include: Profession })
+        res.status(200).send(`The user "${name}" updated successfully`)
+        } catch (error) {
+        console.log(error);
+        res.status(400).send(error)
+    }
+})
+
 //RUTA PARA EDITAR USUARIO SIN JOBS
-// users.put("/edit/:id" , async (req, res) => {
-//     const { id } = req.params
-//     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
-//     try {
-//         const editUserNoJobs = await functions.updateUserNoJobs(id, name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession)
-//         res.status(200).send(`The user "${name}" updated successfully`)
-//     } catch (error) {
-//         console.log(error);
-//         res.status(400).send(error)
-//     }
-// })
 users.put("/edit/:id" , async (req, res) => {
     const { id } = req.params
     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;

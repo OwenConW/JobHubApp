@@ -5,6 +5,19 @@ const { User, Review, Profession} = require("../../db.js")
 
 const review = Router()
 
+
+review.get("/all", async (req, res, next)=>{
+    try {
+        const allReviews = await Review.findAll()
+        res.status(200).json(allReviews)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+
 // RUTA QUE CREA RESEÑAS
 review.post("/:id", async (req, res, next) =>{
     let { id_orders, id_user_client ,feedback_client, rating  } = req.body;
@@ -44,7 +57,6 @@ review.put("/:id", async (req, res, next)=> {
     const { id } = req.params;
     const { feedback_client, rating, id_user_professional } = req.body;
     try {
-        //FALTA AGREGAR LA FUNCION PARA EDITAR EL RATING ACTUALIZADO AL PROMEDIO
         await functions.updateReview(id, feedback_client, rating);
         await functions.searchRating(id_user_professional, rating)
         res.status(201).send(`The Review  was successfully modified`);
@@ -53,7 +65,6 @@ review.put("/:id", async (req, res, next)=> {
         console.log(error)
         next(error)
     }
-    
 })
 
 // RUTA PARA TRAER TODAS LAS RESEÑAS

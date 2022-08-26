@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { deleteUser } from '../../../redux/adminActions'
-import EditModal from "../EditModal/EditModal";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUser, getAllUsersForAdmin, actionFetchingAdminDeleteUserReset } from '../../../../redux/adminActions'
+import EditModal from "../DashboardUserCard/EditModal/EditModal";
 import s from './DashboardUserCard.module.scss';
 
 function DashboardUserCard(props) {
@@ -39,17 +39,23 @@ function DashboardUserCard(props) {
     dispatch(deleteUser(id))
   }
 
-  function handleEdit(e){
-    setEditModalActive(true)
+  function handleRestore(e){
+    console.log('asd');
+  }
+
+  function handleEditOpenModal(e){
+    setEditModalActive(!editModalActive)
   }
 
   useEffect(() => {
-    console.log(editModalActive);
-  }, [editModalActive])
+    return () => {
+      dispatch(actionFetchingAdminDeleteUserReset())
+    }
+  }, [dispatch])
 
   return (
     <div className={`${s.cardContainer} ${openModal ? s.openModal : null}`}>
-      {editModalActive? <EditModal {...props}/> : null}
+      {editModalActive? <EditModal handleEditOpenModal={handleEditOpenModal} editModalActive={editModalActive} {...props}/> : null}
       <div className={s.importantInformationContainer}>
         <button onClick={handleOpenModal}>Detalles</button>
         <div className={s.nameContainer}>
@@ -58,30 +64,33 @@ function DashboardUserCard(props) {
         </div>
         <div>
           <h4>Premium</h4>
-          <h4>Activo{isPremium}</h4>
+          <h4>{isPremium ? "Si" : "No"}</h4>
         </div>
         <div>
           <h4>Admin</h4>
-          <h4>Si{isAdmin}</h4>
+          <h4>{isAdmin ? "Si": "No"}</h4>
         </div>
         <div>
           <h4>Activo</h4>
-          <h4>Si{isActive}</h4>
+          <h4>{isActive ? "Si" : "No"}</h4>
         </div>
         <div>
           <h4>Profesional</h4>
-          <h4>Si{isProfessional}</h4>
+          <h4>{isProfessional ? "Si" : "No"}</h4>
+        </div>
+        <div>
+          <h4>Suspendido</h4>
+          <h4>{isBanned ? "Si" : "No"}</h4>
         </div>
         <div>
           <h4>Rating</h4>
           <h4>{rating}</h4>
         </div>
-        <div>
-          <h4>Suspendido</h4>
-          <h4> Si{isBanned}</h4>
-        </div>
-        <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button>
-        <button className={s.editBtn} onClick={handleEdit}>Editar</button>
+        {
+        isActive ? <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button> :
+                   <button className={s.restoreBtn} onClick={handleRestore}>Restaurar</button>
+        }
+        <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>
       </div>
       {/* Division */}
       <div className={s.notSoRelevantInformationContainer}>
