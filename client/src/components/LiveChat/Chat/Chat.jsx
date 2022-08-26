@@ -35,11 +35,11 @@ const Chat = (props) => {
             socket.current.emit("QuitFromChat", currentUser.id)
             socket.current.disconnect()
         }
-    }, [])
+    }, [currentUser.id])
 
 
     useEffect(() => {
-        socket.current = io("https://jobhub-pg.herokuapp.com"); //"ws://localhost:3001" 
+        socket.current = io("ws://https://jobhub-pg.herokuapp.com"); //"ws://localhost:3001"
         socket.current.on("getMessage", data => {
             setArriveMessage({
                 sender: data.senderId,
@@ -47,7 +47,7 @@ const Chat = (props) => {
                 crearedAt: Date.now()
             })
         })
-    }, [])
+    }, [socket, currentUser])
 
     useEffect(() => {
         arriveMessage && (currentChat?.receptor_id === arriveMessage.sender || currentChat?.emisor_id === arriveMessage.sender )  &&
@@ -59,7 +59,7 @@ const Chat = (props) => {
         socket.current.on("getUsers", users => {
             setOnlineUsers(users);
          })
-    }, [currentUser])
+    }, [currentUser.id])
 
 
     const handleSubmit = async (e) => {
@@ -96,7 +96,7 @@ const Chat = (props) => {
             }
         }
         getConversations()
-    }, [currentUser.id])
+    }, [currentUser.id, currentChat])
   
     useEffect(() => {
         const getMessages = async () => {
@@ -128,7 +128,7 @@ const Chat = (props) => {
             }
         }
         getImage();
-    }, [currentChat, currentUser.id])
+    }, [currentChat])
 
     return (
   
@@ -170,7 +170,7 @@ const Chat = (props) => {
                             </textarea>
                             <button className="chatSubmitButton" onClick={handleSubmit}>Enviar</button>
                         </div>
-                        </> : <span className="noConversationText">Para utilizar el chat primero debes buscar un profesional para contactarte</span>}
+                        </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
                     </div>
                 </div>
                 {currentChat ? (<ProfessionalPreview id={currentChat.receptor_id === currentUser.id ? currentChat.emisor_id : currentChat.receptor_id}

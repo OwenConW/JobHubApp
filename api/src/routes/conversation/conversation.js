@@ -31,7 +31,6 @@ conversation.post("/", async (req, res, next) => {
                 receptor_id
             }
         })
-
         return res.send(newConversation)
     }catch(e){
         console.log(e)

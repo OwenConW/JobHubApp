@@ -9,6 +9,9 @@ require('./db.js');
 
 const app = express();
 
+
+
+
 app.name = 'API';
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
@@ -33,12 +36,10 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(status).send(message);
 });
 
-const server = http.createServer(app)
-
+const server = http.createServer(app);
 
 const io = socketio(server, {
     cors: {
-      origin: ["https://jobhub.vercel.app", "https://jobhub-pg.herokuapp.com", "http://localhost:3001", "http://localhost:3000"],
         methods: ["GET", "POST"]
     }
 });
@@ -61,7 +62,7 @@ const getUser = (receiverId) => {
 
 io.on("connection", socket => {
   console.log("user conected")
-  socket.on("addUser", (userId) => {
+    socket.on("addUser", (userId) => {
       addUser(userId, socket.id)
       io.emit("getUsers", users)
     })
