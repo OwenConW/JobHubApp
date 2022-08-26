@@ -42,7 +42,7 @@ function Card(props) {
 					</div>
 					<div className={s.detail}>
 						{
-							currentUser.id * 1 === id * 1 
+							currentUser?.id * 1 === id * 1 
 							? (
 							<Link to={`/profile`} className={s.detailLink}>
 							<div className={s.btn}>
