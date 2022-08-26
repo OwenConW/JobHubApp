@@ -6,6 +6,7 @@ import s from "./Conversation.module.scss";
 
 export default function Conversation({conversations, currentUser, online}){
     const [user, setUser] = useState(null)
+
     useEffect(() => {
         const friendId = conversations.emisor_id === currentUser.id 
         ? conversations.receptor_id 
@@ -21,7 +22,7 @@ export default function Conversation({conversations, currentUser, online}){
         getUser()
     }, [])
 
-    const onlineOrNo = online?.find(o => o.userId === user?.id);
+    const onlineOrNo = online?.find(o => o.userId === user?.id)
 
     return(
         <div className={s.conversation}>

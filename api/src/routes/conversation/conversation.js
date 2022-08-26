@@ -12,7 +12,7 @@ const conversation = Router()
 conversation.post("/", async (req, res, next) => {
     const { emisor_id,  receptor_id } = req.body
     try{
-        if(emisor_id === receptor_id) return res.status(404).send('No puedes cordinar contigo mismo.');
+        if(emisor_id * 1 === receptor_id * 1) return res.status(404).send('No puedes cordinar contigo mismo.');
         const [newConversation, conversation] = await Conversation.findOrCreate({
             where: {
                 [Op.or]: [{
@@ -25,25 +25,24 @@ conversation.post("/", async (req, res, next) => {
                         {receptor_id: emisor_id}
                     ]}
                 ]
-
             },
             defaults: {
                 emisor_id,
                 receptor_id
             }
-
         })
         return res.send(newConversation)
     }catch(e){
         console.log(e)
         return res.status(404).send(e)
     }
-
 })
+
 
 conversation.get("/:userId", async(req, res, next) => {
     const { userId } = req.params 
     try{
+   
         const conversation = await Conversation.findAll({
             where: {
                 [Op.or]: [{

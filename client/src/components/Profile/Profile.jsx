@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link } from 'react-router-dom';
+import { Link, useParams, useLocation} from 'react-router-dom';
 
 import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
@@ -11,6 +11,8 @@ import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
 import { getLocalStorage } from "../../handlers/localStorage";
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import PremiumModal from "./premiumModal/PremiumModal";
+import * as functions from "../../handlers/localStorage";
+import axios from "axios";
 
 
 //ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
@@ -31,7 +33,18 @@ import PremiumModal from "./premiumModal/PremiumModal";
 // }
 
 const Profile = () => {
-  
+  //success?preapproval_id=x
+
+  let { success } = useParams()
+
+  const currentUser = functions.getLocalStorage()
+  const search = useLocation().search;
+  const preapproval_id = new URLSearchParams(search).get('preapproval_id');
+
+  if(success === "success" && preapproval_id){
+    axios.put(`/premium/${currentUser.id}`, true)
+  }
+
   const [modalActive, setModalActive] = useState(false)
 
   const handlePremiumModal = async () => {

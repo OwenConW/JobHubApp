@@ -61,7 +61,7 @@ const getUser = (receiverId) => {
 
 
 io.on("connection", socket => {
-    console.log("User conected")
+  console.log("user conected")
     socket.on("addUser", (userId) => {
       addUser(userId, socket.id)
       io.emit("getUsers", users)
@@ -77,13 +77,13 @@ io.on("connection", socket => {
 
     socket.on("QuitFromChat", (id) => {
       const user = getUser(id)
-      removeUser(user.socketId)
+      removeUser(user?.socketId)
       io.emit("getUsers", users)
     })
 
 
     socket.on("disconnect", () => {
-      console.log("User disconected")
+      console.log("user disconected")
       removeUser(socket.id)
       io.emit("getUsers", users)
     })

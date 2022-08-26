@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useRef  } from "react"
-// , useEffect, useRef } 
-// import { useParams } from "react-router-dom"
-// import socket from "./Socket"
 import NavBar from "../../Navbar/Navbar"
 import Conversation from "../Conversations/Conversation"
 import Message from "../Message/Message"
-import ChatOnline from "../ChatOnline/ChatOnline"
 import * as functions from "../../../handlers/localStorage"
 import "./Chat.css"
 import axios from "axios"
@@ -37,8 +33,9 @@ const Chat = (props) => {
     useEffect(() => {
         return () => {
             socket.current.emit("QuitFromChat", currentUser.id)
+            socket.current.disconnect()
         }
-    }, [])
+    }, [currentUser.id])
 
 
     useEffect(() => {
@@ -130,9 +127,7 @@ const Chat = (props) => {
                 console.log(e);
             }
         }
-
         getImage();
-
     }, [currentChat])
 
     return (
@@ -144,7 +139,7 @@ const Chat = (props) => {
                 <div className="chatMenu">
                     <div className="chatMenuWrapper">
                         <h3 className='headerChats'>Chats</h3>
-                        {conversations && conversations.length && conversations.map((c, i) => (
+                        {conversations?.map((c, i) => (
                             <div onClick={() => {
                                 setCurrentChat(c)
                             }}>
@@ -178,7 +173,7 @@ const Chat = (props) => {
                         </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
                     </div>
                 </div>
-                {currentChat ? (                <ProfessionalPreview id={currentChat.receptor_id === currentUser.id ? currentChat.emisor_id : currentChat.receptor_id}
+                {currentChat ? (<ProfessionalPreview id={currentChat.receptor_id === currentUser.id ? currentChat.emisor_id : currentChat.receptor_id}
                 />) : ''}
             </div>
             }
