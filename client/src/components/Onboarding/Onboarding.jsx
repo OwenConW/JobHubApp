@@ -113,8 +113,9 @@ const Onboarding = () => {
         ...user,
         coordinate: [response.data[0].lat, response.data[0].lon]
       }, async (currentUser) => {
-        let response = await axios.post('/users', currentUser);
-        navigate("../", { replace: true })
+          let response = await axios.post('/users', currentUser);
+          navigate("../", { replace: true })
+          axios.get(`/mails/welcome?name=${currentUser.name}&mail=${currentUser.mail}`  )
       })
     }
   }

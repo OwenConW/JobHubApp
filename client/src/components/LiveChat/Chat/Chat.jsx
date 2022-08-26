@@ -1,7 +1,4 @@
 import React, { useEffect, useState, useRef  } from "react"
-// , useEffect, useRef } 
-// import { useParams } from "react-router-dom"
-// import socket from "./Socket"
 import NavBar from "../../Navbar/Navbar"
 import Conversation from "../Conversations/Conversation"
 import Message from "../Message/Message"
@@ -11,12 +8,14 @@ import axios from "axios"
 import { io } from "socket.io-client"
 import { useNavigate } from "react-router"
 import { useAuth0 } from '@auth0/auth0-react';
+import ProfessionalPreview from "../ProfessionalPreview/ProfessionalPreview"
 
 const Chat = (props) => {
 
     const navigate = useNavigate()
 
     const { isAuthenticated } = useAuth0();
+    const [currentImage, setCurrentImage] = useState('');
     const [conversations, setConversations] = useState([])
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState([])
@@ -25,9 +24,8 @@ const Chat = (props) => {
     const [onlineUsers, setOnlineUsers] = useState([])
     const socket = useRef()
     const currentUser = functions.getLocalStorage()
-    
     const scrollRef = useRef()
-    
+
 
     if(!isAuthenticated) navigate("/")
 
@@ -35,8 +33,9 @@ const Chat = (props) => {
     useEffect(() => {
         return () => {
             socket.current.emit("QuitFromChat", currentUser.id)
+            socket.current.disconnect()
         }
-    }, [])
+    }, [currentUser.id])
 
 
     useEffect(() => {
@@ -58,13 +57,9 @@ const Chat = (props) => {
     useEffect(() => {
         socket.current.emit("addUser", currentUser.id)
         socket.current.on("getUsers", users => {
-            setOnlineUsers(users)
+            setOnlineUsers(users);
          })
     }, [currentUser.id])
-
-
-
-
 
 
     const handleSubmit = async (e) => {
@@ -119,28 +114,38 @@ const Chat = (props) => {
         scrollRef.current?.scrollIntoView({behavior: "smooth"})
     }, [messages])
 
+    useEffect(() => {
+        const friendId = currentChat?.emisor_id === currentUser.id
+        ? currentChat?.receptor_id
+        : currentChat?.emisor_id
+
+        const getImage = async () => {
+            try{
+                let response = await axios.get(`/users/${friendId}`);
+                setCurrentImage(response?.data.image);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        getImage();
+    }, [currentChat])
 
     return (
   
         <>
          <NavBar/>
-         {
-             console.log(onlineUsers)
-         }
             {
                 <div className="messenger">
                 <div className="chatMenu">
                     <div className="chatMenuWrapper">
-                        <input placeholder="Buscar profesionales..." className="chatMenuInput"/>
+                        <h3 className='headerChats'>Chats</h3>
                         {conversations?.map((c, i) => (
-                                <div onClick={() => {
-                                    setCurrentChat(c)
-    
-                                }}>
-                                <Conversation key={i} conversations={c} currentUser={currentUser} online={onlineUsers} />
-                                </div>
-                                )
-                        )}
+                            <div onClick={() => {
+                                setCurrentChat(c)
+                            }}>
+                            <Conversation key={i} conversations={c} currentUser={currentUser} online={onlineUsers}/>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div className="chatBox">
@@ -152,7 +157,7 @@ const Chat = (props) => {
                             {
                                 messages.map(m => (
                                     <div ref={scrollRef}>
-                                    <Message message={m} own={m.sender === currentUser.id} current={currentUser} />
+                                    <Message message={m} own={m.sender === currentUser.id} current={currentUser} friendImage={currentImage}/>
                                     </div>
                                 ))
                             }
@@ -166,9 +171,11 @@ const Chat = (props) => {
                             <button className="chatSubmitButton" onClick={handleSubmit}>Enviar</button>
                         </div>
                         </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
-                    </div>  
+                    </div>
                 </div>
-            </div>    
+                {currentChat ? (<ProfessionalPreview id={currentChat.receptor_id === currentUser.id ? currentChat.emisor_id : currentChat.receptor_id}
+                />) : ''}
+            </div>
             }
         </>
     )

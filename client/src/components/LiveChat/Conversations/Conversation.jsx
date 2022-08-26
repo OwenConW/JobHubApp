@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./chatOnline.css"
+import s from "./Conversation.module.scss";
+
 
 
 export default function Conversation({conversations, currentUser, online}){
@@ -24,28 +25,38 @@ export default function Conversation({conversations, currentUser, online}){
     const onlineOrNo = online?.find(o => o.userId === user?.id)
 
     return(
-        <div className="conversation">
+        <div className={s.conversation}>
             {
-                onlineOrNo  ? <>
-              <div className="chatOnline">
-                <div className="chatOnlineFriend">
-                <div className="chatOnlineImgContainer">
-                    <img className="chatOnlineImg" src={user?.image} alt=""/>
-                    <div className="chatOnlineBadge"></div>
+                onlineOrNo ? <>
+                <div className={s.chatOnlineImgContainer}>
+                    <img className={s.conversationImg}
+                    src={user?.image || "https://geekflare.com/wp-content/plugins/wp-user-avatars/wp-user-avatars/assets/images/mystery.jpg"}
+                    alt=""
+                    />
+                    <div className={s.chatOnlineBadge}>
+
+                    </div>
                 </div>
-                <span className="chatOnlineName">{user?.name}</span>
-                </div>
+
+                <div className={s.dataChat}>
+                    <p className={s.conversationName}>{user?.name} {user?.last_Name}</p>
+                    <p className={s.profession}>{user?.professions[0]?.name}</p>
                 </div>
                 </>
                 : <>
-                <div className="chatOnlineNO">
-                <div className="chatOnlineFriendNO">
-                <div className="chatOnlineImgContainerNO">
-                    <img className="chatOnlineImgNO" src={user?.image} alt=""/>
-                    <div className="chatOnlineBadgeNO"></div>
+                <div className={s.chatOnlineImgContainer}>
+                    <img className={s.conversationImg}
+                    src={user?.image || "https://geekflare.com/wp-content/plugins/wp-user-avatars/wp-user-avatars/assets/images/mystery.jpg"}
+                    alt=""
+                    />
+                    <div className={s.chatOnlineBadgeNo}>
+
+                    </div>
                 </div>
-                <span className="chatOnlineNameNO">{user?.name}</span>
-                </div>
+
+                <div className={s.dataChat}>
+                    <p className={s.conversationName}>{user?.name} {user?.last_Name}</p>
+                    <p className={s.profession}>{user?.professions[0]?.name}</p>
                 </div>
                 </>
             }

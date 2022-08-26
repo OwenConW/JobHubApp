@@ -3,14 +3,27 @@ import "./Message.css"
 import { format } from "timeago.js"
 
 
-export default function Message({message, own, current}){
+export default function Message({message, own, current, friendImage}){
     return(
         <div className={own ? "message own" : "message"}>
            <div className="messageTop">
-            <img className="messageImg" 
-            src={own ? current.image : "https://cdn-icons-png.flaticon.com/512/560/560216.png"} 
-            alt=""/>
-            <p className="messageText">{message.text}</p>
+               {
+                   !own ? (
+                    <>
+                    <img className="messageImg" 
+                    src={own ? current.image : friendImage}
+                    alt=""/>
+                    <p className="messageText">{message.text}</p>
+                    </>
+                   ) : (
+                       <>
+                    <p className="messageText">{message.text}</p>
+                    <img className="messageImg" 
+                    src={own ? current.image : friendImage}
+                    alt=""/>
+                    </>
+                   )
+               }
            </div>
            <div className="messageBottom">{format(message.createdAt)}</div>
         </div>
