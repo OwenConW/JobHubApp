@@ -5,8 +5,14 @@ const PaymentService = require("../../Services/PaymentService")
 const PaymentInstance = new PaymentController(new PaymentService())
 const pagos = Router()
 
+// SDK de Mercado Pago
+const mercadopago = require("mercadopago");
+// Agrega credenciales
+mercadopago.configure({
+  access_token: process.env.ACCESS_TOKEN,
+});
 
-pagos.get("/premium", (req, res, next) => {
+pagos.post("/premium", (req, res, next) => {
     PaymentInstance.getSubscriptionLink(req, res)
 })
 
