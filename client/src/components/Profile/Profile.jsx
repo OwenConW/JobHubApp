@@ -42,6 +42,7 @@ const Profile = () => {
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
 
   if(success === "success" && preapproval_id){
+    alert("SOS PREMIUM MOSTRO")
     axios.put(`/premium/${currentUser.id}`, true)
   }
 

@@ -20,7 +20,17 @@ users.get("/", (req, res, next) => {
     })
 })
 
-
+//RUTA QUE TRAE TODOS LOS USUARIOS SIN FILTRO
+users.get("/all", async (req, res, next)=>{
+    try {
+        const allUsers = await User.findAll()
+        res.status(200).json(allUsers)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
 
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
@@ -116,10 +126,11 @@ users.put('/:id', async (req, res) => {
     const { id } = req.params
     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
     try {
+
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
         const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
-       
         await userUpdated.removeProfession(oldProfessions)
+
         if(professions.length > 0){
             const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: professions } } })
             await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
@@ -143,8 +154,8 @@ users.put('/:id', async (req, res) => {
         })
         await userUpdated.save()
         let userUpdated2 = await User.findOne({ where: { id }, include: Profession })
-        res.status(200).send(userUpdated2)
-    } catch (error) {
+        res.status(200).send(`The user "${name}" updated successfully`)
+        } catch (error) {
         console.log(error);
         res.status(400).send(error)
     }
@@ -162,9 +173,19 @@ users.put('/:id', async (req, res) => {
 //         res.status(400).send(error)
 //     }
 // })
+users.put("/edit/:id" , async (req, res) => {
+    const { id } = req.params
+    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
+    try {
+        await functions.updateUserNoJobs(id, name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession)
+        return res.status(200).send(`The user "${name}" updated successfully`)
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error)
+    }
+})
 
 // RUTA QUE BUSCA USUARIOS POR ID
-
 users.get("/:id", (req, res, next) => {
     const { id } = req.params;
     functions.getProffesionalById(id * 1)

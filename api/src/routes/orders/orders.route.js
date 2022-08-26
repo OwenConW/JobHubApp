@@ -5,35 +5,40 @@ const { User, Review, Orders} = require("../../db.js")
 
 const orders = Router()
 
-orders.post("/:id", async (req, res, next) =>{
-    let { id_orders, id_user_client ,feedback_client, rating  } = req.body;
-    const { id } = req.params;
-    id_user_client = parseInt(id_user_client)
+orders.post("/", async (req, res, next) =>{
+    const { id_user_professional, id_user_client  } = req.body;
     try {
-        if( id_orders && id_user_client && feedback_client && rating ){
-        const [newReview, created] = await Review.findOrCreate({
-            where:{
-                id_orders,
-            },
-            defaults:{
+        if( id_user_professional && id_user_client ){
+            const newOrder = await Orders.create({
                 id_user_client,
-                id_user_professional: id,
-                feedback_client,
-                rating,
-            }
-        })
-        let idFind = await User.findByPk(id)
-        await newReview.addUser(idFind)
-        await functions.searchRating(id, rating);
-    
+                id_user_professional,
+            })
 
-        if(!created)  res.status(200).send(`The Review cannot be created, the Review has already exist`);
-        return res.status(201).send(`The Review  created successfully`);
-    } return res.status(200).send("Missing data");
+            let userFind = await User.findByPk(id_user_professional)
+            await newOrder.addUser(userFind)
+
+            return res.status(201).send(`The Order created successfully`);
         
+        } return res.status(200).send("Missing data");
 
     } catch (error) {
         console.log(error)
         next(error)
     }
 })
+
+
+orders.put("/:id", async (req, res, next) =>{
+    const { description, complete, apointment_date, allowReview } = req.body;
+    const { id } = req.params;
+    try {
+        functions.updateOrden(id, description, complete, apointment_date, allowReview)
+        res.status(200).send(`The order updated successfully`)
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+
+module.exports = orders;

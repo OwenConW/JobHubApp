@@ -1,0 +1,186 @@
+{
+    "name":"plomero"
+}
+{
+    "name":"electricista"
+}
+{
+    "name":"carpintero"
+}
+{
+    "name":"programador"
+}
+{
+    "name":"jardinero"
+}
+{
+    "name":"albanil"
+}
+{
+    "name":"gasista"
+}
+{
+    "name":"pintor"
+}
+
+
+//Usuarios con coordenadas en Córdoba para testear
+//Tienen imagenes, ubicaciones, y nombre distintos.
+
+{
+    "name": "Victor",
+    "last_Name": "Babolti",
+    "mail": "baboltivictor@gmail.com",
+    "dni": "40.514.921",
+    "image": "https://imageio.forbes.com/specials-images/imageserve/60ab995dbe7dcc922ab5b642/FRANCE-ART-LUXURY-MUSUEM/1960x0.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.400113488767744", "-64.19954751649585"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["gasista"]
+}
+
+{
+    "name": "Coco",
+    "last_Name": "Luciani",
+    "mail": "coquito@gmail.com",
+    "dni": "41.514.921",
+    "image": "https://www.bentbusinessmarketing.com/wp-content/uploads/2013/02/35844588650_3ebd4096b1_b-1024x683.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.381658528174917", "-64.1958858179877"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["programador"]
+}
+
+{
+    "name": "Ramon",
+    "last_Name": "Tunineti",
+    "mail": "ramontunineti@gmail.com",
+    "dni": "42.514.921",
+    "image": "https://www.theportlandclinic.com/wp-content/uploads/2019/07/Person-Curtis_4x5-e1564616444404-300x300.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.393053482888085", "-64.16625661098303"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["pintor"]
+}
+
+{
+    "name": "Lidia",
+    "last_Name": "Kikilidia",
+    "mail": "kiki@gmail.com",
+    "dni": "43.514.921",
+    "image": "http://sjc.uva.es/wp-content/uploads/2021/10/claudia_mahler.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.41505468347454", "-64.19181572653054"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["jardinero"]
+}
+
+{
+    "name": "Trompeta",
+    "last_Name": "Zaralegui",
+    "mail": "trompetazaralegui@gmail.com",
+    "dni": "44.514.921",
+    "image": "https://strayhornlaw.com/wp-content/uploads/2019/09/image0-1170x1170.jpeg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.385752650967163", "-64.1724091798197"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["electricista"]
+}
+
+{
+    "name": "Carlos",
+    "last_Name": "Ricarlos",
+    "mail": "carlosricarlos@gmail.com",
+    "dni": "45.514.921",
+    "image": "https://dergreif-online.de/www/wp-content/uploads/2016/07/Timothy_hoch.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.40091175055419", "-64.20184281257055"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["albanil"]
+}
+
+{
+    "name": "Valentino",
+    "last_Name": "Cachila",
+    "mail": "valentino@gmail.com",
+    "dni": "46.514.921",
+    "image": "https://rti.cl/wp-content/uploads/person-1-1-1.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.406579368009695", "-64.2069674892892"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["carpintero"]
+}
+
+{
+    "name": "Bizcocho",
+    "last_Name": "Corinthians",
+    "mail": "bizcocho@gmail.com",
+    "dni": "47.514.921",
+    "image": "https://lanzzin.com/assets/uploads/gigs/152/0619202219213262af773c28df9.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.41508356077831", "-64.2502581827187"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["programador"]
+}
+
+{
+    "name": "Caco",
+    "last_Name": "Robledo",
+    "mail": "cacorobledo@gmail.com",
+    "dni": "48.514.921",
+    "image": "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Cordoba",
+    "coordinate": ["-31.40280830487767", "-64.19527192971978"],
+    "isProfessional": true,
+    "street": "Padre Luis Galeano",
+    "address": "1211",
+    "profession" : ["albanil"]
+}
+
+
+5031 7557 3453 0604             123                    11/25                        APRO
+
+
