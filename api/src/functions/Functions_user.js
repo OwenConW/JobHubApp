@@ -205,21 +205,24 @@ const updateUserNoJobs = async (id, name, last_Name, date_of_Bird, image, dni, m
 //             where:{
 //                 isProfessional: 'true',
 //                 isPremium: 'true',
-//                 // rating: 'ASC'
 //             },
-//             // limit: 3,
-//             // include:[
-//             //     {
-//             //         model: Profession,
-//             //         attributes: ['name'],
-//             //         through: {attributes: []},
-//             //     },
-//             //     {
-//             //         model: Review,
-//             //         attributes: ['id_user_client','id_orders','feedback_client', 'rating'],
-//             //         through: {attributes: []},
-//             //     }
-//             // ],
+//             attributes:{
+//                 exclude:['createdInDb','createdAt','updatedAt']
+//             },
+//             limit: 3,
+//             order: [["rating", "ASC"]],
+//             include:[
+//                 {
+//                     model: Profession,
+//                     attributes: ['name'],
+//                     through: {attributes: []},
+//                 },
+//                 {
+//                     model: Review,
+//                     attributes: ['id_user_client','id_orders','feedback_client', 'rating'],
+//                     through: {attributes: []},
+//                 }
+//             ],
 //         })
 //     console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',userPremium)
 //         return userPremium
@@ -236,21 +239,24 @@ const updateUserNoJobs = async (id, name, last_Name, date_of_Bird, image, dni, m
 //             where:{
 //                 isProfessional: 'true',
 //                 isPremium: 'false',
-//                 // rating: 'ASC'
 //             },
-//             // limit: 3,
-//             // include:[
-//             //     {
-//             //         model: Profession,
-//             //         attributes: ['name'],
-//             //         through: {attributes: []},
-//             //     },
-//             //     {
-//             //         model: Review,
-//             //         attributes: ['id_user_client','id_orders','feedback_client', 'rating'],
-//             //         through: {attributes: []},
-//             //     }
-//             // ],
+//             attributes:{
+//                 exclude:['createdInDb','createdAt','updatedAt']
+//             },
+//             limit: 3,
+//             order: [["rating", "ASC"]],
+//             include:[
+//                 {
+//                     model: Profession,
+//                     attributes: ['name'],
+//                     through: {attributes: []},
+//                 },
+//                 {
+//                     model: Review,
+//                     attributes: ['id_user_client','id_orders','feedback_client', 'rating'],
+//                     through: {attributes: []},
+//                 }
+//             ],
 //         })
 //         console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',userNoPremium)
 //         return userNoPremium

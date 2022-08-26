@@ -181,10 +181,10 @@ users.put('/destroy/:id', async (req, res, next) => {
 //     try {
 //         const usersPremiumTop = await functions.searchUsersPremium()
 //         const usersNoPremiumTop = await functions.searchUsersNoPremium()
-// console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',usersPremiumTop)
-// console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',usersNoPremiumTop)
+//               console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',usersPremiumTop)
+//               console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',usersNoPremiumTop)
 
-//         const finalConcatUsers = [...usersPremiumTop, ...usersNoPremiumTop]
+//         const finalConcatUsers = usersPremiumTop.concat(usersNoPremiumTop)
 //         res.send(201).json(finalConcatUsers)
 //     } catch (error) {
 //         console.log(error);
