@@ -112,7 +112,7 @@ const Chat = (props) => {
 
     useEffect(() => {
         scrollRef.current?.scrollIntoView({behavior: "smooth"})
-    }, [messages])
+    }, [])
 
     useEffect(() => {
         const friendId = currentChat?.emisor_id === currentUser.id
