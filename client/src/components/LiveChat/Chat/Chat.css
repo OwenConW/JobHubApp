@@ -1,25 +1,35 @@
 .messenger{
-    height: calc(100vh - 170px);
+    width: 100%;
+    height: 90%;
     display: flex;
 }
 
 
 .chatMenu{
-    flex: 3.5
+    width: 25%;
+    height: 100%;
+    overflow-y: scroll;
+
 }
 
-.chatMenuInput{
-    width: 70%;
-    padding: 10px;
-    border: none;
-    border-bottom: 1px solid gray;
-    background-color: transparent;
-    font-size: 15px;
-}
+.headerChats{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    width: 100%;
+    height: 10%;
+    font-size: 2.4rem;
 
+}
 
 .chatBox{
-    flex: 5.5;
+    width: 40%;
+    height: 95%;
+    padding: 10px;
+    margin: 10px;
+    background-color: #ffffff;
+    border-radius: 20px;
 }
 
 .chatBoxWrapper{
@@ -40,12 +50,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-top: 1px solid rgb(171, 169, 169);
 }
 
 .chatMessageInput{
+    border-radius: 0 0 10px 10px;
+    font-family: Poppins;
+    font-size: 1.6rem;
     width: 85%;
     height: 90px;
+    max-width: 85%;
+    max-height: 90px;
     padding: 10px;
+    background-color: #EEEEEE;
 }
 
 .chatSubmitButton{

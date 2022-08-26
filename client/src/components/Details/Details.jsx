@@ -3,31 +3,46 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import s from './Details.module.scss';
-import userImg from './assets/userimage.jpg'
+import { getLocalStorage } from "../../handlers/localStorage";
 
 import Navbar from "../Navbar/Navbar";
 import CardReview from './CardReview/CardReview.jsx'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import ReviewBox from "./ReviewBox/ReviewBox.jsx"
 import { getCharsById } from '../../redux/userActions';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import defaultimage from './assets/deafultimage.png';
+import axios from "axios";
 
 
 
 const Profile = () => {
 
-let params = useParams();
-
+  let params = useParams();
+  let activeUser = getLocalStorage();
 
   const dispatch = useDispatch();
-
+  const navigate  = useNavigate();
   const professional = useSelector((state) => state.users.detail);
   const id = params.id;
 
   useEffect(() => {
     dispatch(getCharsById(id))
   }, [])
+
+  const onCoordinate = async() => {
+    let data = {
+      emisor_id: activeUser.id,
+      receptor_id: id
+    }
+
+    try{
+      await axios.post('/conversation', data);
+      navigate('/chat');
+    }catch(e){
+      console.log(e);
+    }
+  }
 
 
   return (
@@ -44,7 +59,7 @@ let params = useParams();
               <div className={s.name}>{professional.name} {professional.last_Name}</div>
               <div className={s.location}>{professional.city}, {professional.country}</div>
               <div className={s.description}>{professional.description}</div>
-
+              <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Coordinar</div>
             </div>
           </div>
 
