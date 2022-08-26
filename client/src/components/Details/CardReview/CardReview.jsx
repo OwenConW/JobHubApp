@@ -10,10 +10,7 @@ import noUserImg from '../../FeaturedCard/assets/default_user.png'
 let order = {}
 const CardReview = ({ dataObj, reviewer }) => {
   const data = dataObj
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch(getChars())
-  // },[])
+
   console.log('reviewer:', reviewer)
   return (
     <div className={s.orders}>

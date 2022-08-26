@@ -1,12 +1,12 @@
 import React from "react";
-import s from './Opinions.module.scss'
+import s from './OtherReviews.module.scss'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocalStorage } from "../../../../handlers/localStorage";
 import { getChars, getCharsById } from "../../../../redux/userActions";
-import OpinionCard from "./OpinionCard/OpinionCard";
-
-const Opinions = () => {
+import CardReview from "../../../Details/CardReview/CardReview";
+import RevCards from "./RevCards/RevCards";
+const OtherReviews = () => {
   const dispatch = useDispatch()
   let activeUser = getLocalStorage()
 
@@ -37,13 +37,12 @@ const Opinions = () => {
       {
         allReviews ? allReviews.map(review => 
           
-          <OpinionCard review={review}/>
-
-        ) : <p>Aun no has hecho ninguna reseña</p>
+            <RevCards review={review}/>
+        ) : <p>Aun no han hecho ninguna reseña sobre ti</p>
       }
 
     </div>
   )
 }
 
-export default Opinions
+export default OtherReviews
