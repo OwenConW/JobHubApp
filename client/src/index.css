@@ -1,0 +1,14 @@
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body{
+  overflow: hidden;
+  font-family: Poppins, sans-serif;
+}
+
+html{
+  font-size: 62.5%;
+}

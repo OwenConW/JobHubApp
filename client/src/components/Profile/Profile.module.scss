@@ -1,0 +1,299 @@
+.container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  background: rgba(217, 217, 217, 0.2);
+
+  .leftContainer {
+    margin-top: 1.5%;
+    margin-bottom: 1%;
+    margin-right: -2.5%;
+    height: 97.5%;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .profileInfo {
+      height: 25%;
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10%;
+      width: 90%;
+
+      .profile_Img_container {
+        display: flex;
+        width: 30%;
+
+        justify-content: center;
+        align-items: center;
+
+        .profile_Img {
+          width: 55%;
+          height: 80%;
+          border-radius: 50%;
+          border: 15px solid rgba(0, 0, 0, 0.041);
+          object-fit: cover;
+        }
+      }
+
+      .profileDetail {
+        width: 70%;
+
+        .name {
+          font-size: 4.4rem;
+          line-height: 5rem;
+          color: #000000;
+        }
+
+        .location {
+          font-size: 2.3rem;
+          line-height: 3rem;
+          /* identical to box height */
+          color: rgba(0, 0, 0, 0.58);
+          margin-bottom: 2rem;
+        }
+
+        .description {
+          font-weight: 200;
+          text-align: justify;
+          font-size: 1.7rem;
+          line-height: 3rem;
+          color: #000000;
+          width: 95%;
+        }
+      }
+
+    }
+
+    .orderBox {
+
+      height: 50%;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      // flex-wrap: wrap;
+      align-content: space-around;
+      // justify-content: space-evenly;
+      border-radius: 10px;
+      background: #D9D9D9;
+
+      .orderText {
+        font-weight: 300;
+        margin-top: 2%;
+        margin-left: 4.9%;
+        font-size: 3.2rem;
+        line-height: 5.4rem;
+        color: #000000;
+      }
+
+      .lastOrders {
+        height: 70%;
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 5%;
+        padding-right: 5%;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+    }
+
+    .configBox {
+      display: flex;
+      margin-bottom: 3%;
+      margin-top: 2%;
+      height: 10%;
+      width: 100%;
+      justify-content: left;
+      align-items: center;
+
+      img {
+        margin-left: 5%;
+        width: 3.5%;
+      }
+
+      div {
+        margin-left: 1%;
+        font-size: 1.5rem;
+      }
+    }
+
+  }
+}
+
+
+.rightContainer {
+  // border: solid black;
+  margin-top: 1.5%;
+  margin-bottom: 1%;
+  height: 97.5%;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .professionContainer {
+    height: 55%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    align-content: space-around;
+    // justify-content: space-evenly;
+    border-radius: 10px;
+    background: #D9D9D9;
+
+    .professionText {
+
+      font-weight: 300;
+      margin-top: 2%;
+      margin-left: 4.9%;
+      font-size: 3.2rem;
+      line-height: 5.4rem;
+      color: #000000;
+    }
+
+    .professionList {
+      height: 70%;
+      width: 80%;
+      margin-left: 4.8%;
+      display: flex;
+      flex-direction: column;
+      padding-left: 5%;
+      padding-right: 5%;
+      align-items: center;
+      justify-content: space-evenly;
+
+
+    }
+
+    .addProfession {
+      height: 20%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      margin-top: 2%;
+      margin-bottom: 2%;
+
+      div {
+        background-color: white;
+        border-radius: 50%;
+        padding: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.5s;
+
+        &:hover {
+          transition: 0.5s;
+          scale: 1.04;
+        }
+      }
+
+      img {
+        object-fit: cover;
+        transition: 0.5s;
+
+        &:hover {
+          transition: 0.5s;
+          scale: 1.04;
+        }
+
+      }
+    }
+  }
+
+  .bePremium {
+    height: 25%;
+    margin-bottom: 15.4%;
+    width: 90%;
+    display: flex;
+    align-content: space-around;
+    // justify-content: space-evenly;
+    border-radius: 10px;
+    background: #D9D9D9;
+
+    .premiumText {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        font-weight: 300;
+        margin-top: 2%;
+        margin-left: 4.9%;
+        font-size: 3.2rem;
+        line-height: 5.4rem;
+        color: #000000;
+      }
+
+      .premiumDetail {
+        overflow-y: auto;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 2%;
+
+        h4 {
+          margin-left: 4.9%;
+          margin-top: 2%;
+          text-align: justify;
+          font-weight: 200;
+          font-size: 1.7rem;
+          line-height: 2.5rem;
+          color: #000000;
+        }
+      }
+
+    }
+
+    .premiumRocketButton {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+
+      div {
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: 9%;
+        height: 40%;
+        margin-bottom: 5%;
+      }
+
+      span {
+        width: 43%;
+        background: #07393C;
+        border-radius: 10px;
+        margin-left: 4.9%;
+        margin-bottom: 3%;
+        margin-top: 5%;
+        color: #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: 0.5s;
+
+        &:hover {
+          transition: 0.5s;
+          background: #3e909b;
+        }
+
+        button {
+          background-color: #d9d9d900;
+          font-weight: 100;
+          font-size: 1.7rem;
+          line-height: 2.8rem;
+          color: #ffffffc0;
+        }
+      }
+    }
+  }
+}

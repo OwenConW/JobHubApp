@@ -1,0 +1,198 @@
+.container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  background: rgba(217, 217, 217, 0.2);
+
+  .leftContainer {
+    margin-top: 1.5%;
+    margin-bottom: 1%;
+    margin-right: -2.5%;
+    height: 97.5%;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .profileInfo {
+      height: 25%;
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10%;
+      width: 90%;
+
+      .profile_Img_container {
+        display: flex;
+        width: 30%;
+
+        justify-content: center;
+        align-items: center;
+
+        .profile_Img {
+          width: 55%;
+          height: 80%;
+          border-radius: 50%;
+          border: 15px solid rgba(0, 0, 0, 0.041);
+          object-fit: cover;
+        }
+      }
+
+      .profileDetail {
+        width: 70%;
+
+        .name {
+          font-size: 4.4rem;
+          line-height: 5rem;
+          color: #000000;
+        }
+
+        .location {
+          font-size: 2.3rem;
+          line-height: 3rem;
+          /* identical to box height */
+          color: rgba(0, 0, 0, 0.58);
+          margin-bottom: 2rem;
+        }
+
+        .description {
+          font-weight: 200;
+          text-align: justify;
+          font-size: 1.7rem;
+          line-height: 3rem;
+          color: #000000;
+          width: 95%;
+        }
+      }
+
+    }
+
+    .orderBox {
+
+      height: 50%;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      // flex-wrap: wrap;
+      align-content: space-around;
+      // justify-content: space-evenly;
+      border-radius: 10px;
+      background: #D9D9D9;
+
+      .orderText {
+        font-weight: 300;
+        margin-top: 2%;
+        margin-left: 4.9%;
+        font-size: 3.2rem;
+        line-height: 5.4rem;
+        color: #000000;
+      }
+
+      .lastOrders {
+        height: 70%;
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 5%;
+        padding-right: 5%;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+    }
+
+    .configBox {
+      display: flex;
+      margin-bottom: 3%;
+      margin-top: 2%;
+      height: 10%;
+      width: 100%;
+      justify-content: left;
+      align-items: center;
+
+      img {
+        margin-left: 5%;
+        width: 3.5%;
+      }
+
+      div {
+        margin-left: 1%;
+        font-size: 1.5rem;
+      }
+    }
+
+  }
+}
+
+
+.rightContainer {
+  // border: solid black;
+  margin-top: 1.5%;
+  margin-bottom: 1%;
+  height: 97.5%;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .professionContainer {
+    height: 45%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    align-content: space-around;
+    // justify-content: space-evenly;
+    border-radius: 10px;
+    background: #D9D9D9;
+
+    .professionText {
+
+      font-weight: 300;
+      margin-top: 2%;
+      margin-left: 4.9%;
+      font-size: 3.2rem;
+      line-height: 5.4rem;
+      color: #000000;
+    }
+
+    
+
+  }
+
+  .moreReviews {
+    height: 35%;
+    margin-bottom: 15.4%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border-radius: 10px;
+    background: #D9D9D9;
+
+    .premiumText {
+      width: 80%;
+      height: 20%;
+
+
+      h1 {
+        font-weight: 300;
+        margin-top: 4%;
+        margin-left: 12%;
+        margin-bottom: 2%;
+        font-size: 3.2rem;
+        line-height: 3.0rem;
+        color: #000000;
+      }
+
+    }
+
+    .OtherReviews{
+      width: 95%;
+      height: 80%;
+      margin-left: 2.5%;
+      display: flex;
+    }
+  }
+}
