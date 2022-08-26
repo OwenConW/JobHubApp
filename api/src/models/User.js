@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-	sequelize.define('User', {
+	sequelize.define('user', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
@@ -45,7 +45,7 @@ module.exports = (sequelize) => {
 		},
 
 		phone: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 		},
 		country: {
 			type: DataTypes.STRING,
@@ -57,6 +57,14 @@ module.exports = (sequelize) => {
 		},
 		coordinate: {
 			type: DataTypes.ARRAY(DataTypes.STRING),
+			allowNull: false
+		},
+		street: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		address: {
+			type: DataTypes.STRING,
 			allowNull: false
 		},
 		rating: {

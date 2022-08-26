@@ -4,8 +4,9 @@ export const setUserLocalStorage = (user) => {
 }
 
 export const getLocalStorage = () => {
-    if(localStorage.getItem('user')){
+    if (localStorage.getItem('user')) {
         let userActive = JSON.parse(localStorage.getItem('user'));
+
         return userActive;
     }
 }

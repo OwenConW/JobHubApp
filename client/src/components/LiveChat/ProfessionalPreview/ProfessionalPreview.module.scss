@@ -1,0 +1,55 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 35%;
+    height: 70%;
+
+    .professionalImg{
+        margin-top: 2%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 55%;
+        height: 50%;
+
+        img{
+            border: 10px solid rgba(155, 155, 155, 0.311);
+            width: 80%;
+            height: 90%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    .professionaldata{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 40%;
+
+        .professionalName{
+            text-transform: capitalize;
+            color: #222222;
+            font-size: 3.2rem;
+        }
+
+        .professionalCity{
+            text-transform: capitalize;
+            color: #646464;
+            font-size: 2.4rem;
+        }
+
+        .professionalDescription{
+            margin-top: 40px;
+            text-transform: capitalize;
+            text-align: center;
+            color: #646464;
+            font-size: 1.6rem;
+            overflow-y: scroll;
+        }
+    }
+}

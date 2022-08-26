@@ -25,6 +25,15 @@ export const getCharsById = (id) => (dispatch) => {
 		.catch((e) => console.log(e));
 };
 
+export const getLeadingProfessionals = () => (dispatch) => {
+	axios
+		.get(`/users?rating=asc&isProfessional=true`)
+		.then((res) => {
+			dispatch(getUserById(res.data));
+		})
+		.catch((e) => console.log(e));
+};
+
 export const filterProfessionals = (filters) => (dispatch) => {
 	console.log('filters profession: ', filters.profession);
 	axios
@@ -37,3 +46,4 @@ export const filterProfessionals = (filters) => (dispatch) => {
 		})
 		.catch((e) => console.log(e));
 };
+

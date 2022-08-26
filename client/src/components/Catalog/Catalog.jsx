@@ -6,8 +6,7 @@ import Filter from './Filter/Filter';
 import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
 import Navbar from '../Navbar/Navbar';
-
-
+import Paginate from './Paginate/Paginate';
 
 
 const Catalog = (props) => {
@@ -15,6 +14,12 @@ const Catalog = (props) => {
 		(state) => state.users.filteredProfessionals
 	);
 
+	const [currentPage, setCurrentPage] = useState(1) 
+    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(10)  
+    const iOfLastRecipe = currentPage * proffesionalsPerPage
+    const iOfFirstRecipe = iOfLastRecipe - proffesionalsPerPage
+    const currentProffesionals = professionalsArray.slice(iOfFirstRecipe, iOfLastRecipe) 
+	const paginado = (pageNumber) => {  setCurrentPage(pageNumber) }
 	const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
 	const [nameInputValue, setNameInputValue] = useState('')
 
@@ -39,30 +44,32 @@ const Catalog = (props) => {
 			...prevState,
 			[targetName]: value
 		}))
-}
+    }
 
-// useEffect(() => {
-//  console.log(professionalsArray);
-// }, [professionalsArray])
+    // useEffect(() => {
+    //  console.log(professionalsArray);
+    // }, [professionalsArray])
 
-useEffect(() => {
-	dispatch(getChars());
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+    useEffect(() => {
+	    dispatch(getChars());
+	    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
-function handleReset() {
-	setFilters({name:"", profession:"", rating:""})
-	dispatch(getChars());
-	setNameInputValue('')
-}
+    function handleReset() {
+	    setFilters({name:"", profession:"", rating:""})
+	    dispatch(getChars());
+		setCurrentPage(1)
+	    setNameInputValue('')
+    }
 
-function handleSubmit(e){
-	e.preventDefault()
-	dispatch(filterProfessionals({...filters}))
-	setNameInputValue('')
-	e.target.reset()
-}
+    function handleSubmit(e){
+	    e.preventDefault()
+	    dispatch(filterProfessionals({...filters}))
+		setCurrentPage(1)
+	    setNameInputValue('')
+	    e.target.reset()
+    }
 
 	return (
 		<>
@@ -90,9 +97,18 @@ function handleSubmit(e){
 					<header className={estilos.header}>
 						<span>Catálogo de profesionales</span>
 					</header>
+					<div className={estilos.paginate}>
+                        <Paginate 
+                            key = {1}
+                            proffesionalsPerPage={proffesionalsPerPage}
+                            professionalsArray={professionalsArray.length}   
+                            paginado={paginado}
+                            currentPage={currentPage}
+                        />
+                    </div>
 					<div className={estilos.cardsContainer}>
 						{professionalsArray && professionalsArray.length ? (
-							professionalsArray.map((p, i) => (
+							currentProffesionals.map((p, i) => (
 								<Card
 									key={i}
 									data={{
@@ -101,9 +117,8 @@ function handleSubmit(e){
 								/>
 							))
 						) : (
-							<div>
-								-- NO ENCONTRAMOS PROFESIONALES QUE SE AJUSTEN A TU
-								BUSQUEDA --
+							<div className={estilos.notFind}>
+								-- NO ENCONTRAMOS PROFESIONALES QUE SE AJUSTEN A TU BUSQUEDA --
 							</div>
 						)}
 					</div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { getLocalStorage } from '../../handlers/localStorage';
 import s from './Onboarding.module.scss';
-import Loader from '../Loader/Loader';
+import Loader from '../Login/Loader/Loader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,6 +30,8 @@ const Onboarding = () => {
     mail: email,
     phone: 0,
     country: '',
+    street: '',
+    address: '',
     city: '',
     coordinate: [],
   })
@@ -40,11 +42,13 @@ const Onboarding = () => {
     description: '',
     dni: '',
     city: '',
+    address: '',
+    street: ''
   });
 
-  const [address, setAddress] = useState({
-    street:'',
-    number:'',
+  const [errorGeometry, setErrorGeometry] = useState({
+      error: '',
+      loading: false,
   });
 
   const [countries, setCountries] = useState({
@@ -82,6 +86,10 @@ const Onboarding = () => {
 
 
   const handleChange = (e) => {
+    setErrorGeometry({
+      ...errorGeometry,
+      error: '',
+    })
     setUser({
       ...user,
       [e.target.name]: e.target.value
@@ -90,16 +98,26 @@ const Onboarding = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${address.number},${address.street},${user.city},${user.country}&format=json`);
-    setUser({
-      ...user,
-      coordinate: [response.data[0].lat, response.data[0].lon]
-    }, async (currentUser) => {
-      console.log(currentUser);
-      let response = await axios.post('/users', currentUser);
-      console.log(response);
-      navigate("../", { replace: true })
+    setErrorGeometry({
+      error: '',
+      loading: true,
     })
+    let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${user.address},${user.street},${user.city},${user.country}&format=json`);
+    if(!response.data.length){
+      setErrorGeometry({
+        error: 'Verifica la dirección.',
+        loading: false,
+      })
+    }else{
+      setUser({
+        ...user,
+        coordinate: [response.data[0].lat, response.data[0].lon]
+      }, async (currentUser) => {
+          let response = await axios.post('/users', currentUser);
+          navigate("../", { replace: true })
+          axios.get(`/mails/welcome?name=${currentUser.name}&mail=${currentUser.mail}`  )
+      })
+    }
   }
 
   const handleBack = () => {
@@ -117,7 +135,7 @@ const Onboarding = () => {
       });
 
       try{
-        let response = await axios.get('https://restcountries.com/v3.1/all');
+        let response = await axios.get('https://restcountries.com/v3.1/subregion/South%20America');
         let namesOfCountries = response.data.map(country => country.translations.spa.common);
         namesOfCountries.sort();
         setCountries({
@@ -135,8 +153,8 @@ const Onboarding = () => {
   }, []);
 
   useEffect(() => {
-    setErrors(validators(user, address));
-  }, [user, address]);
+    setErrors(validators(user));
+  }, [user]);
 
 
   return (
@@ -209,19 +227,13 @@ const Onboarding = () => {
                 <div className={s.address}>
                   <div className={s.street}>
                     <label>Calle</label>
-                    <input type="text" value={address.street} onChange={e => setAddress({
-                      ...address,
-                      street: e.target.value
-                    })}/>
+                    <input type="text" name="street" value={user.street} onChange={e => handleChange(e)}/>
                     {errors.street === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.street ? <p className={s.error}>{errors.street}</p> : '')}
                   </div>
                   <div className={s.number}>
                     <label>Número</label>
-                    <input type="text" value={address.number} onChange={e => setAddress({
-                      ...address,
-                      number: e.target.value
-                    })}/>
-                    {errors.number === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.number ? <p className={s.error}>{errors.number}</p> : '')}
+                    <input type="text" name="address" value={user.address} onChange={e => handleChange(e)}/>
+                    {errors.address === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.address ? <p className={s.error}>{errors.address}</p> : '')}
                   </div>
                 </div>
               </div>
@@ -249,7 +261,8 @@ const Onboarding = () => {
                 </div>
               </div>
 
-              <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length}/>
+              {errorGeometry.loading ? <Loader/> : <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length || errorGeometry.error}/>}
+              {errorGeometry.error ? <p className={s.error}>{errorGeometry.error}</p> : ''}
           </form>
         </div>
       </div>)}
