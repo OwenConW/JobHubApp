@@ -60,6 +60,12 @@ const Login = () => {
 						<p>Continuar como invitado</p>
 					</Link>
 				</div>
+
+				<div className={s.ayuda}>
+					<Link to="/faq" className={s.link}>
+						<p>¿Necesitás Ayuda?</p>
+					</Link>
+				</div>
 			</div>
 			<div className={s.description}>
 				<div className={s.text}>
