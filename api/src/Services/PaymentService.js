@@ -2,8 +2,9 @@
   const axios = require("axios");
 
   class PaymentService {
-    async createSubscription() { // mail
+    async createSubscription(mail) {
         const url = "https://api.mercadopago.com/preapproval";
+        console.log("mail: ",mail)
       const body = {
         reason: "Job Hub Premium",
         auto_recurring: {
@@ -12,8 +13,8 @@
           transaction_amount: 4000,
           currency_id: "ARS"
         },
-        back_url: "https://jobhub.vercel.app/profile/success",
-        payer_email: `test_user_67073490@testuser.com`
+        back_url: "http://localhost:3000/profile/success",
+        payer_email: `${mail}`
       };
   
       const subscription = await axios.post(url, body, {
