@@ -98,7 +98,6 @@ const getProffesionalById = async(id) => {
                     attributes: ['id_user_client','description', 'complete'],
                     through: {attributes: []},
                 }
-                
             ]
         })
         return users

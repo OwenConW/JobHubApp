@@ -66,7 +66,17 @@ review.get("/:id", async (req, res, next)=>{
         console.log(error)
         next(error)
     }
+})
 
+review.get("/", async (req, res, next)=>{
+    try {
+        const allReview = await Review.findAll()
+        res.status(200).json(allReview)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
 })
 
 

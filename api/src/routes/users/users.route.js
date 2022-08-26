@@ -113,9 +113,9 @@ users.put('/:id', async (req, res) => {
             street,
             address,
             isProfessional,
+
         })
         await userUpdated.save()
-        let userUpdated2 = await User.findOne({ where: { id }, include: Profession })
         res.status(200).send(`The user "${name}" updated successfully`)
         } catch (error) {
         console.log(error);
@@ -148,6 +148,7 @@ users.get("/:id", (req, res, next) => {
         return res.status(404).send(e);
     })
 })
+
 
 // RUTA PARA PASAR UN USUARIO A PREMIUM
 users.put('/premium/:id', async (req, res) => {
