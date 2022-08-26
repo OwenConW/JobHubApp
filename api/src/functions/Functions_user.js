@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { User, Profession, Review } = require("../db")
+const { User, Profession, Review, Orders } = require("../db")
 
 // GET PROFESSIONAL BY NAME AND FILTER BY PROFESSION AND/OR RATING
 const filterByQueris = async(name, profession, rating) => {
@@ -93,7 +93,12 @@ const getProffesionalById = async(id) => {
                     model: Review,
                     attributes: ['id_orders','feedback_client', 'rating'],
                     through: {attributes: []},
+                },{
+                    model: Orders,
+                    attributes: ['id_user_client','description', 'complete'],
+                    through: {attributes: []},
                 }
+                
             ]
         })
         return users
@@ -164,6 +169,36 @@ const destroyUser = async(id, isActive) => {
     }
 }
 
+//UPDATE USER SIN JOBS
+const updateUserNoJobs = async (id, name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional ) => {
+    try {
+        await User.update({
+            name,
+            last_Name,
+            date_of_Bird,
+            image,
+            dni,
+            mail,
+            phone,
+            description,
+            country,
+            city,
+            coordinate,
+            street,
+            address,
+            isProfessional,
+
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 
 
@@ -175,5 +210,6 @@ module.exports = {
     updateRating,
     updatePremium,
     destroyUser,
+    updateUserNoJobs,
 }
 
