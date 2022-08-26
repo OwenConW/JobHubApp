@@ -170,7 +170,7 @@ const Chat = (props) => {
                             </textarea>
                             <button className="chatSubmitButton" onClick={handleSubmit}>Enviar</button>
                         </div>
-                        </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
+                        </> : <span className="noConversationText">Para utilizar el chat primero debes buscar un profesional para contactarte</span>}
                     </div>
                 </div>
                 {currentChat ? (<ProfessionalPreview id={currentChat.receptor_id === currentUser.id ? currentChat.emisor_id : currentChat.receptor_id}
