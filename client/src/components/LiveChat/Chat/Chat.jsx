@@ -39,11 +39,7 @@ const Chat = (props) => {
 
 
     useEffect(() => {
-        socket.current = io("https://jobhub-pg.herokuapp.com", {
-            cors: {
-                origin: "https://jobhub.vercel.app"
-              }
-        }); //"ws://localhost:3001" "wss://jobhub-pg.herokuapp.com" 
+        socket.current = io("https://jobhub-pg.herokuapp.com"); //"ws://localhost:3001" 
         socket.current.on("getMessage", data => {
             setArriveMessage({
                 sender: data.senderId,
