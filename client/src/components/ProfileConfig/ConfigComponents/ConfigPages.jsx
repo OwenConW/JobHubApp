@@ -1,6 +1,7 @@
 import React from "react";
 import Edit from "./Edit/Edit";
-import ProfessionConfig from './ProfessionConfig/ProffessionConfig'
+import ProfessionConfig from './ProfessionConfig/ProffessionConfig';
+import Orders from './Orders/Orders';
 // import Opinions from './Opinions/Opinions'
 import { getLocalStorage } from '../../../handlers/localStorage.js';
 
@@ -8,7 +9,7 @@ import { getLocalStorage } from '../../../handlers/localStorage.js';
 const ConfigPages = (configPage) => {
     const activeUser = getLocalStorage()
     let option = configPage.configPage
-
+    
     if (option === 'edit') {
         return (
             <Edit />
@@ -16,10 +17,17 @@ const ConfigPages = (configPage) => {
     }
 
     // if (option === 'notifications') {
-    //     return (
+    //     return (d
     //         <Edit/>
     //         )
     // }
+
+    if (option === 'orders') {
+        return (
+            <Orders />
+        )
+    }
+
 
 
     if (option === 'professions') {
@@ -35,13 +43,11 @@ const ConfigPages = (configPage) => {
         // <Opinions />
     }
 
-
     // if (option === 'premium') {
     //     return (
     //         <Edit/>
     //         )
     // }
-
 }
 
 
