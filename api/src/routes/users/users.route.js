@@ -11,7 +11,6 @@ const users = Router()
 // RUTA QUE TRAE TODOS LOS USUARIOS O FILTRA POR PROFESION Y/O RATING 
 users.get("/", (req, res, next) => {
     const {name, rating, profession } = req.query;
-    console.log('buenas como andan')
     functions.filterByQueris(name, profession, rating)
     .then(professionals => {
         return res.status(200).send(professionals);
@@ -28,12 +27,12 @@ users.post("/", async (req, res, next) =>{
     const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
-    
+    const mailMinuscule = mail.toLowerCase();
     try {
         if( name &&  last_Name && mail && country  && city && coordinate ){
             const [newUser, created] = await User.findOrCreate({
                 where:{
-                    mail,
+                    mail: mailMinuscule
                 },
                 defaults:{
                     name: nameMinuscule,

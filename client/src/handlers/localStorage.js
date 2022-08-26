@@ -1,6 +1,6 @@
 
 export const setUserLocalStorage = (user) => {
-    localStorage.setItem('user', JSON.stringify({...user, name: user.name[0].toUpperCase() + user.name.substring(1), last_Name: user.last_Name[0].toUpperCase() + user.last_Name.substring(1)}));
+    localStorage.setItem('user', JSON.stringify(user));
 }
 
 export const getLocalStorage = () => {

@@ -6,35 +6,29 @@ import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
 import plusLogo from './assets/PlusLogo.svg'
 import rocket from './assets/Rocket.svg'
-
 import Navbar from "../Navbar/Navbar";
 import CardProfileMap from '../CardProfileMap/CardProfileMap.jsx'
 import { getLocalStorage } from "../../handlers/localStorage";
-import defaultimage from './assets/deafultimage.png'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
-import axios from "axios";
-import { getCharsById } from '../../redux/userActions'
-import { useNavigate } from "react-router-dom";
 import PremiumModal from "./premiumModal/PremiumModal";
-import { useEffect } from "react";
 
 
 //ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
-let activeUser = {
-  name: "lionel test nuevo",
-  last_Name: "messi",
-  description: "hola mi nombre es lio messi trucho y esto es disney CHANNEL",
-  mail: "test_user_8943112@testuser.com",
-  dni: "83.332.125",
-  image: "not image",
-  phone: "1656158172",
-  country: "Rusia",
-  // postal_code: "1406",
-  city: "Moscu",
-  coordinate: ["421", "-22"],
-  professions: [{ name: "extraterrestre" }, { name: "sovietico" }, { name: "militar" }, { name: "armamentista" }, { name: "electricista" }, { name: "gasista" }, { name: "programador" }],
-  isPremium: false
-}
+// let activeUser = {
+//   name: "lionel test nuevo",
+//   last_Name: "messi",
+//   description: "hola mi nombre es lio messi trucho y esto es disney CHANNEL",
+//   mail: "test_user_8943112@testuser.com",
+//   dni: "83.332.125",
+//   image: "not image",
+//   phone: "1656158172",
+//   country: "Rusia",
+//   // postal_code: "1406",
+//   city: "Moscu",
+//   coordinate: ["421", "-22"],
+//   professions: [{ name: "extraterrestre" }, { name: "sovietico" }, { name: "militar" }, { name: "armamentista" }, { name: "electricista" }, { name: "gasista" }, { name: "programador" }],
+//   isPremium: false
+// }
 
 const Profile = () => {
   
@@ -44,10 +38,7 @@ const Profile = () => {
   setModalActive(!modalActive)
   }
   let activeUser = getLocalStorage();
-
-  
-
-  
+  console.log(activeUser)
   return (
     <>
       <Navbar />
@@ -57,7 +48,7 @@ const Profile = () => {
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             <div className={s.profile_Img_container}>
-              {activeUser.image ? <img src={activeUser.image} className={s.profile_Img} /> : <img src={defaultimage} className={s.profile_Img} />}
+              <img src={activeUser.image} className={s.profile_Img}></img>
             </div>
             <div className={s.profileDetail}>
               <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>

@@ -3,6 +3,7 @@ import React from 'react';
 //assets
 import logo from './assets/logo.svg';
 import defaultimage from './assets/deafultimage.png';
+import chatlogo from './assets/chat.png';
 
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
@@ -18,6 +19,11 @@ import { getLocalStorage } from '../../handlers/localStorage';
 const Navbar = () => {
 	const { isAuthenticated, logout } = useAuth0();
 	const activeUser = getLocalStorage();
+
+	const handleLogout = () => {
+        logout();
+        localStorage.clear();
+    }
 
 	return (
 		<div className={s.container}>
@@ -43,7 +49,10 @@ const Navbar = () => {
 			<div className={s.profile}>
 				{isAuthenticated ? (
 					<div className={s.user}>
-						<div className={s.link} onClick={() => logout()}>
+						<Link to={`/chat`} className={s.link}>
+							<img src={chatlogo} alt="chat" />
+						</Link>
+						<div className={s.link} onClick={handleLogout}>
 							Logout
 						</div>
 						<Link to={'/profile'} className={s.profileimg}>
