@@ -35,7 +35,7 @@ const Chat = (props) => {
             socket.current.emit("QuitFromChat", currentUser.id)
             socket.current.disconnect()
         }
-    }, [currentUser.id])
+    }, [])
 
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const Chat = (props) => {
                 crearedAt: Date.now()
             })
         })
-    }, [socket, currentUser])
+    }, [])
 
     useEffect(() => {
         arriveMessage && (currentChat?.receptor_id === arriveMessage.sender || currentChat?.emisor_id === arriveMessage.sender )  &&
@@ -59,7 +59,7 @@ const Chat = (props) => {
         socket.current.on("getUsers", users => {
             setOnlineUsers(users);
          })
-    }, [currentUser.id])
+    }, [currentUser])
 
 
     const handleSubmit = async (e) => {
@@ -96,7 +96,7 @@ const Chat = (props) => {
             }
         }
         getConversations()
-    }, [currentUser.id, currentChat])
+    }, [currentUser.id])
   
     useEffect(() => {
         const getMessages = async () => {
@@ -112,7 +112,7 @@ const Chat = (props) => {
 
     useEffect(() => {
         scrollRef.current?.scrollIntoView({behavior: "smooth"})
-    }, [messages])
+    }, [])
 
     useEffect(() => {
         const friendId = currentChat?.emisor_id === currentUser.id
@@ -128,7 +128,7 @@ const Chat = (props) => {
             }
         }
         getImage();
-    }, [currentChat])
+    }, [currentChat, currentUser.id])
 
     return (
   
