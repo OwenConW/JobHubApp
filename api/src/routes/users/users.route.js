@@ -20,7 +20,17 @@ users.get("/", (req, res, next) => {
     })
 })
 
-
+//RUTA QUE TRAE TODOS LOS USUARIOS SIN FILTRO
+users.get("/all", async (req, res, next)=>{
+    try {
+        const allUsers = await User.findAll()
+        res.status(200).json(allUsers)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
 
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
@@ -79,7 +89,8 @@ users.put('/:id', async (req, res) => {
     const { id } = req.params
     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
     try {
-        const userUpdated = await User.findOne({ where: { id }, include: Profession })
+        if(profession){
+            const userUpdated = await User.findOne({ where: { id }, include: Profession })
         const oldProfession = userUpdated.professions.map(obj => obj.dataValues.id)
         await userUpdated.removeProfession(oldProfession)
 
@@ -103,6 +114,8 @@ users.put('/:id', async (req, res) => {
             isProfessional,
         })
         await userUpdated.save()
+        } await User.update
+        
         res.status(200).send(`The user "${name}" updated successfully`)
     } catch (error) {
         console.log(error);
@@ -110,10 +123,20 @@ users.put('/:id', async (req, res) => {
     }
 })
 
-
+//RUTA PARA EDITAR USUARIO SIN JOBS
+users.put("/edit/:id" , async (req, res) => {
+    const { id } = req.params
+    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
+    try {
+        await functions.updateUserNoJobs(id, name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession)
+        return res.status(200).send(`The user "${name}" updated successfully`)
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error)
+    }
+})
 
 // RUTA QUE BUSCA USUARIOS POR ID
-
 users.get("/:id", (req, res, next) => {
     const { id } = req.params;
     functions.getProffesionalById(id * 1)
