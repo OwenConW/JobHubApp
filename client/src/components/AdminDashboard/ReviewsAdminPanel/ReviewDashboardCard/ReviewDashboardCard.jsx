@@ -5,7 +5,7 @@ import s from './ReviewDashboardCard.module.scss'
 function ReviewDashboardCard(props) {
   const { id, id_orders, id_user_professional, id_user_client, feedback_client, rating, isActive } = props;
 
-  const [editModalActive, setEditModalActive] = useState(true)
+  const [editModalActive, setEditModalActive] = useState(false)
 
   function handleEditOpenModal(e) {
     setEditModalActive(!editModalActive)
@@ -56,10 +56,7 @@ function ReviewDashboardCard(props) {
         <h4>Activa?</h4>
         <h4>{isActive ? "Si" : "No"}</h4>
       </div>
-      {
-      isActive ? <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button> :
-                 <button className={s.restoreBtn} onClick={handleRestore}>Restaurar</button>
-      }
+      <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button>
       <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>
     </div>
   </div>

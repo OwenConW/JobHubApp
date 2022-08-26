@@ -15,7 +15,11 @@ import {
   fetchingAdminDeleteReview,
   fetchingAdminDeleteReviewSuccess,
   fetchingAdminDeleteReviewFailure,
-  fetchingAdminDeleteReviewReset
+  fetchingAdminDeleteReviewReset,
+  fetchingAdminEditReview,
+  fetchingAdminEditReviewSuccess,
+  fetchingAdminEditReviewFailure,
+  fetchingAdminEditReviewReset
 } from './fetchingSlice.js';
 
 // ======================= ACTIONS PARA USERS =================================
@@ -71,9 +75,20 @@ export const getAllReviewsForAdmin = () => (dispatch) => {
 }
 
 
+export const editReview = (id, payload) => (dispatch) => {
+  dispatch(fetchingAdminEditReview())
+  axios.put(`/review/${id}`, payload)
+    .then(res => {
+      dispatch(fetchingAdminEditReviewSuccess())
+      dispatch(getAllReviews())
+    })
+    .catch(e => console.error(e))
+    dispatch(fetchingAdminEditReviewFailure())
+}
+
 // export const deleteReviews = (id) => (dispatch) => {
 //   dispatch(fetchingAdminDeleteReview())
-//   axios.put(`/review/destroy/${id}`, {isActive: false})
+//   axios.delete(`/review/destroy/${id}`, {isActive: false})
 //       .then(r => {
 //         dispatch(fetchingAdminDeleteReviewSuccess())
 //         dispatch(getAllReviews())

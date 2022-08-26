@@ -1,11 +1,15 @@
-import React,  { useState } from "react";
-import { useEffect } from "react";
+import React,  { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editReview } from '../../../../../redux/adminActions'
 import s from './ReviewEditModal.module.scss'
 
 function ReviewEditModal(props) {
-  const { id, id_orders, id_user_professional, id_user_client, feedback_client, rating, isActive } = props;
-
+  const { id, id_orders, id_user_professional, id_user_client, feedback_client, rating, isActive, handleEditOpenModal, editModalActive } = props;
+  const dispatch = useDispatch()
   const [reviewData, setReviewData] = useState({...props})
+
+  const fetchingAdminEditReviewSuccess = useSelector(state => state.fetching.fetchingAdminEditReviewSuccess)
+  const fetchingAdminEditReviewFailure = useSelector(state => state.fetching.fetchingAdminEditReviewFailure)
 
   function handleChange(e) {
     setReviewData({...reviewData, [e.target.name]: e.target.value})
@@ -16,12 +20,15 @@ function ReviewEditModal(props) {
   }
 
   function handleEdit(e) {
-     
+     if (e.target.name === "cancel-btn") return handleEditOpenModal()
+    dispatch(editReview(id, reviewData))
   }
 
   useEffect(() => {
-    console.log(reviewData);
-  }, [reviewData])
+    if (fetchingAdminEditReviewSuccess) {
+      handleEditOpenModal(!editModalActive)   
+    }
+  },[fetchingAdminEditReviewSuccess])
 
   return (
     <div className={s.modalMainContainer}>

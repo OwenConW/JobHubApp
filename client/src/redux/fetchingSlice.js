@@ -24,6 +24,11 @@ export const fetchingSlice = createSlice({
 		fetchingAdminDeleteReview: false,
 		fetchingAdminDeleteReviewSuccess: false,
 		fetchingAdminDeleteReviewFailure: false,
+		//Edit
+		fetchingAdminEditReview: false,
+		fetchingAdminEditReviewFailure: false,
+		fetchingAdminEditReviewSuccess: false,
+
 	},
 	reducers: {
 		fetchingMercadopagoLink: (state, action) => {
@@ -87,20 +92,38 @@ export const fetchingSlice = createSlice({
 
 		//DeleteHandling
 		fetchingAdminDeleteReview: (state, action) => {
-			state.fetchingAdminDeleteUser = true
+			state.fetchingAdminDeleteReview = true
 		},
 		fetchingAdminDeleteReviewSuccess: (state, action) => {
-			state.fetchingAdminDeleteUser = false
-			state.fetchingAdminDeleteUserSuccess = true
+			state.fetchingAdminDeleteReview = false
+			state.fetchingAdminDeleteReviewSuccess = true
 		},
 		fetchingAdminDeleteReviewFailure: (state, action) => {
-			state.fetchingAdminDeleteUser = false
-			state.fetchingAdminDeleteUserFailure = true
+			state.fetchingAdminDeleteReview = false
+			state.fetchingAdminDeleteReviewFailure = true
 		},
 		fetchingAdminDeleteReviewReset: (state, action) => {
-			state.fetchingAdminDeleteUser = false
-			state.fetchingAdminDeleteUserFailure = false
-			state.fetchingAdminDeleteUserSuccess = false
+			state.fetchingAdminDeleteReview = false
+			state.fetchingAdminDeleteReviewFailure = false
+			state.fetchingAdminDeleteReviewSuccess = false
+		},
+
+		//EditHandling
+		fetchingAdminEditReview: (state, action) => {
+			state.fetchingAdminEditReview = true
+		},
+		fetchingAdminEditReviewSuccess: (state, action) => {
+			state.fetchingAdminEditRevieww = false
+			state.fetchingAdminEditReviewSuccess = true
+		},
+		fetchingAdminEditReviewFailure: (state, action) => {
+			state.fetchingAdminEditReview = false
+			state.fetchingAdminEditReviewFailure = true
+		},
+		fetchingAdminEditReviewReset: (state, action) => {
+			state.fetchingAdminEditReview = false
+			state.fetchingAdminEditReviewFailure = false
+			state.fetchingAdminEditReviewSuccess = false
 		},
 	},
 });
@@ -121,6 +144,10 @@ export const { fetchingMercadopagoLink,
 							 fetchingAdminDeleteReview,
 							 fetchingAdminDeleteReviewSuccess,
 							 fetchingAdminDeleteReviewFailure,
-							 fetchingAdminDeleteReviewReset
+							 fetchingAdminDeleteReviewReset,
+							 fetchingAdminEditReview,
+							 fetchingAdminEditReviewSuccess,
+							 fetchingAdminEditReviewFailure,
+							 fetchingAdminEditReviewReset
 							} = fetchingSlice.actions;
 export default fetchingSlice.reducer;
