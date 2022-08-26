@@ -14,7 +14,6 @@ const Accordion = ({ questionsAnswers }) => {
         fontWeightBold={fontWeightBold}
         ariaExpanded={ariaExpanded}
         item={item}
-        key={index}
         index={index}
         onClick={() => {
           index === activeIndex ? setActiveIndex(-1) : setActiveIndex(index)

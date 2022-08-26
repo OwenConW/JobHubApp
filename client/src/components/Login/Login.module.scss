@@ -69,27 +69,6 @@
 				}
 			}
 		}
-
-		.ayuda {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin-top: 5%;
-
-			.link {
-				transition: 0.5s;
-				font-size: 1.6rem;
-				color: #464545bf;
-				text-decoration: underline;
-
-				&:hover {
-					transition: 0.5s;
-					scale: 1.02;
-					cursor: pointer;
-					color: #626161bf;
-				}
-			}
-		}
 	}
 
 	.description {
