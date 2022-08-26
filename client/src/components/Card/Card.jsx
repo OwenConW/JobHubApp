@@ -5,9 +5,12 @@ import s from './Card.module.scss';
 import { Link } from 'react-router-dom';
 import star from './assets/Star.svg';
 import details_interior from './assets/Det_interior.svg';
+import * as functions from "../../handlers/localStorage"
+
 
 // const Card = ({ id, name, lastName, city, province, rating, name_job, image }) => {
 function Card(props) {
+	const currentUser = functions.getLocalStorage()
 	let { id, name, last_Name, city, country, name_job, image } =
 		props.data;
 
@@ -38,11 +41,24 @@ function Card(props) {
 						</div>
 					</div>
 					<div className={s.detail}>
-						<Link to={`/details/${id}`} className={s.detailLink}>
-						<div className={s.btn}>
+						{
+							currentUser?.id * 1 === id * 1 
+							? (
+							<Link to={`/profile`} className={s.detailLink}>
+							<div className={s.btn}>
 							<img src={details_interior} alt="details" />
-						</div>
-						</Link>
+							</div>
+							</Link>
+							)
+							: (
+							<Link to={`/details/${id}`} className={s.detailLink}>
+							<div className={s.btn}>
+							<img src={details_interior} alt="details" />
+							</div>
+							</Link>
+							)
+						}
+						
 					</div>
 				</div>
 				<div className={s.top}></div>
