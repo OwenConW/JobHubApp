@@ -1,0 +1,68 @@
+.conversation{
+    display: flex;
+    width: 80%;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(109, 109, 109, 0.356);
+
+
+    &:hover{
+        background-color: rgba(226, 225, 225, 0.767);
+    }
+
+    .chatOnlineImgContainer{
+        position: relative;
+        margin-right: 10px;
+
+        .conversationImg{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 10px solid rgba(91, 91, 91, 0.165);
+        }
+
+        .chatOnlineBadge{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: limegreen;
+            position: absolute;
+            top: 2px;
+            right: 25px;
+        }
+
+        .chatOnlineBadgeNo{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: rgb(205, 50, 50);
+            position: absolute;
+            top: 2px;
+            right: 25px;
+        }
+    }
+
+
+    .dataChat{
+        width: 80%;
+        .conversationName{
+            font-size: 2.0rem;
+            font-weight: 400;
+            text-transform: capitalize;
+        }
+
+        .profession{
+            text-transform: capitalize;
+            color: rgba(33, 33, 33, 0.767);
+            font-size: 1.6rem;
+            font-weight: 300;
+        }
+    }
+}
+

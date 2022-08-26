@@ -9,18 +9,36 @@ const Review = require('../../models/Review.js');
 const conversation = Router()
 
 // new conv
-conversation.post("/", (req, res, next) => {
+conversation.post("/", async (req, res, next) => {
     const { emisor_id,  receptor_id } = req.body
-    Conversation.create({
-        emisor_id,
-        receptor_id
-    })
-    .then(newConversation => {
+    try{
+        if(emisor_id === receptor_id) return res.status(404).send('No puedes cordinar contigo mismo.');
+        const [newConversation, conversation] = await Conversation.findOrCreate({
+            where: {
+                [Op.or]: [{
+                    [Op.and]: [
+                        {emisor_id},
+                        {receptor_id}
+                    ]},
+                    {[Op.and]: [
+                        {emisor_id: receptor_id},
+                        {receptor_id: emisor_id}
+                    ]}
+                ]
+
+            },
+            defaults: {
+                emisor_id,
+                receptor_id
+            }
+
+        })
         return res.send(newConversation)
-    }, (e) => {
+    }catch(e){
         console.log(e)
-        return res.send(e)
-    })
+        return res.status(404).send(e)
+    }
+
 })
 
 conversation.get("/:userId", async(req, res, next) => {
