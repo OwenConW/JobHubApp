@@ -40,5 +40,17 @@ orders.put("/:id", async (req, res, next) =>{
     }
 })
 
+// RUTA PARA ELIMINAR LAS ORDENES
+orders.delete("/admin/:id", async (req, res, next)=>{
+    const {id} = req.params
+    try{
+        await Orders.destroy({
+            where:{id:id}
+        }) 
+        res.status(201).send("The order was successfully deleted")
+    } catch (error) {
+        next(error)
+    }
+})
 
 module.exports = orders;

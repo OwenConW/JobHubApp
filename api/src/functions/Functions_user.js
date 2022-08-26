@@ -98,7 +98,6 @@ const getProffesionalById = async(id) => {
                     attributes: ['id_user_client','description', 'complete'],
                     through: {attributes: []},
                 }
-                
             ]
         })
         return users
@@ -199,6 +198,74 @@ const updateUserNoJobs = async (id, name, last_Name, date_of_Bird, image, dni, m
     }
 }
 
+// //FILTRADO DE USUARIOS PREMIUM MEJORES RANKEADOS
+// const searchUsersPremium = async () =>{
+//     try {
+//         const userPremium = await User.findAll({
+//             where:{
+//                 isProfessional: 'true',
+//                 isPremium: 'true',
+//             },
+//             attributes:{
+//                 exclude:['createdInDb','createdAt','updatedAt']
+//             },
+//             limit: 3,
+//             order: [["rating", "ASC"]],
+//             include:[
+//                 {
+//                     model: Profession,
+//                     attributes: ['name'],
+//                     through: {attributes: []},
+//                 },
+//                 {
+//                     model: Review,
+//                     attributes: ['id_user_client','id_orders','feedback_client', 'rating'],
+//                     through: {attributes: []},
+//                 }
+//             ],
+//         })
+//     console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',userPremium)
+//         return userPremium
+//     } catch (error) {
+//         console.log(error)
+//         throw error
+//     }
+// }
+
+// //FILTRADO DE USUARIOS MEJORES RANKEADOS NO PREMIUM
+// const searchUsersNoPremium = async () =>{
+//     try {
+//         const userNoPremium = await User.findAll({
+//             where:{
+//                 isProfessional: 'true',
+//                 isPremium: 'false',
+//             },
+//             attributes:{
+//                 exclude:['createdInDb','createdAt','updatedAt']
+//             },
+//             limit: 3,
+//             order: [["rating", "ASC"]],
+//             include:[
+//                 {
+//                     model: Profession,
+//                     attributes: ['name'],
+//                     through: {attributes: []},
+//                 },
+//                 {
+//                     model: Review,
+//                     attributes: ['id_user_client','id_orders','feedback_client', 'rating'],
+//                     through: {attributes: []},
+//                 }
+//             ],
+//         })
+//         console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',userNoPremium)
+//         return userNoPremium
+//     } catch (error) {
+//         console.log(error)
+//         throw error
+//     }
+// }
+
 
 
 
@@ -211,6 +278,7 @@ module.exports = {
     updatePremium,
     destroyUser,
     updateUserNoJobs,
-    updateUserNoJobs
+    // searchUsersPremium,
+    // searchUsersNoPremium
 }
 
