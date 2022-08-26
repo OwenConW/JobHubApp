@@ -8,8 +8,10 @@ export function changeValidator (localStorage, user) {
 }
 
 export function PremiumValidator (premium, professions) {
-    if(!premium && professions.length > 0){
-        return true
+    if(professions){
+        if(!premium && professions.length > 0){
+            return true
+        }
     }
     return false
 }

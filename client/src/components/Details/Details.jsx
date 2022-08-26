@@ -9,8 +9,8 @@ import Navbar from "../Navbar/Navbar";
 import CardReview from './CardReview/CardReview.jsx'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import ReviewBox from "./ReviewBox/ReviewBox.jsx"
-import { getCharsById } from '../../redux/userActions';
 import { useParams, useNavigate } from "react-router-dom";
+import { getChars, getCharsById } from '../../redux/userActions';
 import defaultimage from './assets/deafultimage.png';
 import axios from "axios";
 
@@ -24,10 +24,12 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate  = useNavigate();
   const professional = useSelector((state) => state.users.detail);
+  const allUsers = useSelector((state) => state.users.users)
   const id = params.id;
 
   useEffect(() => {
     dispatch(getCharsById(id))
+    dispatch(getChars())
   }, [])
 
   const onCoordinate = async() => {
@@ -71,8 +73,14 @@ const Profile = () => {
             <p className={s.orderText}>Mejores Reseñas</p>
 
             <div className={s.lastOrders}>
-              <CardReview />
-              <CardReview />
+              {
+                professional.reviews && professional.reviews.map(review => {
+                  let reviewer = allUsers.find(user => user.id === review.id_user_client)
+                  return (
+                  <CardReview dataObj={review} reviewer={reviewer} key={review.id_orders}/>
+                )})
+              }
+             
             </div>
           </div>
           <div className={s.configBox}>

@@ -13,24 +13,10 @@ import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import PremiumModal from "./premiumModal/PremiumModal";
 import * as functions from "../../handlers/localStorage";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getCharsById } from "../../redux/userActions";
+import { useEffect } from "react";
 
-
-//ESTADO HARCODEADO PARA HACER PRUEBAS EN PROFILE
-// let activeUser = {
-//   name: "lionel test nuevo",
-//   last_Name: "messi",
-//   description: "hola mi nombre es lio messi trucho y esto es disney CHANNEL",
-//   mail: "test_user_8943112@testuser.com",
-//   dni: "83.332.125",
-//   image: "not image",
-//   phone: "1656158172",
-//   country: "Rusia",
-//   // postal_code: "1406",
-//   city: "Moscu",
-//   coordinate: ["421", "-22"],
-//   professions: [{ name: "extraterrestre" }, { name: "sovietico" }, { name: "militar" }, { name: "armamentista" }, { name: "electricista" }, { name: "gasista" }, { name: "programador" }],
-//   isPremium: false
-// }
 
 const Profile = () => {
   //success?preapproval_id=x
@@ -46,12 +32,23 @@ const Profile = () => {
     axios.put(`/premium/${currentUser.id}`, true)
   }
 
+
   const [modalActive, setModalActive] = useState(false)
+  let myUser = getLocalStorage();
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getCharsById(myUser.id))
+  }, [])
+
+  const activeUser = useSelector((state) => state.users.detail);
+
+
 
   const handlePremiumModal = async () => {
   setModalActive(!modalActive)
   }
-  let activeUser = getLocalStorage();
+ 
   console.log(activeUser)
   return (
     <>
