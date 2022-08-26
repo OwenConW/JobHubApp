@@ -59,6 +59,25 @@
             width: 90%;
             height: 90%;
 
+            .link{
+                width: 25%;
+                height: 90%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img{
+                    transition: 0.3s;
+                    width: 70%;
+                    height: 60%;
+
+                    &:hover{
+                        transition: 0.3s;
+                        scale: 1.1;
+                    }
+                }
+            }
+
             .profileimg{
                 transition: 0.5s;
                 width: 20%;

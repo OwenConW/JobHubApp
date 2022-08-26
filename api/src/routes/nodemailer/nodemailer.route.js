@@ -35,4 +35,28 @@ mails.get("/premiumspam", (req, res, next) => {
 })
 
 
+mails.get("/welcome", (req, res, next) => {
+    const { mail, name} = req.query
+    console.log("datos:", mail, name)
+    transporter.sendMail({
+        from: `"Job Hub App" <jobhub@gmail.com>`,
+        to: mail,
+        subject: "Bienvenido a JobHubApp!",
+        html: `
+        <h1>Hola ${name}!!!</h1>
+        <br></br>
+        
+        <b>©JobHubApp 2022</b>
+        `
+    })
+    .then(() => {
+        return res.send(`Mail enviado con éxito a ${mail}`)
+    })
+    .catch(e => {
+        console.log(e)
+        return res.status(404).send(e)
+    }) 
+})
+
+
 module.exports = mails;

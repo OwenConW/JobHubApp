@@ -1,32 +1,41 @@
 import React, { useEffect, useState, useRef  } from "react"
-// , useEffect, useRef } 
-// import { useParams } from "react-router-dom"
-// import socket from "./Socket"
 import NavBar from "../../Navbar/Navbar"
 import Conversation from "../Conversations/Conversation"
 import Message from "../Message/Message"
-import ChatOnline from "../ChatOnline/ChatOnline"
 import * as functions from "../../../handlers/localStorage"
 import "./Chat.css"
 import axios from "axios"
 import { io } from "socket.io-client"
 import { useNavigate } from "react-router"
 import { useAuth0 } from '@auth0/auth0-react';
+import ProfessionalPreview from "../ProfessionalPreview/ProfessionalPreview"
 
 const Chat = (props) => {
 
     const navigate = useNavigate()
 
     const { isAuthenticated } = useAuth0();
+    const [currentImage, setCurrentImage] = useState('');
     const [conversations, setConversations] = useState([])
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
     const [arriveMessage, setArriveMessage] = useState(null)
-    // const [onlineUsers, setOnlineUsers] = useState([])
+    const [onlineUsers, setOnlineUsers] = useState([])
     const socket = useRef()
     const currentUser = functions.getLocalStorage()
     const scrollRef = useRef()
+
+
+    if(!isAuthenticated) navigate("/")
+
+
+    useEffect(() => {
+        return () => {
+            socket.current.emit("QuitFromChat", currentUser.id)
+            socket.current.disconnect()
+        }
+    }, [currentUser.id])
 
 
     useEffect(() => {
@@ -38,7 +47,7 @@ const Chat = (props) => {
                 crearedAt: Date.now()
             })
         })
-    }, [])
+    }, [socket, currentUser])
 
     useEffect(() => {
         arriveMessage && (currentChat?.receptor_id === arriveMessage.sender || currentChat?.emisor_id === arriveMessage.sender )  &&
@@ -48,9 +57,9 @@ const Chat = (props) => {
     useEffect(() => {
         socket.current.emit("addUser", currentUser.id)
         socket.current.on("getUsers", users => {
-            console.log(users)
+            setOnlineUsers(users);
          })
-    }, [currentUser])
+    }, [currentUser.id])
 
 
     const handleSubmit = async (e) => {
@@ -87,7 +96,7 @@ const Chat = (props) => {
             }
         }
         getConversations()
-    }, [currentUser.id])
+    }, [currentUser.id, currentChat])
   
     useEffect(() => {
         const getMessages = async () => {
@@ -105,20 +114,36 @@ const Chat = (props) => {
         scrollRef.current?.scrollIntoView({behavior: "smooth"})
     }, [messages])
 
+    useEffect(() => {
+        const friendId = currentChat?.emisor_id === currentUser.id
+        ? currentChat?.receptor_id
+        : currentChat?.emisor_id
+
+        const getImage = async () => {
+            try{
+                let response = await axios.get(`/users/${friendId}`);
+                setCurrentImage(response?.data.image);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        getImage();
+    }, [currentChat])
+
     return (
   
         <>
-         <NavBar/>{
-             isAuthenticated ? (
+         <NavBar/>
+            {
                 <div className="messenger">
                 <div className="chatMenu">
                     <div className="chatMenuWrapper">
-                        <input placeholder="Buscar profesionales..." className="chatMenuInput"/>
-                        {conversations && conversations.length && conversations.map((c, i) => (
+                        <h3 className='headerChats'>Chats</h3>
+                        {conversations?.map((c, i) => (
                             <div onClick={() => {
                                 setCurrentChat(c)
                             }}>
-                            <Conversation key={i} conversations={c} currentUser={currentUser}/>
+                            <Conversation key={i} conversations={c} currentUser={currentUser} online={onlineUsers}/>
                             </div>
                         ))}
                     </div>
@@ -132,7 +157,7 @@ const Chat = (props) => {
                             {
                                 messages.map(m => (
                                     <div ref={scrollRef}>
-                                    <Message message={m} own={m.sender === currentUser.id} current={currentUser}/>
+                                    <Message message={m} own={m.sender === currentUser.id} current={currentUser} friendImage={currentImage}/>
                                     </div>
                                 ))
                             }
@@ -146,70 +171,14 @@ const Chat = (props) => {
                             <button className="chatSubmitButton" onClick={handleSubmit}>Enviar</button>
                         </div>
                         </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
-                    </div>  
+                    </div>
                 </div>
-                <div className="chatOnline">
-                    <div className="chatOnlineWrapper">
-                        <ChatOnline/>
-                    </div>   
-                </div>
+                {currentChat ? (<ProfessionalPreview id={currentChat.receptor_id === currentUser.id ? currentChat.emisor_id : currentChat.receptor_id}
+                />) : ''}
             </div>
-             ): navigate("/")
-         }
-              
+            }
         </>
     )
 }
 
 export default Chat
-
-// let {id} = useParams()
-    
-// useEffect(() =>{
-//     console.log(id)
-//     const res = functions.getLocalStorage()
-//     Object.keys(res).lenght ? setUser(res.name) : setUser("Invitado")
-//     // socket.emit("join", {id1: props.match.params.query})
-// }, [])
-
-// const [user, setUser] = useState("")
-// const [message, setMessage] = useState("")
-// const [messagesSent, setMessagesSent] = useState([]);
-
-// useEffect(() => {
-//     socket.emit("conectado", user)
-// }, [user])
-
-// useEffect(() => {
-//     socket.on("mensajes", mensaje => {
-//         setMessagesSent([...messagesSent, mensaje])
-//     })
-//     return () => {
-//         socket.off()
-//     }
-// }, [messagesSent])
-
-// const divRef = useRef(null)
-
-// useEffect(() => {
-//     divRef.current.scrollIntoView({ behavior: "smooth"})
-// })
-
-// const handleSubmit = (e) => {
-//     e.preventDefault()
-//     socket.emit("mensaje", user, message)
-//     setMessage("")
-// }
-
-
-/* <div className="chat">
-{messagesSent.map((e, i) => <div key={i}><b>{`${e.nombre}:    `}</b><b>{e.mensaje}</b></div>)}
-<div ref={divRef}></div>
-</div>
-<div>
-<form onSubmit={handleSubmit} className="form">
-<label>Escriba su mensaje:</label>
-<input value={message} onChange={(e) => setMessage(e.target.value) }></input>
-<button type="submit">Enviar</button>
-</form>
-</div> */
