@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import s from './Details.module.scss';
-import userImg from './assets/userimage.jpg'
 
 import Navbar from "../Navbar/Navbar";
 import CardReview from './CardReview/CardReview.jsx'
@@ -27,7 +26,7 @@ let params = useParams();
 
   useEffect(() => {
     dispatch(getCharsById(id))
-  }, [])
+  }, [dispatch, id])
 
 
   return (
@@ -38,7 +37,7 @@ let params = useParams();
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             <div className={s.profile_Img_container}>
-              {professional.image ? <img src={professional.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
+              {professional.image ? <img src={professional.image} className={s.profile_Img} alt="professional-img"/> : <img src={defaultimage} className={s.profile_Img} alt="professional-default-img"/>}
             </div>
             <div className={s.profileDetail}>
               <div className={s.name}>{professional.name} {professional.last_Name}</div>

@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
-import Card from '../Card/Card'
 import { getChars } from '../../redux/userActions';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,21 +25,27 @@ function AdminDashboard() {
   }, [dispatch]);
 
   return (
-    <div>
-      <Navbar />
-      <h1>Admin Dashboard</h1>
+    <div className={s.mainContainer}>
+    <Navbar />
+      <h1 className={s.title}>Admin Dashboard</h1>
+      <div className={s.menuAndDisplayContainer}>
+        <div className={s.menuContainer}>
+          <button>Users</button>
+          <button>Reviews</button>
+        </div>
 
-      <div className={s.searchByNameContainer}>
-        <form>
-          <label>Buscar usuario por nombre:</label>
-          <input type="text" name="name"/>
-        </form>
-        <div className={s.cardsContainer}>
-          {users.map( u => {
-            return(
-              <DashboardUserCard key={u.id} {...u} />
-            )
-          })}
+        <div className={s.searchByNameAndUsersContainer}>
+          <form>
+            <label>Buscar usuario por nombre:</label>
+            <input type="text" name="name"/>
+          </form>
+          <div className={s.cardsContainer}>
+            {users.map( u => {
+              return(
+                <DashboardUserCard key={u.id} {...u} />
+              )
+            })}
+          </div>
         </div>
       </div>
     </div>

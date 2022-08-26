@@ -3,7 +3,6 @@ import s from './PremiumModal.module.scss'
 import { useDispatch, useSelector } from "react-redux";
 import { actionFetchingMercadopagoLink, 
          actionClearMercadopagoRedirectLink, 
-         actionFetchingMercadopagoLinkFailure, 
          actionSetFetchingMercadoPagoLinkFalse } from '../../../redux/fetchingActions'
 import { useEffect } from "react";
 
@@ -41,7 +40,7 @@ function PremiumModal(props) {
 
   useEffect(() => {
     dispatch(actionSetFetchingMercadoPagoLinkFalse())
-  },[])
+  },[dispatch])
 
   return(
     <div className={s.modalContainer}>

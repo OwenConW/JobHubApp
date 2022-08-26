@@ -32,7 +32,7 @@ const Profile = () => {
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             <div className={s.profile_Img_container}>
-              <img src={activeUser.image} className={s.profile_Img}></img>
+              <img src={activeUser.image} className={s.profile_Img} alt="profile-img"></img>
             </div>
             <div className={s.profileDetail}>
               <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
@@ -53,7 +53,7 @@ const Profile = () => {
           <div className={s.configBox}>
             <div className={s.configImg}>
               <Link to='/ProfileConfig/edit'>
-                <img src={configLogo} ></img>
+                <img src={configLogo} alt="logo-img"></img>
               </Link>
             </div>
             <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>
