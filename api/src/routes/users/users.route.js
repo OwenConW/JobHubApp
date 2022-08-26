@@ -84,7 +84,7 @@ users.post("/", async (req, res, next) =>{
 
 
 //RUTA PARA EDITAR EL USUARIO
-users.put('/:id', async (req, res) => {
+users.put('/:id', async (req, res, next) => {
     const { id } = req.params
     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
     try {
@@ -124,7 +124,7 @@ users.put('/:id', async (req, res) => {
 })
 
 //RUTA PARA EDITAR USUARIO SIN JOBS
-users.put("/edit/:id" , async (req, res) => {
+users.put("/edit/:id" , async (req, res, next) => {
     const { id } = req.params
     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
     try {
@@ -151,11 +151,11 @@ users.get("/:id", (req, res, next) => {
 
 
 // RUTA PARA PASAR UN USUARIO A PREMIUM
-users.put('/premium/:id', async (req, res) => {
+users.put('/premium/:id', async (req, res, next) => {
     const { id } = req.params;
     const { isPremium } = req.body
     try {
-        functions.updatePremium(id, isPremium)
+        await functions.updatePremium(id, isPremium)
         res.status(200).send(`The user is now premium`)
     } catch (error) {
         console.log(error);
@@ -164,16 +164,32 @@ users.put('/premium/:id', async (req, res) => {
 })
 
 //RUTA PARA ELIMINAR LOGICAMENTE AL USUARIO
-users.put('/destroy/:id', async (req, res) => {
+users.put('/destroy/:id', async (req, res, next) => {
     const { id } = req.params;
     const { isActive } = req.body
     try {
-        functions.destroyUser( id, isActive )
+        await functions.destroyUser( id, isActive )
         res.status(200).send(`The user was successfully deleted`)
     } catch (error) {
         console.log(error);
         next (error)
     }
 })
+
+//RUTA PARA TRAER TODOS LOS USUARIOS MEJORES RANKEADOS
+// users.get("/top", async (req, res, next) => {
+//     try {
+//         const usersPremiumTop = await functions.searchUsersPremium()
+//         const usersNoPremiumTop = await functions.searchUsersNoPremium()
+// console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',usersPremiumTop)
+// console.log('ESTO ES LO QUE DEVUELVE USERS PREMIUM',usersNoPremiumTop)
+
+//         const finalConcatUsers = [...usersPremiumTop, ...usersNoPremiumTop]
+//         res.send(201).json(finalConcatUsers)
+//     } catch (error) {
+//         console.log(error);
+//         next (error)
+//     }
+// })
 
 module.exports = users;

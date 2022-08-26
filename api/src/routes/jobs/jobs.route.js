@@ -39,4 +39,17 @@ jobs.post("/create", async (req, res, next) =>{
     
 })
 
+// RUTA PARA ELIMINAR TRABAJOS
+jobs.delete("/admin/:id", async (req, res, next)=>{
+    const {id} = req.params
+    try{
+        await jobs.Profession({
+            where:{id:id}
+        }) 
+        res.status(201).send("The Profession was successfully deleted")
+    } catch (error) {
+        next(error)
+    }
+})
+
 module.exports = jobs;

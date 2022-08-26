@@ -44,7 +44,7 @@ review.put("/:id", async (req, res, next)=> {
     const { id } = req.params;
     const { feedback_client, rating, id_user_professional } = req.body;
     try {
-        //FALTA AGREGAR LA FUNCION PARA EDITAR EL RATING ACTUALIZADO AL PROMEDIO
+
         await functions.updateReview(id, feedback_client, rating);
         await functions.searchRating(id_user_professional, rating)
         res.status(201).send(`The Review  was successfully modified`);
@@ -56,7 +56,7 @@ review.put("/:id", async (req, res, next)=> {
     
 })
 
-// RUTA PARA TRAER TODAS LAS RESEÑAS
+// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID
 review.get("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
@@ -68,6 +68,7 @@ review.get("/:id", async (req, res, next)=>{
     }
 })
 
+// RUTA PARA TRAER TODAS LAS RESEÑAS
 review.get("/", async (req, res, next)=>{
     try {
         const allReview = await Review.findAll()
@@ -75,6 +76,19 @@ review.get("/", async (req, res, next)=>{
     
     } catch (error) {
         console.log(error)
+        next(error)
+    }
+})
+
+// RUTA PARA ELIMINAR LOS REVIEW
+review.delete("/admin/:id", async (req, res, next)=>{
+    const {id} = req.params
+    try{
+        await Review.destroy({
+            where:{id:id}
+        }) 
+        res.status(201).send("the review was successfully deleted")
+    } catch (error) {
         next(error)
     }
 })
