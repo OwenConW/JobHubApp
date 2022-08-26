@@ -14,12 +14,7 @@
 
 /* closed */
 .faq__question-button::after {
-  //transition: transform 300ms ease-out;
-  transition: 1s;
-  -webkit-transition: 1s;
-  -moz-transition: 1s;
-  -ms-transition: 1s;
-  -o-transition: 1s;
+  transition: transform 300ms ease-out;
 }
 
 /* open */

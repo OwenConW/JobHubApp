@@ -37,9 +37,6 @@ const Navbar = () => {
 				<Link to="/professionals" className={s.link}>
 					Catálogo
 				</Link>
-				<Link to="/faq" className={s.link}>
-					Faq
-				</Link>
 			</div>
 
 			<div className={s.logo}>
