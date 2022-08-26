@@ -77,7 +77,7 @@ io.on("connection", socket => {
 
     socket.on("QuitFromChat", (id) => {
       const user = getUser(id)
-      removeUser(user.socketId)
+      removeUser(user?.socketId)
       io.emit("getUsers", users)
     })
 

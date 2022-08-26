@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,6 +16,11 @@ import s from './Home.module.scss';
 
 
 const Home = () => {
+
+  const search = useLocation().search;
+  const prueba = new URLSearchParams(search).get('prueba');
+
+  if(prueba) console.log("ANDAAAAAAAAAAA", prueba)
 
   const { isAuthenticated } = useAuth0();
   const br = <br></br>;

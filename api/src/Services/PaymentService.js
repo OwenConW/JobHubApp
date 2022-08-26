@@ -13,7 +13,7 @@
           transaction_amount: 4000,
           currency_id: "ARS"
         },
-        back_url: "https://jobhub.vercel.app/home",
+        back_url: "http://localhost:3000/profile/success",
         payer_email: `${mail}`
       };
   

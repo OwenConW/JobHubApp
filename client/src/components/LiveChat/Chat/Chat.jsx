@@ -5,7 +5,6 @@ import React, { useEffect, useState, useRef  } from "react"
 import NavBar from "../../Navbar/Navbar"
 import Conversation from "../Conversations/Conversation"
 import Message from "../Message/Message"
-import ChatOnline from "../ChatOnline/ChatOnline"
 import * as functions from "../../../handlers/localStorage"
 import "./Chat.css"
 import axios from "axios"
@@ -23,9 +22,10 @@ const Chat = (props) => {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
     const [arriveMessage, setArriveMessage] = useState(null)
-    // const [onlineUsers, setOnlineUsers] = useState([])
+    const [onlineUsers, setOnlineUsers] = useState([])
     const socket = useRef()
     const currentUser = functions.getLocalStorage()
+    
     const scrollRef = useRef()
     
 
@@ -58,9 +58,13 @@ const Chat = (props) => {
     useEffect(() => {
         socket.current.emit("addUser", currentUser.id)
         socket.current.on("getUsers", users => {
-            console.log(users)
+            setOnlineUsers(users)
          })
-    }, [currentUser])
+    }, [currentUser.id])
+
+
+
+
 
 
     const handleSubmit = async (e) => {
@@ -115,22 +119,28 @@ const Chat = (props) => {
         scrollRef.current?.scrollIntoView({behavior: "smooth"})
     }, [messages])
 
+
     return (
   
         <>
          <NavBar/>
+         {
+             console.log(onlineUsers)
+         }
             {
                 <div className="messenger">
                 <div className="chatMenu">
                     <div className="chatMenuWrapper">
                         <input placeholder="Buscar profesionales..." className="chatMenuInput"/>
-                        {conversations && conversations.length && conversations.map((c, i) => (
-                            <div onClick={() => {
-                                setCurrentChat(c)
-                            }}>
-                            <Conversation key={i} conversations={c} currentUser={currentUser}/>
-                            </div>
-                        ))}
+                        {conversations?.map((c, i) => (
+                                <div onClick={() => {
+                                    setCurrentChat(c)
+    
+                                }}>
+                                <Conversation key={i} conversations={c} currentUser={currentUser} online={onlineUsers} />
+                                </div>
+                                )
+                        )}
                     </div>
                 </div>
                 <div className="chatBox">
@@ -142,7 +152,7 @@ const Chat = (props) => {
                             {
                                 messages.map(m => (
                                     <div ref={scrollRef}>
-                                    <Message message={m} own={m.sender === currentUser.id} current={currentUser}/>
+                                    <Message message={m} own={m.sender === currentUser.id} current={currentUser} />
                                     </div>
                                 ))
                             }
@@ -157,11 +167,6 @@ const Chat = (props) => {
                         </div>
                         </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
                     </div>  
-                </div>
-                <div className="chatOnline">
-                    <div className="chatOnlineWrapper">
-                        <ChatOnline/>
-                    </div>   
                 </div>
             </div>    
             }

@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./Conversation.css"
+import "./chatOnline.css"
 
 
-
-export default function Conversation({conversations, currentUser}){
+export default function Conversation({conversations, currentUser, online}){
     const [user, setUser] = useState(null)
+
     useEffect(() => {
         const friendId = conversations.emisor_id === currentUser.id 
         ? conversations.receptor_id 
@@ -21,16 +21,33 @@ export default function Conversation({conversations, currentUser}){
         getUser()
     }, [])
 
+    const onlineOrNo = online?.find(o => o.userId === user?.id)
+
     return(
         <div className="conversation">
             {
-                user && <>
-                <img className="conversationImg" 
-                src={user?.image || "https://geekflare.com/wp-content/plugins/wp-user-avatars/wp-user-avatars/assets/images/mystery.jpg"}
-                alt=""
-                />
-                <span className="conversationName">{user?.name}</span>        
-                </>     
+                onlineOrNo  ? <>
+              <div className="chatOnline">
+                <div className="chatOnlineFriend">
+                <div className="chatOnlineImgContainer">
+                    <img className="chatOnlineImg" src={user?.image} alt=""/>
+                    <div className="chatOnlineBadge"></div>
+                </div>
+                <span className="chatOnlineName">{user?.name}</span>
+                </div>
+                </div>
+                </>
+                : <>
+                <div className="chatOnlineNO">
+                <div className="chatOnlineFriendNO">
+                <div className="chatOnlineImgContainerNO">
+                    <img className="chatOnlineImgNO" src={user?.image} alt=""/>
+                    <div className="chatOnlineBadgeNO"></div>
+                </div>
+                <span className="chatOnlineNameNO">{user?.name}</span>
+                </div>
+                </div>
+                </>
             }
         </div>
     )
