@@ -39,7 +39,7 @@ const Chat = (props) => {
 
 
     useEffect(() => {
-        socket.current = io("ws://https://jobhub-pg.herokuapp.com"); //"ws://localhost:3001"
+        socket.current = io("ws://localhost:3001"); //"ws://https://jobhub-pg.herokuapp.com"
         socket.current.on("getMessage", data => {
             setArriveMessage({
                 sender: data.senderId,
