@@ -59,3 +59,8 @@ export const modifyProfessions = (id, payload) => {
 	axios.put(`/users/${id}`, payload);
 	getLocalStorage()
 }
+
+export const changeReview = (id, payload) => {
+	axios.put(`/review/${id}`, payload);
+	getChars()
+}
