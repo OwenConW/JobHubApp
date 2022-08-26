@@ -6,7 +6,7 @@ const PaymentInstance = new PaymentController(new PaymentService())
 const pagos = Router()
 
 
-pagos.get("/premium", (req, res, next) => {
+pagos.post("/premium", (req, res, next) => {
     PaymentInstance.getSubscriptionLink(req, res)
 })
 
