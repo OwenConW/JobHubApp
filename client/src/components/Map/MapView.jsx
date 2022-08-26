@@ -51,7 +51,8 @@ const MapView = () => {
     }, []);
 
 	useEffect(() => {
-			let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate));
+			let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate)
+			&& activeUser.id !== user.id);
 			setCloseUsers([...aux]);
 
 	}, [users, distance]);
