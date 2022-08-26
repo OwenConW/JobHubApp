@@ -1,4 +1,9 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteUser } from '../../../redux/adminActions'
+import EditModal from "../EditModal/EditModal";
 import s from './DashboardUserCard.module.scss';
 
 function DashboardUserCard(props) {
@@ -21,13 +26,32 @@ function DashboardUserCard(props) {
             isActive, 
             professions } = props;
 
+  const [openModal, setOpenModal] = useState(false);
+  const [editModalActive, setEditModalActive] = useState(true)
 
+  const dispatch = useDispatch();
 
-  console.log(professions);
+  function handleOpenModal(e) {
+    setOpenModal(!openModal)
+  }
+
+  function handleDelete(e){
+    dispatch(deleteUser(id))
+  }
+
+  function handleEdit(e){
+    setEditModalActive(true)
+  }
+
+  useEffect(() => {
+    console.log(editModalActive);
+  }, [editModalActive])
 
   return (
-    <div className={s.cardContainer}>
+    <div className={`${s.cardContainer} ${openModal ? s.openModal : null}`}>
+      {editModalActive? <EditModal {...props}/> : null}
       <div className={s.importantInformationContainer}>
+        <button onClick={handleOpenModal}>Detalles</button>
         <div className={s.nameContainer}>
           <h1>Nombre</h1>
           <h1>{name} {last_Name}</h1>
@@ -55,24 +79,50 @@ function DashboardUserCard(props) {
         <div>
           <h4>Suspendido</h4>
           <h4> Si{isBanned}</h4>
-        </div>        
+        </div>
+        <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button>
+        <button className={s.editBtn} onClick={handleEdit}>Editar</button>
       </div>
       {/* Division */}
-      <div>
-        <h4>DNI: {dni}</h4>
-        <h4>Fecha de nacimiento: 17/03/1999{date_of_Birth}</h4>
-        <img src={image} alt="profile-img" />
-        <h4>Email: {mail}</h4>
-        <h4>Telefono: {phone}</h4>
-        <h4>Pais: {country}</h4>
-        <h4>Ciudad: {city}</h4>
-        <p>Description: {description}</p>
-        <h4>Profesiones: {professions?.map(p => {
+      <div className={s.notSoRelevantInformationContainer}>
+        <div>
+          <h4>DNI</h4>
+          <h4>{dni}</h4>
+        </div>
+        <div>
+          <h4>Fecha de nacimiento</h4>
+          <h4>17/03/1999{date_of_Birth}</h4>
+        </div>
+        <div>
+          <h4>Emai</h4>
+          <h4>{mail}</h4>
+        </div>
+        <div>
+          <h4>Telefono</h4>
+          <h4>{phone}</h4>
+        </div>
+        <div>
+          <h4>Pais</h4>
+          <h4>{country}</h4>
+        </div>
+        <div>
+          <h4>Ciudad</h4>
+          <h4>{city}</h4>
+        </div>
+        {/* <div>
+          <p>Description</p>
+          <p>{description}</p>
+        </div> */}
+        <div>
+        <h4>Profesiones</h4>
+        <h4>{professions?.map(p => {
           return (
             <h4>{p.name}</h4>
           )
         })}
         </h4>
+        </div>
+        
       </div>
     </div>
   )

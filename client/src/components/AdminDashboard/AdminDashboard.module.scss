@@ -28,6 +28,13 @@
   
     .searchByNameAndUsersContainer {
       width: 80%;
+      form {
+        display: flex;
+        gap: 10px;
+        label {
+          font-size: 1.5rem;
+        }
+      }
         .cardsContainer {
           display: flex;
           flex-direction: column;
