@@ -12,6 +12,11 @@ export const getAllUsersForAdmin = () => (dispatch) => {
 }
 
 export const deleteUser = (id) => () => {
-  console.log('action');
   axios.put(`/users/destroy/${id}`, {isActive: false})
+}
+
+
+export const editUser = (id, payload) => () => {
+  console.log('action');
+  axios.put(`/users/${id}`, payload)
 }

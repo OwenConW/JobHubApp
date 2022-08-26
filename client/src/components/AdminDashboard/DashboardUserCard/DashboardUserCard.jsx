@@ -27,7 +27,7 @@ function DashboardUserCard(props) {
             professions } = props;
 
   const [openModal, setOpenModal] = useState(false);
-  const [editModalActive, setEditModalActive] = useState(true)
+  const [editModalActive, setEditModalActive] = useState(false)
 
   const dispatch = useDispatch();
 

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { editUser } from "../../../redux/adminActions";
 import s from './EditModal.module.scss';
 
 
 function EditModal(props) {
   
-  const [userData, setUserData] = useState({...props})
+  const [userData, setUserData] = useState({...props, professions: ["plomero"]})
+  const dispatch = useDispatch()
 
   function handleChange(e){
     setUserData({...userData, [e.target.name]: e.target.value})
@@ -15,7 +18,7 @@ function EditModal(props) {
   }
 
   function handleEdit(e){
-    
+    dispatch(editUser(userData.id , userData))
   }
 
   useEffect(() => {
@@ -110,14 +113,14 @@ function EditModal(props) {
               <input type="button" name="isPremium" value='No' onClick={handleClick}/>
             </div>
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="name">Profesiones</label>
             {userData.professions?.map(p => {
               return (
                 <h4>{p.name}</h4>
               )
             })}
-          </div>
+          </div> */}
           <button>Cancelar</button>
           <button onClick={handleEdit}>Editar</button>
         </div>

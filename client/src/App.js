@@ -36,12 +36,8 @@ function App() {
 				<Route exact path="/chat" element={<Chat/>}/>
 				<Route exact path="/faq" element={<Faq />}/>
 				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
-<<<<<<< HEAD
 			</Routes> */}
-=======
-			</Routes>
 
->>>>>>> d22c7c7cad6bb34e2504d124328a2db48aa7f28d
 		</div>
 	);
 }
