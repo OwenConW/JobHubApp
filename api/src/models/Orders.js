@@ -34,8 +34,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         apointment_date:{
-            type: DataTypes.DATE,
-            allowNull: false,
+            type: DataTypes.STRING,
         },
         isActive: {
 			type: DataTypes.BOOLEAN,
