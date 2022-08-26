@@ -9,7 +9,7 @@ export const actionFetchingMercadopagoLink = (mail) => (dispatch) => {
   dispatch(fetchingMercadopagoLink())
 	axios
     // MAIL HARCODEWADO
-		.get(`/pagos/premium?mail=test_user_67073490@testuser.com`)
+		.post(`/pagos/premium?mail=test_user_67073490@testuser.com`)
 		.then((res) => {
 			dispatch(fetchingMercadopagoLinkSuccess(res.data));
 		})
