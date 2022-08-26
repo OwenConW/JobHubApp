@@ -39,6 +39,7 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 const server = http.createServer(app);
 
 const io = socketio(server, {
+    
     cors: {
         methods: ["GET", "POST"]
     }
