@@ -1,18 +1,19 @@
 import React from "react";
 import s from './Edit.module.scss'
-import { getLocalStorage } from '../../../../handlers/localStorage';
+import { getLocalStorage, setUserLocalStorage } from '../../../../handlers/localStorage';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
+import { modifyUser } from "../../../../redux/userActions";
 
 const Edit = () => {
   let localSt = getLocalStorage()
-  let activeUser = {...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1)}
-  
+  let activeUser = { ...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1) }
+
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
-  const [user, setUser] = useState({
-    id: activeUser.id,
+
+  const comparative = {
     name: activeUser.name,
     last_Name: activeUser.last_Name,
     description: activeUser.description,
@@ -26,14 +27,26 @@ const Edit = () => {
     coordinate: activeUser.coordinate,
     street: activeUser.street,
     address: activeUser.address,
-    rating: activeUser.rating,
-    isPremium: activeUser.isPremium,
     isProfessional: activeUser.isProfessional,
-    isAdmin: activeUser.isAdmin,
-    isBanned: activeUser.isBanned,
-    isActive: activeUser.isActive,
     professions: activeUser.professions,
-    reviews: activeUser.reviews
+  }
+
+  const [user, setUser] = useState({
+    name: activeUser.name,
+    last_Name: activeUser.last_Name,
+    description: activeUser.description,
+    dni: activeUser.dni,
+    image: activeUser.image,
+    date_of_Birth: activeUser.date_of_Birth,
+    mail: activeUser.mail,
+    phone: activeUser.phone,
+    country: activeUser.country,
+    city: activeUser.city,
+    coordinate: activeUser.coordinate,
+    street: activeUser.street,
+    address: activeUser.address,
+    isProfessional: activeUser.isProfessional,
+    professions: activeUser.professions,
   })
 
   //HandleChange de inputs
@@ -50,8 +63,11 @@ const Edit = () => {
   }, [user])
 
 
+
   // PAISES DESDE LA API
   useEffect(() => {
+
+
 
     const getCountries = async () => {
       setCountries({
@@ -98,7 +114,7 @@ const Edit = () => {
   // VALIDATOR de DATOS
   useEffect(() => {
     setErrors(validators(user));
-    console.log(errors)
+    // console.log(errors)
   }, [user]);
 
   const clickToBeProffessional = (event) => {
@@ -112,9 +128,48 @@ const Edit = () => {
         [event.target.name]: true
       })
   }
+  const [errorGeometry, setErrorGeometry] = useState({
+    error: '',
+    loading: false,
+  });
 
-  const handleSubmit = () => {
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${user.address},${user.street},${user.city},${user.country}&format=json`);
+    if (!response.data.length) {
+      setErrorGeometry({
+        error: 'Verifica la dirección.',
+        loading: false,
+      })
+    } else {
+      setUser({
+        ...user,
+        coordinate: [response.data[0].lat, response.data[0].lon]
+      })
+    }
+
+
+    modifyUser(activeUser.id, user)
+    let newValues = {
+      ...localSt,
+      name: user.name,
+      last_Name: user.last_Name,
+      description: user.description,
+      dni: user.dni,
+      image: user.image,
+      date_of_Birth: user.date_of_Birth,
+      mail: user.mail,
+      phone: user.phone,
+      country: user.country,
+      city: user.city,
+      coordinate: user.coordinate,
+      street: user.street,
+      address: user.address,
+      isProfessional: user.isProfessional,
+      professions: user.professions,
+    }
+    setUserLocalStorage(newValues)
   }
   // console.log('entre a Edit')
   // console.log('activeuser: ', activeUser)
@@ -199,7 +254,7 @@ const Edit = () => {
         <textarea className={s.description} placeholder="Descripcion personal" name='description' value={user.description} onChange={(event) => handleChange(event)}></textarea>
       </div>
 
-      <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={changeValidator(activeUser, user) || Object.keys(errors).length} />
+      <input type="submit" className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
 
     </div>
   )

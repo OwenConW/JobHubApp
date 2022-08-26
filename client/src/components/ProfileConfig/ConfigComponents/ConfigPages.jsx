@@ -1,16 +1,18 @@
 import React from "react";
 import Edit from "./Edit/Edit";
 import ProfessionConfig from './ProfessionConfig/ProffessionConfig'
+// import Opinions from './Opinions/Opinions'
 import { getLocalStorage } from '../../../handlers/localStorage.js';
 
 
 const ConfigPages = (configPage) => {
     const activeUser = getLocalStorage()
-let option = configPage.configPage
+    let option = configPage.configPage
+
     if (option === 'edit') {
         return (
-            <Edit/>
-            )
+            <Edit />
+        )
     }
 
     // if (option === 'notifications') {
@@ -21,15 +23,19 @@ let option = configPage.configPage
 
 
     if (option === 'professions') {
-        if(activeUser.isProfessional){
+        if (activeUser.isProfessional) {
             return (
-                <ProfessionConfig/>
-                )
-        } else return <Edit/>
-        
+                <ProfessionConfig />
+            )
+        } else return <Edit />
+
     }
 
-    
+    if (option === 'opinions') {
+        // <Opinions />
+    }
+
+
     // if (option === 'premium') {
     //     return (
     //         <Edit/>

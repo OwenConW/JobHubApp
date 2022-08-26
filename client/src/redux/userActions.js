@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getLocalStorage } from '../handlers/localStorage.js';
 import {
 	getAllUsers,
 	getUserById,
@@ -47,3 +48,14 @@ export const filterProfessionals = (filters) => (dispatch) => {
 		.catch((e) => console.log(e));
 };
 
+export const modifyUser = (id, payload) => {
+	// console.log('modifyUser payload', payload)
+	// console.log('id', id)
+	axios.put(`/users/edit/${id}`, payload);
+	getLocalStorage()
+}
+
+export const modifyProfessions = (id, payload) => {
+	axios.put(`/users/${id}`, payload);
+	getLocalStorage()
+}

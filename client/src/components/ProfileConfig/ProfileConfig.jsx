@@ -14,7 +14,7 @@ import ConfigPages from "./ConfigComponents/ConfigPages";
 const ProfileConfig = () => {
   //tomo los datos del usuario
   let activeUser = getLocalStorage();
-  
+
 
   // id para conditional render
   let params = useParams();
@@ -27,10 +27,10 @@ const ProfileConfig = () => {
   }
 
   useEffect(() => {
-    
+
   }, [configPage])
 
-  
+
   return (
     <>
       <Navbar />
@@ -49,6 +49,12 @@ const ProfileConfig = () => {
             <button className={s.optionList} name='notifications' onClick={paginado}>
               Notificaciones por correo
             </button>
+            <button className={s.optionList} name='orders' onClick={paginado}>
+              Mis Ordenes
+            </button>
+            <button className={s.optionList} name='opinions' onClick={paginado}>
+              Mis Opiniones
+            </button>
             {
               activeUser.isProfessional ?
                 <button className={s.optionList} name='professions' onClick={paginado}>
@@ -57,10 +63,18 @@ const ProfileConfig = () => {
             }
             {
               activeUser.isProfessional ?
+                <button className={s.optionList} name='otherReviews' onClick={paginado}>
+                  Mis Reseñas
+                </button> : <></>
+            }
+            {
+              activeUser.isProfessional ?
                 <button className={s.optionList} name='premium' onClick={paginado}>
                   Premium
                 </button> : <></>
             }
+
+
 
           </div>
 

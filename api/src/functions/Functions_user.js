@@ -91,7 +91,7 @@ const getProffesionalById = async(id) => {
                 },
                 {
                     model: Review,
-                    attributes: ['id_orders','feedback_client', 'rating'],
+                    attributes: ['id_user_client','id_orders','feedback_client', 'rating'],
                     through: {attributes: []},
                 },{
                     model: Orders,
@@ -211,5 +211,6 @@ module.exports = {
     updatePremium,
     destroyUser,
     updateUserNoJobs,
+    updateUserNoJobs
 }
 
