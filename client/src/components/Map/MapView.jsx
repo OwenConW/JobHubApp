@@ -104,13 +104,13 @@ const MapView = () => {
 									...search,
 									value: e.target.value
 								})}/>
-								<input type="submit" className={s.submit} value='Buscar'/>
-								<input type="button" onClick={handleReset} className={s.reset} value='Cercanos'/>
+								<input type="submit" className={s.submit} value='Buscar' disabled={!search.value}/>
+								<input type="button" onClick={handleReset} className={s.reset} value='Cercanos' />
 							</form>
 						</div>
 					</div>
 					<div className={s.professionals}>
-						{ search.searchUsers.length ? (
+						{search.searchUsers.length ? (
 						<>
 						<h3>Busqueda</h3>
 						{search.searchUsers.map(user => {
@@ -121,7 +121,7 @@ const MapView = () => {
 								</div>
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
-									<p>{user.profession[0].name}</p>
+									<p>{user?.profession[0].name}</p>
 									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser.coordinate, user.coordinate)).toFixed(2)} km</p>
 								</div>
 								</Link>

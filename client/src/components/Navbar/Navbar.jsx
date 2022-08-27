@@ -52,12 +52,15 @@ const Navbar = () => {
 						<Link to={`/chat`} className={s.link}>
 							<img src={chatlogo} alt="chat" />
 						</Link>
-						<div className={s.link} onClick={handleLogout}>
-							Logout
-						</div>
+						<Link to={`/myorders`} className={s.link}>
+							Ordenes
+						</Link>
 						<Link to={'/profile'} className={s.profileimg}>
 							{activeUser.image ? <img src={activeUser.image}/> : <img src={defaultimage}/>}
 						</Link>
+						<div className={s.link} onClick={handleLogout}>
+							Cerrar Sesión
+						</div>
 					</div>
 				) : (
 					<div className={s.user}>

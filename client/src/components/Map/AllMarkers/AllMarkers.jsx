@@ -55,6 +55,7 @@ const AllMarkers = () => {
             }
         }
         return activeUser?.id === user?.id ? '' : (
+
             <Marker position={[user.coordinate[0], user.coordinate[1]]} key={user.id} icon={iconMarker}>
                 <Link to={`/details/${user.id}`}>
                     <Popup className='professional-popup'>

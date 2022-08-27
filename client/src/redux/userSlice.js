@@ -13,7 +13,7 @@ export const userSlice = createSlice({
 			state.users = action.payload;
 		},
 		getUserById: (state, action) => {
-			state.detail = action.payload;
+			state.detail = action.payload
 		},
 		getFilteredProfessionals: (state, action) => {
 			state.filteredProfessionals = action.payload;
