@@ -18,21 +18,31 @@ import { getCharsById } from "../../redux/userActions";
 import { useEffect } from "react";
 import corona from "./assets/corona.png"
 import rocketP from "./assets/RocketP.png"
+import Swal from "sweetalert2"
 
 const Profile = () => {
   //success?preapproval_id=x
   const currentUser = functions.getLocalStorage()
-  
   const search = useLocation().search;
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
 
   if(preapproval_id){
-    axios.put(`users/premium/${currentUser.id}`, {isPremium: true})
+    axios.put(`users/premium/${currentUser.id}`, {isPremium: true, idPago: preapproval_id})
     .then(() => {
-      setTimeout(() => {
-        alert(`Muchas gracias ${currentUser.name}, ahora eres premium, bienvenido!`)
-        alert(`Tu id de compra es ${preapproval_id}`)
-      }, 2000);
+      Swal.fire({
+        icon: 'success',
+        html: `<h1>Muchas gracias por formar parte de la familia Job Hub</h1>
+        <h3>Tu id de compra para reclamos es ${preapproval_id}</h3>
+         <h2>Porfavor recarga la página</h2>`,
+        width: 700,
+        padding: '3em',
+        color: '#dfdddd',
+        background: '#2C666E',
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url(""./assets/confetti2.gif"")
+        `
+      })
     })
   }
 
