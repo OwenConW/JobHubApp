@@ -32,7 +32,7 @@ export const getLeadingProfessionals = () => (dispatch) => {
 	axios
 		.get(`/users?rating=ASC`)
 		.then((res) => {
-			dispatch(getUserById(res.data.slice(0, 3)));
+			dispatch(getUserById(res.data));
 		})
 		.catch((e) => console.log(e));
 };
