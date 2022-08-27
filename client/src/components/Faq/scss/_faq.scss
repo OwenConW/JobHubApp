@@ -1,12 +1,13 @@
 .faq {
   width: 100%;
-  display: flex;
-  justify-content: end;
   margin: -5% 8% 1% 35%;
+  display: flex;
+  justify-content: center;
 
-  &__title {
-    font-size: 4.5rem;
-    line-height: 32px;
+
+  .title {
+    color: $page-color;
+    font-size: 4rem;
   }
 
   &__list {
@@ -36,13 +37,12 @@
     background-color: transparent;
     padding: 0px;
     cursor: pointer;
-    font-size: 1.7rem;
-
+    font-size: 1.9rem;
     padding-top: 8%;
 
     &::after {
       content: url(../assets/icon-arrow-down.svg);
-      margin-left: 0%;
+      margin-left: 5%;
       margin-right: -10%;
       transform: rotate(90deg);
     }

@@ -1,7 +1,8 @@
 import React from "react";
 import Edit from "./Edit/Edit";
 import ProfessionConfig from './ProfessionConfig/ProffessionConfig'
-// import Opinions from './Opinions/Opinions'
+import Opinions from './Opinions/Opinions'
+import OtherReviews from "./ReviewsAboutMe/OtherReviews";
 import { getLocalStorage } from '../../../handlers/localStorage.js';
 
 
@@ -32,15 +33,17 @@ const ConfigPages = (configPage) => {
     }
 
     if (option === 'opinions') {
-        // <Opinions />
+        return(
+            <Opinions />
+        )
     }
 
 
-    // if (option === 'premium') {
-    //     return (
-    //         <Edit/>
-    //         )
-    // }
+    if (option === 'otherReviews') {
+        return (
+            <OtherReviews/>
+            )
+    }
 
 }
 

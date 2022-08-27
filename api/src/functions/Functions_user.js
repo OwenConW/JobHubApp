@@ -98,7 +98,6 @@ const getProffesionalById = async(id) => {
                     attributes: ['id_user_client','description', 'complete'],
                     through: {attributes: []},
                 }
-                
             ]
         })
         return users
@@ -170,12 +169,12 @@ const destroyUser = async(id, isActive) => {
 }
 
 //UPDATE USER SIN JOBS
-const updateUserNoJobs = async (id, name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional ) => {
+const updateUserNoJobs = async (id, name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional ) => {
     try {
         await User.update({
             name,
             last_Name,
-            date_of_Bird,
+            date_of_Birth,
             image,
             dni,
             mail,
@@ -202,7 +201,6 @@ const updateUserNoJobs = async (id, name, last_Name, date_of_Bird, image, dni, m
 
 
 
-
 module.exports = {
     filterByQueris,
     getProffesionalById,
@@ -211,6 +209,6 @@ module.exports = {
     updatePremium,
     destroyUser,
     updateUserNoJobs,
-    updateUserNoJobs
+
 }
 

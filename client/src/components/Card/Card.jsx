@@ -32,7 +32,7 @@ function Card(props) {
 							<img src={image} alt="user_profile" />
 						</div>
 						<div className={s.userinfo}>
-							<h3>
+							<h3 style={{textTransform: "capitalize"}}>
 								{name} {last_Name}
 							</h3>
 							<p>
