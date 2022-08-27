@@ -40,7 +40,7 @@ const Profile = () => {
         background: '#2C666E',
         backdrop: `
           rgba(0,0,123,0.4)
-          url(""./assets/confetti2.gif"")
+          url("./assets/confetti2.gif")
         `
       })
     })
