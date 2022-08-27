@@ -16,7 +16,8 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getCharsById } from "../../redux/userActions";
 import { useEffect } from "react";
-
+import corona from "./assets/corona.png"
+import rocketP from "./assets/RocketP.png"
 
 const Profile = () => {
   //success?preapproval_id=x
@@ -60,11 +61,24 @@ const Profile = () => {
       <div className={s.container}>
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
-            <div className={s.profile_Img_container}>
-              <img src={activeUser.image} className={s.profile_Img} alt=""></img>
+            {
+              currentUser.isPremium ? (
+                <div className={s.profile_Img_containerPremium}>
+              <img src={activeUser.image} className={s.profile_ImgPremium} alt=""></img>
             </div>
+              ): (
+                <div className={s.profile_Img_container}>
+                <img src={activeUser.image} className={s.profile_Img} alt=""></img>
+              </div>
+              )
+            }
+           
             <div className={s.profileDetail}>
-              <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
+              {
+                currentUser.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
+                : <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
+              }
+              
               <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
               <div className={s.description}>{activeUser.description}</div>
             </div>
@@ -104,30 +118,52 @@ const Profile = () => {
               </Link>
             </div>
           </div>
-          <div className={s.bePremium}>
-            {
+          {
+            activeUser.isPremium ? (
+              <div className={s.isPremiumTRUE}>
 
-            }
-            <div className={s.premiumText}>
-              <h1>Plan Premium</h1>
-              <div className={s.premiumDetail}>
-                <h4>Obtenga los beneficios del plan premium:
-                  mas visibilidad, opciones y recomendacion por parte de la aplicacion
-                  para que tenga una mayor cantidad de clientes y despegue al proximo nivel
-                </h4>
+              <div className={s.premiumTextTRUE}>
+                <h1>Premium Activo</h1>
+                <div className={s.premiumDetailTRUE}>
+                  <h4>Usted posee todos los beneficios del plan premium.
+                      Estamos muy contentos y agredecidos de que formes parte de la familia Job Hub y 
+                      aporte a que sigamos creciendo.
+                  </h4>
+                </div>
+  
               </div>
-
-            </div>
-
-            <div className={s.premiumRocketButton}>
-              <div>
-                <img src={rocket} alt='Premium Logo'></img>
+  
+              <div className={s.premiumRocketButtonTRUE}>
+                <div>
+                  <img className={s.rocketsito} src={rocketP} alt='Premium Logo'></img>
+                </div>
               </div>
-              <span onClick={handlePremiumModal}>
-                <button>Mejorar</button>
-              </span>
             </div>
-          </div>
+              ) : (
+                <div className={s.bePremium}>
+
+                <div className={s.premiumText}>
+                  <h1>Plan Premium</h1>
+                  <div className={s.premiumDetail}>
+                    <h4>Obtenga los beneficios del plan premium:
+                      mas visibilidad, opciones y recomendacion por parte de la aplicacion
+                      para que tenga una mayor cantidad de clientes y despegue al proximo nivel
+                    </h4>
+                  </div>
+    
+                </div>
+    
+                <div className={s.premiumRocketButton}>
+                  <div>
+                    <img src={rocket} alt='Premium Logo'></img>
+                  </div>
+                  <span onClick={handlePremiumModal}>
+                    <button>Mejorar</button>
+                  </span>
+                </div>
+              </div>
+              )
+          }
         </div>
 
       </div>

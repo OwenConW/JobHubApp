@@ -55,9 +55,17 @@ const Navbar = () => {
 						<div className={s.link} onClick={handleLogout}>
 							Logout
 						</div>
-						<Link to={'/profile'} className={s.profileimg}>
-							{activeUser.image ? <img src={activeUser.image}/> : <img src={defaultimage}/>}
-						</Link>
+						{
+							activeUser.isPremium ?
+							<Link to={'/profile'} className={s.profileimgPremium}>
+							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							</Link>
+							:
+							<Link to={'/profile'} className={s.profileimg}>
+							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							</Link>
+						}
+						
 					</div>
 				) : (
 					<div className={s.user}>
