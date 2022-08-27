@@ -28,8 +28,10 @@ const Profile = () => {
   console.log("preapproval_id:", preapproval_id);
 
   if(preapproval_id){
-    alert("SOS PREMIUM MOSTRO")
-    axios.put(`/premium/${currentUser.id}`, true)
+    axios.put(`/premium/${currentUser.id}`, {isPremium: true})
+    .then(() => {
+      alert(`Muchas gracias ${currentUser.name}, ahora eres premium, bienvenido!`)
+    })
   }
 
 
