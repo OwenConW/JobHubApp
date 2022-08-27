@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link, useParams, useLocation} from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 
 import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
@@ -20,14 +20,11 @@ import { useEffect } from "react";
 
 const Profile = () => {
   //success?preapproval_id=x
-
-  let { success } = useParams()
-
   const currentUser = functions.getLocalStorage()
   const search = useLocation().search;
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
 
-  if(success === "success" && preapproval_id){
+  if(preapproval_id){
     alert("SOS PREMIUM MOSTRO")
     axios.put(`/premium/${currentUser.id}`, true)
   }
