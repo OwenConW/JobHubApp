@@ -61,7 +61,7 @@ const Profile = () => {
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             <div className={s.profile_Img_container}>
-              <img src={activeUser.image} className={s.profile_Img}></img>
+              <img src={activeUser.image} className={s.profile_Img} alt=""></img>
             </div>
             <div className={s.profileDetail}>
               <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
