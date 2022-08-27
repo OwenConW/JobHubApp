@@ -13,7 +13,7 @@
           transaction_amount: 4000,
           currency_id: "ARS"
         },
-        back_url: "https://jobhub-pg.herokuapp.com/profile/success",
+        back_url: "https://jobhub-pg.herokuapp.com/profile",
         payer_email: `${mail}`
       };
   
