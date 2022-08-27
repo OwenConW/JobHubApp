@@ -18,7 +18,7 @@ import { useDebugValue } from "react";
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
   //cambiar por el estado de todos los usuarios
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -39,7 +39,6 @@ function AdminDashboard() {
   const fetchingAdminEditOrderSuccess = useSelector(state => state.fetching.fetchingAdminEditOrderSuccess)
   const fetchingAdminEditOrderFailure = useSelector(state => state.fetching.fetchingAdminEditOrderFailure)
 
-  
   function handlePanelChange(e) {
     setPanelDisplayed(e.target.value)
   }
@@ -50,10 +49,6 @@ function AdminDashboard() {
     dispatch(getAllOrdersForAdmin())
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(orders);
-  },[orders])
-  
   useEffect(() => {
     dispatch(getAllUsersForAdmin())
     dispatch(getAllReviewsForAdmin())

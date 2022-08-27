@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
   getAllReviews,
   getAllUsers,
-  getAllOrders
+  getAllOrders,
+  getUserById
 } from './adminSlice.js';
 import {
   fetchingAdminDeleteUser,
@@ -40,6 +41,16 @@ export const getAllUsersForAdmin = () => (dispatch) => {
     })
     .catch(e => console.error(e))
 }
+
+export const getUsersByIdForAdmin = (id) => (dispatch) => {
+  axios.get(`/users/${id}`)
+    .then((res) => {
+      dispatch(getUserById(res.data))
+    })
+    .catch(e => console.error(e))
+}
+
+
 
 export const deleteUser = (id) => (dispatch) => {
   dispatch(fetchingAdminDeleteUser())

@@ -57,6 +57,10 @@ function OrdersDashboardCard(props) {
         <h4>Fecha pactada</h4>
         <h4>{apointment_date}</h4>
       </div>
+      {/* <div>
+        <h4>Activa?</h4>
+        <h4>{isActive ? "Si" : "No"}</h4>
+      </div> */}
       <div>
         <h4>Reseña habilitada?</h4>
         <h4>{allowReview ? "Si" : "No"}</h4>
@@ -64,10 +68,6 @@ function OrdersDashboardCard(props) {
       <div>
         <h4>Finalizada?</h4>
         <h4>{complete ? "Si" : "No"}</h4>
-      </div>
-      <div>
-        <h4>Activa?</h4>
-        <h4>{isActive ? "Si" : "No"}</h4>
       </div>
       <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button>
       <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>

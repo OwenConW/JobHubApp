@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editOrder} from '../../../../../redux/adminActions';
-import s from './ReviewEditModal.module.scss';
+import s from './OrderEditModal.module.scss';
 
 function OrderEditModal(props) {
 
@@ -54,29 +54,32 @@ function OrderEditModal(props) {
           </div>
           <div className={s.informationRightSide}>
             <div>
-              <label htmlFor="rating">Rating</label>
-              <input type="text" name="rating" value={orderData.rating} onChange={handleChange}/>
-            </div>
-            <div>
-              <label htmlFor="date_created">Feche de creación</label>
+              <label htmlFor="date_created">Fecha de creación</label>
               <input type="text" name="date_created" value={orderData.date_created} onChange={handleChange}/>
             </div>
             <div>
-              <label htmlFor="feedback_client">Descripción</label>
-              <input type="text" name="feedback_client" value={orderData.feedback_client} onChange={handleChange}/>
+              <label htmlFor="apointment_date">Fecha pactada</label>
+              <input type="text" name="apointment_date" value={orderData.apointment_date} onChange={handleChange}/>
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="isActive">Activa?</label>
               <div>
                 <input type="button" name="isActive" value='Si' onClick={handleClick}/>
                 <input type="button" name="isActive" value='No' onClick={handleClick}/>
               </div>
-            </div>
+            </div> */}
             <div>
-              <label htmlFor="allowReview">Reseña abierta?</label>
+              <label htmlFor="allowReview">Reseña habilitada?</label>
               <div>
                 <input type="button" name="allowReview" value='Si' onClick={handleClick}/>
                 <input type="button" name="allowReview" value='No' onClick={handleClick}/>
+              </div>
+            </div>
+            <div>
+              <label htmlFor="complete">Finalizada?</label>
+              <div>
+                <input type="button" name="complete" value='Si' onClick={handleClick}/>
+                <input type="button" name="complete" value='No' onClick={handleClick}/>
               </div>
             </div>
             <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>

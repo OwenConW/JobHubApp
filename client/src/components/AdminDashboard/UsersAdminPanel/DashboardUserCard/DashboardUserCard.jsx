@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, getAllUsersForAdmin, actionFetchingAdminDeleteUserReset } from '../../../../redux/adminActions'
+import { deleteUser, getAllUsersForAdmin, actionFetchingAdminDeleteUserReset, editUser } from '../../../../redux/adminActions'
 import EditModal from "../DashboardUserCard/EditModal/EditModal";
 import s from './DashboardUserCard.module.scss';
 
@@ -40,7 +40,7 @@ function DashboardUserCard(props) {
   }
 
   function handleRestore(e){
-    console.log('asd');
+    dispatch(editUser(id , {...props, isActive: true, professions: ["plomero"]}))
   }
 
   function handleEditOpenModal(e){
