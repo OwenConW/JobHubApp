@@ -12,7 +12,7 @@ import Onboarding from "./components/Onboarding/Onboarding";
 import Chat from "./components/LiveChat/Chat/Chat.jsx"
 import ProfileConfig from './components/ProfileConfig/ProfileConfig';
 import Faq from './components/Faq/Faq';
-import OrderForm from "./components/OrderForm/OrderForm";
+import Orders from './components/Orders/Orders';
 
 function App() {
 	return (
@@ -28,7 +28,7 @@ function App() {
 				<Route exact path="/chat" element={<Chat/>}/>
         		<Route exact path="/faq" element={<Faq />}/>
 				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
-				<Route exact path="/generateorder" element={<OrderForm/>}/>
+				<Route exact path="/myorders" element={<Orders/>}/>
 			</Routes>
 
 		</div>
