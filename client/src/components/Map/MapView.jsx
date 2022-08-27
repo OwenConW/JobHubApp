@@ -10,7 +10,7 @@ import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { oficioStyle } from './AllMarkers/styles';
 
-import { userIcon } from './mapIcons';
+import { userIcon, userIconP } from './mapIcons';
 import { getLocalStorage } from '../../handlers/localStorage';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -168,7 +168,7 @@ const MapView = () => {
 								url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
 						/>
 
-						<Marker position={[activeUser.coordinate[0], activeUser.coordinate[1]]} icon={userIcon}>
+						<Marker position={[activeUser.coordinate[0], activeUser.coordinate[1]]} icon={activeUser.isPremium ? userIconP : userIcon}>
 							<Popup className='professional-popup'>
 								<p style={oficioStyle}>{activeUser.name}</p>
 							</Popup>
