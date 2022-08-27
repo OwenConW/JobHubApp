@@ -27,7 +27,7 @@ const Home = () => {
 
   // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
   const dispatch = useDispatch()
-  const bestProffesionals = useSelector((state) => state.users.destacados)
+  const bestProffesionals = useSelector((state) => state.users.filteredProfessionals)
 
   useEffect(() => { dispatch(getLeadingProfessionals()) }, [dispatch]) 
 
@@ -46,7 +46,7 @@ const Home = () => {
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
             <div className={s.cards}>
               {console.log("mejores",bestProffesionals)}
-              {bestProffesionals.length ? bestProffesionals.map((obj, i) => {
+              {bestProffesionals.length ? bestProffesionals.slice(0,3).map((obj, i) => {
                   return <FeaturedCard key={i} prop={obj}/>
                 })
               : (
