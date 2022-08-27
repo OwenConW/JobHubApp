@@ -21,9 +21,11 @@ import { useEffect } from "react";
 const Profile = () => {
   //success?preapproval_id=x
   const currentUser = functions.getLocalStorage()
-  const urlParams = new URLSearchParams(window.location.search);
-  const preapproval_id = urlParams.get('preapproval_id')  
+  
+  const search = useLocation().search;
+  const preapproval_id = new URLSearchParams(search).get('preapproval_id');
 
+  console.log("preapproval_id:", preapproval_id);
 
   if(preapproval_id){
     alert("SOS PREMIUM MOSTRO")
