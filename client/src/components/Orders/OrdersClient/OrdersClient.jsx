@@ -1,40 +1,57 @@
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import s from './OrdersClient.module.scss';
 
-const OrdersClient = ({orders, allUsers}) => {
-    const [professionals, setProfessionals] = useState([]);
+const OrdersClient = ({order}) => {
+    const [professional, setProfessional] = useState([]);
+    const [onReview, setOnReview] = useState(false);
 
     useEffect(() => {
+        const fetchProf = async() => {
+            let response = await axios.get(`/users/${order.id_user_professional}`);
+            setProfessional(response.data);
+        }
 
-        let profs = allUsers.filter(user => {
-            return orders.find(order => user.id === order.id_user_professional);
-        })
+        fetchProf();
+    }, [])
 
-        setProfessionals(profs);
-    }, [allUsers, orders])
+    const handleReview = () =>{
+        onReview ? setOnReview(false) : setOnReview(true);
+    }
 
-    return (
-        <div className={s.container}>
-            <h4>Puntajes pendientes</h4>
-            {professionals?.length ?
-            professionals?.map(professional => {
-                return (
-                <div className={s.order} key={professional.id}>
-                    <div className={s.img}>
-                        <img src={professional.image} alt="" />
-                    </div>
-                    <div className={s.userdata}>
-                        <p className={s.name}>{professional.name} {professional.last_Name}</p>
-                        <p className={s.location}>{professional.city}, {professional.country}</p>
-                    </div>
-                    <div className={s.btndiv}>
-                        <div className={s.btn}>Puntuar</div>
-                    </div>
-                </div>)
-            }) : <p>No tienes puntuaciones pendientes</p>}
+    return(
+        <div className={onReview ? s.review : s.order} key={professional.id}>
+        <div className={s.info}>
+            <div className={s.img}>
+                <img src={professional.image} alt="" />
+            </div>
+            <div className={s.userdata}>
+                <p className={s.name}>{professional.name} {professional.last_Name}</p>
+                <p className={s.location}>{professional.city}, {professional.country}</p>
+            </div>
+            <div className={s.btndiv}>
+                <div className={s.btn} onClick={handleReview}>Puntuar</div>
+            </div>
         </div>
-    )
+        <div className={s.opinion}>
+          <form className={s.form}>
+          <div className={s.description}>
+                <label>Description</label>
+                <textarea></textarea>
+            </div>
+            <div className={s.barra}>
+                <label>Puntaje</label>
+                <input
+                    name="rating"
+                    max="5"
+                    step="0.5"
+                    type="range"/>
+            </div>
+            </form>
+        </div>
+    </div>
+    );
 }
 
 export default OrdersClient
