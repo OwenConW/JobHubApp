@@ -39,11 +39,12 @@ const Profile = () => {
     }
     console.log(data)
     if(data.emisor_id === data.receptor_id ){
-      alert("No puedes chatear contigo mismo )?")
+      alert("No puedes ordenar contigo mismo )?")
     }else{
       try{
-        await axios.post('/conversation', data);
-        navigate('/chat');
+
+        // await axios.post('/conversation', data);
+        // navigate('/chat');
       }catch(e){
         console.log(e);
       }
