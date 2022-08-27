@@ -26,12 +26,13 @@ const Profile = () => {
   const search = useLocation().search;
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
 
-  console.log("preapproval_id:", preapproval_id);
-
   if(preapproval_id){
     axios.put(`users/premium/${currentUser.id}`, {isPremium: true})
     .then(() => {
-      alert(`Muchas gracias ${currentUser.name}, ahora eres premium, bienvenido!`)
+      setTimeout(() => {
+        alert(`Muchas gracias ${currentUser.name}, ahora eres premium, bienvenido!`)
+        alert(`Tu id de compra es ${preapproval_id}`)
+      }, 2000);
     })
   }
 
@@ -51,8 +52,6 @@ const Profile = () => {
   const handlePremiumModal = async () => {
   setModalActive(!modalActive)
   }
- 
-  console.log(activeUser)
   return (
     <>
       <Navbar />
