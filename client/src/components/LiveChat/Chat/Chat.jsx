@@ -64,6 +64,7 @@ const Chat = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(newMessage === "")return
         const message = {
             conversationId: currentChat.id,
             sender: currentUser.id,
