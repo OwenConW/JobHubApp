@@ -5,41 +5,64 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLocalStorage } from "../../../../handlers/localStorage";
 import { getChars, getCharsById } from "../../../../redux/userActions";
 import OpinionCard from "./OpinionCard/OpinionCard";
+import { useState } from "react";
 
 const Opinions = () => {
   const dispatch = useDispatch()
   let activeUser = getLocalStorage()
 
-  let allReviews = [{ id_orders: 7, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }, { id_orders: 8, id_user_client: 1, id_professional: 2, feedback_client: 'Un asco', rating: 1 }, { id_orders: 9, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }, { id_orders: 10, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }]
+  // let allReviews = [{ id_orders: 7, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }, { id_orders: 8, id_user_client: 1, id_professional: 2, feedback_client: 'Un asco', rating: 1 }, { id_orders: 9, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }, { id_orders: 10, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }]
 
   let users = useSelector((state) => state.users.users)
-
-  console.log(allReviews[0])
+  // let allReviews = useSelector((state) => state.reviews.reviews)
+  let saveAllReviews = useSelector((state) => state.reviews.reviews)
+  let myReviews = saveAllReviews?.filter(review => review?.id_user_client === activeUser.id)
   useEffect(() => {
 
   }, [users])
 
-  const setRating = (event) => {
-    console.log(parseInt(event.target.id))
+  const [ allReviews, setAllReviews ] = useState(myReviews)
+
+//FILTRADO POR NOMBRE
+  const [filter, setFilter] = useState('')
+
+  const filterByName = (filter) => {
+    let filteredProfessionals;
+    let filteredReviews = allReviews
+  
+    if (filter) {
+      filteredReviews = []
+      filteredProfessionals = users.filter(prof => prof.name.toLowerCase().includes(filter.toLowerCase()))
+      for (let x = 0; x < filteredProfessionals.length; x++) {
+        let filteredProfessional = filteredProfessionals[x];
+        let reviewsForFilteredProfessional = myReviews.filter(review => review.id_user_professional == filteredProfessional.id);
+        reviewsForFilteredProfessional.forEach(review => filteredReviews.push(review))
+      }
+      setAllReviews(filteredReviews)
+    } else {
+      setAllReviews(myReviews)
+    }
   }
 
-  const onChange = (event) => {
-
+  const onFilterChange = (event) => {
+    setFilter(event.target.value)
   }
 
+  useEffect(() => {
+    console.log(allReviews)
+    filterByName(filter)
+  }, [filter])
 
-  // let allReviews = users.map(user => user.reviews)
-  // console.log(users)
+
   return (
     <div className={s.container}>
       <label>Filtrar</label>
-      <input></input>
+      <input name="filter" value={filter} onChange={event => onFilterChange(event)}></input>
       {
-        allReviews ? allReviews.map(review => 
-          
-          <OpinionCard review={review}/>
+        allReviews.length ? allReviews.map(review =>
+          <OpinionCard review={review} users={users} key={review?.id}/>
 
-        ) : <p>Aun no has hecho ninguna reseña</p>
+        ) : <p>No se encontraron reseñas</p>
       }
 
     </div>

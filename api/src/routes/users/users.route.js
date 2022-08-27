@@ -86,7 +86,7 @@ users.post("/", async (req, res, next) =>{
 //RUTA PARA EDITAR EL USUARIO
 users.put('/:id', async (req, res, next) => {
     const { id } = req.params
-    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
+    const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
     try {
 
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
@@ -101,7 +101,7 @@ users.put('/:id', async (req, res, next) => {
         userUpdated.set({
             name,
             last_Name,
-            date_of_Bird,
+            date_of_Birth,
             image,
             dni,
             mail,
@@ -126,9 +126,9 @@ users.put('/:id', async (req, res, next) => {
 //RUTA PARA EDITAR USUARIO SIN JOBS
 users.put("/edit/:id" , async (req, res, next) => {
     const { id } = req.params
-    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
+    const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
     try {
-        await functions.updateUserNoJobs(id, name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession)
+        await functions.updateUserNoJobs(id, name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession)
         return res.status(200).send(`The user "${name}" updated successfully`)
     } catch (error) {
         console.log(error);
