@@ -71,12 +71,14 @@
                     transition: 0.3s;
                     width: 70%;
                     height: 60%;
+                    object-fit: cover;
 
                     &:hover{
                         transition: 0.3s;
                         scale: 1.1;
                     }
                 }
+               
             }
 
             .profileimg{
@@ -88,11 +90,11 @@
                 border: 5px solid #c9c9c997;
                 background-color: #c9c9c971;
                 object-fit: cover;
-
                 img{
                     width: 100%;
                     height: 100%;
                     border-radius: 50%;
+                    object-fit: cover
                 }
 
                 &:hover{
@@ -100,6 +102,30 @@
                     scale: 1.02;
                 }
             }
+            .profileimgPremium{
+                transition: 0.5s;
+                width: 20%;
+                height: 60%;
+                margin-left: 5%;
+                border-radius: 50%;
+                border: 2px solid #fdc644;
+                box-shadow: 0px 0px 27px 7px #FFF780;
+                background-color: #c9c9c971;
+                object-fit: cover;
+                
+                img{
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    object-fit: cover
+                }
+
+                &:hover{
+                    transition: 0.5s;
+                    scale: 1.02;
+                }
+            }
+        
         }
     }
 

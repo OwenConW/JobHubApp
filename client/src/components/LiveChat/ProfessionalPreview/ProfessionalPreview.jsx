@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import s from './ProfessionalPreview.module.scss';
-
+import corona from "./asset/corona.png"
 const ProfessionalPreview = ({id}) => {
     const [professional, setProfessional] = useState({});
 
@@ -23,7 +23,25 @@ const ProfessionalPreview = ({id}) => {
 
   return (
     <div className={s.container}>
-        <div className={s.professionalImg}>
+      {
+        professional.isPremium ? (
+            <>
+            <div className={s.professionalImg}>
+            <img src={professional?.image} alt="professional" className={s.imagePremium} />
+        </div>
+        <div className={s.professionaldata}>
+            <p className={s.professionalName}>{professional?.name} {professional?.last_Name} <img src={corona} alt="" className={s.corona}/></p>
+            <p className={s.professionalCity}>
+                {professional?.city} {professional?.country}
+            </p>
+            <p className={s.professionalDescription}>
+                {professional?.description}
+            </p>
+        </div>
+        </>
+        ) : (
+            <>
+            <div className={s.professionalImg}>
             <img src={professional?.image} alt="professional" />
         </div>
         <div className={s.professionaldata}>
@@ -35,6 +53,10 @@ const ProfessionalPreview = ({id}) => {
                 {professional?.description}
             </p>
         </div>
+        </>
+        )
+      }
+        
     </div>
   )
 }
