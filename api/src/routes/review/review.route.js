@@ -56,6 +56,10 @@ review.post("/:id", async (req, res, next) =>{
 review.put("/:id", async (req, res, next)=> {
     const { id } = req.params;
     const { feedback_client, rating, id_user_professional } = req.body;
+    console.log(id);
+    console.log(feedback_client);
+    console.log(rating);
+    console.log(id_user_professional);
     try {
         await functions.updateReview(id, feedback_client, rating);
         await functions.searchRating(id_user_professional, rating)

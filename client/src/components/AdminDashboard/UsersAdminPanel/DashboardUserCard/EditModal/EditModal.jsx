@@ -31,10 +31,6 @@ function EditModal(props) {
     }
   },[fetchingAdminEditUserSuccess])
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData])
-
   return (
     <div className={s.modalMainContainer}>
       <div className={s.modalContainer}>

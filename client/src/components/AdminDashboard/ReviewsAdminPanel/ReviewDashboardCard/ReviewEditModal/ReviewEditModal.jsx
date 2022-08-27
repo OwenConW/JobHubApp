@@ -4,7 +4,7 @@ import { editReview } from '../../../../../redux/adminActions'
 import s from './ReviewEditModal.module.scss'
 
 function ReviewEditModal(props) {
-  const { id, id_orders, id_user_professional, id_user_client, feedback_client, rating, isActive, handleEditOpenModal, editModalActive } = props;
+  const { id, id_orders, id_user_professional, id_user_client, handleEditOpenModal, editModalActive } = props;
   const dispatch = useDispatch()
   const [reviewData, setReviewData] = useState({...props})
 
@@ -24,9 +24,9 @@ function ReviewEditModal(props) {
     dispatch(editReview(id, reviewData))
   }
 
-  useEffect(() => {
+  useEffect(() => {;
     if (fetchingAdminEditReviewSuccess) {
-      handleEditOpenModal(!editModalActive)   
+      return handleEditOpenModal(!editModalActive)   
     }
   },[fetchingAdminEditReviewSuccess])
 

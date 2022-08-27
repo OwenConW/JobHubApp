@@ -3,10 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import s from './Details.module.scss';
-<<<<<<< HEAD
-=======
 import { getLocalStorage } from "../../handlers/localStorage";
->>>>>>> d22c7c7cad6bb34e2504d124328a2db48aa7f28d
 
 import Navbar from "../Navbar/Navbar";
 import CardReview from './CardReview/CardReview.jsx'

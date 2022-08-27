@@ -113,7 +113,7 @@ export const fetchingSlice = createSlice({
 			state.fetchingAdminEditReview = true
 		},
 		fetchingAdminEditReviewSuccess: (state, action) => {
-			state.fetchingAdminEditRevieww = false
+			state.fetchingAdminEditReview = false
 			state.fetchingAdminEditReviewSuccess = true
 		},
 		fetchingAdminEditReviewFailure: (state, action) => {
@@ -124,6 +124,44 @@ export const fetchingSlice = createSlice({
 			state.fetchingAdminEditReview = false
 			state.fetchingAdminEditReviewFailure = false
 			state.fetchingAdminEditReviewSuccess = false
+		},
+
+		// =============== Order ===========================
+
+		//DeleteHandling
+		fetchingAdminDeleteOrder: (state, action) => {
+			state.fetchingAdminDeleteOrder = true
+		},
+		fetchingAdminDeleteOrderSuccess: (state, action) => {
+			state.fetchingAdminDeleteOrder = false
+			state.fetchingAdminDeleteOrderSuccess = true
+		},
+		fetchingAdminDeleteOrderFailure: (state, action) => {
+			state.fetchingAdminDeleteOrder = false
+			state.fetchingAdminDeleteOrderFailure = true
+		},
+		fetchingAdminDeleteOrderReset: (state, action) => {
+			state.fetchingAdminDeleteOrder = false
+			state.fetchingAdminDeleteOrderFailure = false
+			state.fetchingAdminDeleteOrderSuccess = false
+		},
+
+		//EditHandling
+		fetchingAdminEditOrder: (state, action) => {
+			state.fetchingAdminEditOrder = true
+		},
+		fetchingAdminEditOrderSuccess: (state, action) => {
+			state.fetchingAdminEditOrder = false
+			state.fetchingAdminEditOrderSuccess = true
+		},
+		fetchingAdminEditOrderFailure: (state, action) => {
+			state.fetchingAdminEditOrder = false
+			state.fetchingAdminEditOrderFailure = true
+		},
+		fetchingAdminEditOrderReset: (state, action) => {
+			state.fetchingAdminEditOrder = false
+			state.fetchingAdminEditOrderFailure = false
+			state.fetchingAdminEditOrderSuccess = false
 		},
 	},
 });
@@ -148,6 +186,14 @@ export const { fetchingMercadopagoLink,
 							 fetchingAdminEditReview,
 							 fetchingAdminEditReviewSuccess,
 							 fetchingAdminEditReviewFailure,
-							 fetchingAdminEditReviewReset
+							 fetchingAdminEditReviewReset,
+							 fetchingAdminDeleteOrder,
+							 fetchingAdminDeleteOrderSuccess,
+							 fetchingAdminDeleteOrderFailure,
+							 fetchingAdminDeleteOrderReset,
+							 fetchingAdminEditOrder,
+							 fetchingAdminEditOrderSuccess,
+							 fetchingAdminEditOrderFailure,
+							 fetchingAdminEditOrderReset,
 							} = fetchingSlice.actions;
 export default fetchingSlice.reducer;
