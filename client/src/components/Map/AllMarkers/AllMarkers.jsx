@@ -25,31 +25,31 @@ const AllMarkers = () => {
 
     const Markers = users.map(user => {
         let iconMarker;
-        if(user?.professions[0].name === 'electricista'){
+        if(user?.professions[0]?.name === 'electricista'){
             iconMarker = electricistaIcon;
         }
-        if(user?.professions[0].name === 'jardinero'){
+        if(user?.professions[0]?.name === 'jardinero'){
             iconMarker = jardineroIcon;
         }
-        if(user?.professions[0].name === 'plomero'){
+        if(user?.professions[0]?.name === 'plomero'){
             iconMarker = plomeroIcon;
         }
-        if(user?.professions[0].name === 'gasista'){
+        if(user?.professions[0]?.name === 'gasista'){
             iconMarker = gasistaIcon;
         }
-        if(user?.professions[0].name === 'programador'){
+        if(user?.professions[0]?.name === 'programador'){
             iconMarker = programadorIcon;
         }
-        if(user?.professions[0].name === 'costurero'){
+        if(user?.professions[0]?.name === 'costurero'){
             iconMarker = costureroIcon;
         }
-        if(user?.professions[0].name === 'carpintero'){
+        if(user?.professions[0]?.name === 'carpintero'){
             iconMarker = carpinteroIcon;
         }
-        if(user?.professions[0].name === 'pintor'){
+        if(user?.professions[0]?.name === 'pintor'){
             iconMarker = pintorIcon;
         }
-        if(user?.professions[0].name === 'albanil'){
+        if(user?.professions[0]?.name === 'albanil'){
             iconMarker = albanilIcon;
         }
 

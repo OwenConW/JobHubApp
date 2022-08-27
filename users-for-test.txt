@@ -11,7 +11,7 @@
     "name":"programador"
 }
 {
-    "name":"jardinero"
+    "name":"programador"
 }
 {
     "name":"albanil"
