@@ -4,4 +4,32 @@
     align-items: center;
     width: 100%;
     height: 90%;
+
+    .profContainer, .clientContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 40%;
+        height: 80%;
+        border-radius: 10px;
+        background-color: rgb(193, 193, 193);
+        box-shadow: 14px 7px 42px -3px rgba(0,0,0,0.1);
+        overflow-y: scroll;
+
+        h4{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.2rem;
+            font-weight: 300;
+            width: 100%;
+            min-height: 15%;
+            color: #1f1f1f;
+        }
+
+        p{
+            font-size: 1.6rem;
+        }
+    }
 }
