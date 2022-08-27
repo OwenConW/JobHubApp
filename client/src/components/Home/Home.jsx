@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
+// import axios from 'axios';
+import { Link, /*useLocation*/ } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,20 +17,22 @@ import s from './Home.module.scss';
 
 const Home = () => {
 
-  const search = useLocation().search;
-  const prueba = new URLSearchParams(search).get('prueba');
+  const dispatch = useDispatch()
+  useEffect(() => { 
+    dispatch(getLeadingProfessionals()) 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) 
+  
+  // const search = useLocation().search;
+  // const prueba = new URLSearchParams(search).get('prueba');
 
-  if(prueba) console.log("ANDAAAAAAAAAAA", prueba)
 
   const { isAuthenticated } = useAuth0();
   const br = <br></br>;
-
+  
   // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
-  const dispatch = useDispatch()
   const bestProffesionals = useSelector((state) => state.users.filteredProfessionals)
-
-  useEffect(() => { dispatch(getLeadingProfessionals()) }, [dispatch]) 
-
+    
   return (
     <>
       <Navbar />
@@ -45,7 +47,7 @@ const Home = () => {
             <h1 className={s.subtitle}>Trabajadores destacados de la semana</h1>
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
             <div className={s.cards}>
-              {console.log("mejores",bestProffesionals)}
+              {/* {console.log("mejores",bestProffesionals)} */}
               {bestProffesionals.length ? bestProffesionals.slice(0,3).map((obj, i) => {
                   return <FeaturedCard key={i} prop={obj}/>
                 })

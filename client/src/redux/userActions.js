@@ -30,9 +30,9 @@ export const getCharsById = (id) => (dispatch) => {
 
 export const getLeadingProfessionals = () => (dispatch) => {
 	axios
-		.get(`/users?rating=ASC`)
+		.get(`/users`)
 		.then((res) => {
-			dispatch(getUserById(res.data));
+			dispatch(getFilteredProfessionals(res.data));
 		})
 		.catch((e) => console.log(e));
 };
