@@ -37,6 +37,7 @@ export const getLeadingProfessionals = () => (dispatch) => {
 
 export const filterProfessionals = (filters) => (dispatch) => {
 	console.log('filters profession: ', filters.profession);
+	console.log("filters name:", filters.name)
 	axios
 		.get(
 			`/users?name=${filters.name}&profession=${filters.profession}&rating=${filters.rating}`
