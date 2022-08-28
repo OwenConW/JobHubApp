@@ -85,7 +85,9 @@ const OrdersClient = ({order, activeUser, setCli, clientOrders}) => {
                 <p className={s.location}>{professional.city}, {professional.country}</p>
             </div>
             <div className={s.btndiv}>
+
                 <div className={s.btn} onClick={handleReview}>{onReview ? 'Cerrar' : 'Abrir'}</div>
+
             </div>
         </div>
         <div className={s.opinion}>

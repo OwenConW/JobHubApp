@@ -35,7 +35,8 @@ module.exports = (sequelize) => {
         },
         apointment_date:{
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            defaultValue: DataTypes.NOW.toString(), //VER PORQUE NO ME DEJABA HACER POST SIN ESTE DATO
         },
         isActive: {
 			type: DataTypes.BOOLEAN,

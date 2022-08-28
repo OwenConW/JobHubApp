@@ -21,13 +21,13 @@ return (
 
       <div className={s.orderDetail}>
         {
-          reviewer ? <h1>{reviewer.name}</h1> : <h1>Usuario anonimo</h1>
+          reviewer ? <h1>{reviewer.name} {reviewer.last_Name}</h1> : <h1>Usuario anonimo</h1>
         }
 
         <h2>{review.feedback_client}</h2>
       </div>
       <div className={s.orderDetail2}>
-        <h3><img src={star} /> {review.rating}</h3>
+      <h3><img src={star} />{review.rating}</h3>
       </div>
     </div>
   )

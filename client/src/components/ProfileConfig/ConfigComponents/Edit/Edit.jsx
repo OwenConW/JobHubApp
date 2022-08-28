@@ -6,8 +6,11 @@ import axios from "axios";
 import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
 import { modifyUser } from "../../../../redux/userActions";
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
+  const navigate = useNavigate()
   let localSt = getLocalStorage()
   let activeUser = { ...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1) }
 
@@ -59,7 +62,6 @@ const Edit = () => {
 
   // Control del estado user
   useEffect(() => {
-    // console.log('USUARIO:', user)
   }, [user])
 
 
@@ -134,6 +136,8 @@ const Edit = () => {
   });
 
 
+
+
   const handleSubmit = async () => {
     let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${user.address},${user.street},${user.city},${user.country}&format=json`);
     if (!response.data.length) {
@@ -147,8 +151,8 @@ const Edit = () => {
         coordinate: [response.data[0].lat, response.data[0].lon]
       })
     }
-
     
+
     let newValues = {
       ...localSt,
       name: user.name.toLowerCase(),
@@ -167,8 +171,18 @@ const Edit = () => {
       isProfessional: user.isProfessional,
       professions: user.professions,
     }
-    setUserLocalStorage(newValues)
-    modifyUser(activeUser.id, user)
+   setUserLocalStorage(newValues)
+  
+   modifyUser(activeUser.id, user)
+
+   Swal.fire({
+    icon: 'success',
+    title: 'Cambios Guardados',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  
+  navigate("./")
   }
   // console.log('entre a Edit')
   // console.log('activeuser: ', activeUser)
@@ -253,7 +267,7 @@ const Edit = () => {
         <textarea className={s.description} placeholder="Descripcion personal" name='description' value={user.description} onChange={(event) => handleChange(event)}></textarea>
       </div>
 
-      <input type="submit" className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
+      <input type="submit" value='Confirmar' className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
 
     </div>
   )
