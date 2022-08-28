@@ -3,7 +3,7 @@ import { Marker, Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import {nameStyle , imgDiv, imgStyle, containerStyle, dataDiv, oficioStyle} from './styles';
-import { electricistaIcon, jardineroIcon, plomeroIcon, gasistaIcon, pintorIcon, costureroIcon, programadorIcon, carpinteroIcon, albanilIcon, electricistaIconP, jardineroIconP, plomeroIconP, gasistaIconP, pintorIconP, costureroIconP, programadorIconP, carpinteroIconP, albanilIconP} from '../mapIcons';
+import { electricistaIcon, jardineroIcon, plomeroIcon, gasistaIcon, pintorIcon, costureroIcon, programadorIcon, carpinteroIcon, albanilIcon, tecnicoaireIcon, electricistaIconP, jardineroIconP, plomeroIconP, gasistaIconP, pintorIconP, costureroIconP, programadorIconP, carpinteroIconP, albanilIconP, tecnicoaireIconP} from '../mapIcons';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { getLocalStorage } from '../../../handlers/localStorage';
@@ -54,6 +54,9 @@ const AllMarkers = () => {
                 if(user?.professions[0].name === 'albanil'){
                     iconMarker = albanilIconP;
                 }
+                if(user?.professions[0].name === 'tecnico de aires acondicionados'){
+                    iconMarker = tecnicoaireIconP;
+                }
             }else{
                 if(user?.professions[0].name === 'electricista'){
                     iconMarker = electricistaIcon;
@@ -81,6 +84,9 @@ const AllMarkers = () => {
                 }
                 if(user?.professions[0].name === 'albanil'){
                     iconMarker = albanilIcon;
+                }
+                if(user?.professions[0].name === 'tecnico de aires acondicionados'){
+                    iconMarker = tecnicoaireIcon;
                 }
             }
         }

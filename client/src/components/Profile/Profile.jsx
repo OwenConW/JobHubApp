@@ -33,7 +33,7 @@ const Profile = () => {
       Swal.fire({
         icon: 'success',
         html: `<h1>Muchas gracias por formar parte de la familia Job Hub</h1>
-        <h3>Tu id de compra para reclamos es <h2 style="font-weight: 400">${preapproval_id}</h2></h3>
+        <h3>Tu id de compra para reclamos es: <h2 style="font-weight: 800">${preapproval_id}</h2></h3>
          <h2>Recorda que tendras todo acerca de tu suscripcion en el panel de configuracion</h2>`,
         width: 700,
         padding: '3em',
