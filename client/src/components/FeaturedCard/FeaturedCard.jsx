@@ -84,7 +84,7 @@ const FeaturedCard = (prop) => {
             <h4>Calificación</h4>
             <div className={s.rating}>
               <img src={star} alt="" />
-              <b>{prop?.prop.rating === -1 ? <h4>Sin reseñas</h4> : prop?.prop.rating}</b>
+              <b className={s.ratingNumber}>{prop?.prop.rating === -1 ? <h4>Sin reseñas</h4> : prop?.prop.rating}</b>
             </div>
           </div>
         </motion.div>

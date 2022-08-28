@@ -102,24 +102,6 @@
             align-items: center;
             padding-top: 3%;
 
-            .resenas{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding-bottom: 1%;
-
-                h4{
-                    font-weight: 350;
-                    font-size: 1.7rem;
-                }
-
-                p{
-                    font-size: 1.8rem;
-                    font-weight: 400;
-                    color: #07393C;
-                }
-            }
 
             .calificacion{
                 display: flex;
@@ -136,6 +118,11 @@
                 .rating{
                     display: flex;
                     align-items: center;
+
+                    .ratingNumber{
+                        font-size: 30px;
+                        font-weight: 300;
+                    }
 
                     p{
                         font-size: 1.7rem;
@@ -253,24 +240,7 @@
             align-items: center;
             padding-top: 3%;
 
-            .resenas{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding-bottom: 1%;
 
-                h4{
-                    font-weight: 350;
-                    font-size: 1.7rem;
-                }
-
-                p{
-                    font-size: 1.8rem;
-                    font-weight: 400;
-                    color: #07393C;
-                }
-            }
 
             .calificacion{
                 display: flex;
@@ -287,6 +257,10 @@
                 .rating{
                     display: flex;
                     align-items: center;
+
+                    .ratingNumber{
+                        font-size: 1rem;
+                    }
 
                     p{
                         font-size: 1.7rem;
