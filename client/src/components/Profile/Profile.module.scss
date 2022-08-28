@@ -33,7 +33,24 @@
           width: 55%;
           height: 80%;
           border-radius: 50%;
-          border: 15px solid rgba(0, 0, 0, 0.041);
+          border: 15px solid rgba(0, 0, 0, 0.082);
+          object-fit: cover;
+        }
+      }
+
+      .profile_Img_containerPremium {
+        display: flex;
+        width: 30%;
+
+        justify-content: center;
+        align-items: center;
+
+        .profile_ImgPremium {
+          width: 55%;
+          height: 80%;
+          border-radius: 50%;
+          border: 9px solid #fdc644;
+          box-shadow: 0px 0px 27px 7px #FFF780;
           object-fit: cover;
         }
       }
@@ -45,7 +62,16 @@
           text-transform: capitalize;
           font-size: 4.4rem;
           line-height: 5rem;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
           color: #000000;
+        }
+
+        .corona{
+          width: 50px;
+          height: 50px;
+          margin-right: 5px;
         }
 
         .location {
@@ -264,7 +290,6 @@
       }
 
     }
-
     .premiumRocketButton {
       width: 40%;
       display: flex;
@@ -305,6 +330,95 @@
           font-size: 1.7rem;
           line-height: 2.8rem;
           color: #ffffffc0;
+        }
+      }
+    }
+  }
+
+  // PREMIUN TRUE
+
+  .isPremiumTRUE {
+    height: 25%;
+    margin-bottom: 15.4%;
+    width: 90%;
+    display: flex;
+    align-content: space-around;
+    // justify-content: space-evenly;
+    border-radius: 10px;
+    background: #D9D9D9;
+    box-shadow: 0px 0px 6px 4px #FFF780;
+
+    .premiumTextTRUE {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      
+      h1 {
+        font-weight: 300;
+        margin-top: 2%;
+        margin-left: 4.9%;
+        font-size: 3.2rem;
+        line-height: 5.4rem;
+        color: #000000;
+      }
+
+      .premiumDetailTRUE {
+        
+        overflow-y: auto;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 2%;
+
+        h4 {
+          margin-left: 4.9%;
+          margin-top: 2%;
+          text-align: justify;
+          font-weight: 200;
+          font-size: 1.7rem;
+          line-height: 2.5rem;
+          color: #000000;
+        }
+      }
+
+    }
+    .premiumRocketButtonTRUE {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      
+      .rocketsito{
+        width: 120px;
+        height: 120px;
+      }
+
+      div {
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: 9%;
+        height: 40%;
+        margin-bottom: 5%;
+      }
+
+      span {
+        width: 43%;
+        background: #07393C;
+        border-radius: 10px;
+        margin-left: 4.9%;
+        margin-bottom: 3%;
+        margin-top: 5%;
+        color: #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: 0.5s;
+        &:hover {
+          transition: 0.5s;
+          background: #3e909b;
         }
       }
     }

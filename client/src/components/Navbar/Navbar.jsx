@@ -37,6 +37,9 @@ const Navbar = () => {
 				<Link to="/professionals" className={s.link}>
 					Catálogo
 				</Link>
+				<Link to="/faq" className={s.link}>
+					Faq
+				</Link>
 			</div>
 
 			<div className={s.logo}>
@@ -46,15 +49,26 @@ const Navbar = () => {
 			<div className={s.profile}>
 				{isAuthenticated ? (
 					<div className={s.user}>
+						<Link to={`/myorders`} className={s.link}>
+							Ordenes
+						</Link>
 						<Link to={`/chat`} className={s.link}>
 							<img src={chatlogo} alt="chat" />
 						</Link>
+
+						{
+							activeUser.isPremium ?
+							<Link to={'/profile'} className={s.profileimgPremium}>
+							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							</Link>
+							:
+							<Link to={'/profile'} className={s.profileimg}>
+							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							</Link>
+						}
 						<div className={s.link} onClick={handleLogout}>
-							Logout
+							Cerrar Sesión
 						</div>
-						<Link to={'/profile'} className={s.profileimg}>
-							{activeUser.image ? <img src={activeUser.image}/> : <img src={defaultimage}/>}
-						</Link>
 					</div>
 				) : (
 					<div className={s.user}>

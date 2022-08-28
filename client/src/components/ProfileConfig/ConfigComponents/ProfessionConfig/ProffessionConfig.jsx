@@ -32,7 +32,7 @@ const ProfessionConfig = () => {
   useEffect(() => {
     // console.log(user)
     dispatch(actionGetAllJobs())
-    dispatch(getCharsById(activeUser.id))
+    // dispatch(getCharsById(activeUser.id))
   }, [])
 
   const deleteProfession = (event) => {

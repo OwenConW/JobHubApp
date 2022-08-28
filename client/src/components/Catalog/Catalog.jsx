@@ -15,7 +15,7 @@ const Catalog = (props) => {
 	);
 
 	const [currentPage, setCurrentPage] = useState(1) 
-    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(10)  
+    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(6)  
     const iOfLastRecipe = currentPage * proffesionalsPerPage
     const iOfFirstRecipe = iOfLastRecipe - proffesionalsPerPage
     const currentProffesionals = professionalsArray.slice(iOfFirstRecipe, iOfLastRecipe) 
