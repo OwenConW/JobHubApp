@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link, useLocation} from 'react-router-dom';
+import { Link, useLocation, useNavigate} from 'react-router-dom';
 
 import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
@@ -22,6 +22,7 @@ import Swal from "sweetalert2"
 
 const Profile = () => {
   //success?preapproval_id=x
+  const navigate = useNavigate()
   const currentUser = functions.getLocalStorage()
   const search = useLocation().search;
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
@@ -42,6 +43,10 @@ const Profile = () => {
           rgba(0,0,123,0.4)
           url("./assets/confetti2.gif")
         `
+      })
+      .then(() => {
+        axios.get(`/users/${currentUser.id}`)
+        Swal.close(navigate("/profile"))
       })
     })
   }
