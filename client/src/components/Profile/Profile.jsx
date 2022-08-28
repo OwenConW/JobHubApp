@@ -49,7 +49,7 @@ const Profile = () => {
         background: '#2C666E',
         backdrop: `
           rgba(0,0,123,0.4)
-          url("https://acegif.com/wp-content/uploads/gif/confetti-4.gif")
+          url("https://cutewallpaper.org/21/gif-transparent-background/Confetti-gif-transparent-background-6-GIF-Images-Download.gif")
         `
       })
       .then(() => {
