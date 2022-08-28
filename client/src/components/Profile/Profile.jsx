@@ -76,7 +76,7 @@ const Profile = () => {
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             {
-              currentUser.isPremium ? (
+              activeUser?.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
               <img src={activeUser.image} className={s.profile_ImgPremium} alt=""></img>
             </div>
@@ -89,7 +89,7 @@ const Profile = () => {
            
             <div className={s.profileDetail}>
               {
-                currentUser.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
+                activeUser?.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
                 : <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
               }
               
@@ -133,7 +133,7 @@ const Profile = () => {
             </div>
           </div>
           {
-            activeUser.isPremium ? (
+            activeUser?.isPremium ? (
               <div className={s.isPremiumTRUE}>
 
               <div className={s.premiumTextTRUE}>
