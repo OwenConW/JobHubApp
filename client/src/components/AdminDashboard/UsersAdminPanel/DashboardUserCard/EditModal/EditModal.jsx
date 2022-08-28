@@ -6,32 +6,38 @@ import s from './EditModal.module.scss';
 
 function EditModal(props) {
   const { editModalActive, handleEditOpenModal } = props;
-  
+  //estado de los datos a enviar a la DB, (professions harcodeado por la misma razon que en el handleRestore)
   const [userData, setUserData] = useState({...props, professions: ["plomero"]})
   const dispatch = useDispatch()
+
+  //ESTADOS DE HANDLING DE EXITO Y ERROR PARA LA EDICION DE USUARIO
   const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
   const fetchingAdminEditUserFailure = useSelector(state => state.fetching.fetchingAdminEditUserFailure)
 
+  //CAMBIA EL ESTADO DE LOS INPUTS (userData)
   function handleChange(e){
     setUserData({...userData, [e.target.name]: e.target.value})
   }
-
+  
+  //CAMBIA EL ESTADO DE LOS INPUTS (userData), pero para botones.
   function handleClick(e){
     setUserData({...userData, [e.target.name]: e.target.value === "Si" ? true : false})
   }
 
+  //funcion onSubmit
   function handleEdit(e){
     if(e.target.name === "cancel-btn") return handleEditOpenModal(!editModalActive) 
-    console.log(userData);
     dispatch(editUser(userData.id , userData))
+    //placeholder fix (arreglar)
+    handleEditOpenModal(!editModalActive)   
   }
   
-  useEffect(() => {
-    console.log(fetchingAdminEditUserSuccess);
-    if (fetchingAdminEditUserSuccess) {
-      handleEditOpenModal(!editModalActive)   
-    }
-  },[fetchingAdminEditUserSuccess])
+  // useEffect(() => {
+  //   console.log(fetchingAdminEditUserSuccess);
+  //   if (fetchingAdminEditUserSuccess) {
+  //     handleEditOpenModal(!editModalActive)   
+  //   }
+  // },[fetchingAdminEditUserSuccess])
 
   return (
     <div className={s.modalMainContainer}>

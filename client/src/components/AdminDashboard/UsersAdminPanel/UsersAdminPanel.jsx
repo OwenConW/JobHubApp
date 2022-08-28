@@ -7,19 +7,22 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function UsersAdminPanel(props) {
+  //traigo estado users por props (despues lo voy a traer directo de redux)
   const { users } = props;
   const dispatch = useDispatch()
-
+  //estado del inuput de busqueda por ID (el de nombre todavia no esta hecho)
   const [searchByIdInput, setSearchByIdInput] = useState('');
 
+  //funcion que trae todos lo usuarios al clickear el boton.
   function getAllUsers() {
     dispatch(getAllUsersForAdmin())
   }
-
+  //funcion onChange
   function handleSearchUserByIdChange(e) {
     setSearchByIdInput( e.target.value)
   }
   
+  //funcion submit del form por ID
   function handleSearchUserByIdSubmit(e) {
     e.preventDefault()
     dispatch(getUsersByIdForAdmin(searchByIdInput));

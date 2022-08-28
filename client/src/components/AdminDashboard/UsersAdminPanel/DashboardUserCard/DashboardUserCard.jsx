@@ -26,23 +26,29 @@ function DashboardUserCard(props) {
             isActive, 
             professions } = props;
 
+  //estado que abre y cierra los DETALLES de la card.
   const [openModal, setOpenModal] = useState(false);
+  //estado que abre y cierra el MODAL de edicion de usuario.
   const [editModalActive, setEditModalActive] = useState(false)
 
   const dispatch = useDispatch();
 
+  //funcion que cambia el estado del DETALLE de usuario
   function handleOpenModal(e) {
     setOpenModal(!openModal)
   }
 
+  //funcion que elimina
   function handleDelete(e){
     dispatch(deleteUser(id))
   }
 
+  //Funcion para "restaurar" el usuario "eliminado"(professions esta hardcodeado porque no hice para que se pueda seleccionar todavia)
   function handleRestore(e){
     dispatch(editUser(id , {...props, isActive: true, professions: ["plomero"]}))
   }
-
+  
+  //funcion que cambia el estado del MODAL DE EDICION de usuario
   function handleEditOpenModal(e){
     setEditModalActive(!editModalActive)
   }

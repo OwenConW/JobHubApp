@@ -8,47 +8,45 @@ import ReviewsAdminPanel from "./ReviewsAdminPanel/ReviewsAdminPanel";
 import OrdersAdminPanel from "./OrdersAdminPanel/OrdersAdminPanel"
 import { useDebugValue } from "react";
 
-//ordenar por rating.
-//buscar por nombre.
-//boton para banear, eliminar.
-//
-//
-//
-//
-
 function AdminDashboard() {
   const dispatch = useDispatch()
   const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
-  //cambiar por el estado de todos los usuarios
+
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
   const orders = useSelector( state => state.admin.orders)
+  //ESTOS ESTADOS SON PARA EL HANDLING DE ERRORES, DE EXITO Y DE CUANDO ESTA BUSCANDO EN LA DB, SE VAN A USAR PARA LAS ALERTAS
+
   //Fetching user states
   const fetchingAdminDeleteUserSuccess = useSelector(state => state.fetching.fetchingAdminDeleteUserSuccess)
   const fetchingAdminDeleteUserFailure = useSelector(state => state.fetching.fetchingAdminDeleteUserFailure)
   const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
   const fetchingAdminEditUserFailure = useSelector(state => state.fetching.fetchingAdminEditUserFailure)
+
   //Fetching reviews states
-  //const fetchingAdminDeleteReviewSuccess = useSelector(state => state.fetching.fetchingAdminDeleteReviewSuccess)
-  //const fetchingAdminDeleteReviewFailure = useSelector(state => state.fetching.fetchingAdminDeleteReviewFailure)
+  const fetchingAdminDeleteReviewSuccess = useSelector(state => state.fetching.fetchingAdminDeleteReviewSuccess)
+  const fetchingAdminDeleteReviewFailure = useSelector(state => state.fetching.fetchingAdminDeleteReviewFailure)
   const fetchingAdminEditReviewSuccess = useSelector(state => state.fetching.fetchingAdminEditReviewSuccess)
   const fetchingAdminEditReviewFailure = useSelector(state => state.fetching.fetchingAdminEditReviewFailure)
+
   //Fetching orders states
   const fetchingAdminDeleteOrderSuccess = useSelector(state => state.fetching.fetchingAdminDeleteOrderSuccess)
   const fetchingAdminDeleteOrderFailure = useSelector(state => state.fetching.fetchingAdminDeleteOrderFailure)
   const fetchingAdminEditOrderSuccess = useSelector(state => state.fetching.fetchingAdminEditOrderSuccess)
   const fetchingAdminEditOrderFailure = useSelector(state => state.fetching.fetchingAdminEditOrderFailure)
 
+  //FUNCION QUE CAMBIA EL PANEL QUE SE MUESTRA (usuarios, reviews, ordenes)
   function handlePanelChange(e) {
     setPanelDisplayed(e.target.value)
   }
-
+  //FETCH DE LA DB
   useEffect(() => {
     dispatch(getAllUsersForAdmin())
     dispatch(getAllReviewsForAdmin())
     dispatch(getAllReviewsForAdmin())
   }, [dispatch])
 
+  //ESTO NO FUNCIONA CORRECTAMENTE TODAVIA
   // useEffect(() => {
   //   if(fetchingAdminDeleteUserSuccess) {
   //     alert('Usuario eliminado correctamundo')

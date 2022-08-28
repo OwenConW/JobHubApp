@@ -53,14 +53,17 @@ export const getUsersByIdForAdmin = (id) => (dispatch) => {
 
 
 export const deleteUser = (id) => (dispatch) => {
+  //setea el estado a TRUE, para hacerle saber al usuario que se esta "trabajando" (loading...)
   dispatch(fetchingAdminDeleteUser())
   axios.put(`/users/destroy/${id}`, {isActive: false})
-      .then(r => {
+  .then(r => {
+        //setea el estado (success) a TRUE, para hacerle saber al usuario que la accion tuvo exito.
         dispatch(fetchingAdminDeleteUserSuccess())
         dispatch(getAllUsersForAdmin())
       })
       .catch(e => {
         console.error(e)
+        //setea el estado (failure) a TRUE, para hacerle saber al usuario que hubo un error.
         dispatch(fetchingAdminDeleteUserFailure())
         dispatch(getAllUsersForAdmin())
       })
@@ -77,6 +80,7 @@ export const editUser = (id, payload) => (dispatch) => {
     .catch(e =>{
       console.error(e)
       dispatch(fetchingAdminEditUserFailure())
+      dispatch(getAllUsersForAdmin())
     })
 }
 
