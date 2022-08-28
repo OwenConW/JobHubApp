@@ -25,6 +25,7 @@ function UsersAdminPanel(props) {
   //funcion submit del form por ID
   function handleSearchUserByIdSubmit(e) {
     e.preventDefault()
+    if(!searchByIdInput) return
     dispatch(getUsersByIdForAdmin(searchByIdInput));
   }
 

@@ -19,6 +19,8 @@ function DashboardUserCard(props) {
             country, 
             city, 
             rating, 
+            street,
+            address,
             isPremium, 
             isProfessional, 
             isAdmin, 
@@ -121,6 +123,14 @@ function DashboardUserCard(props) {
         <div>
           <h4>Ciudad</h4>
           <h4>{city}</h4>
+        </div>
+        <div>
+          <h4>Calle</h4>
+          <h4>{street}</h4>
+        </div>
+        <div>
+          <h4>numero</h4>
+          <h4>{address}</h4>
         </div>
         {/* <div>
           <p>Description</p>
