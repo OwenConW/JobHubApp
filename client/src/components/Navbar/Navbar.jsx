@@ -49,12 +49,13 @@ const Navbar = () => {
 			<div className={s.profile}>
 				{isAuthenticated ? (
 					<div className={s.user}>
-						<Link to={`/chat`} className={s.link}>
-							<img src={chatlogo} alt="chat" />
-						</Link>
 						<Link to={`/myorders`} className={s.link}>
 							Ordenes
 						</Link>
+						<Link to={`/chat`} className={s.link}>
+							<img src={chatlogo} alt="chat" />
+						</Link>
+
 						{
 							activeUser.isPremium ?
 							<Link to={'/profile'} className={s.profileimgPremium}>

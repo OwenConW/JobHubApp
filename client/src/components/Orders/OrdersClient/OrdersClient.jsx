@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import s from './OrdersClient.module.scss';
 import Loader from '../../Login/Loader/Loader';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 const OrdersClient = ({order, activeUser, setCli, clientOrders}) => {
     const [professional, setProfessional] = useState([]);
@@ -41,32 +41,37 @@ const OrdersClient = ({order, activeUser, setCli, clientOrders}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        swal({
-            title: "Enviar reseña?",
-            text: "Seguro que quieres enviar esta reseña? Podrás editarla en la configuración de tu perfil.",
-            icon: "info",
-            buttons: true,
-          })
-          .then((willSend) => {
-            if (willSend) {
+        Swal.fire({
+            title: 'Publicar reseña?',
+            text: "Podrás modificarla en la configuración de tu perfil.",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#2C666E',
+            cancelButtonColor: '#4e4e4e',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Enviar'
+          }).then((result) => {
+            if (result.isConfirmed) {
                 let body = {
                     complete: true,
                     allowReview: true,
                 }
-
                 axios.post(`/review/${order.id_user_professional}`, opinion)
-                .then(() => axios.put(`/orders/${order.id}`, body)
-                            .then(() => {
-                            setCli(clientOrders.filter(o => o.id !== order.id));
-                            setLoading(false);
-                            swal("Se ha enviado la reseña, gracias por puntuar a los usuarios! :)", {
-                                icon: "success",
-                            })})
-                )
-            } else {
-              setLoading(false);
-            }
-          });
+                .then(() => axios.put(`/orders/${order.id}`, body)).then(() => {
+                    setCli(clientOrders.filter(o => o.id !== order.id));
+                    setLoading(false);
+                    Swal.fire({
+                        title: 'Se ha publicado tu reseña.',
+                        text: "Gracias por puntuar a los usuarios :)",
+                        icon: 'success',
+                        confirmButtonColor: '#2C666E',
+                    })
+                })
+          }else{
+            setLoading(false);
+          }
+        })
+
     }
 
     return(

@@ -3,7 +3,8 @@ import Navbar from '../Navbar/Navbar';
 import s from './MapView.module.scss';
 import AllMarkers from './AllMarkers/AllMarkers';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Preview from './preview/Preview';
 
 //map
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
@@ -28,7 +29,6 @@ const MapView = () => {
 	});
 
 	const { isAuthenticated } = useAuth0();
-	const navigate = useNavigate();
 
 	const closeToOne = (coords1, coords2) => {
 		if(pitagorasDistance(coords1, coords2) < distance){ //distancia en kilometros
@@ -83,9 +83,10 @@ const MapView = () => {
 	}
 
 	return (
-			isAuthenticated ? (<>
+			<>
 			<Navbar />
-			<div className={s.container}>
+			{isAuthenticated ? (
+				<div className={s.container}>
 				<div className={s.leftContainer}>
 					<div className={s.activeUser}>
 						<h3>Mapa</h3>
@@ -179,7 +180,8 @@ const MapView = () => {
 					</MapContainer>
 				</div>
 			</div>
-			</>) : navigate('../')
+			) : <Preview/>}
+			</>
 	);
 };
 

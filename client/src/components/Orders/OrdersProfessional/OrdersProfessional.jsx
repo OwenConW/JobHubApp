@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import s from './OrdersProfessional.module.scss';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 const OrdersProfessional = ({order, setProf, profOrders}) => {
     const [client, setClient] = useState([]);
@@ -19,24 +19,30 @@ const OrdersProfessional = ({order, setProf, profOrders}) => {
     }, [])
 
     const handleClick = () => {
-        swal({
-            title: "Trabajo",
-            text: "Estás seguro que se completo el trabajo? Si completas el cliente podrá puntuarte.",
-            icon: "info",
-            buttons: true,
-          })
-          .then((willComplete) => {
+        Swal.fire({
+            title: 'Seguro?',
+            text: "Al completar, habilitas al cliente a puntuarte.",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#2C666E',
+            cancelButtonColor: '#4e4e4e',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Completar'
+          }).then((result) => {
             let body = {
                 complete: false,
                 allowReview: true,
             }
-            if (willComplete) {
-            axios.put(`/orders/${order.id}`, body).then(() => setProf(profOrders.filter(p => p.id !== order.id)))
-            .then(() => swal("Se ha habilitado la puntuacion al cliente.", {
-                icon: "success",
-              }))
-            }
-          });
+            if (result.isConfirmed) {
+                axios.put(`/orders/${order.id}`, body).then(() => setProf(profOrders.filter(p => p.id !== order.id)))
+                .then(() => Swal.fire({
+                    title: 'Genial!',
+                    text: "Ahora el cliente podrá puntuarte",
+                    icon: 'success',
+                    confirmButtonColor: '#2C666E',
+                }))
+             }
+          })
     }
 
     return(
