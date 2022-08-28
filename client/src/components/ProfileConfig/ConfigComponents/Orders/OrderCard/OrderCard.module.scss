@@ -1,0 +1,108 @@
+.orders {
+  width: 70%;
+  max-height: 27%;
+  background: #07393C;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2%;
+  transition: 0.5s;
+  
+  .imgDetail {
+    margin-top: 2%;
+    width: 20%;
+    height: 37%;
+    padding-right: 5%;
+    margin-bottom: 23%;
+    margin-left: -7%;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .orderProfessional {
+    width: 100%;
+    margin-bottom: -3%;
+    
+    h1 {
+      font-weight: 230;
+      font-size: 2rem;
+      line-height: 3rem;
+      color: #F0EDEE;
+    }
+
+    h2 {
+      font-weight: 230;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      color: rgba(217, 217, 217, 0.63);
+      padding-bottom: 3%;
+    }
+    
+    .orderDate1{
+      display: flex;
+      margin-left: -27%;
+      h1{
+        font-size: 1.7rem;
+      }
+    }
+
+    .orderDescription{
+      display: flex;
+      margin-left: -25%;
+      margin-right: 35%;
+      margin-bottom: 3%;
+
+      h2{
+        font-weight: 230;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: rgba(217, 217, 217, 0.63);
+      }
+    }
+  }
+  
+  .orderRating {
+    margin-right: 3%;
+    margin-left: -65%;
+    margin-bottom: 20%;
+    h3 {
+      font-weight: 230;
+      font-size: 2.5rem;
+      color: #F0EDEE;
+    }
+  }
+
+  .contact{
+    margin-bottom: 20%;
+    margin-left: 1%;
+
+    button{
+      background-color:#09555a;
+      border-radius: 50%;
+      width: 250%;
+      padding-top: 15%;
+      padding-bottom: 7%;
+
+      img{
+        width: 50%;
+      }
+      &:hover{
+          transition: 0.5s;
+          background: #3e909b;
+      }
+  }
+  }
+
+  &:hover{
+    transition: 0.5s;
+    scale: 1.04;
+  }
+}
+
