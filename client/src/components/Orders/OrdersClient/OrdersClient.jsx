@@ -2,10 +2,20 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import s from './OrdersClient.module.scss';
+import Loader from '../../Login/Loader/Loader';
+import swal from 'sweetalert';
 
-const OrdersClient = ({order}) => {
+const OrdersClient = ({order, activeUser, setCli, clientOrders}) => {
     const [professional, setProfessional] = useState([]);
     const [onReview, setOnReview] = useState(false);
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [opinion, setOpinion] = useState({
+        feedback_client: '',
+        rating: 0,
+        id_orders: order.id,
+        id_user_client: activeUser.id,
+    })
 
     useEffect(() => {
         const fetchProf = async() => {
@@ -20,6 +30,45 @@ const OrdersClient = ({order}) => {
         onReview ? setOnReview(false) : setOnReview(true);
     }
 
+    const handleChange = (e) => {
+        setError('');
+        setOpinion({
+            ...opinion,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        swal({
+            title: "Enviar reseña?",
+            text: "Seguro que quieres enviar esta reseña? Podrás editarla en la configuración de tu perfil.",
+            icon: "info",
+            buttons: true,
+          })
+          .then((willSend) => {
+            if (willSend) {
+                let body = {
+                    complete: true,
+                    allowReview: true,
+                }
+
+                axios.post(`/review/${order.id_user_professional}`, opinion)
+                .then(() => axios.put(`/orders/${order.id}`, body)
+                            .then(() => {
+                            setCli(clientOrders.filter(o => o.id !== order.id));
+                            setLoading(false);
+                            swal("Se ha enviado la reseña, gracias por puntuar a los usuarios! :)", {
+                                icon: "success",
+                            })})
+                )
+            } else {
+              setLoading(false);
+            }
+          });
+    }
+
     return(
         <div className={onReview ? s.review : s.order} key={professional.id}>
         <div className={s.info}>
@@ -31,23 +80,34 @@ const OrdersClient = ({order}) => {
                 <p className={s.location}>{professional.city}, {professional.country}</p>
             </div>
             <div className={s.btndiv}>
-                <div className={s.btn} onClick={handleReview}>Puntuar</div>
+                <div className={s.btn} onClick={handleReview}>{onReview ? 'Cerrar' : 'Abrir'}</div>
             </div>
         </div>
         <div className={s.opinion}>
-          <form className={s.form}>
-          <div className={s.description}>
-                <label>Description</label>
-                <textarea></textarea>
-            </div>
-            <div className={s.barra}>
-                <label>Puntaje</label>
-                <input
-                    name="rating"
-                    max="5"
-                    step="0.5"
-                    type="range"/>
-            </div>
+            <form className={s.form} onSubmit={e => handleSubmit(e)}>
+                <div className={s.inputs}>
+                    <div className={s.description}>
+                        <label>Mensaje</label>
+                        <textarea name='feedback_client' value={opinion.feedback_client} onChange={(e) => handleChange(e)} required></textarea>
+                    </div>
+                    <div className={s.barra}>
+                        <label>Puntaje</label>
+                        <p>{opinion.rating}</p>
+                        <input
+                            name="rating"
+                            max="5"
+                            value={opinion.rating}
+                            step="0.5"
+                            type="range"
+                            onChange={(e) => handleChange(e)}
+                            required
+                            />
+                    </div>
+                </div>
+                <div className={s.submit}>
+                    {loading ? <Loader/> : <button className={s.btnSubmit} type='submit'>Enviar reseña</button>}
+                    {error ? <p>{error}</p> : ''}
+                </div>
             </form>
         </div>
     </div>

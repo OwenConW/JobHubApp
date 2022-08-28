@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import s from './OrdersProfessional.module.scss';
+import swal from 'sweetalert';
 
 const OrdersProfessional = ({order, setProf, profOrders}) => {
     const [client, setClient] = useState([]);
@@ -17,15 +18,25 @@ const OrdersProfessional = ({order, setProf, profOrders}) => {
         fetchUser();
     }, [])
 
-    const handleClick = async() => {
-
-        let body = {
-            complete: false,
-            allowReview: true,
-        }
-
-        await axios.put(`/orders/${order.id}`, body);
-        setProf(profOrders.filter(p => p.id !== order.id));
+    const handleClick = () => {
+        swal({
+            title: "Trabajo",
+            text: "Estás seguro que se completo el trabajo? Si completas el cliente podrá puntuarte.",
+            icon: "info",
+            buttons: true,
+          })
+          .then((willComplete) => {
+            let body = {
+                complete: false,
+                allowReview: true,
+            }
+            if (willComplete) {
+            axios.put(`/orders/${order.id}`, body).then(() => setProf(profOrders.filter(p => p.id !== order.id)))
+            .then(() => swal("Se ha habilitado la puntuacion al cliente.", {
+                icon: "success",
+              }))
+            }
+          });
     }
 
     return(
@@ -38,7 +49,7 @@ const OrdersProfessional = ({order, setProf, profOrders}) => {
                 <p className={s.location}>{client.city}, {client.country}</p>
             </div>
             <div className={s.btndiv}>
-                <div className={s.btn} onClick={() => {handleClick()}}>Completar</div>
+                <div className={s.btn} onClick={() => handleClick()}>Completar</div>
             </div>
         </div>
     )
