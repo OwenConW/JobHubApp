@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUser } from "../../../../../redux/adminActions";
+import { editUser, actionFetchingAdminEditUserReset } from "../../../../../redux/adminActions";
 import s from './EditModal.module.scss';
 
 
@@ -22,10 +22,12 @@ function EditModal(props) {
 
   function handleEdit(e){
     if(e.target.name === "cancel-btn") return handleEditOpenModal(!editModalActive) 
+    console.log(userData);
     dispatch(editUser(userData.id , userData))
   }
   
   useEffect(() => {
+    console.log(fetchingAdminEditUserSuccess);
     if (fetchingAdminEditUserSuccess) {
       handleEditOpenModal(!editModalActive)   
     }

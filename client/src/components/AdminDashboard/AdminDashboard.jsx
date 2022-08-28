@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
-import { getAllUsersForAdmin, getAllReviewsForAdmin,getAllOrdersForAdmin } from '../../redux/adminActions';
+import { getAllUsersForAdmin, getAllReviewsForAdmin,getAllOrdersForAdmin, actionFetchingAdminDeleteUserReset } from '../../redux/adminActions';
 import { useDispatch, useSelector } from "react-redux";
 import s from './AdminDashboard.module.scss'
 import UsersAdminPanel from "./UsersAdminPanel/UsersAdminPanel";
@@ -46,25 +46,17 @@ function AdminDashboard() {
   useEffect(() => {
     dispatch(getAllUsersForAdmin())
     dispatch(getAllReviewsForAdmin())
-    dispatch(getAllOrdersForAdmin())
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getAllUsersForAdmin())
     dispatch(getAllReviewsForAdmin())
-    dispatch(getAllOrdersForAdmin())
-  },[fetchingAdminDeleteUserFailure,
-     fetchingAdminDeleteUserSuccess,
-     fetchingAdminEditUserFailure,
-     fetchingAdminEditUserSuccess,
-     fetchingAdminEditReviewFailure,
-     fetchingAdminEditReviewSuccess,
-     fetchingAdminDeleteOrderSuccess,
-     fetchingAdminDeleteOrderFailure,
-     fetchingAdminEditOrderSuccess,
-     fetchingAdminEditOrderFailure,
-       dispatch])
+  }, [dispatch])
 
+  // useEffect(() => {
+  //   if(fetchingAdminDeleteUserSuccess) {
+  //     alert('Usuario eliminado correctamundo')
+  //   } else if (fetchingAdminDeleteUserFailure) {
+  //     alert('Hubo un error al eliminar el usuario')
+  //   }
+  // }, [fetchingAdminDeleteUserSuccess, fetchingAdminDeleteUserFailure])
+ 
   return (
     <div className={s.mainContainer}>
     <Navbar />

@@ -4,6 +4,7 @@ import DashboardUserCard from "../UsersAdminPanel/DashboardUserCard/DashboardUse
 import { getAllUsersForAdmin, getUsersByIdForAdmin } from '../../../redux/adminActions'
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function UsersAdminPanel(props) {
   const { users } = props;
@@ -16,13 +17,19 @@ function UsersAdminPanel(props) {
   }
 
   function handleSearchUserByIdChange(e) {
-    setSearchByIdInput(e.target.value)
+    setSearchByIdInput( e.target.value)
   }
   
   function handleSearchUserByIdSubmit(e) {
     e.preventDefault()
     dispatch(getUsersByIdForAdmin(searchByIdInput));
   }
+
+  // useEffect(() => {
+  //   console.log('asd');
+  //   console.log(users);
+
+  // }, [users])
 
   return(
     <div>
@@ -38,14 +45,15 @@ function UsersAdminPanel(props) {
       <button onClick={getAllUsers}>Traer todos los usuarios</button>
 
       {
-        
+        users[0] !== '' ? 
         <div className={s.cardsContainer}>  
               {users?.map( u => {
                 return(
                   <DashboardUserCard key={u.id} {...u} />
                 )
               })}
-      </div> 
+      </div> :
+      <h1>El usuario no existe</h1>
       }
       
     </div>

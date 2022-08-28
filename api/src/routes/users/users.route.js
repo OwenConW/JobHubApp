@@ -30,7 +30,6 @@ users.get("/all", async (req, res, next)=>{
                 through: {attributes: []},
             },
         })
-
         res.status(200).json(allUsers)
     
     } catch (error) {
@@ -93,7 +92,7 @@ users.post("/", async (req, res, next) =>{
 //RUTA PARA EDITAR EL USUARIO
 users.put('/:id', async (req, res) => {
     const { id } = req.params
-    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
+    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, rating, address, isProfessional, professions } = req.body;
     try {
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
         const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
@@ -118,6 +117,7 @@ users.put('/:id', async (req, res) => {
             street,
             address,
             isProfessional,
+            rating,
         })
         await userUpdated.save()
         let userUpdated2 = await User.findOne({ where: { id }, include: Profession })

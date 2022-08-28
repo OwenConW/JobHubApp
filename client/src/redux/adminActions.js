@@ -57,11 +57,12 @@ export const deleteUser = (id) => (dispatch) => {
   axios.put(`/users/destroy/${id}`, {isActive: false})
       .then(r => {
         dispatch(fetchingAdminDeleteUserSuccess())
-        dispatch(getAllUsers())
+        dispatch(getAllUsersForAdmin())
       })
       .catch(e => {
         console.error(e)
         dispatch(fetchingAdminDeleteUserFailure())
+        dispatch(getAllUsersForAdmin())
       })
 }
 
@@ -69,12 +70,14 @@ export const deleteUser = (id) => (dispatch) => {
 export const editUser = (id, payload) => (dispatch) => {
   dispatch(fetchingAdminEditUser())
   axios.put(`/users/admin/${id}`, payload)
-    .then(res => {
+  .then(res => {
       dispatch(fetchingAdminEditUserSuccess())
-      dispatch(getAllUsers())
+      dispatch(getAllUsersForAdmin())
     })
-    .catch(e => console.error(e))
-    dispatch(fetchingAdminEditUserFailure())
+    .catch(e =>{
+      console.error(e)
+      dispatch(fetchingAdminEditUserFailure())
+    })
 }
 
 export const actionFetchingAdminDeleteUserReset = () => (dispatch) => {

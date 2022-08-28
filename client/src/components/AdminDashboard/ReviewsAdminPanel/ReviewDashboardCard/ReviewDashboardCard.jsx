@@ -14,11 +14,9 @@ function ReviewDashboardCard(props) {
     setEditModalActive(!editModalActive)
   }
 
-  useEffect(() => {
-    return () => {
-      dispatch(actionFetchingAdminEditReviewReset())
-    }
-  }, [dispatch])
+  // useEffect(() => {
+  //     dispatch(actionFetchingAdminEditReviewReset())
+  // }, [dispatch])
 
   function handleDelete(e) {
     console.log('Esta eliminado vos confiá');
