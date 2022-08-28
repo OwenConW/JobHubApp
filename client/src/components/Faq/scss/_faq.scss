@@ -3,11 +3,13 @@
   margin: -5% 8% 1% 35%;
   display: flex;
   justify-content: center;
-
-
+  text-align: center;
   .title {
     color: $page-color;
-    font-size: 4rem;
+    font-size: 5rem;
+    justify-self: center;
+
+   
   }
 
   &__list {

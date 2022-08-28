@@ -200,3 +200,19 @@
     "address": "689",
     "profession" : ["programador"]
 }
+{
+  "name": "Cheng",
+    "last_Name": "Bladimir",
+    "mail": "Bladimir@gmail.com",
+    "dni": "21.325.953",
+    "image": "https://st3.depositphotos.com/1192060/13725/i/600/depositphotos_137256882-stock-photo-portrait-of-air-conditioning-serviceman.jpg",
+    "phone": "35845723",
+    "country": "Argentina",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "city": "Bella Vista",
+    "coordinate": ["-34.50728015672251", "-58.681958920336356"],
+    "isProfessional": true,
+    "street": "O' Brien Juan",
+    "address": "4259",
+    "profession" : ["tecnico de aires acondicionados"]
+}

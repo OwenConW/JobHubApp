@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link, useLocation} from 'react-router-dom';
+import { Link, useLocation, useNavigate} from 'react-router-dom';
 
 import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
@@ -19,9 +19,11 @@ import { useEffect } from "react";
 import corona from "./assets/corona.png"
 import rocketP from "./assets/RocketP.png"
 import Swal from "sweetalert2"
+import { setUserLocalStorage } from "../../handlers/localStorage"
 
 const Profile = () => {
   //success?preapproval_id=x
+  const navigate = useNavigate()
   const currentUser = functions.getLocalStorage()
   const search = useLocation().search;
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
@@ -32,8 +34,8 @@ const Profile = () => {
       Swal.fire({
         icon: 'success',
         html: `<h1>Muchas gracias por formar parte de la familia Job Hub</h1>
-        <h3>Tu id de compra para reclamos es ${preapproval_id}</h3>
-         <h2>Porfavor recarga la página</h2>`,
+        <h3>Tu id de compra para reclamos es: <h2 style="font-weight: 800">${preapproval_id}</h2></h3>
+         <h2>Recorda que tendras todo acerca de tu suscripcion en el panel de configuracion</h2>`,
         width: 700,
         padding: '3em',
         color: '#dfdddd',
@@ -43,7 +45,18 @@ const Profile = () => {
           url("./assets/confetti2.gif")
         `
       })
+      .then(() => {
+        Swal.close(navigate("/profile"))
+        axios.get(`/users/${currentUser.id}`)
+        .then(res => {
+          setUserLocalStorage(res.data)
+          window.location.reload()
+        })
+      })
     })
+    .catch(e => {
+      console.log(e)
+    }) 
   }
 
 
@@ -71,7 +84,7 @@ const Profile = () => {
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
             {
-              currentUser.isPremium ? (
+              activeUser?.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
               <img src={activeUser.image} className={s.profile_ImgPremium} alt=""></img>
             </div>
@@ -84,7 +97,7 @@ const Profile = () => {
            
             <div className={s.profileDetail}>
               {
-                currentUser.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
+                activeUser?.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
                 : <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
               }
               
@@ -128,7 +141,7 @@ const Profile = () => {
             </div>
           </div>
           {
-            activeUser.isPremium ? (
+            activeUser?.isPremium ? (
               <div className={s.isPremiumTRUE}>
 
               <div className={s.premiumTextTRUE}>
