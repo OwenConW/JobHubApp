@@ -136,8 +136,7 @@ const Edit = () => {
   });
 
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${user.address},${user.street},${user.city},${user.country}&format=json`);
     if (!response.data.length) {
       setErrorGeometry({
@@ -151,8 +150,7 @@ const Edit = () => {
       })
     }
 
-
-    dispatch(modifyUser(activeUser.id, user))
+    
     let newValues = {
       ...localSt,
       name: user.name.toLowerCase(),
@@ -172,6 +170,7 @@ const Edit = () => {
       professions: user.professions,
     }
     setUserLocalStorage(newValues)
+    dispatch(modifyUser(activeUser.id, user))
   }
   // console.log('entre a Edit')
   // console.log('activeuser: ', activeUser)
