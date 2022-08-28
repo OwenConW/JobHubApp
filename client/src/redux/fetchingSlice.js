@@ -72,20 +72,20 @@ export const fetchingSlice = createSlice({
 
 		//EditHandling
 		fetchingAdminEditUser: (state, action) => {
-			state.fetchingAdminDeleteUser = true
+			state.fetchingAdminEditUser = true
 		},
 		fetchingAdminEditUserSuccess: (state, action) => {
-			state.fetchingAdminDeleteUser = false
-			state.fetchingAdminDeleteUserSuccess = true
+			state.fetchingAdminEditUser = false
+			state.fetchingAdminEditUserSuccess = true
 		},
 		fetchingAdminEditUserFailure: (state, action) => {
-			state.fetchingAdminDeleteUser = false
-			state.fetchingAdminDeleteUserFailure = true
+			state.fetchingAdminEditUser = false
+			state.fetchingAdminEditUserFailure = true
 		},
 		fetchingAdminEditUserReset: (state, action) => {
-			state.fetchingAdminDeleteUser = false
-			state.fetchingAdminDeleteUserFailure = false
-			state.fetchingAdminDeleteUserSuccess = false
+			state.fetchingAdminEditUser = false
+			state.fetchingAdminEditUserFailure = false
+			state.fetchingAdminEditUserSuccess = false
 		},
 
 		// =============== Review ===========================

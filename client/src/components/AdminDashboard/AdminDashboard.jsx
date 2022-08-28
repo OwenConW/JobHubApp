@@ -46,14 +46,16 @@ function AdminDashboard() {
     dispatch(getAllReviewsForAdmin())
   }, [dispatch])
 
-  //ESTO NO FUNCIONA CORRECTAMENTE TODAVIA
-  // useEffect(() => {
-  //   if(fetchingAdminDeleteUserSuccess) {
-  //     alert('Usuario eliminado correctamundo')
-  //   } else if (fetchingAdminDeleteUserFailure) {
-  //     alert('Hubo un error al eliminar el usuario')
-  //   }
-  // }, [fetchingAdminDeleteUserSuccess, fetchingAdminDeleteUserFailure])
+  // ESTO NO FUNCIONA CORRECTAMENTE TODAVIA
+  useEffect(() => {
+    console.log(fetchingAdminDeleteUserSuccess);
+    if(fetchingAdminDeleteUserSuccess) {
+      alert('Usuario eliminado correctamundo')
+    } else if (fetchingAdminDeleteUserFailure) {
+      alert('Hubo un error al eliminar el usuario')
+    }
+    dispatch(actionFetchingAdminDeleteUserReset())
+  }, [fetchingAdminDeleteUserSuccess, fetchingAdminDeleteUserFailure])
  
   return (
     <div className={s.mainContainer}>

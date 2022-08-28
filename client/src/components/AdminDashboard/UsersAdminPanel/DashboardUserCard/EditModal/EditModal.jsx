@@ -27,21 +27,24 @@ function EditModal(props) {
   //funcion onSubmit
   function handleEdit(e){
     if(e.target.name === "cancel-btn") return handleEditOpenModal(!editModalActive) 
+    e.preventDefault()
     dispatch(editUser(userData.id , userData))
-    //placeholder fix (arreglar)
-    handleEditOpenModal(!editModalActive)   
   }
   
+  //Success y Error handler del Edit
   useEffect(() => {
-    console.log(fetchingAdminEditUserSuccess);
     if (fetchingAdminEditUserSuccess) {
       handleEditOpenModal(!editModalActive)   
+      alert('Usuario editado correctamente')
+    } else if(fetchingAdminEditUserFailure) {
+      alert('Hubo un error al editar el usuario')
     }
-  },[fetchingAdminEditUserSuccess])
+    dispatch(actionFetchingAdminEditUserReset())
+  },[fetchingAdminEditUserSuccess, fetchingAdminEditUserFailure])
 
   return (
     <div className={s.modalMainContainer}>
-      <div className={s.modalContainer}>
+      <form className={s.modalContainer} onSubmit={handleEdit}>
         <div className={s.informationLeftSide}>
           <div>
             <label htmlFor="name">Nombre</label>
@@ -139,9 +142,9 @@ function EditModal(props) {
             })}
           </div> */}
           <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>
-          <button onClick={handleEdit}>Editar</button>
+          <input type="submit" value='Editar' />
         </div>
-      </div>
+      </form>
     </div>
   )
 }

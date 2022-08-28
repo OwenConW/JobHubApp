@@ -62,7 +62,6 @@ export const deleteUser = (id) => (dispatch) => {
         dispatch(getAllUsersForAdmin())
       })
       .catch(e => {
-        console.error(e)
         //setea el estado (failure) a TRUE, para hacerle saber al usuario que hubo un error.
         dispatch(fetchingAdminDeleteUserFailure())
         dispatch(getAllUsersForAdmin())
@@ -74,9 +73,9 @@ export const editUser = (id, payload) => (dispatch) => {
   dispatch(fetchingAdminEditUser())
   axios.put(`/users/admin/${id}`, payload)
   .then(res => {
-      dispatch(fetchingAdminEditUserSuccess())
-      dispatch(getAllUsersForAdmin())
-    })
+    dispatch(getAllUsersForAdmin())
+    dispatch(fetchingAdminEditUserSuccess())
+  })
     .catch(e =>{
       console.error(e)
       dispatch(fetchingAdminEditUserFailure())
