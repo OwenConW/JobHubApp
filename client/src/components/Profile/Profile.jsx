@@ -47,11 +47,11 @@ const Profile = () => {
       })
       .then(() => {
         Swal.close(navigate("/profile"))
+        window.location.reload()
         axios.get(`/users/${currentUser.id}`)
         .then(res => {
           setUserLocalStorage(res.data)
         })
-        window.location.reload()
       })
     })
     .catch(e => {
