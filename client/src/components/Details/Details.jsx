@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 
 import s from './Details.module.scss';
 import { getLocalStorage } from "../../handlers/localStorage";
@@ -39,12 +40,16 @@ const Profile = () => {
     }
     console.log(data)
     if(data.emisor_id === data.receptor_id ){
-      alert("No puedes ordenar contigo mismo )?")
+      Swal.fire("No puedes chatear ni crear ordenes contigo mismo");
     }else{
       try{
-
-        // await axios.post('/conversation', data);
-        // navigate('/chat');
+        let body = {
+          id_user_professional: id * 1,
+          id_user_client : activeUser.id,
+        }
+        await axios.post('/orders', body);
+        await axios.post('/conversation', data);
+        navigate('/chat');
       }catch(e){
         console.log(e);
       }
@@ -63,10 +68,12 @@ const Profile = () => {
               professional.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
                   {professional.image ? <img src={professional.image} className={s.profile_ImgPremium}/> : <img src={defaultimage} className={s.profile_Img}/>}
+                  <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
                 </div>
               ) : (
                 <div className={s.profile_Img_container}>
                   {professional.image ? <img src={professional.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
+                  <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
                 </div>
               )
             }
@@ -82,7 +89,7 @@ const Profile = () => {
               
               <div className={s.location}>{professional.city}, {professional.country}</div>
               <div className={s.description}>{professional.description}</div>
-              <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Coordinar</div>
+
             </div>
           </div>
 
