@@ -32,7 +32,7 @@ const Opinions = () => {
   
     if (filter) {
       filteredReviews = []
-      filteredProfessionals = users.filter(prof => prof.name.toLowerCase().includes(filter.toLowerCase()))
+      filteredProfessionals = users.filter(prof => prof.name.toLowerCase().includes(filter.toLowerCase()) || prof.last_Name.toLowerCase().includes(filter.toLowerCase()))
       for (let x = 0; x < filteredProfessionals.length; x++) {
         let filteredProfessional = filteredProfessionals[x];
         let reviewsForFilteredProfessional = myReviews.filter(review => review.id_user_professional == filteredProfessional.id);

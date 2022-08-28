@@ -50,14 +50,14 @@ const OpinionCard = ({review, users}) => {
 
   return (
 
-    <div className={onReview ? s.review : s.order} key={professional.id}>
+    <div className={onReview ? s.review : s.order} key={professional?.id}>
     <div className={s.info}>
         <div className={s.img}>
-            <img src={professional.image} alt="" />
+            <img src={professional?.image} alt="" />
         </div>
         <div className={s.userdata}>
-            <p className={s.name}>{professional.name} {professional.last_Name}</p>
-            <p className={s.location}>{professional.city}, {professional.country}</p>
+            <p className={s.name}>{professional?.name} {professional?.last_Name}</p>
+            <p className={s.location}>{professional?.city}, {professional?.country}</p>
         </div>
         <div className={s.btndiv}>
             <div className={s.btn} onClick={handleReview}>Puntuar</div>
