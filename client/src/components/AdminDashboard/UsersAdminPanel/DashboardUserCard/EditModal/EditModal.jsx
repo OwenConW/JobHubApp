@@ -32,12 +32,12 @@ function EditModal(props) {
     handleEditOpenModal(!editModalActive)   
   }
   
-  // useEffect(() => {
-  //   console.log(fetchingAdminEditUserSuccess);
-  //   if (fetchingAdminEditUserSuccess) {
-  //     handleEditOpenModal(!editModalActive)   
-  //   }
-  // },[fetchingAdminEditUserSuccess])
+  useEffect(() => {
+    console.log(fetchingAdminEditUserSuccess);
+    if (fetchingAdminEditUserSuccess) {
+      handleEditOpenModal(!editModalActive)   
+    }
+  },[fetchingAdminEditUserSuccess])
 
   return (
     <div className={s.modalMainContainer}>
