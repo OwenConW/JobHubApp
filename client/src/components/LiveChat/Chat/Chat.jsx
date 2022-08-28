@@ -39,7 +39,7 @@ const Chat = (props) => {
 
 
     useEffect(() => {
-        socket.current = io("ws://jobhub-pg.herokuapp.com"); //"ws://localhost:3001"
+        socket.current = io( process.env.REACT_APP_URL || 'ws://localhost:3001'); //""https://jobhub-pg.herokuapp.com"" 
         socket.current.on("getMessage", data => {
             setArriveMessage({
                 sender: data.senderId,
@@ -47,7 +47,7 @@ const Chat = (props) => {
                 crearedAt: Date.now()
             })
         })
-    }, [socket, currentUser])
+    }, [socket])
 
     useEffect(() => {
         arriveMessage && (currentChat?.receptor_id === arriveMessage.sender || currentChat?.emisor_id === arriveMessage.sender )  &&
@@ -64,6 +64,7 @@ const Chat = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(newMessage === "")return
         const message = {
             conversationId: currentChat.id,
             sender: currentUser.id,
@@ -128,7 +129,7 @@ const Chat = (props) => {
             }
         }
         getImage();
-    }, [currentChat])
+    }, [currentChat, currentUser.id])
 
     return (
   
@@ -170,7 +171,7 @@ const Chat = (props) => {
                             </textarea>
                             <button className="chatSubmitButton" onClick={handleSubmit}>Enviar</button>
                         </div>
-                        </> : <span className="noConversationText">Abri una orden para empezar a chatear</span>}
+                        </> : <span className="noConversationText">Para utilizar el chat primero debes buscar un profesional para contactarte</span>}
                     </div>
                 </div>
                 {currentChat ? (<ProfessionalPreview id={currentChat.receptor_id === currentUser.id ? currentChat.emisor_id : currentChat.receptor_id}

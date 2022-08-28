@@ -19,7 +19,6 @@ import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 
 //import restProvider from 'ra-data-simple-rest';
 //https://jsonplaceholder.typicode.com
-			
 
 function App() {
 	return (

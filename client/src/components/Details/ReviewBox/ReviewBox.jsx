@@ -6,10 +6,10 @@ const ReviewBox = () => {
 
   return (
     <div className={s.professionList}>
+          {/* <CardReview/>
           <CardReview/>
           <CardReview/>
-          <CardReview/>
-          <CardReview/>
+          <CardReview/> */}
     </div>
   )
 }

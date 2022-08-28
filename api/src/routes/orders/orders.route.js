@@ -52,5 +52,43 @@ orders.put("/:id", async (req, res, next) =>{
     }
 })
 
+// RUTA PARA ELIMINAR LAS ORDENES
+orders.delete("/admin/:id", async (req, res, next)=>{
+    const {id} = req.params
+    try{
+        await Orders.destroy({
+            where:{id:id}
+        }) 
+        res.status(201).send("The order was successfully deleted")
+    } catch (error) {
+        next(error)
+    }
+})
+
+// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID CUANDO SOY PROFESSIONAL
+orders.get("/professional/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try{
+        const allOrders = await functions.getAllOrdersByProfessional(id);
+        res.status(200).json(allOrders);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID CUANDO SOY CLIENTE
+orders.get("/client/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try{
+        const allOrders = await functions.getAllOrdersByClient(id);
+        res.status(200).json(allOrders);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+
 
 module.exports = orders;

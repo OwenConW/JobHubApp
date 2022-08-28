@@ -31,7 +31,7 @@ const getAllReview = async (id) =>{
             include:[
                 {
                     model: Review,
-                    attributes: ['feedback_client','rating'],
+                    attributes: ['id_orders','id_user_client','feedback_client','rating'],
                     through: {attributes: []}
                 }
             ]

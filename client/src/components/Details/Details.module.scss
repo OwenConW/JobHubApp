@@ -38,10 +38,28 @@
         }
       }
 
+      .profile_Img_containerPremium {
+        display: flex;
+        width: 30%;
+
+        justify-content: center;
+        align-items: center;
+
+        .profile_ImgPremium {
+          width: 55%;
+          height: 70%;
+          border-radius: 50%;
+          border: 9px solid #fdc644;
+          box-shadow: 0px 0px 27px 7px #FFF780;
+          object-fit: cover;
+        }
+      }
+
       .profileDetail {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        justify-items: center;
         width: 70%;
         height: 100%;
 
@@ -50,6 +68,23 @@
           font-size: 4.4rem;
           line-height: 5rem;
           color: #000000;
+        }
+
+        .namePremium{
+          display: flex;
+          justify-content: flex-start;
+          text-transform: capitalize;
+          align-items: center;
+          font-size: 4.4rem;
+          line-height: 5rem;
+          color: #000000;
+        }
+
+        .corona{
+          width: 50px;
+          height: 50px;
+          margin-right: 5px;
+        
         }
 
         .location {
@@ -113,6 +148,7 @@
       }
 
       .lastOrders {
+        overflow-y: auto;
         height: 70%;
         width: 90%;
         display: flex;

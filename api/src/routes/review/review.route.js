@@ -68,7 +68,7 @@ review.put("/:id", async (req, res, next)=> {
     }
 })
 
-// RUTA PARA TRAER TODAS LAS RESEÑAS
+// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID
 review.get("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
@@ -78,7 +78,31 @@ review.get("/:id", async (req, res, next)=>{
         console.log(error)
         next(error)
     }
+})
 
+// RUTA PARA TRAER TODAS LAS RESEÑAS
+review.get("/", async (req, res, next)=>{
+    try {
+        const allReview = await Review.findAll()
+        res.status(200).json(allReview)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+// RUTA PARA ELIMINAR LOS REVIEW
+review.delete("/admin/:id", async (req, res, next)=>{
+    const {id} = req.params
+    try{
+        await Review.destroy({
+            where:{id:id}
+        }) 
+        res.status(201).send("the review was successfully deleted")
+    } catch (error) {
+        next(error)
+    }
 })
 
 

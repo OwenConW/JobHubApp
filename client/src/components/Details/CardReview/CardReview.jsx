@@ -2,22 +2,33 @@ import React from "react";
 import s from './CardReview.module.scss';
 import userImg from './assets/userimage.jpg'
 import star from './assets/star.svg'
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getChars } from "../../../redux/userActions";
+import noUserImg from '../../FeaturedCard/assets/default_user.png'
 
-let order = { name: 'Nombre 1', description: 'Diseñador asdasd asdasd asdasds adsadas dasdasdsdasd asdasdsad', rating: 4.2, img: userImg }
+let order = {}
+const CardReview = ({ dataObj, reviewer }) => {
+  const data = dataObj
 
-const CardReview = () => {
+  console.log('reviewer:', reviewer)
   return (
     <div className={s.orders}>
       <div className={s.imgDetail}>
-        <img src={order.img} alt="imagen"></img>
+        {
+          reviewer ? <img src={reviewer.image} alt="imagen"></img> : <img src={noUserImg}></img>
+        }
       </div>
 
       <div className={s.orderDetail}>
-        <h1>{order.name}</h1>
-        <h2>{order.description}</h2>
+        {
+          reviewer ? <h1>{reviewer.name}</h1> : <h1>Usuario anonimo</h1>
+        }
+
+        <h2>{data.feedback_client}</h2>
       </div>
       <div className={s.orderDetail2}>
-        <h3><img src={star} /> {order.rating}</h3>
+        <h3><img src={star} /> {data.rating}</h3>
       </div>
     </div>
   )
