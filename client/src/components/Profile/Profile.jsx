@@ -48,8 +48,9 @@ const Profile = () => {
         color: '#dfdddd',
         background: '#2C666E',
         backdrop: `
-          rgba(0,0,123,0.4)
-          url("https://cutewallpaper.org/21/gif-transparent-background/Confetti-gif-transparent-background-6-GIF-Images-Download.gif")
+        rgba(172,172,172,0.5424720913756127)
+ 
+        url("https://cutewallpaper.org/24/transparent-animated-gifs/confetti-in-gif-format-55-animated-images-for-free.gif")
         `
       })
       .then(() => {
