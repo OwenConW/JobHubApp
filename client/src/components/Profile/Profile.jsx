@@ -16,6 +16,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getCharsById } from "../../redux/userActions";
 import { useEffect } from "react";
+import { actionGetAllOrders } from "../../redux/orderActions";
 
 
 const Profile = () => {
@@ -24,8 +25,9 @@ const Profile = () => {
   
   const search = useLocation().search;
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
-
-  console.log("preapproval_id:", preapproval_id);
+  const activeUser = useSelector((state) => state.users.detail);
+  const allOrders = useSelector((state) => state.orders.orders)
+  // console.log("preapproval_id:", preapproval_id);
 
   if(preapproval_id){
     axios.put(`users/premium/${currentUser.id}`, {isPremium: true})
@@ -41,17 +43,18 @@ const Profile = () => {
   
   useEffect(() => {
     dispatch(getCharsById(myUser.id))
+    dispatch(actionGetAllOrders(currentUser.id))
   }, [])
 
-  const activeUser = useSelector((state) => state.users.detail);
+ 
 
 
+  console.log('allOrders', allOrders)
 
   const handlePremiumModal = async () => {
   setModalActive(!modalActive)
   }
  
-  console.log(activeUser)
   return (
     <>
       <Navbar />

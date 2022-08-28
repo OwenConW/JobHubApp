@@ -18,11 +18,10 @@ export const getChars = () => (dispatch) => {
 };
 
 export const getCharsById = (id) => (dispatch) => {
-	console.log("llega la id userActions", id)
 	axios
 		.get(`/users/${id}`)
 		.then((res) => {
-			console.log("respues userActions:", res)
+			// console.log("respues userActions:", res)
 			dispatch(getUserById(res.data));
 		})
 		.catch((e) => console.log(e));

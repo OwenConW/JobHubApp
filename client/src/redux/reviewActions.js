@@ -10,6 +10,3 @@ export const actionGetAllReviews = () => (dispatch) => {
 		.catch((e) => console.log(e));
 }; 
 
-export const actionFilterReviews = (filter) => (dispatch) => {
-	
-}
