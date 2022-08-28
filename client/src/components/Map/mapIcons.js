@@ -12,6 +12,7 @@ import carpintero from './AllMarkers/assets/carpintero.png';
 import costurero from './AllMarkers/assets/costurero.png';
 import pintor from './AllMarkers/assets/pintor.png';
 import albanil from './AllMarkers/assets/albanil.png';
+import tecnicoaire from "./AllMarkers/assets/tecnicoaire.png"
 // premium 
 import electricistaP from './AllMarkers/assets/electricistaP.png';
 import jardineroP from './AllMarkers/assets/jardineroP.png';
@@ -22,7 +23,7 @@ import carpinteroP from './AllMarkers/assets/carpinteroP.png';
 import costureroP from './AllMarkers/assets/costureroP.png';
 import pintorP from './AllMarkers/assets/pintorP.png';
 import albanilP from './AllMarkers/assets/albanilP.png';
-
+import tecnicoaireP from "./AllMarkers/assets/tecnicoaireP.png"
 
 export const markerIcon = L.icon({
     iconUrl: micon,
@@ -157,6 +158,17 @@ export const albanilIcon = L.icon({
     className: 'leaflet-venue-icon'
 });
 
+export const tecnicoaireIcon = L.icon({
+    iconUrl: tecnicoaire,
+    iconRetinaUrl: tecnicoaire,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
 
 // PREMIUM
 
@@ -281,6 +293,17 @@ export const albanilIconP = L.icon({
     className: 'leaflet-venue-icon'
 });
 
+export const tecnicoaireIconP = L.icon({
+    iconUrl: tecnicoaireP,
+    iconRetinaUrl: tecnicoaireP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
 
 
 
