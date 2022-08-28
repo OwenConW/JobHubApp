@@ -46,24 +46,16 @@ export const filterProfessionals = (filters) => (dispatch) => {
 		.catch((e) => console.log(e));
 };
 
-export const modifyUser = (id, payload) => (dispatch) => {
+export const modifyUser = (id, payload) => {
 	// console.log('modifyUser payload', payload)
 	// console.log('id', id)
 	axios.put(`/users/edit/${id}`, payload)
-	.then(() => {
-		getLocalStorage()
-	})
-	.catch((e) => console.log(e));
-	
+	getLocalStorage()
 }
 
-export const modifyProfessions = (id, payload) => (dispatch)=> {
-	axios.put(`/users/${id}`, payload)
-	.then((res) => {
-		getLocalStorage()
-	})
-	.catch((e) => console.log(e));
-	
+export const modifyProfessions = (id, payload) => {
+	axios.put(`/users/${id}`, payload);
+	getLocalStorage()
 }
 
 export const changeReview = (id, payload) => {

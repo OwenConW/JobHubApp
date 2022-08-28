@@ -2,7 +2,6 @@ import React from "react";
 import s from './Edit.module.scss'
 import { getLocalStorage, setUserLocalStorage } from '../../../../handlers/localStorage';
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux"
 import axios from "axios";
 import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
@@ -11,7 +10,6 @@ import { modifyUser } from "../../../../redux/userActions";
 const Edit = () => {
   let localSt = getLocalStorage()
   let activeUser = { ...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1) }
-  const dispatch = useDispatch()
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
 
@@ -170,7 +168,7 @@ const Edit = () => {
       professions: user.professions,
     }
     setUserLocalStorage(newValues)
-    dispatch(modifyUser(activeUser.id, user))
+    modifyUser(activeUser.id, user)
   }
   // console.log('entre a Edit')
   // console.log('activeuser: ', activeUser)
