@@ -11,7 +11,7 @@ import * as functions from "../../handlers/localStorage"
 // const Card = ({ id, name, lastName, city, province, rating, name_job, image }) => {
 function Card(props) {
 	const currentUser = functions.getLocalStorage()
-	let { id, name, last_Name, city, country, name_job, image, isPremium } =
+	let { id, name, last_Name, city, country, name_job, image, isPremium, rating } =
 		props.data;
 
 	return (
@@ -20,8 +20,8 @@ function Card(props) {
 				<h3>{name_job}</h3>
 				<div className={s.rating}>
 					<img src={star} alt="star" />
-					{/* <p>{rating}</p> */}
-					<p>4.5</p>
+					<p>{rating}</p>
+					{/* <p>4.5</p> */}
 				</div>
 			</div>
 

@@ -10,6 +10,8 @@ import axios from "axios";
 import ConfigPages from "./ConfigComponents/ConfigPages";
 import { useDispatch } from "react-redux";
 import { getChars, getCharsById } from "../../redux/userActions";
+import { actionGetAllReviews } from "../../redux/reviewActions";
+import { actionGetAllJobs } from "../../redux/jobActions";
 
 
 
@@ -21,7 +23,11 @@ const ProfileConfig = () => {
   useEffect(()=>{
     dispatch(getChars())
     dispatch(getCharsById(activeUser.id))
+    dispatch(actionGetAllReviews())
+    dispatch(actionGetAllJobs())
   }, [])
+
+  
 
   // id para conditional render
   let params = useParams();
@@ -35,7 +41,8 @@ const ProfileConfig = () => {
   }
 
   useEffect(() => {
-
+    dispatch(getChars())
+    dispatch(actionGetAllReviews())
   }, [configPage])
 
 
