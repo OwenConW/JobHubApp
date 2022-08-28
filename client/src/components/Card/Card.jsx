@@ -11,19 +11,22 @@ import * as functions from "../../handlers/localStorage"
 // const Card = ({ id, name, lastName, city, province, rating, name_job, image }) => {
 function Card(props) {
 	const currentUser = functions.getLocalStorage()
-	let { id, name, last_Name, city, country, name_job, image, isPremium, rating } =
+	let { id, name, last_Name, city, country, professions, image, isPremium, rating } =
 		props.data;
 
 	return (
 		<div className={s.card}>
+			{rating === -1 ? <div className={s.header}>
+				<h3>{professions[0]?.name}</h3>
+				<p>No posee rating</p>
+			</div> :
 			<div className={s.header}>
-				<h3>{name_job}</h3>
+				<h3>{professions[0]?.name}</h3>
 				<div className={s.rating}>
 					<img src={star} alt="star" />
 					<p>{rating}</p>
-					{/* <p>4.5</p> */}
 				</div>
-			</div>
+			</div>}
 
 			<div className={s.data}>
 				<div className={s.info}>
