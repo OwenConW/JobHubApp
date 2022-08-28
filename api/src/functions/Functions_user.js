@@ -5,6 +5,7 @@ const { User, Profession, Review, Orders } = require("../db")
 const filterByQueris = async(name, profession, rating) => {
     try{
         if(profession){
+            console.log("ENTRO A PROFESSION",name )
             let profesionals = await Profession.findAll({ 
                 include: {
                     model: User,
@@ -49,9 +50,11 @@ const filterByQueris = async(name, profession, rating) => {
             let options = {};
             let where = {};
             if(name){
-                where[Op.or] = []
-                name ? where[Op.or].push({name: {[Op.substring]: name.toLowerCase()}}) : null;
-                name ? where[Op.or].push({last_Name: {[Op.substring]: name.toLowerCase()}}) : null; 
+                where.name = {
+                  
+                    [Op.substring]: name.toLowerCase()
+                    
+                }
             }
             rating ?  options.order =  [["rating", rating]] : null;
             options.where = where;

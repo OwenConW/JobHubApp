@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import corona from "./assets/corona.png"
 import rocketP from "./assets/RocketP.png"
 import Swal from "sweetalert2"
+import { setUserLocalStorage } from "../../handlers/localStorage"
 
 const Profile = () => {
   //success?preapproval_id=x
@@ -46,6 +47,7 @@ const Profile = () => {
       })
       .then(() => {
         Swal.close(navigate("/profile"))
+        setUserLocalStorage({...currentUser, isPremium: true})
         window.location.reload()
       })
     })

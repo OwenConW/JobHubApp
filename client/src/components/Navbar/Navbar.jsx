@@ -21,7 +21,7 @@ const Navbar = () => {
 	const activeUser = getLocalStorage();
 
 	const handleLogout = () => {
-        logout(activeUser.id);
+        logout();
         localStorage.clear();
     }
 
