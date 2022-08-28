@@ -42,35 +42,72 @@ const OpinionCard = ({review, users}) => {
     changeReview(modifiedReview.id_orders , sendInfo);
   }
 
+  const [onReview, setOnReview] = useState(false);
+
+  const handleReview = () =>{
+    onReview ? setOnReview(false) : setOnReview(true);
+}
 
   return (
-    <div className={s.allReviews} key={review?.id_orders}>
-      <div className={s.leftInfo}>
-        {
-          professional ? <h1>{professional.name}</h1> : <h1>-</h1>
-        }
-        
-        <textarea name='feedback_client' onChange={(event) => handleChange(event)}value={modifiedReview.feedback_client}></textarea>
-      </div>
-      <div className={s.rightInfo}>
-        <h2>Orden: {review?.id_orders}</h2>
 
-        <div>
-          <h2>Calificacion: {modifiedReview.rating}</h2>
-          <input
-            name="rating"
-            max="5"
-            step="0.5"
-            type="range"
-            value={modifiedReview.rating} onChange={(event) => handleChange(event)}></input>
+    <div className={onReview ? s.review : s.order} key={professional.id}>
+    <div className={s.info}>
+        <div className={s.img}>
+            <img src={professional.image} alt="" />
         </div>
-
-
-      </div>
-      <div className={s.submitChanges} onClick={handleSubmit}>
-        <img src={saveImg}></img>
-      </div>
+        <div className={s.userdata}>
+            <p className={s.name}>{professional.name} {professional.last_Name}</p>
+            <p className={s.location}>{professional.city}, {professional.country}</p>
+        </div>
+        <div className={s.btndiv}>
+            <div className={s.btn} onClick={handleReview}>Puntuar</div>
+        </div>
     </div>
+    <div className={s.opinion}>
+      <form className={s.form}>
+      <div className={s.description}>
+            <label>Description</label>
+            <textarea></textarea>
+        </div>
+        <div className={s.barra}>
+            <label>Puntaje</label>
+            <input
+                name="rating"
+                max="5"
+                step="0.5"
+                type="range"/>
+        </div>
+        </form>
+    </div>
+</div>
+
+    // <div className={s.allReviews} key={review?.id_orders}>
+    //   <div className={s.leftInfo}>
+    //     {
+    //       professional ? <h1>{professional.name}</h1> : <h1>-</h1>
+    //     }
+        
+    //     <textarea name='feedback_client' onChange={(event) => handleChange(event)}value={modifiedReview.feedback_client}></textarea>
+    //   </div>
+    //   <div className={s.rightInfo}>
+    //     <h2>Orden: {review?.id_orders}</h2>
+
+    //     <div>
+    //       <h2>Calificacion: {modifiedReview.rating}</h2>
+    //       <input
+    //         name="rating"
+    //         max="5"
+    //         step="0.5"
+    //         type="range"
+    //         value={modifiedReview.rating} onChange={(event) => handleChange(event)}></input>
+    //     </div>
+
+
+    //   </div>
+    //   <div className={s.submitChanges} onClick={handleSubmit}>
+    //     <img src={saveImg}></img>
+    //   </div>
+    // </div>
   )
 
 }

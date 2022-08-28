@@ -2,6 +2,7 @@ import React from "react";
 import s from './ProfessionConfig.module.scss'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 //Nuestros Archivos
 import { getLocalStorage } from '../../../../handlers/localStorage';
@@ -22,7 +23,7 @@ const ProfessionConfig = () => {
  
 
   const allProfessions = useSelector((state) => state.jobs.jobs)
-  // console.log('allProfessions', allProfessions)
+
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
   const [user, setUser] = useState({
@@ -30,9 +31,7 @@ const ProfessionConfig = () => {
   })
 
   useEffect(() => {
-    // console.log(user)
     dispatch(actionGetAllJobs())
-    // dispatch(getCharsById(activeUser.id))
   }, [])
 
   const deleteProfession = (event) => {
@@ -56,9 +55,16 @@ const ProfessionConfig = () => {
   }
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = () => {
     let newProfessions = user.professions.map(prof => prof.name )
     modifyProfessions(activeUser.id, {...activeUser, professions: newProfessions})
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Cambios Guardados',
+      showConfirmButton: false,
+      timer: 1500
+    })
     dispatch(getCharsById(activeUser.id))
   }
 
@@ -67,6 +73,17 @@ const ProfessionConfig = () => {
     // console.log(user)
     console.log(user.professions)
   }, [user])
+
+  const disableSelector = () => {
+    if(activeUser.isPremium){
+      return false
+    }else if (user.professions.length > 0){
+      return true
+    }else{
+      return false
+    }
+    
+  }
 
 
 
@@ -77,7 +94,7 @@ const ProfessionConfig = () => {
 
       <div className={s.inputDiv}>
         <div>Profesiones</div>
-        <select name='professions' value={user.professions} onChange={(event) => addProfession(event)} disabled={PremiumValidator(user.isPremium, user.professions)}>
+        <select name='professions' value={user.professions} onChange={(event) => addProfession(event)} disabled={disableSelector()}>
 
           <option key={'none'} value=''>Profesiones</option>
           {

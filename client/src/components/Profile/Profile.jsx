@@ -14,7 +14,7 @@ import PremiumModal from "./premiumModal/PremiumModal";
 import * as functions from "../../handlers/localStorage";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getCharsById } from "../../redux/userActions";
+import { getChars, getCharsById } from "../../redux/userActions";
 import { useEffect } from "react";
 import { actionGetAllOrders } from "../../redux/orderActions";
 import corona from "./assets/corona.png"
@@ -29,7 +29,7 @@ const Profile = () => {
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
 
   const activeUser = useSelector((state) => state.users.detail);
-  const allOrders = useSelector((state) => state.orders.orders)
+  let allOrders = useSelector((state) => state.orders.orders)
 
 
   if(preapproval_id){
@@ -58,6 +58,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
+    dispatch(getChars())
     dispatch(getCharsById(myUser.id))
     dispatch(actionGetAllOrders(currentUser.id))
   }, [])
@@ -70,7 +71,9 @@ const Profile = () => {
   const handlePremiumModal = async () => {
   setModalActive(!modalActive)
   }
-
+  if(allOrders.length > 4){
+    allOrders = allOrders.slice(0,3)
+  }
 
   return (
     <>
@@ -107,9 +110,11 @@ const Profile = () => {
             <p className={s.orderText}>Mis ordenes recientes</p>
 
             <div className={s.lastOrders}>
-              <CardProfileMap />
-              <CardProfileMap />
-              <CardProfileMap />
+              {
+                
+               allOrders ? 
+               allOrders.map(order => <CardProfileMap order={order}/>) : <></>
+              }
             </div>
           </div>
           <div className={s.configBox}>

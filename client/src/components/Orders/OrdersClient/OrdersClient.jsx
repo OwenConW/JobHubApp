@@ -31,7 +31,7 @@ const OrdersClient = ({order}) => {
                 <p className={s.location}>{professional.city}, {professional.country}</p>
             </div>
             <div className={s.btndiv}>
-                <div className={s.btn} onClick={handleReview}>Puntuar</div>
+                <div className={s.btn} onClick={handleReview}>Modificar</div>
             </div>
         </div>
         <div className={s.opinion}>

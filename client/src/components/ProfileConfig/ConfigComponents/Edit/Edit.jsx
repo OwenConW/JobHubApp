@@ -6,6 +6,7 @@ import axios from "axios";
 import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
 import { modifyUser } from "../../../../redux/userActions";
+import Swal from 'sweetalert2'
 
 const Edit = () => {
   let localSt = getLocalStorage()
@@ -135,7 +136,7 @@ const Edit = () => {
 
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${user.address},${user.street},${user.city},${user.country}&format=json`);
     if (!response.data.length) {
       setErrorGeometry({
@@ -148,9 +149,6 @@ const Edit = () => {
         coordinate: [response.data[0].lat, response.data[0].lon]
       })
     }
-
-
-    modifyUser(activeUser.id, user)
     let newValues = {
       ...localSt,
       name: user.name,
@@ -169,7 +167,19 @@ const Edit = () => {
       isProfessional: user.isProfessional,
       professions: user.professions,
     }
-    setUserLocalStorage(newValues)
+   setUserLocalStorage(newValues)
+    
+   modifyUser(activeUser.id, user)
+
+   Swal.fire({
+    icon: 'success',
+    title: 'Cambios Guardados',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  
+
+    
   }
   // console.log('entre a Edit')
   // console.log('activeuser: ', activeUser)
@@ -254,7 +264,7 @@ const Edit = () => {
         <textarea className={s.description} placeholder="Descripcion personal" name='description' value={user.description} onChange={(event) => handleChange(event)}></textarea>
       </div>
 
-      <input type="submit" className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
+      <input type="submit" value='Confirmar' className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
 
     </div>
   )
