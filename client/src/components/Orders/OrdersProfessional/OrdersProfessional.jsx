@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import s from './OrdersProfessional.module.scss';
+import Swal from 'sweetalert2';
 
 const OrdersProfessional = ({order, setProf, profOrders}) => {
     const [client, setClient] = useState([]);
@@ -17,15 +18,31 @@ const OrdersProfessional = ({order, setProf, profOrders}) => {
         fetchUser();
     }, [])
 
-    const handleClick = async() => {
-
-        let body = {
-            complete: false,
-            allowReview: true,
-        }
-
-        await axios.put(`/orders/${order.id}`, body);
-        setProf(profOrders.filter(p => p.id !== order.id));
+    const handleClick = () => {
+        Swal.fire({
+            title: 'Seguro?',
+            text: "Al completar, habilitas al cliente a puntuarte.",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#2C666E',
+            cancelButtonColor: '#4e4e4e',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Completar'
+          }).then((result) => {
+            let body = {
+                complete: false,
+                allowReview: true,
+            }
+            if (result.isConfirmed) {
+                axios.put(`/orders/${order.id}`, body).then(() => setProf(profOrders.filter(p => p.id !== order.id)))
+                .then(() => Swal.fire({
+                    title: 'Genial!',
+                    text: "Ahora el cliente podrá puntuarte",
+                    icon: 'success',
+                    confirmButtonColor: '#2C666E',
+                }))
+             }
+          })
     }
 
     return(
@@ -38,7 +55,7 @@ const OrdersProfessional = ({order, setProf, profOrders}) => {
                 <p className={s.location}>{client.city}, {client.country}</p>
             </div>
             <div className={s.btndiv}>
-                <div className={s.btn} onClick={() => {handleClick()}}>Completar</div>
+                <div className={s.btn} onClick={() => handleClick()}>Completar</div>
             </div>
         </div>
     )

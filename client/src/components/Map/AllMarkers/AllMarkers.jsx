@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Marker, Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
+
 import {nameStyle , imgDiv, imgStyle, containerStyle, dataDiv, oficioStyle} from './styles';
 import { electricistaIcon, jardineroIcon, plomeroIcon, gasistaIcon, pintorIcon, costureroIcon, programadorIcon, carpinteroIcon, albanilIcon, tecnicoaireIcon, electricistaIconP, jardineroIconP, plomeroIconP, gasistaIconP, pintorIconP, costureroIconP, programadorIconP, carpinteroIconP, albanilIconP, tecnicoaireIconP} from '../mapIcons';
 import { useEffect } from 'react';
@@ -22,7 +23,7 @@ const AllMarkers = () => {
 
         fetchData();
     }, []);
-
+    // console.log(users)
     const Markers = users.map(user => {
         let iconMarker;
         if(user.professions.length > 0){
@@ -90,8 +91,8 @@ const AllMarkers = () => {
                 }
             }
         }
+        return activeUser?.id === user?.id ? '' : (
 
-       return activeUser?.id === user?.id ? '' : (
             <Marker position={[user.coordinate[0], user.coordinate[1]]} key={user.id} icon={iconMarker}>
                 <Link to={`/details/${user.id}`}>
                     <Popup className='professional-popup'>
@@ -110,7 +111,7 @@ const AllMarkers = () => {
         );
     })
 
-  return Markers;
+    return Markers;
 }
 
 export default AllMarkers

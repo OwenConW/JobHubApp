@@ -21,6 +21,7 @@ export const getCharsById = (id) => (dispatch) => {
 	axios
 		.get(`/users/${id}`)
 		.then((res) => {
+
 			dispatch(getUserById(res.data));
 		})
 		.catch((e) => console.log(e));
@@ -47,9 +48,7 @@ export const filterProfessionals = (filters) => (dispatch) => {
 };
 
 export const modifyUser = (id, payload) => {
-	// console.log('modifyUser payload', payload)
-	// console.log('id', id)
-	axios.put(`/users/edit/${id}`, payload)
+	axios.put(`/users/edit/${id}`, payload);
 	getLocalStorage()
 }
 

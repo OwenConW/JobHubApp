@@ -50,7 +50,7 @@ const Orders = () => {
             {clientOrders.length ? (
               clientOrders.map(client => {
                 return(
-                  <OrdersClient order={client} setCli={setClientOrders} clientOrders={clientOrders}/>
+                  <OrdersClient order={client} setCli={setClientOrders} clientOrders={clientOrders} activeUser={activeUser}/>
                 )
               })
             ) : <p>No hay reseñas pendientes.</p>}
