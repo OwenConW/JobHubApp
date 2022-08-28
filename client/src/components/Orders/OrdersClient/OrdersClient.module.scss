@@ -1,40 +1,21 @@
-.container{
+.order{
+    transition: 0.3s;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 40%;
-    height: 80%;
-    border-radius: 10px;
-    background-color: rgb(193, 193, 193);
-    box-shadow: 14px 7px 42px -3px rgba(0,0,0,0.1);
-    overflow-y: scroll;
+    border-radius: 5px;
+    margin-top: 5%;
+    min-width: 80%;
+    min-height: 20%;
+    background-color: #EEEEEE;
 
-    h4{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 3.2rem;
-        font-weight: 300;
-        width: 100%;
-        min-height: 15%;
-        color: #1f1f1f;
-    }
-
-    p{
-        font-size: 1.6rem;
-    }
-
-    .order{
-        transition: 0.3s;
+    .info{
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        border-radius: 5px;
-        margin-top: 5%;
-        min-width: 80%;
-        min-height: 20%;
-        background-color: #EEEEEE;
+        width: 100%;
+        height: 100%;
 
         .img{
             display: flex;
@@ -102,7 +83,6 @@
 
         &:hover{
             transition: 0.3s;
-            scale: 1.03;
             cursor: pointer;
             background-color: #2C666E;
 
@@ -122,6 +102,166 @@
                 .location{
                     color: #b7b7b7;
                     font-size: 1.6rem;
+                }
+            }
+        }
+    }
+
+    .opinion{
+        width: 100%;
+        height: 55%;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: red;
+    }
+}
+
+.review{
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-radius: 5px;
+    margin-top: 5%;
+    min-width: 80%;
+    min-height: 50%;
+    background-color: #EEEEEE;
+
+    .info{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 45%;
+
+        .img{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 25%;
+            height: 100%;
+
+            img{
+                width: 60%;
+                height: 65%;
+                border-radius: 50%;
+                border: 10px solid rgba(190, 190, 190, 0.475);
+                object-fit: cover;
+            }
+        }
+
+        .userdata{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+            height: 60%;
+            .name{
+                text-transform: capitalize;
+                font-weight: 400;
+                font-size: 2.2rem;
+            }
+
+            .location{
+                color: #4e4e4e;
+                font-size: 1.6rem;
+            }
+        }
+
+        .btndiv{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 25%;
+            height: 100%;
+
+            .btn{
+                transition: 0.3s;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+                width: 70%;
+                height: 40%;
+                font-size: 1.6rem;
+                font-weight: 400;
+                background-color: #1c464c;
+                color: #EEEEEE;
+
+                &:hover{
+                    transition: 0.3s;
+                    background-color: #EEEEEE;
+                    color: #0e2427;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+
+    .opinion{
+        width: 100%;
+        height: 55%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        h2{
+            text-align: center;
+            width: 100%;
+            height: 20%;
+            font-size: 2.4rem;
+            font-weight: 300;
+            background-color: red;
+        }
+
+        .form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 80%;
+
+            .barra{
+                width: 40%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+
+                label{
+                    margin-top: 5px;
+                    font-size: 1.8rem;
+                }
+
+                input{
+                    margin-bottom: 15%;
+                }
+            }
+
+            .description{
+                width: 60%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+
+
+                label{
+                    margin-top: 5px;
+                    font-size: 1.8rem;
+                }
+
+                textarea{
+                    margin-bottom: 5px;
+                    width: 90%;
+                    height: 60%;
                 }
             }
         }
