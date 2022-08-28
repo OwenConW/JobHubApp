@@ -10,7 +10,7 @@ import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { oficioStyle } from './AllMarkers/styles';
 
-import { userIcon } from './mapIcons';
+import { userIcon, userIconP } from './mapIcons';
 import { getLocalStorage } from '../../handlers/localStorage';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -90,11 +90,11 @@ const MapView = () => {
 					<div className={s.activeUser}>
 						<h3>Mapa</h3>
 						<div className={s.user}>
-							<div className={s.profileImage}>
-								<img src={activeUser.image} alt="userprofile" />
+							<div className={activeUser?.isPremium ? s.profileImagePremium : s.profileImage}>
+								<img src={activeUser?.image} alt="userprofile" />
 							</div>
 							<div className={s.name}>
-								{activeUser.name} {activeUser.last_Name}
+								{activeUser?.name} {activeUser?.last_Name}
 							</div>
 						</div>
 
@@ -116,13 +116,13 @@ const MapView = () => {
 						{search.searchUsers.map(user => {
 							return(
 								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
-								<div className={s.profileImage}>
+								<div className={user.isPremium ? s.profileImageP : s.profileImage}>
 									<img src={user.image} alt="userprofile" />
 								</div>
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
 									<p>{user?.profession[0].name}</p>
-									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser.coordinate, user.coordinate)).toFixed(2)} km</p>
+									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser?.coordinate, user.coordinate)).toFixed(2)} km</p>
 								</div>
 								</Link>
 							)
@@ -143,13 +143,13 @@ const MapView = () => {
 						{closeUsers.length ? closeUsers.map(user => {
 							return(
 								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
-								<div className={s.profileImage}>
+								<div className={user.isPremium ? s.profileImageP : s.profileImage}>
 									<img src={user.image} alt="userprofile" />
 								</div>
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
 									<p>{user.professions[0].name}</p>
-									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser.coordinate, user.coordinate)).toFixed(2)} KM</p>
+									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser?.coordinate, user.coordinate)).toFixed(2)} KM</p>
 								</div>
 								</Link>
 							)
@@ -160,7 +160,7 @@ const MapView = () => {
 				</div>
 
 				<div className={s.mapContainer}>
-					<MapContainer center={[activeUser.coordinate[0], activeUser.coordinate[1]]} zoom={15} scrollWheelZoom={true} className={s.map}>
+					<MapContainer center={[activeUser?.coordinate[0], activeUser?.coordinate[1]]} zoom={15} scrollWheelZoom={true} className={s.map}>
 						<TileLayer
 								noWrap={true}
 								minZoom={3}
@@ -168,14 +168,14 @@ const MapView = () => {
 								url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
 						/>
 
-						<Marker position={[activeUser.coordinate[0], activeUser.coordinate[1]]} icon={userIcon}>
+						<Marker position={[activeUser?.coordinate[0], activeUser?.coordinate[1]]} icon={activeUser?.isPremium ? userIconP : userIcon}>
 							<Popup className='professional-popup'>
 								<p style={oficioStyle}>{activeUser.name}</p>
 							</Popup>
 						</Marker>
 
 						<AllMarkers/>
-						<Circle center={[activeUser.coordinate[0], activeUser.coordinate[1]]} pathOptions={{fillColor: 'grey', color: '#07393C'}} radius={distance * 1000} />
+						<Circle center={[activeUser?.coordinate[0], activeUser?.coordinate[1]]} pathOptions={activeUser?.isPremium ? {fillColor: '#e6ff00', color: '#AB9F3A'} : {fillColor: 'grey', color: '#07393C'}} radius={distance * 1000} />
 					</MapContainer>
 				</div>
 			</div>
