@@ -47,7 +47,10 @@ const Profile = () => {
       })
       .then(() => {
         Swal.close(navigate("/profile"))
-        setUserLocalStorage({...currentUser, isPremium: true})
+        axios.get(`/users/${currentUser.id}`)
+        .then(res => {
+          setUserLocalStorage(res.data)
+        })
         window.location.reload()
       })
     })
