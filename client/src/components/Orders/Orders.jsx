@@ -15,7 +15,6 @@ const Orders = () => {
   const navigate = useNavigate();
   const [profOrders, setProfOrders] = useState([]);
   const [clientOrders, setClientOrders] = useState([]);
-  const [allUsers, setAllUsers] = useState([]);
 
 
   useEffect(() => {
@@ -25,9 +24,6 @@ const Orders = () => {
 
       let client = await axios.get(`/orders/client/${activeUser?.id}`);
       setClientOrders(client?.data.filter(c => (!c.complete && c.allowReview)));
-
-      let allUsers = await axios.get(`/users`);
-      setAllUsers(allUsers?.data);
     }
 
     fetchOrders();
@@ -38,8 +34,27 @@ const Orders = () => {
     <>
     <Navbar />
     <div className={s.container}>
-        <OrdersClient orders={clientOrders} allUsers={allUsers}/>
-        <OrdersProfessional orders={profOrders} allUsers={allUsers}/>
+        <div className={s.profContainer}>
+          <h4>Trabajos a confirmar</h4>
+            {profOrders.length ? (
+              profOrders.map(prof => {
+                return(
+                  <OrdersProfessional order={prof} setProf={setProfOrders} profOrders={profOrders}/>
+                )
+              })
+            ) : <p>No hay trabajos pendientes.</p>}
+        </div>
+
+        <div className={s.clientContainer}>
+          <h4>Reseñas a completar</h4>
+            {clientOrders.length ? (
+              clientOrders.map(client => {
+                return(
+                  <OrdersClient order={client} setCli={setClientOrders} clientOrders={clientOrders}/>
+                )
+              })
+            ) : <p>No hay reseñas pendientes.</p>}
+        </div>
     </div>
     </> : navigate('/')
   )

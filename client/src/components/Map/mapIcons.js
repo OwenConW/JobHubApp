@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import micon from './asset/marker.png';
 import uicon from './asset/usericon.png';
-
+import uiconP from './asset/usericonP.png'
 //profesiones
 import electricista from './AllMarkers/assets/electricista.png';
 import jardinero from './AllMarkers/assets/jardinero.png';
@@ -12,6 +12,17 @@ import carpintero from './AllMarkers/assets/carpintero.png';
 import costurero from './AllMarkers/assets/costurero.png';
 import pintor from './AllMarkers/assets/pintor.png';
 import albanil from './AllMarkers/assets/albanil.png';
+// premium 
+import electricistaP from './AllMarkers/assets/electricistaP.png';
+import jardineroP from './AllMarkers/assets/jardineroP.png';
+import plomeroP from './AllMarkers/assets/plomeroP.png';
+import gasistaP from './AllMarkers/assets/gasistaP.png';
+import programadorP from './AllMarkers/assets/programadorP.png';
+import carpinteroP from './AllMarkers/assets/carpinteroP.png';
+import costureroP from './AllMarkers/assets/costureroP.png';
+import pintorP from './AllMarkers/assets/pintorP.png';
+import albanilP from './AllMarkers/assets/albanilP.png';
+
 
 export const markerIcon = L.icon({
     iconUrl: micon,
@@ -145,6 +156,131 @@ export const albanilIcon = L.icon({
     popupAnchor: [0, -43],
     className: 'leaflet-venue-icon'
 });
+
+
+// PREMIUM
+
+export const userIconP = L.icon({
+    iconUrl: uiconP,
+    iconRetinaUrl: uiconP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [60, 60],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+export const electricistaIconP = L.icon({
+    iconUrl: electricistaP,
+    iconRetinaUrl: electricistaP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+export const jardineroIconP = L.icon({
+    iconUrl: jardineroP,
+    iconRetinaUrl: jardineroP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+export const  plomeroIconP = L.icon({
+    iconUrl: plomeroP,
+    iconRetinaUrl: plomeroP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+export const  gasistaIconP = L.icon({
+    iconUrl: gasistaP,
+    iconRetinaUrl: gasistaP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+export const pintorIconP = L.icon({
+    iconUrl: pintorP,
+    iconRetinaUrl: pintorP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+export const carpinteroIconP = L.icon({
+    iconUrl: carpinteroP,
+    iconRetinaUrl: carpinteroP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+export const programadorIconP = L.icon({
+    iconUrl: programadorP,
+    iconRetinaUrl: programadorP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+
+export const costureroIconP = L.icon({
+    iconUrl: costureroP,
+    iconRetinaUrl: costureroP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
+export const albanilIconP = L.icon({
+    iconUrl: albanilP,
+    iconRetinaUrl: albanilP,
+    iconAnchor: null,
+    shadowUrl: null,
+    shadowSize: null,
+    shadowAnchor: null,
+    iconSize: [40, 40],
+    popupAnchor: [0, -43],
+    className: 'leaflet-venue-icon'
+});
+
 
 
 

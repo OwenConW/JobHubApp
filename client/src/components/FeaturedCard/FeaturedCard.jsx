@@ -12,7 +12,7 @@ import default_user from './assets/default_user.png';
 const FeaturedCard = (prop) => { 
 
   return (
-    <div className={s.container}
+    <div className={prop?.prop.isPremium ? s.containerPremium : s.container}
       transition={{duration: 1}}
       initial={{
         opacity:0,
@@ -44,9 +44,18 @@ const FeaturedCard = (prop) => {
           opacity: 1,
         }}
       />
-      <div className={s.image}>
-        {prop?.prop.image ? <img src={prop?.prop.image} alt=""/> : <img src={default_user} alt="img user not found"/>}
-      </div>
+      {
+        prop?.prop.isPremium ? (
+          <div className={s.imagePremium}>
+            {prop?.prop.image ? <img src={prop?.prop.image} alt=""/> : <img src={default_user} alt="img user not found"/>}
+          </div>
+        ) : (
+          <div className={s.image}>
+            {prop?.prop.image ? <img src={prop?.prop.image} alt=""/> : <img src={default_user} alt="img user not found"/>}
+          </div>
+        )
+      }
+     
       <div className={s.data}>
         <motion.div className={s.name}
           transition={{duration: 0.3, delay:1}}
@@ -84,18 +93,36 @@ const FeaturedCard = (prop) => {
             </div>
           </div>
         </motion.div>
-        <motion.button
-          transition={{duration: 0.5, delay:1}}
-          initial={{
-            opacity:0,
-            scale: 0,
-          }}
-          animate={{
-            opacity:1,
-            scale:1,
-          }}
-        > <img src={sign} alt="sign"/>
-        </motion.button>
+        {
+          prop?.prop.isPremium ? (
+            <motion.button className={s.buttonPremium}
+            transition={{duration: 0.5, delay:1}}
+            initial={{
+              opacity:0,
+              scale: 0,
+            }}
+            animate={{
+              opacity:1,
+              scale:1,
+            }}
+          > <img src={sign} alt="sign"/>
+          </motion.button>
+          ) : (
+            <motion.button
+            transition={{duration: 0.5, delay:1}}
+            initial={{
+              opacity:0,
+              scale: 0,
+            }}
+            animate={{
+              opacity:1,
+              scale:1,
+            }}
+          > <img src={sign} alt="sign"/>
+          </motion.button>
+          )
+        }
+     
       </div>
     </div>
   )

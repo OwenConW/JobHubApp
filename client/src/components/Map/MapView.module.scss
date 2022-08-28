@@ -53,6 +53,25 @@
                     }
                 }
 
+                .profileImagePremium{
+                    margin-left: 2%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 25%;
+                    height: 85%;
+
+                    img{
+                        border: 8px solid #fdc54488;
+                        box-shadow: 0px 0px 27px 7px #FFF780;
+                        object-fit: cover;
+                        border-radius: 50%;
+                        width: 60%;
+                        height: 70%;
+                    }
+                }
+
+
                 .name{
                     display: flex;
                     justify-content: flex-start;
@@ -168,6 +187,24 @@
 
                     img{
                         border: 10px solid rgba(95, 94, 94, 0.163);
+                        object-fit: cover;
+                        border-radius: 50%;
+                        width: 60%;
+                        height: 90%;
+                    }
+                }
+
+                .profileImageP{
+                    margin-left: 2%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 25%;
+                    height: 60%;
+
+                    img{
+                        border: 8px solid #fdc54488;
+                        box-shadow: 0px 0px 27px 7px #FFF780;
                         object-fit: cover;
                         border-radius: 50%;
                         width: 60%;

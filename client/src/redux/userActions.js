@@ -21,7 +21,7 @@ export const getCharsById = (id) => (dispatch) => {
 	axios
 		.get(`/users/${id}`)
 		.then((res) => {
-			// console.log("respues userActions:", res)
+
 			dispatch(getUserById(res.data));
 		})
 		.catch((e) => console.log(e));
