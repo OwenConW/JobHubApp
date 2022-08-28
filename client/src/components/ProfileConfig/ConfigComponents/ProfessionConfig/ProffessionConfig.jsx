@@ -30,9 +30,7 @@ const ProfessionConfig = () => {
     professions: comparative.professions,
   })
 
-  useEffect(() => {
-    dispatch(actionGetAllJobs())
-  }, [])
+
 
   const deleteProfession = (event) => {
     setUser({
@@ -70,14 +68,13 @@ const ProfessionConfig = () => {
 
 
   useEffect(() => {
-    // console.log(user)
     console.log(user.professions)
   }, [user])
 
   const disableSelector = () => {
     if(activeUser.isPremium){
       return false
-    }else if (user.professions.length > 0){
+    }else if (user?.professions?.length > 0){
       return true
     }else{
       return false

@@ -27,7 +27,7 @@ return (
         <h2>{review.feedback_client}</h2>
       </div>
       <div className={s.orderDetail2}>
-        <h3><img src={star} /> {review.rating}</h3>
+      <h3><img src={star} />{review.rating}</h3>
       </div>
     </div>
   )

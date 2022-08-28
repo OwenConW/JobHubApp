@@ -7,8 +7,10 @@ import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
 import { modifyUser } from "../../../../redux/userActions";
 import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
+  const navigate = useNavigate()
   let localSt = getLocalStorage()
   let activeUser = { ...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1) }
 
@@ -60,7 +62,6 @@ const Edit = () => {
 
   // Control del estado user
   useEffect(() => {
-    // console.log('USUARIO:', user)
   }, [user])
 
 
@@ -168,7 +169,7 @@ const Edit = () => {
       professions: user.professions,
     }
    setUserLocalStorage(newValues)
-    
+  
    modifyUser(activeUser.id, user)
 
    Swal.fire({
@@ -178,7 +179,7 @@ const Edit = () => {
     timer: 1500
   })
   
-
+  navigate("./")
     
   }
   // console.log('entre a Edit')

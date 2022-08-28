@@ -49,8 +49,6 @@ export const filterProfessionals = (filters) => (dispatch) => {
 };
 
 export const modifyUser = (id, payload) => {
-	// console.log('modifyUser payload', payload)
-	// console.log('id', id)
 	axios.put(`/users/edit/${id}`, payload);
 	getLocalStorage()
 }
