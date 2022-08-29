@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editOrder} from '../../../../../redux/adminActions';
+import { editOrder, actionFetchingAdminEditOrderReset} from '../../../../../redux/adminActions';
 import s from './OrderEditModal.module.scss';
 
 function OrderEditModal(props) {
@@ -25,11 +25,15 @@ function OrderEditModal(props) {
     dispatch(editOrder(id, orderData))
   }
 
-  useEffect(() => {;
+  useEffect(() => {
     if (fetchingAdminEditOrderSuccess) {
-      return handleEditOpenModal(!editModalActive)   
+      handleEditOpenModal(!editModalActive)
+      alert('Orden modificada exitosamente')
+    } else if(fetchingAdminEditOrderFailure) {
+      alert('Error al modificar la Orden')
     }
-  },[fetchingAdminEditOrderSuccess])
+    dispatch(actionFetchingAdminEditOrderReset())
+  },[fetchingAdminEditOrderSuccess, fetchingAdminEditOrderFailure, handleEditOpenModal, editModalActive,dispatch])
 
   return (
     <div className={s.modalMainContainer}>

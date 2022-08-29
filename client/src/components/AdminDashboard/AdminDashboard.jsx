@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
-import { getAllUsersForAdmin, getAllReviewsForAdmin,getAllOrdersForAdmin, actionFetchingAdminDeleteUserReset, actionFetchingAdminRestoreUserReset } from '../../redux/adminActions';
+import { getAllUsersForAdmin, 
+         getAllReviewsForAdmin,
+         getAllOrdersForAdmin, 
+         actionFetchingAdminDeleteUserReset, 
+         actionFetchingAdminRestoreUserReset,
+         actionFetchingAdminDeleteReviewReset,
+         actionFetchingAdminDeleteOrderReset } from '../../redux/adminActions';
 import { useDispatch, useSelector } from "react-redux";
 import s from './AdminDashboard.module.scss'
 import UsersAdminPanel from "./UsersAdminPanel/UsersAdminPanel";
 import ReviewsAdminPanel from "./ReviewsAdminPanel/ReviewsAdminPanel";
 import OrdersAdminPanel from "./OrdersAdminPanel/OrdersAdminPanel"
-import { useDebugValue } from "react";
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("reviewsPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -45,10 +50,10 @@ function AdminDashboard() {
   useEffect(() => {
     dispatch(getAllUsersForAdmin())
     dispatch(getAllReviewsForAdmin())
-    dispatch(getAllReviewsForAdmin())
+    dispatch(getAllOrdersForAdmin())
   }, [dispatch])
 
-  // ESTO NO FUNCIONA CORRECTAMENTE TODAVIA
+  //Alert DELETE USER
   useEffect(() => {
     if(fetchingAdminDeleteUserSuccess) {
       alert('Usuario eliminado correctamundo')
@@ -58,6 +63,7 @@ function AdminDashboard() {
     dispatch(actionFetchingAdminDeleteUserReset())
   }, [fetchingAdminDeleteUserSuccess, fetchingAdminDeleteUserFailure])
 
+  //Alert RESTORE USER
   useEffect(() => {
     if(fetchingAdminRestoreUserSuccess) {
       alert('Usuario restaurado correctamundo')
@@ -66,7 +72,28 @@ function AdminDashboard() {
     }
     dispatch(actionFetchingAdminRestoreUserReset())
   }, [fetchingAdminRestoreUserFailure, fetchingAdminRestoreUserSuccess])
- 
+  
+  //Alert DELETE REVIEW
+  useEffect(() => {
+    if(fetchingAdminDeleteReviewSuccess) {
+      alert('Reseña eliminada correctamundo')
+    } else if (fetchingAdminDeleteReviewFailure) {
+      alert('Hubo un error al eliminar la reseña')
+    }
+    dispatch(actionFetchingAdminDeleteReviewReset())
+    
+  }, [fetchingAdminDeleteReviewSuccess,fetchingAdminDeleteReviewFailure])
+   
+  //Alert DELETE ORDER
+  useEffect(() => {
+    if(fetchingAdminDeleteOrderSuccess) {
+      alert('Orden eliminada correctamundo')
+    } else if (fetchingAdminDeleteOrderFailure) {
+      alert('Hubo un error al eliminar la Orden')
+    }
+    dispatch(actionFetchingAdminDeleteOrderReset())
+  }, [fetchingAdminDeleteOrderSuccess,fetchingAdminDeleteOrderFailure])
+  
   return (
     <div className={s.mainContainer}>
     <Navbar />

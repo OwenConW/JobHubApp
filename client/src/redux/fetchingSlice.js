@@ -34,10 +34,20 @@ export const fetchingSlice = createSlice({
 		fetchingAdminEditReviewFailure: false,
 		fetchingAdminEditReviewSuccess: false,
 
+		// ============ ORDERS ================
+		//Delete
+		fetchingAdminDeleteOrder: false,
+		fetchingAdminDeleteOrderSuccess: false,
+		fetchingAdminDeleteOrderFailure: false,
+		//Edit
+		fetchingAdminEditOrder: false,
+		fetchingAdminEditOrderFailure: false,
+		fetchingAdminEditOrderSuccess: false,
+
+
 	},
 	reducers: {
 
-		//
 		fetchingMercadopagoLink: (state, action) => {
 			state.fetchingMercadoPagoLink = true
 		},
@@ -152,7 +162,7 @@ export const fetchingSlice = createSlice({
 			state.fetchingAdminEditReviewSuccess = false
 		},
 
-		// =============== Order ===========================
+		// =============== Orders ===========================
 
 		//DeleteHandling
 		fetchingAdminDeleteOrder: (state, action) => {

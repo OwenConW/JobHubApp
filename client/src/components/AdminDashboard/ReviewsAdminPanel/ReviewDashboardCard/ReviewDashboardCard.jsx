@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReviewEditModal from './ReviewEditModal/ReviewEditModal'
 import { actionFetchingAdminEditReviewReset, deleteReviews } from '../../../../redux/adminActions'
 import s from './ReviewDashboardCard.module.scss'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function ReviewDashboardCard(props) {
   const { id, id_orders, id_user_professional, id_user_client, feedback_client, rating, isActive } = props;
@@ -13,10 +13,6 @@ function ReviewDashboardCard(props) {
   function handleEditOpenModal(e) {
     setEditModalActive(!editModalActive)
   }
-
-  // useEffect(() => {
-  //     dispatch(actionFetchingAdminEditReviewReset())
-  // }, [dispatch])
 
   function handleDelete(e) {
     console.log('Esta eliminado vos confiá');
@@ -58,6 +54,7 @@ function ReviewDashboardCard(props) {
         <h4>{isActive ? "Si" : "No"}</h4>
       </div>
       <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button>
+
       <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>
     </div>
   </div>

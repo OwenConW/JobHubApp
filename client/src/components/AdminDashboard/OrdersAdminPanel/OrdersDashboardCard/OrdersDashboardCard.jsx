@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OrderEditModal from './OrderEditModal/OrderEditModal'
-import { actionFetchingAdminEditOrderReset } from '../../../../redux/adminActions'
+import { deleteOrder  } from '../../../../redux/adminActions'
 import s from './OrdersDashboardCard.module.scss'
 import { useDispatch } from "react-redux";
 
@@ -14,20 +14,10 @@ function OrdersDashboardCard(props) {
     setEditModalActive(!editModalActive)
   }
 
-  useEffect(() => {
-    return () => {
-      dispatch(actionFetchingAdminEditOrderReset())
-    }
-  }, [dispatch])
-
   function handleDelete(e) {
-    console.log('Esta eliminado vos confiá');
+    dispatch(deleteOrder(id));
   }
   
-  function handleRestore(e) {
-    console.log('edit');
-  }
-
   return (
     <div className={`${s.cardContainer}`}>
     {editModalActive? <OrderEditModal handleEditOpenModal={handleEditOpenModal} editModalActive={editModalActive} {...props}/> : null}

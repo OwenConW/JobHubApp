@@ -130,7 +130,6 @@ export const editReview = (id, payload) => (dispatch) => {
   dispatch(fetchingAdminEditReview())
   axios.put(`/review/${id}`, payload)
   .then(res => {
-    console.log(res);
     dispatch(fetchingAdminEditReviewSuccess())
     dispatch(getAllReviewsForAdmin())
     })
@@ -145,7 +144,7 @@ export const deleteReviews = (id) => (dispatch) => {
   axios.delete(`/review/admin/${id}`, {isActive: false})
       .then(r => {
         dispatch(fetchingAdminDeleteReviewSuccess())
-        dispatch(getAllReviews())
+        dispatch(getAllReviewsForAdmin())
       })
       .catch(e => {
         console.error(e)
@@ -157,7 +156,11 @@ export const actionFetchingAdminEditReviewReset = () => (dispatch) => {
   dispatch(fetchingAdminEditReviewReset())
 }
 
-// ======================= ACTIONS PARA REVIEWS =================================
+export const actionFetchingAdminDeleteReviewReset = () => (dispatch) => {
+  dispatch(fetchingAdminDeleteReviewReset())
+}
+
+// ======================= ACTIONS PARA ORDERS =================================
 
 export const getAllOrdersForAdmin = () => (dispatch) => {
   axios.get('/orders/all')
@@ -172,26 +175,27 @@ export const editOrder = (id, payload) => (dispatch) => {
   dispatch(fetchingAdminEditOrder())
   axios.put(`/orders/${id}`, payload)
   .then(res => {
-    console.log(res);
     dispatch(fetchingAdminEditOrderSuccess())
-    dispatch(getAllOrders())
+    dispatch(getAllOrdersForAdmin())
     })
-    .catch(e => console.error(e))
-    dispatch(fetchingAdminEditReviewFailure())
+    .catch(e =>{
+      console.error(e)
+      dispatch(fetchingAdminEditOrderFailure())
+    })
 }
 
-// export const deleteOrder = (id) => (dispatch) => {
-//   dispatch(fetchingAdminDeleteOrder())
-//   axios.delete(`/orders/destroy/${id}`, {isActive: false})
-//       .then(r => {
-//         dispatch(fetchingAdminDeleteOrderSuccess())
-//         dispatch(getAllOrders())
-//       })
-//       .catch(e => {
-//         console.error(e)
-//         dispatch(fetchingAdminDeleteOrderFailure())
-//       })
-// }
+export const deleteOrder = (id) => (dispatch) => {
+  dispatch(fetchingAdminDeleteOrder())
+  axios.delete(`/orders/admin/${id}`)
+      .then(r => {
+        dispatch(fetchingAdminDeleteOrderSuccess())
+        dispatch(getAllOrdersForAdmin())
+      })
+      .catch(e => {
+        console.error(e)
+        dispatch(fetchingAdminDeleteOrderFailure())
+      })
+}
 
 export const actionFetchingAdminEditOrderReset = () => (dispatch) => {
   dispatch(fetchingAdminEditOrderReset())
