@@ -13,25 +13,32 @@ const CardReview = ({ dataObj, reviewer }) => {
 
   console.log('reviewer:', reviewer)
   return (
-    <div className={s.orders}>
+    <>
+    {
+      reviewer?.name ? 
+      <div className={s.orders}>
       <div className={s.imgDetail}>
         {
           reviewer ? <img src={reviewer.image} alt="imagen"></img> : <img src={noUserImg}></img>
         }
       </div>
-
+      
       <div className={s.orderDetail}>
         {
           reviewer ? <h1>{reviewer.name} {reviewer.last_Name}</h1> : <h1>Usuario anonimo</h1>
         }
-
+      
         <h2>{data.feedback_client}</h2>
       </div>
       <div className={s.orderDetail2}>
         <h3><img src={star} /> {data.rating}</h3>
       </div>
-    </div>
+      </div> : <></>
+    }
+    </>
+
   )
 }
 
 export default CardReview
+
