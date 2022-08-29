@@ -51,9 +51,10 @@ const MapView = () => {
     }, []);
 
 	useEffect(() => {
-			let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate)
-			&& activeUser.id !== user.id);
-			setCloseUsers([...aux]);
+		if(activeUser){
+			let aux = users?.filter(user => closeToOne(activeUser?.coordinate, user.coordinate)
+			&& activeUser?.id !== user.id);
+			setCloseUsers([...aux])}
 
 	}, [users, distance]);
 
@@ -82,10 +83,10 @@ const MapView = () => {
 		});
 	}
 
-	return (
+	if(isAuthenticated){
+		return (
 			<>
 			<Navbar />
-			{isAuthenticated ? (
 				<div className={s.container}>
 				<div className={s.leftContainer}>
 					<div className={s.activeUser}>
@@ -180,9 +181,17 @@ const MapView = () => {
 					</MapContainer>
 				</div>
 			</div>
-			) : <Preview/>}
 			</>
 	);
+	}else{
+		return(
+			<>
+				<Navbar/>
+				<Preview/>
+			</>
+		)
+	}
+
 };
 
 export default MapView;
