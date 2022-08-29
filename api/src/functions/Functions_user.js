@@ -134,7 +134,6 @@ const filterByQueris = async(name, profession, rating) => {
                 name ? where[Op.or].push({name: {[Op.substring]: name.toLowerCase()}}) : null;
                 name ? where[Op.or].push({last_Name: {[Op.substring]: name.toLowerCase()}}) : null; 
             }
-            rating ?  options.order =  [["rating", rating]] : null;
             options.where = where;
             options.include = {
                 model: Profession,
@@ -151,6 +150,16 @@ const filterByQueris = async(name, profession, rating) => {
                 }
                 return 0
             })
+            user = rating ? user.sort(function (x, y){  
+                if(x.rating > y.rating){
+                    return -1 
+                }
+                if(x.rating < y.rating){
+                    return 1;
+                }
+                return 0
+            })
+            : user
             return user.filter(obj => obj.isProfessional === true && obj.isActive === true && obj.isBanned === false)
         }
     }catch(e){

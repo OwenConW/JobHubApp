@@ -176,7 +176,7 @@ const MapView = () => {
 						</Marker>
 
 						<AllMarkers/>
-						<Circle center={[activeUser?.coordinate[0], activeUser?.coordinate[1]]} pathOptions={activeUser?.isPremium ? {fillColor: '#e6ff00', color: '#AB9F3A'} : {fillColor: 'grey', color: '#07393C'}} radius={distance * 1000} />
+						<Circle center={[activeUser?.coordinate[0], activeUser?.coordinate[1]]} pathOptions={activeUser?.isPremium ? {fillColor: 'rgba(241,255,99,0.5144608868938201)', color: '#AB9F3A'} : {fillColor: 'grey', color: '#07393C'}} radius={distance * 1000} />
 					</MapContainer>
 				</div>
 			</div>
