@@ -12,14 +12,19 @@ export const fetchingSlice = createSlice({
 		// ============ Users ================
 		//Delete
 		fetchingAdminDeleteUser: false,
-		fetchingAdminDeleteUserFailure: false,
-		fetchingAdminDeleteUserSuccess: false,
+		fetchingAdminDeleteUserFailure: false, 
+		fetchingAdminDeleteUserSuccess: false, 
 		//Edit
 		fetchingAdminEditUser: false,
 		fetchingAdminEditUserFailure: false,
 		fetchingAdminEditUserSuccess: false,
 
-		// ============ Users ================
+		//restore
+		fetchingAdminRestoreUser: false,
+		fetchingAdminRestoreUserFailure: false,
+		fetchingAdminRestoreUserSuccess: false,
+	
+		// ============ Reviews ================
 		//Delete
 		fetchingAdminDeleteReview: false,
 		fetchingAdminDeleteReviewSuccess: false,
@@ -31,6 +36,8 @@ export const fetchingSlice = createSlice({
 
 	},
 	reducers: {
+
+		//
 		fetchingMercadopagoLink: (state, action) => {
 			state.fetchingMercadoPagoLink = true
 		},
@@ -87,6 +94,25 @@ export const fetchingSlice = createSlice({
 			state.fetchingAdminEditUserFailure = false
 			state.fetchingAdminEditUserSuccess = false
 		},
+
+		//RestoreHandling
+		fetchingAdminRestoreUser: (state, action) => {
+			state.fetchingAdminRestoreUser = true
+		},
+		fetchingAdminRestoreUserSuccess: (state, action) => {
+			state.fetchingAdminRestoreUser = false
+			state.fetchingAdminRestoreUserSuccess = true
+		},
+		fetchingAdminRestoreUserFailure: (state, action) => {
+			state.fetchingAdminRestoreUser = false
+			state.fetchingAdminRestoreUserFailure = true
+		},
+		fetchingAdminRestoreUserReset: (state, action) => {
+			state.fetchingAdminRestoreUser = false
+			state.fetchingAdminRestoreUserFailure = false
+			state.fetchingAdminRestoreUserSuccess = false
+		},
+
 
 		// =============== Review ===========================
 
@@ -195,5 +221,9 @@ export const { fetchingMercadopagoLink,
 							 fetchingAdminEditOrderSuccess,
 							 fetchingAdminEditOrderFailure,
 							 fetchingAdminEditOrderReset,
+							 fetchingAdminRestoreUser,
+							 fetchingAdminRestoreUserSuccess,
+							 fetchingAdminRestoreUserFailure,
+							 fetchingAdminRestoreUserReset
 							} = fetchingSlice.actions;
 export default fetchingSlice.reducer;

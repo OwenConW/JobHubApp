@@ -30,6 +30,10 @@ import {
   fetchingAdminEditOrderSuccess,
   fetchingAdminEditOrderFailure,
   fetchingAdminEditOrderReset,
+  fetchingAdminRestoreUser,
+  fetchingAdminRestoreUserSuccess,
+  fetchingAdminRestoreUserFailure,
+  fetchingAdminRestoreUserReset,
 
 } from './fetchingSlice.js';
 
@@ -68,6 +72,22 @@ export const deleteUser = (id) => (dispatch) => {
       })
 }
 
+export const restoreUser = (id) => (dispatch) => {
+  //setea el estado a TRUE, para hacerle saber al usuario que se esta "trabajando" (loading...)
+  dispatch(fetchingAdminRestoreUser())
+  axios.put(`/users/destroy/${id}`, {isActive: true})
+  .then(r => {
+        //setea el estado (success) a TRUE, para hacerle saber al usuario que la accion tuvo exito.
+        dispatch(fetchingAdminRestoreUserSuccess())
+        dispatch(getAllUsersForAdmin())
+      })
+      .catch(e => {
+        //setea el estado (failure) a TRUE, para hacerle saber al usuario que hubo un error.
+        dispatch(fetchingAdminRestoreUserFailure())
+        dispatch(getAllUsersForAdmin())
+      })
+}
+
 
 export const editUser = (id, payload) => (dispatch) => {
   dispatch(fetchingAdminEditUser())
@@ -91,6 +111,10 @@ export const actionFetchingAdminEditUserReset = () => (dispatch) => {
   dispatch(fetchingAdminEditUserReset())
 }
 
+export const actionFetchingAdminRestoreUserReset = () => (dispatch) => {
+  dispatch(fetchingAdminRestoreUserReset())
+}
+
 // ======================= ACTIONS PARA REVIEWS =================================
 
 export const getAllReviewsForAdmin = () => (dispatch) => {
@@ -108,24 +132,26 @@ export const editReview = (id, payload) => (dispatch) => {
   .then(res => {
     console.log(res);
     dispatch(fetchingAdminEditReviewSuccess())
-    dispatch(getAllReviews())
+    dispatch(getAllReviewsForAdmin())
     })
-    .catch(e => console.error(e))
-    dispatch(fetchingAdminEditReviewFailure())
+    .catch(e => {
+      console.error(e);
+      dispatch(fetchingAdminEditReviewFailure())
+    })
 }
 
-// export const deleteReviews = (id) => (dispatch) => {
-//   dispatch(fetchingAdminDeleteReview())
-//   axios.delete(`/review/destroy/${id}`, {isActive: false})
-//       .then(r => {
-//         dispatch(fetchingAdminDeleteReviewSuccess())
-//         dispatch(getAllReviews())
-//       })
-//       .catch(e => {
-//         console.error(e)
-//         dispatch(fetchingAdminDeleteReviewFailure())
-//       })
-// }
+export const deleteReviews = (id) => (dispatch) => {
+  dispatch(fetchingAdminDeleteReview())
+  axios.delete(`/review/admin/${id}`, {isActive: false})
+      .then(r => {
+        dispatch(fetchingAdminDeleteReviewSuccess())
+        dispatch(getAllReviews())
+      })
+      .catch(e => {
+        console.error(e)
+        dispatch(fetchingAdminDeleteReviewFailure())
+      })
+}
 
 export const actionFetchingAdminEditReviewReset = () => (dispatch) => {
   dispatch(fetchingAdminEditReviewReset())

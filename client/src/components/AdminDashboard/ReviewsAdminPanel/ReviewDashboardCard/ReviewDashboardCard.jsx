@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReviewEditModal from './ReviewEditModal/ReviewEditModal'
-import { actionFetchingAdminEditReviewReset } from '../../../../redux/adminActions'
+import { actionFetchingAdminEditReviewReset, deleteReviews } from '../../../../redux/adminActions'
 import s from './ReviewDashboardCard.module.scss'
 import { useDispatch } from "react-redux";
 
@@ -20,12 +20,10 @@ function ReviewDashboardCard(props) {
 
   function handleDelete(e) {
     console.log('Esta eliminado vos confiá');
+    dispatch(deleteReviews(id))
+
   }
   
-  function handleRestore(e) {
-    console.log('edit');
-  }
-
   return (
     <div className={`${s.cardContainer}`}>
     {editModalActive? <ReviewEditModal handleEditOpenModal={handleEditOpenModal} editModalActive={editModalActive} {...props}/> : null}

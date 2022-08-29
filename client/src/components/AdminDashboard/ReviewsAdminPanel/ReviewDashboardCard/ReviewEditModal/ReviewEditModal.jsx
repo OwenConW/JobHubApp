@@ -1,6 +1,6 @@
 import React,  { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editReview } from '../../../../../redux/adminActions'
+import { editReview, actionFetchingAdminEditReviewReset } from '../../../../../redux/adminActions'
 import s from './ReviewEditModal.module.scss'
 
 function ReviewEditModal(props) {
@@ -20,27 +20,32 @@ function ReviewEditModal(props) {
   }
 
   function handleEdit(e) {
+    e.preventDefault()
      if (e.target.name === "cancel-btn") return handleEditOpenModal()
-    dispatch(editReview(id, reviewData))
+    dispatch(editReview(id_orders, reviewData))
   }
 
-  useEffect(() => {;
+  useEffect(() => {
     if (fetchingAdminEditReviewSuccess) {
-      return handleEditOpenModal(!editModalActive)   
+      handleEditOpenModal(!editModalActive)
+      alert('Reseña modificada exitosamente')
+    } else if(fetchingAdminEditReviewFailure) {
+      alert('Error al modificar la reseña')
     }
-  },[fetchingAdminEditReviewSuccess])
+    dispatch(actionFetchingAdminEditReviewReset())
+  },[fetchingAdminEditReviewSuccess, fetchingAdminEditReviewFailure])
 
   return (
     <div className={s.modalMainContainer}>
-        <div className={s.modalContainer}>
+        <form onSubmit={handleEdit} className={s.modalContainer}>
           <div className={s.informationLeftSide}>
             <div>
               <label htmlFor="id">ID Reseña</label>
-              <h2>{id}</h2>
+              <h2>{id_orders}</h2>
             </div>
             <div>
             <label htmlFor="id">ID Orden</label>
-              <h2>{id_orders}</h2>
+            <h2>{id}</h2>
             </div>
             <div>
             <label htmlFor="id">ID Usuario Solicitante</label>
@@ -68,9 +73,9 @@ function ReviewEditModal(props) {
               </div>
             </div>
             <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>
-            <button onClick={handleEdit}>Editar</button>
+            <input type="submit" value="Editar" />
           </div>
-        </div>
+        </form>
     </div>
   )
 }

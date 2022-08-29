@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, getAllUsersForAdmin, actionFetchingAdminDeleteUserReset, editUser } from '../../../../redux/adminActions'
+import { deleteUser, restoreUser, getAllUsersForAdmin, actionFetchingAdminDeleteUserReset, editUser } from '../../../../redux/adminActions'
 import EditModal from "../DashboardUserCard/EditModal/EditModal";
 import s from './DashboardUserCard.module.scss';
 
@@ -47,7 +47,7 @@ function DashboardUserCard(props) {
 
   //Funcion para "restaurar" el usuario "eliminado"(professions esta hardcodeado porque no hice para que se pueda seleccionar todavia)
   function handleRestore(e){
-    dispatch(editUser(id , {...props, isActive: true, professions: ["plomero"]}))
+    dispatch(restoreUser(id))
   }
   
   //funcion que cambia el estado del MODAL DE EDICION de usuario
@@ -90,7 +90,7 @@ function DashboardUserCard(props) {
         </div>
         <div>
           <h4>Rating</h4>
-          <h4>{rating}</h4>
+          <h4>{rating === -1 ? "No tiene" : rating}</h4>
         </div>
         {
         isActive ? <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button> :

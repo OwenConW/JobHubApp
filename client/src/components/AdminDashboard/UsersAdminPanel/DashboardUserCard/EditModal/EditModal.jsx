@@ -64,7 +64,7 @@ function EditModal(props) {
           </div>
           <div>
             <label htmlFor="rating">Rating</label>
-            <input type="text" name="rating" value={userData.rating} onChange={handleChange}/>
+            <h4>{userData.rating === -1 ? "No tiene" : userData.rating}</h4>
           </div>
           <div>
             <label htmlFor="country">Pais</label>

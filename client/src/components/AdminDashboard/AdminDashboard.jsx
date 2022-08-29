@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
-import { getAllUsersForAdmin, getAllReviewsForAdmin,getAllOrdersForAdmin, actionFetchingAdminDeleteUserReset } from '../../redux/adminActions';
+import { getAllUsersForAdmin, getAllReviewsForAdmin,getAllOrdersForAdmin, actionFetchingAdminDeleteUserReset, actionFetchingAdminRestoreUserReset } from '../../redux/adminActions';
 import { useDispatch, useSelector } from "react-redux";
 import s from './AdminDashboard.module.scss'
 import UsersAdminPanel from "./UsersAdminPanel/UsersAdminPanel";
@@ -10,7 +10,7 @@ import { useDebugValue } from "react";
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("reviewsPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -22,6 +22,8 @@ function AdminDashboard() {
   const fetchingAdminDeleteUserFailure = useSelector(state => state.fetching.fetchingAdminDeleteUserFailure)
   const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
   const fetchingAdminEditUserFailure = useSelector(state => state.fetching.fetchingAdminEditUserFailure)
+  const fetchingAdminRestoreUserFailure = useSelector(state => state.fetching.fetchingAdminRestoreUserFailure)
+  const fetchingAdminRestoreUserSuccess = useSelector(state => state.fetching.fetchingAdminRestoreUserSuccess)
 
   //Fetching reviews states
   const fetchingAdminDeleteReviewSuccess = useSelector(state => state.fetching.fetchingAdminDeleteReviewSuccess)
@@ -48,7 +50,6 @@ function AdminDashboard() {
 
   // ESTO NO FUNCIONA CORRECTAMENTE TODAVIA
   useEffect(() => {
-    console.log(fetchingAdminDeleteUserSuccess);
     if(fetchingAdminDeleteUserSuccess) {
       alert('Usuario eliminado correctamundo')
     } else if (fetchingAdminDeleteUserFailure) {
@@ -56,6 +57,15 @@ function AdminDashboard() {
     }
     dispatch(actionFetchingAdminDeleteUserReset())
   }, [fetchingAdminDeleteUserSuccess, fetchingAdminDeleteUserFailure])
+
+  useEffect(() => {
+    if(fetchingAdminRestoreUserSuccess) {
+      alert('Usuario restaurado correctamundo')
+    } else if (fetchingAdminRestoreUserFailure) {
+      alert('Hubo un error al restaurar el usuario')
+    }
+    dispatch(actionFetchingAdminRestoreUserReset())
+  }, [fetchingAdminRestoreUserFailure, fetchingAdminRestoreUserSuccess])
  
   return (
     <div className={s.mainContainer}>
