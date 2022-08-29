@@ -13,6 +13,8 @@ const CardReview = ({ dataObj, reviewer }) => {
 
   console.log('reviewer:', reviewer)
   return (
+
+
     <div className={s.orders}>
       <div className={s.imgDetail}>
         {
@@ -31,7 +33,9 @@ const CardReview = ({ dataObj, reviewer }) => {
         <h3><img src={star} /> {data.rating}</h3>
       </div>
     </div>
+
   )
 }
 
 export default CardReview
+
