@@ -164,12 +164,12 @@ const Chat = (props) => {
                             }
                         </div>
                         <div className="chatBoxBottom">
-                            <input placeholder="Escribe algo..." 
+                            <textarea placeholder="Escribe algo..." 
                             className="chatMessageInput"
                             onChange={e => setNewMessage(e.target.value)}
                             value={newMessage}>
-                            </input>
-                            <button type="submit" className="chatSubmitButton" onSubmit={handleSubmit}>Enviar</button>
+                            </textarea>
+                            <button type="submit" className="chatSubmitButton" onClick={handleSubmit}>Enviar</button>
                         </div>
                         </> : <span className="noConversationText">Para utilizar el chat primero debes buscar un profesional para contactarte</span>}
                     </div>
