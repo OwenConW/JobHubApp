@@ -41,14 +41,15 @@ const Profile = () => {
         icon: 'success',
         html: `<h1>Muchas gracias por formar parte de la familia Job Hub</h1>
         <h3>Tu id de compra para reclamos es: <h2 style="font-weight: 800">${preapproval_id}</h2></h3>
-         <h2>Recorda que tendras todo acerca de tu suscripcion en el panel de configuracion</h2>`,
+        <br></br>
+        <h2>Recorda que tendras todo acerca de tu suscripcion en el panel de configuracion</h2>`,
         width: 700,
         padding: '3em',
         color: '#dfdddd',
         background: '#2C666E',
         backdrop: `
           rgba(0,0,123,0.4)
-          url("./assets/confetti2.gif")
+          url("https://acegif.com/wp-content/uploads/gif/confetti-4.gif")
         `
       })
       .then(() => {
@@ -57,6 +58,7 @@ const Profile = () => {
         .then(res => {
           setUserLocalStorage(res.data)
           window.location.reload()
+          axios.get(`/mails/bienvenido/premium?name=${currentUser.name}&mail=${currentUser.mail}`)
         })
       })
     })
