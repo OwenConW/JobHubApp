@@ -1,8 +1,9 @@
 import React from "react"
 import { useState } from "react"
 import s from './OpinionCard.module.scss'
-import saveImg from './assets/Save2.png'
+import Loader from "../../../../Login/Loader/Loader"
 import { changeReview } from "../../../../../redux/userActions"
+import Swal from "sweetalert2"
 
 
 
@@ -15,7 +16,8 @@ const OpinionCard = ({review, users}) => {
   if(professional){
     professional ={...professional, name:professional.name[0].toUpperCase() + professional.name.substring(1)} 
   }
-  
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [modifiedReview, setModifiedReview] = useState({
     id_orders: review?.id_orders,
     id_user_client: review?.id_user_client,
@@ -25,6 +27,7 @@ const OpinionCard = ({review, users}) => {
   })
 
   const handleChange = (event) => {
+    setError('');
     setModifiedReview({
       ...modifiedReview,
       [event.target.name]: event.target.value
@@ -32,7 +35,8 @@ const OpinionCard = ({review, users}) => {
    
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     let sendInfo = {
       feedback_client: modifiedReview?.feedback_client,
       rating: modifiedReview?.rating,
@@ -40,6 +44,13 @@ const OpinionCard = ({review, users}) => {
     }
     console.log('sendInfo', sendInfo);
     changeReview(modifiedReview.id_orders , sendInfo);
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Cambios Guardados',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
   const [onReview, setOnReview] = useState(false);
@@ -67,7 +78,7 @@ const OpinionCard = ({review, users}) => {
       <form className={s.form}>
       <div className={s.description}>
             <label>Description</label>
-            <textarea></textarea>
+            <textarea name='feedback_client' value={modifiedReview.feedback_client} onChange={event => handleChange(event)}></textarea>
         </div>
         <div className={s.barra}>
             <label>Puntaje</label>
@@ -75,8 +86,15 @@ const OpinionCard = ({review, users}) => {
                 name="rating"
                 max="5"
                 step="0.5"
-                type="range"/>
+                type="range"
+                value={modifiedReview.rating}
+                onChange={event => handleChange(event)}
+/>
         </div>
+        <div className={s.submit}>
+                    {loading ? <Loader/> : <button className={s.btnSubmit} onClick={handleSubmit} type='submit'>Enviar reseña</button>}
+                    {error ? <p>{error}</p> : ''}
+                </div>
         </form>
     </div>
 </div>

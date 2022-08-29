@@ -15,7 +15,7 @@
     
     .imgDetail {
       width: 10%;
-      height: 80%;
+      height: 75%;
       margin-left: 3%;
       margin-right: 3%;
       border-radius: 50%;
@@ -34,6 +34,7 @@
      
 
       h1 {
+        text-transform: capitalize;
         font-weight: 230;
         font-size: 2rem;
         line-height: 3rem;

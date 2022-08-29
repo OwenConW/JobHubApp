@@ -70,7 +70,6 @@
 //     }
 // }
 
-
 .order{
     transition: 0.3s;
     display: flex;
@@ -187,7 +186,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: red;
     }
 }
 
@@ -200,7 +198,7 @@
     border-radius: 5px;
     margin-top: 5%;
     min-width: 80%;
-    min-height: 50%;
+    min-height: 60%;
     background-color: #EEEEEE;
 
     .info{
@@ -208,7 +206,7 @@
         justify-content: flex-start;
         align-items: center;
         width: 100%;
-        height: 45%;
+        height: 40%;
 
         .img{
             display: flex;
@@ -259,8 +257,9 @@
                 align-items: center;
                 border-radius: 10px;
                 width: 70%;
-                height: 40%;
+                height: 30%;
                 font-size: 1.6rem;
+                cursor: pointer;
                 font-weight: 400;
                 background-color: #1c464c;
                 color: #EEEEEE;
@@ -277,64 +276,97 @@
 
     .opinion{
         width: 100%;
-        height: 55%;
+        height: 60%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
 
-        h2{
-            text-align: center;
-            width: 100%;
-            height: 20%;
-            font-size: 2.4rem;
-            font-weight: 300;
-            background-color: red;
-        }
-
         .form{
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 80%;
+            height: 100%;
 
-            .barra{
-                width: 40%;
-                height: 100%;
+            .inputs{
+                width: 100%;
+                height: 70%;
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                justify-content: center;
                 align-items: center;
 
-                label{
-                    margin-top: 5px;
-                    font-size: 1.8rem;
+                .barra{
+                    width: 40%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    label{
+                        margin-top: 5px;
+                        font-size: 2.0rem;
+                    }
+
+                    input{
+                        margin-bottom: 15%;
+                    }
                 }
 
-                input{
-                    margin-bottom: 15%;
+                .description{
+                    width: 60%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+
+
+                    label{
+                        margin-top: 5px;
+                        font-size: 2.0rem;
+                    }
+
+                    textarea{
+                        padding: 5px;
+                        font-family: Poppins;
+                        font-size: 1.6rem;
+                        margin-bottom: 5px;
+                        width: 90%;
+                        height: 60%;
+                    }
                 }
             }
 
-            .description{
-                width: 60%;
-                height: 100%;
+            .submit{
+                width: 100%;
+                height: 30%;
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                justify-content: center;
                 align-items: center;
 
+                .btnSubmit{
+                    transition: 0.3s;
+                    background-color: #1c464c;
+                    width: 25%;
+                    height: 70%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.6rem;
+                    color: #b7b7b7;
+                    border-radius: 10px;
+                    font-weight: 500;
 
-                label{
-                    margin-top: 5px;
-                    font-size: 1.8rem;
-                }
-
-                textarea{
-                    margin-bottom: 5px;
-                    width: 90%;
-                    height: 60%;
+                    &:hover{
+                        cursor: pointer;
+                        transition: 0.3s;
+                        background-color: #EEEEEE;
+                        color: #0e2427;
+                        border-radius: 5px;
+                    }
                 }
             }
         }

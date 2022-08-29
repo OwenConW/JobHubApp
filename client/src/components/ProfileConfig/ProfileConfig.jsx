@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { getChars, getCharsById } from "../../redux/userActions";
 import { actionGetAllReviews } from "../../redux/reviewActions";
 import { actionGetAllJobs } from "../../redux/jobActions";
+import { actionGetAllOrders } from "../../redux/orderActions";
 
 
 
@@ -25,6 +26,7 @@ const ProfileConfig = () => {
     dispatch(getCharsById(activeUser.id))
     dispatch(actionGetAllReviews())
     dispatch(actionGetAllJobs())
+    dispatch(actionGetAllOrders(activeUser.id))
   }, [])
 
   
@@ -61,9 +63,9 @@ const ProfileConfig = () => {
             {/* <button className={s.optionList} name='password' onClick={paginado}>
               Cambiar contraseña
             </button> */}
-            <button className={s.optionList} name='notifications' onClick={paginado}>
+            {/* <button className={s.optionList} name='notifications' onClick={paginado}>
               Notificaciones por correo
-            </button>
+            </button> */}
             <button className={s.optionList} name='orders' onClick={paginado}>
               Mis Ordenes
             </button>
@@ -84,12 +86,12 @@ const ProfileConfig = () => {
                   Mis Reseñas
                 </button> : <></>
             }
-            {
+            {/* {
               activeUser.isProfessional ?
                 <button className={s.optionList} name='premium' onClick={paginado}>
                   Premium
                 </button> : <></>
-            }
+            } */}
 
 
 
