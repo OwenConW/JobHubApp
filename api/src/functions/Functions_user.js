@@ -89,7 +89,7 @@ const filterByQueris = async(name, profession, rating) => {
             let profesionals = await Profession.findAll({ 
                 include: {
                     model: User,
-                    attributes: ['id','name','last_Name','image','city', 'coordinate', 'country', 'isActive', 'isProfessional', 'isAdmin', 'isBanned', 'isPremium'],
+                    attributes: ['id','name','last_Name','image','city', 'coordinate', 'country', 'isActive', 'isProfessional', 'isAdmin', 'isBanned', 'isPremium','rating'],
                     through: {attributes: []},
                 },
                 where: {
@@ -101,7 +101,7 @@ const filterByQueris = async(name, profession, rating) => {
             let professionalsFilters = [...profesionals[0].users.map(obj => {
                 return {
                     ...obj.dataValues,
-                    profession: [{name: profession}]
+                    professions: [{name: profession}]
                 }
             })]
             professionalsFilters = name ? professionalsFilters.filter(obj => obj.name.includes(name) || obj.last_Name.includes(name)) 

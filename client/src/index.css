@@ -1,8 +1,26 @@
-*{
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #32534850 #5d5d5d7e;
+  border: 0;
   margin: 0;
   padding: 0;
-  border: 0;
 }
+
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #3b5e4410;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #5d5d5d7e;
+  border-radius: 5px;
+  border: 0px none #45454561;
+}
+
 
 body{
   overflow: hidden;
