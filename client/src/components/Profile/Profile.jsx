@@ -86,7 +86,7 @@ const Profile = () => {
   setModalActive(!modalActive)
   }
   if(allOrders.length > 4){
-    allOrders = allOrders.slice(0,3)
+    allOrders = allOrders.slice(0,4)
   }
 
   return (
@@ -108,13 +108,13 @@ const Profile = () => {
               </div>
               )
             }
-           
+
             <div className={s.profileDetail}>
               {
                 activeUser?.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
                 : <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
               }
-              
+
               <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
               <div className={s.description}>{activeUser.description}</div>
             </div>
@@ -125,8 +125,8 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-                
-               allOrders ? 
+
+               allOrders ?
                allOrders.map(order => <CardProfileMap order={order}/>) : <></>
               }
             </div>

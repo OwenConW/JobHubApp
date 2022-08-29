@@ -14,6 +14,8 @@ function Card(props) {
 	let { id, name, last_Name, city, country, professions, image, isPremium, rating } =
 		props.data;
 
+		console.log(props.data);
+
 	return (
 		<div className={s.card}>
 			{rating === -1 ? <div className={s.header}>

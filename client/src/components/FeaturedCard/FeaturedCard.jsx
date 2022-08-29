@@ -12,15 +12,13 @@ import default_user from './assets/default_user.png';
 const FeaturedCard = (prop) => { 
 
   return (
-    <div className={prop?.prop.isPremium ? s.containerPremium : s.container}
-      transition={{duration: 1}}
+    <motion.div className={prop?.prop.isPremium ? s.containerPremium : s.container}
+      transition={{duration: 0.5}}
       initial={{
         opacity:0,
-        scale: 0,
       }}
       animate={{
         opacity:1,
-        scale:1,
       }}
     >
       <motion.div className={s.oficio}
@@ -89,7 +87,7 @@ const FeaturedCard = (prop) => {
           </div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

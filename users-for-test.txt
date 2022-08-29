@@ -22,6 +22,9 @@
 {
     "name":"pintor"
 }
+{
+    "name":"tecnico de aires acondicionado"
+}
 
 
 //Usuarios con coordenadas en Córdoba para testear
@@ -35,7 +38,7 @@
     "image": "https://imageio.forbes.com/specials-images/imageserve/60ab995dbe7dcc922ab5b642/FRANCE-ART-LUXURY-MUSUEM/1960x0.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Gasista matriculado N-412896. Servicios de mantenimiento y revision periodica. Contactame para acordar una cita. ",
     "city": "Cordoba",
     "coordinate": ["-31.400113488767744", "-64.19954751649585"],
     "isProfessional": true,
@@ -45,14 +48,14 @@
 }
 
 {
-    "name": "Coco",
+    "name": "Leandro",
     "last_Name": "Luciani",
     "mail": "coquito@gmail.com",
     "dni": "41.514.921",
-    "image": "https://www.bentbusinessmarketing.com/wp-content/uploads/2013/02/35844588650_3ebd4096b1_b-1024x683.jpg",
+    "image": "https://imageio.forbes.com/specials-images/imageserve/61688aa1d4a8658c3f4d8640/Antonio-Juliano/0x0.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Desarrollador mobile, conocimientos en tecnologias como react-native y swift. Experiencia en desarrollo de aplicaciones para android y iOS.",
     "city": "Cordoba",
     "coordinate": ["-31.381658528174917", "-64.1958858179877"],
     "isProfessional": true,
@@ -69,7 +72,7 @@
     "image": "https://www.theportlandclinic.com/wp-content/uploads/2019/07/Person-Curtis_4x5-e1564616444404-300x300.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Trabajos en pintura de excelente calidad. Evite manchas de humedad y filtraciones. Ofrecemos servicio de diseño y realizamos recomendaciones.",
     "city": "Cordoba",
     "coordinate": ["-31.393053482888085", "-64.16625661098303"],
     "isProfessional": true,
@@ -80,13 +83,13 @@
 
 {
     "name": "Lidia",
-    "last_Name": "Kikilidia",
+    "last_Name": "Clausen",
     "mail": "kiki@gmail.com",
     "dni": "43.514.921",
     "image": "http://sjc.uva.es/wp-content/uploads/2021/10/claudia_mahler.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Lidia, amante de las flores y la naturaleza, realizo trabajos de jardineria y paisajismo. No dudes en contactarme.",
     "city": "Cordoba",
     "coordinate": ["-31.41505468347454", "-64.19181572653054"],
     "isProfessional": true,
@@ -96,14 +99,14 @@
 }
 
 {
-    "name": "Trompeta",
+    "name": "Tiara",
     "last_Name": "Zaralegui",
     "mail": "trompetazaralegui@gmail.com",
     "dni": "44.514.921",
     "image": "https://strayhornlaw.com/wp-content/uploads/2019/09/image0-1170x1170.jpeg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Hola mi nombre es Tiara y soy electricista matriculada de la provincia de Córdoba, realizo trabajos de mantenimiento y seguridad.Experiencia comprobale en Epec.",
     "city": "Cordoba",
     "coordinate": ["-31.385752650967163", "-64.1724091798197"],
     "isProfessional": true,
@@ -114,13 +117,13 @@
 
 {
     "name": "Carlos",
-    "last_Name": "Ricarlos",
+    "last_Name": "Martini",
     "mail": "carlosricarlos@gmail.com",
     "dni": "45.514.921",
     "image": "https://dergreif-online.de/www/wp-content/uploads/2016/07/Timothy_hoch.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Albañil especializado en terminaciones de ceramica y revoque fino. Experiencia en el area industrial.",
     "city": "Cordoba",
     "coordinate": ["-31.40091175055419", "-64.20184281257055"],
     "isProfessional": true,
@@ -131,13 +134,13 @@
 
 {
     "name": "Valentino",
-    "last_Name": "Cachila",
+    "last_Name": "Rossi",
     "mail": "valentino@gmail.com",
     "dni": "46.514.921",
     "image": "https://rti.cl/wp-content/uploads/person-1-1-1.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Córdoba, Argentina. Muebles de la mejor calidad, pino, roble y cedro. Hacemos envios a todo el pais y visitas para medidas exactas. No dudes en contactar.",
     "city": "Cordoba",
     "coordinate": ["-31.406579368009695", "-64.2069674892892"],
     "isProfessional": true,
@@ -147,14 +150,14 @@
 }
 
 {
-    "name": "Bizcocho",
-    "last_Name": "Corinthians",
-    "mail": "bizcocho@gmail.com",
+    "name": "Walter",
+    "last_Name": "Ducasse",
+    "mail": "ducasse@gmail.com",
     "dni": "47.514.921",
-    "image": "https://lanzzin.com/assets/uploads/gigs/152/0619202219213262af773c28df9.jpg",
+    "image": "https://www.conference-news.co.uk/sites/default/files/styles/large/public/2022-07/paul_jones_headshot.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Hola! Aquí Walter, soy FullStack Developer, me especializo en tecnologías como React, Redux, sequelize, postgress. Tengo experiencia comprobable en aplicaciones web bancarias. ",
     "city": "Cordoba",
     "coordinate": ["-31.41508356077831", "-64.2502581827187"],
     "isProfessional": true,
@@ -164,14 +167,14 @@
 }
 
 {
-    "name": "Caco",
+    "name": "Carlos",
     "last_Name": "Robledo",
     "mail": "cacorobledo@gmail.com",
     "dni": "48.514.921",
     "image": "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Vivo en Córdoba, Argentina. Presto servicios de albañileria, me especializo en terminaciones de reformas hogareñas y ampliaciones.",
     "city": "Cordoba",
     "coordinate": ["-31.40280830487767", "-64.19527192971978"],
     "isProfessional": true,
@@ -192,7 +195,7 @@
     "image": "https://res.cloudinary.com/jobhubapp/image/upload/v1661474109/jobhub/i2dkayrae3agsxxuwckz.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Hola mi nombre es Valentino Machuca, soy estudiante de Desarrollo web en Henry y uno de los desarrolladores de este proyecto.",
     "city": "Cordoba",
     "coordinate": ["-31.40416686646734", "-64.18983370165847"],
     "isProfessional": true,
@@ -200,17 +203,18 @@
     "address": "689",
     "profession" : ["programador"]
 }
+
 {
-  "name": "Cheng",
-    "last_Name": "Bladimir",
-    "mail": "Bladimir@gmail.com",
+  "name": "Victor",
+    "last_Name": "Cheng",
+    "mail": "victorcheng@gmail.com",
     "dni": "21.325.953",
-    "image": "https://st3.depositphotos.com/1192060/13725/i/600/depositphotos_137256882-stock-photo-portrait-of-air-conditioning-serviceman.jpg",
+    "image": "https://i.cbc.ca/1.6323672.1642803333!/cumulusImage/httpImage/image.jpg_gen/derivatives/16x9_780/grade-7-teacher-matthew-morris.jpg",
     "phone": "35845723",
     "country": "Argentina",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    "description": "Hola mi nombre es Victor Cheng, soy tecnico en aires acondicionados, sientase seguro de contactarse conmigo. Trabajos de alta calidad con repuestos de alta calidad.",
     "city": "Bella Vista",
-    "coordinate": ["-34.50728015672251", "-58.681958920336356"],
+    "coordinate": ["-31.329277268154467", "-64.25214605804419"],
     "isProfessional": true,
     "street": "O' Brien Juan",
     "address": "4259",

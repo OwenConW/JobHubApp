@@ -8,7 +8,14 @@
 		height: 100%;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
+
+		h1{
+			font-weight: 300;
+			font-size: 2.8rem;
+		}
 		.showAllBtn {
+			transition: 0.5s;
 			background-color: #2C666E;
 			width: 80%;
 			color: white;
@@ -16,6 +23,13 @@
 			border-radius: 3px;
 			margin-top: 20px;
 			align-self: center;
+
+			&:hover{
+				cursor: pointer;
+				transition: 0.5s;
+				color: #2C666E;
+				background-color: white;
+			}
 		}
 		
 		.filtersFormMainContainer {
@@ -23,15 +37,23 @@
 			flex-direction: column;
 			justify-content: space-around;
 			align-items: center;
-			height: 90%;
+			height: 95%;
 
 			.searchButton {
+					margin-top: 5%;
+					transition: 0.5s;
 					width: 80%;
-					height: 30px;
+					height: 40px;
 					border-radius: 3px;
-					transition: all 0.1s;
 					background-color: #2C666E;
 					color: white;
+
+					&:hover{
+						cursor: pointer;
+						transition: 0.5s;
+						color: #2C666E;
+						background-color: white;
+					}
 			}
 		}
 	}
