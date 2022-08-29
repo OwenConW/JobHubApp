@@ -76,12 +76,14 @@ const OpinionCard = ({review, users}) => {
     </div>
     <div className={s.opinion}>
       <form className={s.form}>
+      <div className={s.inputs}>
       <div className={s.description}>
             <label>Description</label>
             <textarea name='feedback_client' value={modifiedReview.feedback_client} onChange={event => handleChange(event)}></textarea>
         </div>
         <div className={s.barra}>
             <label>Puntaje</label>
+            <p>{modifiedReview.rating}</p>
             <input
                 name="rating"
                 max="5"
@@ -91,10 +93,11 @@ const OpinionCard = ({review, users}) => {
                 onChange={event => handleChange(event)}
 />
         </div>
+        </div>
         <div className={s.submit}>
                     {loading ? <Loader/> : <button className={s.btnSubmit} onClick={handleSubmit} type='submit'>Enviar reseña</button>}
                     {error ? <p>{error}</p> : ''}
-                </div>
+        </div>
         </form>
     </div>
 </div>

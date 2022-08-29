@@ -193,14 +193,18 @@ const Edit = () => {
 
       <div className={s.inputDiv}>
         <div>Nombre</div>
+        <div className={s.errorInput}>
         <input placeholder="Nombre" name="name" value={user.name} onChange={(event) => handleChange(event)}></input>
         {errors.name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.name ? <p className={s.error}>{errors.name}</p> : '')}
+      </div>
       </div>
 
       <div className={s.inputDiv}>
         <div>Apellido</div>
+        <div className={s.errorInput}>
         <input placeholder="Apellido" name='last_Name' value={user.last_Name} onChange={(event) => handleChange(event)}></input>
         {errors.last_Name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.last_Name ? <p className={s.error}>{errors.last_Name}</p> : '')}
+        </div>
       </div>
 
 
@@ -213,19 +217,23 @@ const Edit = () => {
 
       <div className={s.inputDiv}>
         <div>Telefono</div>
+        <div className={s.errorInput}>
         <input placeholder="Telefono" name='phone' value={user.phone} onChange={(event) => handleChange(event)}></input>
+        </div>
       </div>
 
       <div className={s.inputDiv}>
         <div>DNI</div>
+        <div className={s.errorInput}>
         <input placeholder="dni" name='dni' value={user.dni} onChange={(event) => handleChange(event)}></input>
         {errors.dni === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.dni ? <p className={s.error}>{errors.dni}</p> : '')}
+      </div>
       </div>
 
 
       <div className={s.inputDiv}>
         <div>Pais</div>
-        <select name='country' value={user.country} onChange={(event) => handleChange(event)}>
+        <select name='country' value={user.country} onChange={(event) => handleChange(event)} className={s.select}>
 
           <option key={'none'} value={user.country}>{user.country}</option>
           {
@@ -241,20 +249,26 @@ const Edit = () => {
 
       <div className={s.inputDiv}>
         <div>Ciudad</div>
+        <div className={s.errorInput}>
         <input placeholder="Ciudad" name='city' value={user.city} onChange={(event) => handleChange(event)}></input>
         {errors.city === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.city ? <p className={s.error}>{errors.city}</p> : '')}
+      </div>
       </div>
 
       <div className={s.inputDiv}>
         <div>Calle</div>
+        <div className={s.errorInput}>
         <input placeholder="Calle" name='street' value={user.street} onChange={(event) => handleChange(event)}></input>
         {errors.street === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.street ? <p className={s.error}>{errors.street}</p> : '')}
+      </div>
       </div>
 
       <div className={s.inputDiv}>
         <div>Número</div>
+        <div className={s.errorInput}>
         <input placeholder="Tu direccion" name='address' value={user.address} onChange={(event) => handleChange(event)}></input>
         {errors.address === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.address ? <p className={s.error}>{errors.address}</p> : '')}
+      </div>
       </div>
 
       <div className={s.inputDiv}>
