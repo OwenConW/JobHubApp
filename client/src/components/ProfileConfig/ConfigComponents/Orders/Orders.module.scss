@@ -1,21 +1,10 @@
 .container{
-   background-color: rgb(233, 236, 239);
-   height: 100%;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   padding-top: 1%;
-
-    h1{
-      color: rgba($color: #000000b6, $alpha: 0.8);
-    }
-
-    .cardsContainer{
-      margin-top: -2%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
+  overflow-y: auto;
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }

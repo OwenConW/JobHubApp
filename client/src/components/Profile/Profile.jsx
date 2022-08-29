@@ -33,7 +33,6 @@ const Profile = () => {
   const activeUser = useSelector((state) => state.users.detail);
   let allOrders = useSelector((state) => state.orders.orders)
 
-
   if(preapproval_id){
     axios.put(`users/premium/${currentUser.id}`, {isPremium: true, idPago: preapproval_id})
     .then(() => {
@@ -82,7 +81,6 @@ const Profile = () => {
  
 
 
-  console.log('allOrders', allOrders)
 
   const handlePremiumModal = async () => {
   setModalActive(!modalActive)
@@ -149,7 +147,10 @@ const Profile = () => {
         <div className={s.rightContainer}>
           <div className={s.professionContainer}>
             <p className={s.professionText}>Mis oficios publicados</p>
-            <ProfessionBox professional={activeUser} />
+            
+            {
+              activeUser?.isProfessional ?  <>          
+               <ProfessionBox professional={activeUser} />
             <div className={s.addProfession}>
               <Link to='/ProfileConfig/professions'>
                 <div>
@@ -157,6 +158,10 @@ const Profile = () => {
                 </div>
               </Link>
             </div>
+              </>: 
+              <div className={s.noProfessional}><Link to='/ProfileConfig/edit' className={s.intNoProf}>Convertite en Profesional</Link></div>
+            }
+  
           </div>
           {
             activeUser?.isPremium ? (

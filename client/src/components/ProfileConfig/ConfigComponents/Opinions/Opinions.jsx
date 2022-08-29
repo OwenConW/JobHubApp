@@ -49,7 +49,6 @@ const Opinions = () => {
   }
 
   useEffect(() => {
-    console.log(allReviews)
     filterByName(filter)
   }, [filter])
 
