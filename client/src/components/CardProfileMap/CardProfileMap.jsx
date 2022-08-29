@@ -20,7 +20,8 @@ const CardProfileMap = ({order}) => {
             <h2>{professional?.professions[0]?.name}</h2>
           </div>
           <div className={s.orderDetail2}>
-            <h3><img src={star} /> {professional?.rating}</h3>
+            {professional?.rating === -1 ? '' : <h3><img src={star} /> {professional?.rating}</h3>}
+
           </div>
         </div>
     )

@@ -16,11 +16,11 @@ const SearchBar = (props) => {
 				<input
 					type="text"
 					name="name"
-					placeholder="Search name..."
+					placeholder="Ingresa un nombre..."
 					value={valueState}
 					onChange={handleChange}
 				/>
-				
+
 		</section>
 	);
 };

@@ -77,7 +77,7 @@ const Catalog = (props) => {
 			<div className={estilos.container}>
 				<aside className={estilos.aside}>
 						<form onSubmit={handleSubmit} className={estilos.filtersFormMainContainer}>
-							<h1>FILTRAR</h1>
+							<h1>Filtrar</h1>
 							<SearchBar addFilterValue={addFilterValue} handleReset={handleReset} valueState={nameInputValue}/>
 							<Filter addFilterValue={addFilterValue} />
 							<input
