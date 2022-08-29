@@ -58,7 +58,9 @@ const Home = () => {
 						  )} 
             </div>
             <Link to='/professionals' className={s.link}>
-              <button className={s.button}>Explorar Catálogo</button>
+            <div className={s.button}>
+					      <p>Explorar Catalogo</p>
+				      </div>
             </Link>
           </div>
         </aside>
@@ -66,10 +68,14 @@ const Home = () => {
           <h1 className={s.titlemapa}>Utiliza nuestro {br} sistema de {br} búsqueda por {br} ubicación</h1>
           {isAuthenticated ?
             <Link to='/map' className={s.link}>
-              <button className={s.button}>Buscar</button> 
+              <div className={s.button}>
+					      <p>Buscar</p>
+				      </div>
             </Link>
-          : <Link to='/' className={s.link}>
-              <button className={s.button}>Iniciar Sesión</button> 
+          : <Link to='/' className={s.link}> 
+              <div className={s.button}>
+					      <p>Iniciar Sesión</p>
+				      </div>
             </Link>
           }
         </div>
