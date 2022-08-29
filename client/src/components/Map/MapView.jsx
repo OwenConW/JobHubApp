@@ -123,7 +123,7 @@ const MapView = () => {
 								</div>
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
-									<p>{user?.profession[0].name}</p>
+									<p>{user?.professions[0]?.name}</p>
 									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser?.coordinate, user.coordinate)).toFixed(2)} km</p>
 								</div>
 								</Link>

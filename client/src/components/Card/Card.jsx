@@ -14,16 +14,14 @@ function Card(props) {
 	let { id, name, last_Name, city, country, professions, image, isPremium, rating } =
 		props.data;
 
-		console.log(props.data);
-
 	return (
 		<div className={s.card}>
 			{rating === -1 ? <div className={s.header}>
-				<h3>{professions[0]?.name}</h3>
+				{professions?.length > 1  ? <h3>{professions[0]?.name} y más...</h3> : <h3>{professions[0]?.name}</h3>}
 				<p>No posee rating</p>
 			</div> :
 			<div className={s.header}>
-				<h3>{professions[0]?.name}</h3>
+				{professions?.length > 1  ? <h3>{professions[0]?.name} y más...</h3> : <h3>{professions[0]?.name}</h3>}
 				<div className={s.rating}>
 					<img src={star} alt="star" />
 					<p>{rating}</p>
