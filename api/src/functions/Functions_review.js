@@ -23,7 +23,7 @@ const updateReview = async (id, feedback_client, rating) =>{
     }
 }
 
-//FUNCION PARA TRAER TODAS LAS REVIERW
+//FUNCION PARA TRAER TODAS LAS REVIERW DEL USUARIO
 const getAllReview = async (id) =>{
     try {
         const ratingById = await User.findByPk(id,{

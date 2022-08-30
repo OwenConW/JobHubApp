@@ -71,7 +71,6 @@ review.put("/:id", async (req, res, next)=> {
 // RUTA PARA TRAER TODAS LAS RESEÑAS POR ID (DEL USUARIO)
 review.get("/:id", async (req, res, next)=>{
     const {id} = req.params;
-    console.log(id);
     try{
         const allReview = await functions.getAllReview(id);
         res.status(200).json(allReview);
@@ -109,7 +108,7 @@ review.delete("/admin/:id", async (req, res, next)=>{
 review.get("/admin/:id", async (req, res, next)=>{
     const { id } = req.params;
     try {
-        const reviewFoundById = await Review.findAll({
+        const reviewFoundById = await Review.findOne({
             where: {
                 id
             }
