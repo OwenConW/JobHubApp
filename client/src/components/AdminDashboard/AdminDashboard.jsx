@@ -15,7 +15,7 @@ import OrdersAdminPanel from "./OrdersAdminPanel/OrdersAdminPanel"
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -93,7 +93,7 @@ function AdminDashboard() {
     }
     dispatch(actionFetchingAdminDeleteOrderReset())
   }, [fetchingAdminDeleteOrderSuccess,fetchingAdminDeleteOrderFailure])
-  
+
   return (
     <div className={s.mainContainer}>
     <Navbar />

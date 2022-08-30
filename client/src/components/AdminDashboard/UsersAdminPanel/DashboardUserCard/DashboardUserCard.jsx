@@ -64,6 +64,10 @@ function DashboardUserCard(props) {
       {editModalActive? <EditModal handleEditOpenModal={handleEditOpenModal} editModalActive={editModalActive} {...props}/> : null}
       <div className={s.importantInformationContainer}>
         <button onClick={handleOpenModal}>Detalles</button>
+        <div>
+          <h3>ID</h3>
+          <h3>{id}</h3>
+        </div>
         <div className={s.nameContainer}>
           <h1>Nombre</h1>
           <h1>{name} {last_Name}</h1>
