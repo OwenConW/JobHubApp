@@ -8,7 +8,6 @@ import Filter from './Filter/Filter';
 import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
 import Navbar from '../Navbar/Navbar';
-import Paginate from './Paginate/Paginate';
 
 const theme = createTheme({
 	palette: {
@@ -16,31 +15,39 @@ const theme = createTheme({
 	    	main: '#00695f',
 	    },
 	},
+	// components: {
+	// 	Pagination: {
+	// 	  styleOverrides: {
+	// 		root: {
+	// 		  fontSize: '2rem',
+	// 		},
+	// 	  },
+	// 	},
+	// },
 });
 
 const Catalog = (props) => {
 	let professionalsArray = useSelector(
 		(state) => state.users.filteredProfessionals
 	);
-    
+    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(6) 
+	const setPages = () => {
+		let pages = Math.ceil(professionalsArray.length / proffesionalsPerPage);
+		return parseInt(pages);
+	}
+
 	const [currentPage, setCurrentPage] = useState(1) 
-    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(6)  
     const iOfLastProfessional = currentPage * proffesionalsPerPage
     const iOfFirstProfessional = iOfLastProfessional - proffesionalsPerPage
     const currentProffesionals = professionalsArray.slice(iOfFirstProfessional, iOfLastProfessional) 
-	const [activePages, setActivePages] = useState(setPages)
 	const paginado = (pageNumber) => {  setCurrentPage(pageNumber) }
+	var pages = setPages();
+	const [activePages, setActivePages] = useState(pages);
 	const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
 	const [nameInputValue, setNameInputValue] = useState('') 
 	const dispatch = useDispatch();
-
-	let setPages = () => {
-		let pages = 0;
-        for(let i = 1; i <= Math.ceil(professionalsArray / proffesionalsPerPage); i ++) {
-			pages+= i;
-		}
-		return pages;
-	}
+	
+	
 
 	function addFilterValue(targetName, value) {
 
@@ -62,10 +69,6 @@ const Catalog = (props) => {
 		}))
     }
 
-    // useEffect(() => {
-    //  console.log(professionalsArray);
-    // }, [professionalsArray])
-
     useEffect(() => {
 	    dispatch(getChars());
 	    // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,7 +77,8 @@ const Catalog = (props) => {
 
     function handleReset() {
 	    setFilters({name:"", profession:"", rating:""})
-	    dispatch(getChars());
+	    dispatch(getChars())
+		setActivePages(setPages)
 		setCurrentPage(1)
 	    setNameInputValue('')
     }
@@ -82,11 +86,14 @@ const Catalog = (props) => {
     function handleSubmit(e){
 	    e.preventDefault()
 	    dispatch(filterProfessionals({...filters}))
+	    setActivePages(setPages)
 		setCurrentPage(1)
-	    setNameInputValue('')
 	    e.target.reset()
     }
 
+	const handleChange = (e, page) => {
+		setCurrentPage(page)
+	}
 
 	return (
 		<>
@@ -116,7 +123,15 @@ const Catalog = (props) => {
 					</header>
 					<div className={estilos.paginate}>
 					    <ThemeProvider theme={theme}>
-                            <Pagination count={activePages} size="large" variant="outlined" shape="rounded" color= "primary" />
+                            <Pagination 
+							    count={activePages} 
+								page={currentPage} 
+								size="large" 
+								variant="outlined" 
+								shape="rounded" 
+								color= "primary" 
+								onChange={handleChange}
+							/>
 						</ThemeProvider>
 					</div>
 					<div className={estilos.cardsContainer}>
