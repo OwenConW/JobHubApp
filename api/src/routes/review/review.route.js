@@ -8,6 +8,7 @@ const review = Router()
 // RUTA QUE CREA RESEÑAS
 review.post("/:id", async (req, res, next) =>{
     let { id_orders, id_user_client ,feedback_client, rating  } = req.body;
+    console.log('ESTE ES EL RATING QUE LLEGA A LA RUTA POR BODY',rating)
     const { id } = req.params;
     id_user_client = parseInt(id_user_client)
     try {
@@ -56,12 +57,24 @@ review.put("/:id", async (req, res, next)=> {
     
 })
 
-// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID
+// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID (del professional)
 review.get("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
         const allReview = await functions.getAllReview(id);
         res.status(200).json(allReview);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID (del cliente)
+review.get("/admin/client/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try{
+        const allReviewByClient = await functions.getAllReviewByClient(id);
+        res.status(200).json(allReviewByClient);
     } catch (error) {
         console.log(error)
         next(error)

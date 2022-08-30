@@ -29,14 +29,12 @@ module.exports = (sequelize) => {
             defaultValue: false,
         },
         date_created:{
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             defaultValue: DataTypes.NOW,
             allowNull: false,
         },
         apointment_date:{
-            type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: DataTypes.NOW.toString(), //VER PORQUE NO ME DEJABA HACER POST SIN ESTE DATO
+            type: DataTypes.DATEONLY,
         },
         isActive: {
 			type: DataTypes.BOOLEAN,
