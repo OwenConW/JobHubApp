@@ -25,8 +25,8 @@ useEffect(() => {
           {professions?.map(profession => {
             return (
               <button key={profession.id}
-              type="button"
-              onClick={handleClick}
+                      type="button"
+                      onClick={handleClick}
                       name="profession"
                       value={profession.name}
                       > {profession.name} </button>

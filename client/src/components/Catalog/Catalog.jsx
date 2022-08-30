@@ -15,7 +15,7 @@ const Catalog = (props) => {
 	);
 
 	const [currentPage, setCurrentPage] = useState(1) 
-    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(10)  
+    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(6)  
     const iOfLastRecipe = currentPage * proffesionalsPerPage
     const iOfFirstRecipe = iOfLastRecipe - proffesionalsPerPage
     const currentProffesionals = professionalsArray.slice(iOfFirstRecipe, iOfLastRecipe) 
@@ -77,7 +77,7 @@ const Catalog = (props) => {
 			<div className={estilos.container}>
 				<aside className={estilos.aside}>
 						<form onSubmit={handleSubmit} className={estilos.filtersFormMainContainer}>
-							<h1>FILTRAR</h1>
+							<h1>Filtrar</h1>
 							<SearchBar addFilterValue={addFilterValue} handleReset={handleReset} valueState={nameInputValue}/>
 							<Filter addFilterValue={addFilterValue} />
 							<input

@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 
 import s from './Details.module.scss';
 import { getLocalStorage } from "../../handlers/localStorage";
@@ -13,7 +14,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getChars, getCharsById } from '../../redux/userActions';
 import defaultimage from './assets/deafultimage.png';
 import axios from "axios";
-
+import corona from "./assets/corona.png"
 
 
 const Profile = () => {
@@ -39,9 +40,14 @@ const Profile = () => {
     }
     console.log(data)
     if(data.emisor_id === data.receptor_id ){
-      alert("No puedes chatear contigo mismo )?")
+      Swal.fire("No puedes chatear ni crear ordenes contigo mismo");
     }else{
       try{
+        let body = {
+          id_user_professional: id * 1,
+          id_user_client : activeUser.id,
+        }
+        await axios.post('/orders', body);
         await axios.post('/conversation', data);
         navigate('/chat');
       }catch(e){
@@ -58,14 +64,32 @@ const Profile = () => {
       <div className={s.container}>
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
-            <div className={s.profile_Img_container}>
-              {professional.image ? <img src={professional.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
-            </div>
+            {
+              professional.isPremium ? (
+                <div className={s.profile_Img_containerPremium}>
+                  {professional.image ? <img src={professional.image} className={s.profile_ImgPremium}/> : <img src={defaultimage} className={s.profile_Img}/>}
+                  <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
+                </div>
+              ) : (
+                <div className={s.profile_Img_container}>
+                  {professional.image ? <img src={professional.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
+                  <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
+                </div>
+              )
+            }
+          
             <div className={s.profileDetail}>
-              <div className={s.name}>{professional.name} {professional.last_Name}</div>
+              {
+                professional.isPremium ? (
+                  <div className={s.namePremium}><img src={corona} alt="" className={s.corona}/>{professional.name} {professional.last_Name}</div>
+                ) : (
+                  <div className={s.name}>{professional.name} {professional.last_Name}</div>
+                )
+              }
+              
               <div className={s.location}>{professional.city}, {professional.country}</div>
               <div className={s.description}>{professional.description}</div>
-              <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Coordinar</div>
+
             </div>
           </div>
 

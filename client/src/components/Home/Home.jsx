@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
+// import axios from 'axios';
+import { Link, /*useLocation*/ } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,20 +17,22 @@ import s from './Home.module.scss';
 
 const Home = () => {
 
-  const search = useLocation().search;
-  const prueba = new URLSearchParams(search).get('prueba');
+  const dispatch = useDispatch()
+  useEffect(() => { 
+    dispatch(getLeadingProfessionals()) 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) 
+  
+  // const search = useLocation().search;
+  // const prueba = new URLSearchParams(search).get('prueba');
 
-  if(prueba) console.log("ANDAAAAAAAAAAA", prueba)
 
   const { isAuthenticated } = useAuth0();
   const br = <br></br>;
-
+  
   // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
-  const dispatch = useDispatch()
-  const bestProffesionals = useSelector((state) => state.users.detail)
-
-  useEffect(() => { dispatch(getLeadingProfessionals()) }, [dispatch]) 
-
+  const bestProffesionals = useSelector((state) => state.users.filteredProfessionals)
+    
   return (
     <>
       <Navbar />
@@ -45,15 +47,10 @@ const Home = () => {
             <h1 className={s.subtitle}>Trabajadores destacados de la semana</h1>
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
             <div className={s.cards}>
-              {bestProffesionals.length ? (bestProffesionals.map((prop, i) => (
-                i < 3 && 
-								  <FeaturedCard
-                    key= {i}
-									  data={{
-										  ...prop
-									  }}
-								  />
-                )))
+              {/* {console.log("mejores",bestProffesionals)} */}
+              {bestProffesionals.length ? bestProffesionals.slice(0,3).map((obj, i) => {
+                  return <FeaturedCard key={i} prop={obj}/>
+                })
               : (
 							  <div className={s.notFind}>
 								  -- Estamos actualizando los profesionales de la semana --
@@ -61,7 +58,9 @@ const Home = () => {
 						  )} 
             </div>
             <Link to='/professionals' className={s.link}>
-              <button className={s.button}>Explorar Catálogo</button>
+            <div className={s.button}>
+					      <p>Explorar Catalogo</p>
+				      </div>
             </Link>
           </div>
         </aside>
@@ -69,10 +68,14 @@ const Home = () => {
           <h1 className={s.titlemapa}>Utiliza nuestro {br} sistema de {br} búsqueda por {br} ubicación</h1>
           {isAuthenticated ?
             <Link to='/map' className={s.link}>
-              <button className={s.button}>Buscar</button> 
+              <div className={s.button}>
+					      <p>Buscar</p>
+				      </div>
             </Link>
-          : <Link to='/' className={s.link}>
-              <button className={s.button}>Iniciar Sesión</button> 
+          : <Link to='/' className={s.link}> 
+              <div className={s.button}>
+					      <p>Iniciar Sesión</p>
+				      </div>
             </Link>
           }
         </div>

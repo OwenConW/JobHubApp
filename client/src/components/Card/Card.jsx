@@ -11,28 +11,39 @@ import * as functions from "../../handlers/localStorage"
 // const Card = ({ id, name, lastName, city, province, rating, name_job, image }) => {
 function Card(props) {
 	const currentUser = functions.getLocalStorage()
-	let { id, name, last_Name, city, country, name_job, image } =
+	let { id, name, last_Name, city, country, professions, image, isPremium, rating } =
 		props.data;
 
 	return (
 		<div className={s.card}>
+			{rating === -1 ? <div className={s.header}>
+				{professions?.length > 1  ? <h3>{professions[0]?.name} y más...</h3> : <h3>{professions[0]?.name}</h3>}
+				<p>No posee rating</p>
+			</div> :
 			<div className={s.header}>
-				<h3>{name_job}</h3>
+				{professions?.length > 1  ? <h3>{professions[0]?.name} y más...</h3> : <h3>{professions[0]?.name}</h3>}
 				<div className={s.rating}>
 					<img src={star} alt="star" />
-					{/* <p>{rating}</p> */}
-					<p>4.5</p>
+					<p>{rating}</p>
 				</div>
-			</div>
+			</div>}
 
 			<div className={s.data}>
 				<div className={s.info}>
-					<div className={s.user}>
-						<div className={s.image}>
-							<img src={image} alt="user_profile" />
-						</div>
+				<div className={s.user}>
+						{
+							isPremium? (
+								<div className={s.imagePremium}>
+									<img src={image} alt="user_profile" />
+								</div>
+							): (
+								<div className={s.image}>
+									<img src={image} alt="user_profile" />
+								</div>
+							)
+						}
 						<div className={s.userinfo}>
-							<h3>
+							<h3 style={{textTransform: "capitalize"}}>
 								{name} {last_Name}
 							</h3>
 							<p>
@@ -45,23 +56,46 @@ function Card(props) {
 							currentUser?.id * 1 === id * 1 
 							? (
 							<Link to={`/profile`} className={s.detailLink}>
-							<div className={s.btn}>
-							<img src={details_interior} alt="details" />
-							</div>
+								{
+									isPremium ? (
+										<div className={s.btnPremium}>
+											<img src={details_interior} alt="details" />
+										</div>
+									) : (
+										<div className={s.btn}>
+											<img src={details_interior} alt="details" />
+										</div>
+									)
+								}
+							
 							</Link>
 							)
 							: (
 							<Link to={`/details/${id}`} className={s.detailLink}>
-							<div className={s.btn}>
-							<img src={details_interior} alt="details" />
-							</div>
+							{
+									isPremium ? (
+										<div className={s.btnPremium}>
+											<img src={details_interior} alt="details" />
+										</div>
+									) : (
+										<div className={s.btn}>
+											<img src={details_interior} alt="details" />
+										</div>
+									)
+								}
 							</Link>
 							)
 						}
 						
 					</div>
 				</div>
-				<div className={s.top}></div>
+				{
+					isPremium ? (
+						<div className={s.topPremium}></div>
+					) : (
+						<div className={s.top}></div>
+					)
+				}
 				<div className={s.bottom}></div>
 			</div>
 		</div>

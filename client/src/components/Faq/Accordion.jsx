@@ -44,7 +44,7 @@ const questionsAnswers = [
   },
   {
     question: "¿Puedo cancelar mi suscripción Premium?",
-    answer: `Una vez que se hace un pago, no es posible la devolución por la configuración de los sistemas, pero si es posible cancelarla para que la próxima vez no se cobre ya que funciona como una suscripción.`,
+    answer: `Al realizar la compra le brindamos su id de pago con el cual podria reclamar el pago con Mercado Pago!`,
   },
 ];
 
@@ -71,7 +71,6 @@ const Accordion = () => {
       />
     );
   });
-
   return (
     <>
       <div className="faq">

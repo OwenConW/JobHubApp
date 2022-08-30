@@ -36,6 +36,25 @@
             width: 40%;
         }
 
+        .select{
+            width: 65%;
+            margin-right: 5%;
+        }
+
+        .errorInput{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            text-align: center;
+
+            .error{
+                color: rgb(228, 82, 82);
+            }
+        }
+
         input {
             margin-left: 10px;
             font-size: 1.4rem;
@@ -57,11 +76,9 @@
             border: solid rgba(136, 136, 136, 0.356);
             border-width: 1px;
         }
-        .required{
-            font-size: 1.8rem;
-            color: #7db8d8;
-        }
 
+
+ 
     }
 
 
