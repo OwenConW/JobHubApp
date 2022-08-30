@@ -18,6 +18,7 @@ export const adminSlice = createSlice({
       state.reviews = action.payload;
 		},
     getReviewByUserId: (state, action) => {
+      if (!action.payload) return state.reviews = [];
       state.reviews = action.payload.reviews;
     },
     getAllOrders: (state, action) => {

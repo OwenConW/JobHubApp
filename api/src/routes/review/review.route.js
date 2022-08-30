@@ -75,7 +75,6 @@ review.get("/:id", async (req, res, next)=>{
     try{
         const allReview = await functions.getAllReview(id);
         res.status(200).json(allReview);
-        console.log(allReview);
     } catch (error) {
         console.log(error)
         next(error)

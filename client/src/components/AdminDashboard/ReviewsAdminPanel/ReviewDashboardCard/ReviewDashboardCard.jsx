@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ReviewDashboardCard(props) {
   const { id, id_orders, id_user_professional, id_user_client, feedback_client, rating, isActive } = props;
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
 
   const [editModalActive, setEditModalActive] = useState(false)
 

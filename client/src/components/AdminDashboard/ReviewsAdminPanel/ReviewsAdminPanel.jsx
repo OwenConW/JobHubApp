@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {getReviewByUserIdForAdmin } from '../../../redux/adminActions'
+import {getAllReviewsForAdmin, getReviewByUserIdForAdmin } from '../../../redux/adminActions'
 import ReviewDashboardCard from './ReviewDashboardCard/ReviewDashboardCard'
 import s from './ReviewsAdminPanel.module.scss'
 
@@ -17,6 +18,10 @@ function ReviewsAdminPanel(props) {
     setSearchByIdInput(e.target.value)
   }
 
+  function getAllReviews(e){
+    dispatch(getAllReviewsForAdmin())
+  }
+
   function handleSearchReviewByUserIdSubmit(e) {
     e.preventDefault()
     if(!searchByIdInput) return
@@ -31,12 +36,19 @@ function ReviewsAdminPanel(props) {
         <input type="text" name="review_id" onChange={handleSearchReviewByUserIdChange} />
         <input type="submit" value="buscar" />
       </form>
+
+      <button onClick={getAllReviews}>Traer todas las reseñas</button>
+
       {
-        reviews?.map( r => {
-          return (
-              <ReviewDashboardCard {...r} />
-          )
-        })
+        reviews.length !== 0 ? 
+        <div className={s.cardsContainer}>  
+              {reviews?.map( r => {
+                return(
+                  <ReviewDashboardCard key={r.id} {...r} />
+                )
+              })}
+      </div> :
+      <h1>El usuario no existe o no tiene reseñas</h1>
       }
     </div>
   )

@@ -46,6 +46,7 @@ function AdminDashboard() {
   function handlePanelChange(e) {
     setPanelDisplayed(e.target.value)
   }
+
   //FETCH DE LA DB
   useEffect(() => {
     dispatch(getAllUsersForAdmin())
