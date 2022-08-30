@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterProfessionals, getChars } from '../../redux/userActions';
+import Pagination from '@mui/material/Pagination';
 import SearchBar from './SearchBar/SearchBar';
 import Filter from './Filter/Filter';
 import estilos from './Catalog.module.scss';
@@ -13,16 +14,26 @@ const Catalog = (props) => {
 	let professionalsArray = useSelector(
 		(state) => state.users.filteredProfessionals
 	);
+	let setPages = () => {
+		let pages = 0;
+        for(let i = 1; i <= Math.ceil(professionalsArray / proffesionalsPerPage); i ++) {
+			pages+= i;
+		}
+		return pages;
+	}
+    
 
 	const [currentPage, setCurrentPage] = useState(1) 
     const [proffesionalsPerPage, setProffesionalsPerPage] = useState(6)  
-    const iOfLastRecipe = currentPage * proffesionalsPerPage
-    const iOfFirstRecipe = iOfLastRecipe - proffesionalsPerPage
-    const currentProffesionals = professionalsArray.slice(iOfFirstRecipe, iOfLastRecipe) 
+    const iOfLastProfessional = currentPage * proffesionalsPerPage
+    const iOfFirstProfessional = iOfLastProfessional - proffesionalsPerPage
+    const currentProffesionals = professionalsArray.slice(iOfFirstProfessional, iOfLastProfessional) 
+	const [activePages, setActivePages] = useState(setPages)
 	const paginado = (pageNumber) => {  setCurrentPage(pageNumber) }
 	const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
 	const [nameInputValue, setNameInputValue] = useState('')
 
+    
 
 	const dispatch = useDispatch();
 
@@ -98,13 +109,7 @@ const Catalog = (props) => {
 						<span>Catálogo de profesionales</span>
 					</header>
 					<div className={estilos.paginate}>
-                        <Paginate 
-                            key = {1}
-                            proffesionalsPerPage={proffesionalsPerPage}
-                            professionalsArray={professionalsArray.length}   
-                            paginado={paginado}
-                            currentPage={currentPage}
-                        />
+                        <Pagination count={10} variant="outlined" shape="rounded" />
                     </div>
 					<div className={estilos.cardsContainer}>
 						{professionalsArray && professionalsArray.length ? (
