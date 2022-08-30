@@ -6,11 +6,14 @@ import { getLocalStorage } from "../../../../handlers/localStorage";
 import { getChars, getCharsById } from "../../../../redux/userActions";
 import CardReview from "../../../Details/CardReview/CardReview";
 import RevCards from "./RevCards/RevCards";
+import { useState } from "react";
 const OtherReviews = () => {
   const dispatch = useDispatch()
   let activeUser = getLocalStorage()
+  let saveAllReviews = useSelector((state) => state.reviews.reviews)
+  let otherReviews = saveAllReviews?.filter(review => review?.id_user_professional === activeUser.id)
 
-  let allReviews = [{ id_orders: 7, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }, { id_orders: 8, id_user_client: 1, id_professional: 2, feedback_client: 'Un asco', rating: 1 }, { id_orders: 9, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }, { id_orders: 10, id_user_client: 1, id_professional: 3, feedback_client: 'Buenardo el trabajo', rating: 3 }]
+  const [ allReviews, setAllReviews ] = useState(otherReviews)
 
   let users = useSelector((state) => state.users.users)
 
@@ -19,13 +22,35 @@ const OtherReviews = () => {
 
   }, [users])
 
-  const setRating = (event) => {
-    console.log(parseInt(event.target.id))
+//FILTRADO POR NOMBRE
+  const [filter, setFilter] = useState('')
+
+  const filterByName = (filter) => {
+    let filteredclients;
+    let filteredReviews = allReviews
+  
+    if (filter) {
+      filteredReviews = []
+      filteredclients = users.filter(prof => prof.name.toLowerCase().includes(filter.toLowerCase())  || prof.last_Name.toLowerCase().includes(filter.toLowerCase()))
+      for (let x = 0; x < filteredclients.length; x++) {
+        let filteredclient = filteredclients[x];
+        let reviewsForFilteredclient = otherReviews.filter(review => review.id_user_client == filteredclient.id);
+        reviewsForFilteredclient.forEach(review => filteredReviews.push(review))
+      }
+      setAllReviews(filteredReviews)
+    } else {
+      setAllReviews(otherReviews)
+    }
   }
 
-  const onChange = (event) => {
-
+  const onFilterChange = (event) => {
+    setFilter(event.target.value)
   }
+
+  useEffect(() => {
+    console.log(allReviews)
+    filterByName(filter)
+  }, [filter])
 
 
   // let allReviews = users.map(user => user.reviews)
@@ -33,7 +58,7 @@ const OtherReviews = () => {
   return (
     <div className={s.container}>
       <label>Filtrar</label>
-      <input></input>
+      <input name="filter"  value={filter} onChange={event => onFilterChange(event)}></input>
       {
         allReviews ? allReviews.map(review => 
           

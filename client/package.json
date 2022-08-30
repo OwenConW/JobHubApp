@@ -31,7 +31,6 @@
     "sass": "^1.54.4",
     "socket.io-client": "^4.5.1",
     "styled-components": "^5.3.5",
-    "sweetalert": "^2.1.2",
     "sweetalert2": "^11.4.29",
     "timeago.js": "^4.0.2",
     "use-state-with-callback": "^3.0.2",

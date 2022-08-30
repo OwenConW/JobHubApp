@@ -20,6 +20,27 @@ users.get("/", (req, res, next) => {
     })
 })
 
+//RUTA PARA TRAER TODOS LOS USUARIOS QUE MATCHEEN EL NOMBRE
+// users.get("/admin", async (req, res, next) => {
+//     const {name} = req.query;
+//     try {
+//         const users = await User.findAll({
+//             where: {
+//                 name: {
+//                     [Op.startsWith]: name,
+//                 },
+//                 last_Name: {
+//                     [Op.startsWith]: name,
+//                 }
+//             }
+//         })
+//         res.status(200).json(users)
+//     } catch (error) {
+//         console.error(error);
+//         next(error)
+//     }
+// })
+
 //RUTA QUE TRAE TODOS LOS USUARIOS SIN FILTRO
 users.get("/all", async (req, res, next)=>{
     try {
@@ -91,7 +112,10 @@ users.post("/", async (req, res, next) =>{
 //RUTA PARA EDITAR EL USUARIO
 users.put('/:id', async (req, res, next) => {
     const { id } = req.params
-    const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, rating, address, isProfessional, professions } = req.body;
+    const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
+    const nameMinuscule = name.toLowerCase();
+    const lastNameMinuscule = last_Name.toLowerCase();
+
     try {
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
         const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
@@ -102,8 +126,8 @@ users.put('/:id', async (req, res, next) => {
         }
 
         userUpdated.set({
-            name,
-            last_Name,
+            name: nameMinuscule,
+            last_Name: lastNameMinuscule,
             date_of_Birth,
             image,
             dni,
@@ -118,7 +142,6 @@ users.put('/:id', async (req, res, next) => {
             isProfessional,
         })
         await userUpdated.save()
-        let userUpdated2 = await User.findOne({ where: { id }, include: Profession })
         res.status(200).send(`The user "${name}" updated successfully`)
         } catch (error) {
         console.log(error);
@@ -160,7 +183,6 @@ users.put('/admin/:id', async (req, res) => {
 
         })
         await userUpdated.save()
-        let userUpdated2 = await User.findOne({ where: { id }, include: Profession })
         res.status(200).send(`The user "${name}" updated successfully`)
         } catch (error) {
         console.log(error);
@@ -173,7 +195,7 @@ users.put("/edit/:id" , async (req, res, next) => {
     const { id } = req.params
     const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
     try {
-        await functions.updateUserNoJobs(id, name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession)
+        await functions.updateUserNoJobs(id, name.toLowerCase(), last_Name.toLowerCase(), date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession)
         return res.status(200).send(`The user "${name}" updated successfully`)
     } catch (error) {
         console.log(error);

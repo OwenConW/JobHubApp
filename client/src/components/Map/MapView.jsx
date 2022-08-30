@@ -3,7 +3,8 @@ import Navbar from '../Navbar/Navbar';
 import s from './MapView.module.scss';
 import AllMarkers from './AllMarkers/AllMarkers';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Preview from './preview/Preview';
 
 //map
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
@@ -28,7 +29,6 @@ const MapView = () => {
 	});
 
 	const { isAuthenticated } = useAuth0();
-	const navigate = useNavigate();
 
 	const closeToOne = (coords1, coords2) => {
 		if(pitagorasDistance(coords1, coords2) < distance){ //distancia en kilometros
@@ -51,9 +51,10 @@ const MapView = () => {
     }, []);
 
 	useEffect(() => {
-			let aux = users.filter(user => closeToOne(activeUser.coordinate, user.coordinate)
-			&& activeUser.id !== user.id);
-			setCloseUsers([...aux]);
+		if(activeUser){
+			let aux = users?.filter(user => closeToOne(activeUser?.coordinate, user.coordinate)
+			&& activeUser?.id !== user.id);
+			setCloseUsers([...aux])}
 
 	}, [users, distance]);
 
@@ -82,19 +83,20 @@ const MapView = () => {
 		});
 	}
 
-	return (
-			isAuthenticated ? (<>
+	if(isAuthenticated){
+		return (
+			<>
 			<Navbar />
-			<div className={s.container}>
+				<div className={s.container}>
 				<div className={s.leftContainer}>
 					<div className={s.activeUser}>
 						<h3>Mapa</h3>
 						<div className={s.user}>
-							<div className={activeUser.isPremium ? s.profileImagePremium : s.profileImage}>
-								<img src={activeUser.image} alt="userprofile" />
+							<div className={activeUser?.isPremium ? s.profileImagePremium : s.profileImage}>
+								<img src={activeUser?.image} alt="userprofile" />
 							</div>
 							<div className={s.name}>
-								{activeUser.name} {activeUser.last_Name}
+								{activeUser?.name} {activeUser?.last_Name}
 							</div>
 						</div>
 
@@ -121,8 +123,8 @@ const MapView = () => {
 								</div>
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
-									<p>{user?.profession[0].name}</p>
-									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser.coordinate, user.coordinate)).toFixed(2)} km</p>
+									<p>{user?.professions[0]?.name}</p>
+									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser?.coordinate, user.coordinate)).toFixed(2)} km</p>
 								</div>
 								</Link>
 							)
@@ -149,7 +151,7 @@ const MapView = () => {
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
 									<p>{user.professions[0].name}</p>
-									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser.coordinate, user.coordinate)).toFixed(2)} KM</p>
+									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser?.coordinate, user.coordinate)).toFixed(2)} KM</p>
 								</div>
 								</Link>
 							)
@@ -160,7 +162,7 @@ const MapView = () => {
 				</div>
 
 				<div className={s.mapContainer}>
-					<MapContainer center={[activeUser.coordinate[0], activeUser.coordinate[1]]} zoom={15} scrollWheelZoom={true} className={s.map}>
+					<MapContainer center={[activeUser?.coordinate[0], activeUser?.coordinate[1]]} zoom={15} scrollWheelZoom={true} className={s.map}>
 						<TileLayer
 								noWrap={true}
 								minZoom={3}
@@ -168,19 +170,28 @@ const MapView = () => {
 								url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
 						/>
 
-						<Marker position={[activeUser.coordinate[0], activeUser.coordinate[1]]} icon={activeUser.isPremium ? userIconP : userIcon}>
+						<Marker position={[activeUser?.coordinate[0], activeUser?.coordinate[1]]} icon={activeUser?.isPremium ? userIconP : userIcon}>
 							<Popup className='professional-popup'>
 								<p style={oficioStyle}>{activeUser.name}</p>
 							</Popup>
 						</Marker>
 
 						<AllMarkers/>
-						<Circle center={[activeUser.coordinate[0], activeUser.coordinate[1]]} pathOptions={activeUser.isPremium ? {fillColor: '#e6ff00', color: '#AB9F3A'} : {fillColor: 'grey', color: '#07393C'}} radius={distance * 1000} />
+						<Circle center={[activeUser?.coordinate[0], activeUser?.coordinate[1]]} pathOptions={activeUser?.isPremium ? {fillColor: 'rgba(241,255,99,0.5144608868938201)', color: '#AB9F3A'} : {fillColor: 'grey', color: '#07393C'}} radius={distance * 1000} />
 					</MapContainer>
 				</div>
 			</div>
-			</>) : navigate('../')
+			</>
 	);
+	}else{
+		return(
+			<>
+				<Navbar/>
+				<Preview/>
+			</>
+		)
+	}
+
 };
 
 export default MapView;

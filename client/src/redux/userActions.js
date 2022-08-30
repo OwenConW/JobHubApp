@@ -21,6 +21,7 @@ export const getCharsById = (id) => (dispatch) => {
 	axios
 		.get(`/users/${id}`)
 		.then((res) => {
+
 			dispatch(getUserById(res.data));
 		})
 		.catch((e) => console.log(e));
@@ -28,7 +29,7 @@ export const getCharsById = (id) => (dispatch) => {
 
 export const getLeadingProfessionals = () => (dispatch) => {
 	axios
-		.get(`/users`)
+		.get(`/users?rating=ASC`)
 		.then((res) => {
 			dispatch(getFilteredProfessionals(res.data));
 		})
@@ -36,7 +37,6 @@ export const getLeadingProfessionals = () => (dispatch) => {
 };
 
 export const filterProfessionals = (filters) => (dispatch) => {
-	console.log('filters profession: ', filters.profession);
 	axios
 		.get(
 			`/users?name=${filters.name}&profession=${filters.profession}&rating=${filters.rating}`
@@ -48,8 +48,6 @@ export const filterProfessionals = (filters) => (dispatch) => {
 };
 
 export const modifyUser = (id, payload) => {
-	// console.log('modifyUser payload', payload)
-	// console.log('id', id)
 	axios.put(`/users/edit/${id}`, payload);
 	getLocalStorage()
 }

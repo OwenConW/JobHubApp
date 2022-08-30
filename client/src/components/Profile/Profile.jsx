@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link, useLocation} from 'react-router-dom';
+import { Link, useLocation, useNavigate} from 'react-router-dom';
 
 import s from './Profile.module.scss';
 import configLogo from './assets/configLogo.svg'
@@ -14,17 +14,24 @@ import PremiumModal from "./premiumModal/PremiumModal";
 import * as functions from "../../handlers/localStorage";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getCharsById } from "../../redux/userActions";
+import { getChars, getCharsById } from "../../redux/userActions";
 import { useEffect } from "react";
+import { actionGetAllOrders } from "../../redux/orderActions";
 import corona from "./assets/corona.png"
 import rocketP from "./assets/RocketP.png"
 import Swal from "sweetalert2"
+import { setUserLocalStorage } from "../../handlers/localStorage"
+
 
 const Profile = () => {
   //success?preapproval_id=x
+  const navigate = useNavigate()
   const currentUser = functions.getLocalStorage()
   const search = useLocation().search;
   const preapproval_id = new URLSearchParams(search).get('preapproval_id');
+
+  const activeUser = useSelector((state) => state.users.detail);
+  let allOrders = useSelector((state) => state.orders.orders)
 
   if(preapproval_id){
     axios.put(`users/premium/${currentUser.id}`, {isPremium: true, idPago: preapproval_id})
@@ -32,18 +39,32 @@ const Profile = () => {
       Swal.fire({
         icon: 'success',
         html: `<h1>Muchas gracias por formar parte de la familia Job Hub</h1>
-        <h3>Tu id de compra para reclamos es ${preapproval_id}</h3>
-         <h2>Porfavor recarga la página</h2>`,
+        <h3>Tu id de compra para reclamos es: <h2 style="font-weight: 800">${preapproval_id}</h2></h3>
+        <br></br>
+        <h2>Recorda que tendras todo acerca de tu suscripcion en el panel de configuracion</h2>`,
         width: 700,
         padding: '3em',
         color: '#dfdddd',
         background: '#2C666E',
         backdrop: `
-          rgba(0,0,123,0.4)
-          url("./assets/confetti2.gif")
+        rgba(172,172,172,0.5424720913756127)
+ 
+        url("https://cutewallpaper.org/24/transparent-animated-gifs/confetti-in-gif-format-55-animated-images-for-free.gif")
         `
       })
+      .then(() => {
+        Swal.close(navigate("/profile"))
+        axios.get(`/users/${currentUser.id}`)
+        .then(res => {
+          setUserLocalStorage(res.data)
+          window.location.reload()
+          axios.get(`/mails/bienvenido/premium?name=${currentUser.name}&mail=${currentUser.mail}`)
+        })
+      })
     })
+    .catch(e => {
+      console.log(e)
+    }) 
   }
 
 
@@ -52,16 +73,22 @@ const Profile = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
+    dispatch(getChars())
     dispatch(getCharsById(myUser.id))
+    dispatch(actionGetAllOrders(currentUser.id))
   }, [])
 
-  const activeUser = useSelector((state) => state.users.detail);
+ 
 
 
 
   const handlePremiumModal = async () => {
   setModalActive(!modalActive)
   }
+  if(allOrders.length > 4){
+    allOrders = allOrders.slice(0,4)
+  }
+
   return (
     <>
       <Navbar />
@@ -75,7 +102,7 @@ const Profile = () => {
               <img src={activeUser.image} className={s.profile_Img} alt="profile-img"></img>
 =======
             {
-              currentUser.isPremium ? (
+              activeUser?.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
               <img src={activeUser.image} className={s.profile_ImgPremium} alt=""></img>
 >>>>>>> 86f7172ceaa43944b7f56638ff8e0d7a86f07ae2
@@ -86,13 +113,13 @@ const Profile = () => {
               </div>
               )
             }
-           
+
             <div className={s.profileDetail}>
               {
-                currentUser.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
+                activeUser?.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
                 : <div className={s.name}>{activeUser.name} {activeUser.last_Name}</div>
               }
-              
+
               <div className={s.location}>{activeUser.city}, {activeUser.country}</div>
               <div className={s.description}>{activeUser.description}</div>
             </div>
@@ -102,9 +129,11 @@ const Profile = () => {
             <p className={s.orderText}>Mis ordenes recientes</p>
 
             <div className={s.lastOrders}>
-              <CardProfileMap />
-              <CardProfileMap />
-              <CardProfileMap />
+              {
+
+               allOrders ?
+               allOrders.map(order => <CardProfileMap order={order}/>) : <></>
+              }
             </div>
           </div>
           <div className={s.configBox}>
@@ -123,7 +152,10 @@ const Profile = () => {
         <div className={s.rightContainer}>
           <div className={s.professionContainer}>
             <p className={s.professionText}>Mis oficios publicados</p>
-            <ProfessionBox professional={activeUser} />
+            
+            {
+              activeUser?.isProfessional ?  <>          
+               <ProfessionBox professional={activeUser} />
             <div className={s.addProfession}>
               <Link to='/ProfileConfig/professions'>
                 <div>
@@ -131,9 +163,13 @@ const Profile = () => {
                 </div>
               </Link>
             </div>
+              </>: 
+              <div className={s.noProfessional}><Link to='/ProfileConfig/edit' className={s.intNoProf}>Convertite en Profesional</Link></div>
+            }
+  
           </div>
           {
-            activeUser.isPremium ? (
+            activeUser?.isPremium ? (
               <div className={s.isPremiumTRUE}>
 
               <div className={s.premiumTextTRUE}>

@@ -81,7 +81,7 @@ orders.get("/professional/:id", async (req, res, next)=>{
 orders.get("/client/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
-        const allOrders = await functions.getAllOrdersByClient(id);
+        const allOrders = await functions.getAllOrdersByClient(parseInt(id));
         res.status(200).json(allOrders);
     } catch (error) {
         console.log(error)

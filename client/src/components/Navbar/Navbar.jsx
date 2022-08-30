@@ -13,7 +13,8 @@ import s from './Navbar.module.scss';
 import { Link } from 'react-router-dom';
 
 //UserTest
-import login from './assets/login.svg';
+import login from './assets/Login.png';
+import logouticon from './assets/Logout.png';
 import { getLocalStorage } from '../../handlers/localStorage';
 
 const Navbar = () => {
@@ -49,12 +50,13 @@ const Navbar = () => {
 			<div className={s.profile}>
 				{isAuthenticated ? (
 					<div className={s.user}>
-						<Link to={`/chat`} className={s.link}>
-							<img src={chatlogo} alt="chat" />
-						</Link>
 						<Link to={`/myorders`} className={s.link}>
 							Ordenes
 						</Link>
+						<Link to={`/chat`} className={s.link}>
+							<img src={chatlogo} alt="chat" />
+						</Link>
+
 						{
 							activeUser.isPremium ?
 							<Link to={'/profile'} className={s.profileimgPremium}>
@@ -65,16 +67,17 @@ const Navbar = () => {
 							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
 							</Link>
 						}
+
 						<div className={s.link} onClick={handleLogout}>
-							Cerrar Sesión
+							<img src={logouticon} className={s.logout} alt="logout" />
 						</div>
 					</div>
 				) : (
-					<div className={s.user}>
+					<div className={s.nouser}>
 						<Link to="/" className={s.link}>
 							Iniciar sesión
+							<img src={login} className={s.login} alt="login" />
 						</Link>
-						<img src={login} alt="login" />
 					</div>
 				)}
 			</div>
