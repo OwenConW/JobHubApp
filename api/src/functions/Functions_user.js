@@ -201,6 +201,7 @@ const updateUserNoJobs = async (id, name, last_Name, date_of_Birth, image, dni, 
 
 
 
+
 module.exports = {
     filterByQueris,
     getProffesionalById,
@@ -209,6 +210,7 @@ module.exports = {
     updatePremium,
     destroyUser,
     updateUserNoJobs,
+    
 
 }
 

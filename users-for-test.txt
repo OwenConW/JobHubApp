@@ -1,3 +1,7 @@
+//direcion heroku:
+https://jobhub-pg.herokuapp.com/
+
+
 {
     "name":"plomero"
 }
@@ -26,6 +30,8 @@
 
 //Usuarios con coordenadas en Córdoba para testear
 //Tienen imagenes, ubicaciones, y nombre distintos.
+
+
 
 {
     "name": "Victor",

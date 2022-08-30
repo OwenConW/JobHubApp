@@ -176,5 +176,4 @@ users.put('/destroy/:id', async (req, res, next) => {
     }
 })
 
-
 module.exports = users;
