@@ -13,6 +13,7 @@ import Chat from "./components/LiveChat/Chat/Chat.jsx"
 import ProfileConfig from './components/ProfileConfig/ProfileConfig';
 import Faq from './components/Faq/Faq';
 import Orders from './components/Orders/Orders';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
 	return (
@@ -29,8 +30,8 @@ function App() {
         		<Route exact path="/faq" element={<Faq />}/>
 				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
 				<Route exact path="/myorders" element={<Orders/>}/>
+				<Route exact path="/nav" element={<Navbar />} />
 			</Routes>
-
 		</div>
 	);
 }
