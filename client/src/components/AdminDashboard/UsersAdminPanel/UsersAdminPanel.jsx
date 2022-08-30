@@ -37,10 +37,10 @@ function UsersAdminPanel(props) {
 
   return(
     <div>
-      <form>
+      {/* <form>
         <label>Buscar usuario por nombre:</label>
         <input type="text" name="name"/>
-      </form>
+      </form> */}
       <form onSubmit={handleSearchUserByIdSubmit}>
         <label>Buscar usuario por ID:</label>
         <input type="text" name="user_id" onChange={handleSearchUserByIdChange}/>

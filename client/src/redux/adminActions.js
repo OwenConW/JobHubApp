@@ -3,7 +3,8 @@ import {
   getAllReviews,
   getAllUsers,
   getAllOrders,
-  getUserById
+  getUserById,
+  getReviewByUserId
 } from './adminSlice.js';
 import {
   fetchingAdminDeleteUser,
@@ -125,6 +126,13 @@ export const getAllReviewsForAdmin = () => (dispatch) => {
     .catch(e => console.error(e))
 }
 
+export const getReviewByUserIdForAdmin = (id) => (dispatch) => {
+  axios.get(`/review/${id}`)
+    .then((res) => {
+      dispatch(getReviewByUserId(res.data))
+    })
+    .catch(e => console.error(e))
+}
 
 export const editReview = (id, payload) => (dispatch) => {
   dispatch(fetchingAdminEditReview())

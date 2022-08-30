@@ -15,9 +15,7 @@ function ReviewDashboardCard(props) {
   }
 
   function handleDelete(e) {
-    console.log('Esta eliminado vos confiá');
     dispatch(deleteReviews(id))
-
   }
   
   return (

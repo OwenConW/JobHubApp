@@ -15,7 +15,7 @@ import OrdersAdminPanel from "./OrdersAdminPanel/OrdersAdminPanel"
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("reviewsPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
