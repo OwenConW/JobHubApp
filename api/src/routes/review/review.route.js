@@ -105,6 +105,20 @@ review.delete("/admin/:id", async (req, res, next)=>{
         next(error)
     }
 })
-
+//RUTA PARA BUSCAR REVIEW POR ID (de la review)
+review.get("/admin/:id", async (req, res, next)=>{
+    const { id } = req.params;
+    try {
+        const reviewFoundById = await Review.findAll({
+            where: {
+                id
+            }
+        })
+        res.status(200).json(reviewFoundById)
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
 
 module.exports = review;

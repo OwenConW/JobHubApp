@@ -34,7 +34,7 @@ function ReviewsAdminPanel(props) {
     <div className={s.cardsContainer}>
       {fetchingAdminDeleteReview ? <h1>Eliminando...</h1> : null}
       <form onSubmit={handleSearchReviewByUserIdSubmit}>
-        <label htmlFor="review_id">Buscar review por ID</label>
+        <label htmlFor="review_id">Buscar review por ID del usuario</label>
         <input type="text" name="review_id" onChange={handleSearchReviewByUserIdChange} />
         <input type="submit" value="buscar" />
       </form>
