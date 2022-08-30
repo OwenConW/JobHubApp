@@ -28,6 +28,8 @@ function ReviewsAdminPanel(props) {
     dispatch(getReviewByUserIdForAdmin(searchByIdInput));
   }
 
+  console.log(reviews);
+
   return (
     <div className={s.cardsContainer}>
       {fetchingAdminDeleteReview ? <h1>Eliminando...</h1> : null}
@@ -42,7 +44,7 @@ function ReviewsAdminPanel(props) {
       {
         reviews.length !== 0 ? 
         <div className={s.cardsContainer}>  
-              {reviews?.map( r => {
+              { reviews.length && reviews?.map( r => {
                 return(
                   <ReviewDashboardCard key={r.id} {...r} />
                 )

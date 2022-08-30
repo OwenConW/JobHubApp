@@ -129,6 +129,7 @@ export const getAllReviewsForAdmin = () => (dispatch) => {
 export const getReviewByUserIdForAdmin = (id) => (dispatch) => {
   axios.get(`/review/${id}`)
     .then((res) => {
+      if (!res.data) res.data = { reviews: []}
       dispatch(getReviewByUserId(res.data))
     })
     .catch(e => console.error(e))
