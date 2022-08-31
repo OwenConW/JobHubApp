@@ -54,13 +54,13 @@ const Profile = () => {
       })
       .then(() => {
         Swal.close(navigate("/profile"))
-        axios.get(`/users/${currentUser.id}`)
+        axios.put(`/subscription/${currentUser.id}`, {preapproval_id})
+        .then(() => {
+          return axios.get(`/users/${currentUser.id}`)
+        })
         .then(res => {
-          setUserLocalStorage(res.data)
-          axios.put(`/subscription/${currentUser.id}`, {preapproval_id})
-          .then(obj => {
-            console.log(obj.data)
-          })
+          setUserLocalStorage(res.data)   
+          console.log("tiene que estas las fechas: ",res.data)
           window.location.reload()
           axios.get(`/mails/bienvenido/premium?name=${currentUser.name}&mail=${currentUser.mail}`)
         })
