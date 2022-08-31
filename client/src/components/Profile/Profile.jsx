@@ -34,7 +34,7 @@ const Profile = () => {
   let allOrders = useSelector((state) => state.orders.orders)
 
   if(preapproval_id){
-    axios.put(`users/premium/${currentUser.id}`, {isPremium: true, idPago: preapproval_id})
+    axios.put(`users/premium/${currentUser.id}`, { isPremium: true })
     .then(() => {
       Swal.fire({
         icon: 'success',
@@ -57,6 +57,10 @@ const Profile = () => {
         axios.get(`/users/${currentUser.id}`)
         .then(res => {
           setUserLocalStorage(res.data)
+          axios.put(`/subscription/${currentUser.id}`, {preapproval_id})
+          .then(obj => {
+            console.log(obj.data)
+          })
           window.location.reload()
           axios.get(`/mails/bienvenido/premium?name=${currentUser.name}&mail=${currentUser.mail}`)
         })
