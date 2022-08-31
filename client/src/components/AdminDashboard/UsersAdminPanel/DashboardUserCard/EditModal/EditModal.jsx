@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editUser, actionFetchingAdminEditUserReset } from "../../../../../redux/adminActions";
+import { actionGetAllJobs } from '../../../../../redux/jobActions'
 import s from './EditModal.module.scss';
 
 
 function EditModal(props) {
   const { editModalActive, handleEditOpenModal } = props;
   //estado de los datos a enviar a la DB, (professions harcodeado por la misma razon que en el handleRestore)
-  const [userData, setUserData] = useState({...props, professions: ["plomero"]})
+  const [userData, setUserData] = useState({...props})
   const dispatch = useDispatch()
 
+  const professionFromDb = useSelector(state => state.jobs.jobs)
   //ESTADOS DE HANDLING DE EXITO Y ERROR PARA LA EDICION DE USUARIO
   const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
   const fetchingAdminEditUserFailure = useSelector(state => state.fetching.fetchingAdminEditUserFailure)
@@ -20,8 +22,12 @@ function EditModal(props) {
   }
   
   //CAMBIA EL ESTADO DE LOS INPUTS (userData), pero para botones.
-  function handleClick(e){
+  function handleClick(e) {
     setUserData({...userData, [e.target.name]: e.target.value === "Si" ? true : false})
+  }
+
+  function handleProfessionsClick(e) {
+    console.log('aiuda');
   }
 
   //funcion onSubmit
@@ -41,6 +47,10 @@ function EditModal(props) {
     }
     dispatch(actionFetchingAdminEditUserReset())
   },[fetchingAdminEditUserSuccess, fetchingAdminEditUserFailure])
+
+  useEffect(() => {
+    dispatch(actionGetAllJobs())
+  },[dispatch])
 
   return (
     <div className={s.modalMainContainer}>
@@ -133,14 +143,22 @@ function EditModal(props) {
               <input type="button" name="isPremium" value='No' onClick={handleClick}/>
             </div>
           </div>
-          {/* <div>
+          <div>
             <label htmlFor="name">Profesiones</label>
-            {userData.professions?.map(p => {
+            {userData.length && userData?.professions?.map(p => {
               return (
-                <h4>{p.name}</h4>
+                <h4>{p}</h4>
               )
             })}
-          </div> */}
+            <select onClick={handleProfessionsClick} name="add-professions">
+                  <option name="main-option" value=''>Selecciona profesiones</option>
+              {professionFromDb?.map(p => {
+                return (
+                  <option name="add-professions" value={p.name}>{p.name}</option>
+                )
+              })}
+            </select>
+          </div>
           <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>
           <input type="submit" value='Editar' />
         </div>

@@ -44,10 +44,6 @@ function ReviewsAdminPanel(props) {
     dispatch(getReviewByIdForAdmin(searchByIdInput.review_id));
   }
 
-  useEffect(() => {
-    console.log(searchByIdInput);
-  },[searchByIdInput])
-
   return (
     <div className={s.cardsContainer}>
       {fetchingAdminDeleteReview ? <h1>Eliminando...</h1> : null}

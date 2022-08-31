@@ -149,6 +149,7 @@ users.put('/:id', async (req, res, next) => {
     }
 })
 
+// RUTA DEL ADMIN PARA EDITAR EL USUARIO
 users.put('/admin/:id', async (req, res) => {
     const { id } = req.params
     const { name, last_Name, date_of_Bird, image, dni, mail, phone, description, country, city, coordinate, street, address, professions, isProfessional,  isPremium, isActive, isBanned, isAdmin} = req.body;

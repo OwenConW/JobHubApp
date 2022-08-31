@@ -199,6 +199,44 @@ export const fetchingSlice = createSlice({
 			state.fetchingAdminEditOrderFailure = false
 			state.fetchingAdminEditOrderSuccess = false
 		},
+
+		// =============== Professions ===========================
+
+		//CreationHandling
+		fetchingAdminCreateProfession: (state, action) => {
+			state.fetchingAdminCreateProfession = true
+		},
+		fetchingAdminCreateProfessionSuccess: (state, action) => {
+			state.fetchingAdminCreateProfession = false
+			state.fetchingAdminCreateProfessionSuccess = true
+		},
+		fetchingAdminCreateProfessionFailure: (state, action) => {
+			state.fetchingAdminCreateProfession = false
+			state.fetchingAdminCreateProfessionFailure = true
+		},
+		fetchingAdminCreateProfessionReset: (state, action) => {
+			state.fetchingAdminCreateProfession = false
+			state.fetchingAdminCreateProfessionFailure = false
+			state.fetchingAdminCreateProfessionSuccess = false
+		},
+
+		//DeleteHandling
+		fetchingAdminDeleteProfession: (state, action) => {
+			state.fetchingAdminDeleteProfession = true
+		},
+		fetchingAdminDeleteProfessionSuccess: (state, action) => {
+			state.fetchingAdminDeleteProfession = false
+			state.fetchingAdminDeleteProfessionSuccess = true
+		},
+		fetchingAdminDeleteProfessionFailure: (state, action) => {
+			state.fetchingAdminDeleteProfession = false
+			state.fetchingAdminDeleteProfessionFailure = true
+		},
+		fetchingAdminDeleteProfessionReset: (state, action) => {
+			state.fetchingAdminDeleteProfession = false
+			state.fetchingAdminDeleteProfessionFailure = false
+			state.fetchingAdminDeleteProfessionSuccess = false
+		},
 	},
 });
 
@@ -234,6 +272,14 @@ export const { fetchingMercadopagoLink,
 							 fetchingAdminRestoreUser,
 							 fetchingAdminRestoreUserSuccess,
 							 fetchingAdminRestoreUserFailure,
-							 fetchingAdminRestoreUserReset
+							 fetchingAdminRestoreUserReset,
+							 fetchingAdminCreateProfession,
+							 fetchingAdminCreateProfessionSuccess,
+							 fetchingAdminCreateProfessionFailure,
+							 fetchingAdminCreateProfessionReset,
+							 fetchingAdminDeleteProfession,
+							 fetchingAdminDeleteProfessionSuccess,
+							 fetchingAdminDeleteProfessionFailure,
+							 fetchingAdminDeleteProfessionReset
 							} = fetchingSlice.actions;
 export default fetchingSlice.reducer;

@@ -1,18 +1,24 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteProfession } from '../../../../../redux/adminActions'
 import s from './DeleteModal.module.scss'
 
 function DeleteModal(props){
   const { name, id, handleOpenDeleteModal } = props;  
   const dispatch = useDispatch();
+  const fetchingAdminDeleteProfessionSuccess = useSelector(state => state.fetching.fetchingAdminDeleteProfessionSuccess)
 
   function handleDelete(e) {
     if(e.target.name === "cancel-btn") return handleOpenDeleteModal();
-    console.log(id);
     dispatch(deleteProfession(id))
-    handleOpenDeleteModal();
   }
+
+  useEffect(() =>{
+    if (fetchingAdminDeleteProfessionSuccess) {
+      handleOpenDeleteModal();
+    }
+  },[fetchingAdminDeleteProfessionSuccess])
 
   return (
     <div className={s.container}>

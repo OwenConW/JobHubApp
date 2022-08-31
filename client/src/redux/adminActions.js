@@ -38,6 +38,15 @@ import {
   fetchingAdminRestoreUserSuccess,
   fetchingAdminRestoreUserFailure,
   fetchingAdminRestoreUserReset,
+  fetchingAdminCreateProfession,
+  fetchingAdminCreateProfessionSuccess,
+  fetchingAdminCreateProfessionFailure,
+  fetchingAdminCreateProfessionReset,
+  fetchingAdminDeleteProfession,
+  fetchingAdminDeleteProfessionSuccess,
+  fetchingAdminDeleteProfessionFailure,
+  fetchingAdminDeleteProfessionReset
+  
 
 } from './fetchingSlice.js';
 
@@ -270,21 +279,35 @@ export const actionFetchingAdminDeleteOrderReset = () => (dispatch) => {
 // ======================= ACTIONS PARA PROFESIONES =================================
 
 export const createProfession = (name) => (dispatch) => {
+  dispatch(fetchingAdminCreateProfession())
   axios.post(`/jobs/create`, {name})
       .then(r => {
         dispatch(actionGetAllJobs())
+        dispatch(fetchingAdminCreateProfessionSuccess())
       })
       .catch(e => {
+        dispatch(fetchingAdminCreateProfessionFailure())
         console.error(e)
       })
 }
 
 export const deleteProfession = (id) => (dispatch) => {
+  dispatch(fetchingAdminDeleteProfession())
   axios.delete(`/jobs/admin/${id}`)
       .then(r => {
         dispatch(actionGetAllJobs())
+        dispatch(fetchingAdminDeleteProfessionSuccess())
       })
       .catch(e => {
         console.error(e)
+        dispatch(fetchingAdminDeleteProfessionFailure())
       })
+}
+
+export const actionFetchingAdminCreateProfessionReset = () => (dispatch) => {
+  dispatch(fetchingAdminCreateProfessionReset())
+}
+
+export const actionFetchingAdminDeleteProfessionReset = () => (dispatch) => {
+  dispatch(fetchingAdminDeleteProfessionReset())
 }

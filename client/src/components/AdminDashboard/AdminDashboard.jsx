@@ -6,7 +6,8 @@ import { getAllUsersForAdmin,
          actionFetchingAdminDeleteUserReset, 
          actionFetchingAdminRestoreUserReset,
          actionFetchingAdminDeleteReviewReset,
-         actionFetchingAdminDeleteOrderReset } from '../../redux/adminActions';
+         actionFetchingAdminDeleteOrderReset,
+         actionFetchingAdminCreateProfessionReset } from '../../redux/adminActions';
 import { actionGetAllJobs } from "../../redux/jobActions";
 import { useDispatch, useSelector } from "react-redux";
 import s from './AdminDashboard.module.scss'
@@ -18,7 +19,7 @@ import ProfessionsCreationPanel from "./ProfessionsCreationPanel/ProfessionsCrea
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("professionsPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -27,10 +28,13 @@ function AdminDashboard() {
   //ESTOS ESTADOS SON PARA EL HANDLING DE ERRORES, DE EXITO Y DE CUANDO ESTA BUSCANDO EN LA DB, SE VAN A USAR PARA LAS ALERTAS
 
   //Fetching user states
+  //delete
   const fetchingAdminDeleteUserSuccess = useSelector(state => state.fetching.fetchingAdminDeleteUserSuccess)
   const fetchingAdminDeleteUserFailure = useSelector(state => state.fetching.fetchingAdminDeleteUserFailure)
+  //edit
   const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
   const fetchingAdminEditUserFailure = useSelector(state => state.fetching.fetchingAdminEditUserFailure)
+  //restore
   const fetchingAdminRestoreUserFailure = useSelector(state => state.fetching.fetchingAdminRestoreUserFailure)
   const fetchingAdminRestoreUserSuccess = useSelector(state => state.fetching.fetchingAdminRestoreUserSuccess)
 
@@ -45,6 +49,13 @@ function AdminDashboard() {
   const fetchingAdminDeleteOrderFailure = useSelector(state => state.fetching.fetchingAdminDeleteOrderFailure)
   const fetchingAdminEditOrderSuccess = useSelector(state => state.fetching.fetchingAdminEditOrderSuccess)
   const fetchingAdminEditOrderFailure = useSelector(state => state.fetching.fetchingAdminEditOrderFailure)
+  
+  //Fetching Profession creation states
+  const fetchingAdminCreateProfessionSuccess = useSelector(state => state.fetching.fetchingAdminCreateProfessionSuccess)
+  const fetchingAdminCreateProfessionFailure = useSelector(state => state.fetching.fetchingAdminCreateProfessionFailure)
+  //Fetching Profession delete states
+  const fetchingAdminDeleteProfessionSuccess = useSelector(state => state.fetching.fetchingAdminDeleteProfessionSuccess)
+  const fetchingAdminDeleteProfessionFailure = useSelector(state => state.fetching.fetchingAdminDeleteProfessionFailure)
 
   //FUNCION QUE CAMBIA EL PANEL QUE SE MUESTRA (usuarios, reviews, ordenes)
   function handlePanelChange(e) {
@@ -99,6 +110,26 @@ function AdminDashboard() {
     }
     dispatch(actionFetchingAdminDeleteOrderReset())
   }, [fetchingAdminDeleteOrderSuccess,fetchingAdminDeleteOrderFailure])
+
+  //Alert create Profession
+  useEffect(() => {
+    if(fetchingAdminCreateProfessionSuccess) {
+      alert('Profesion creada correctamente')
+    } else if (fetchingAdminCreateProfessionFailure) {
+      alert('Hubo un error al crear la profesion')
+    }
+    dispatch(actionFetchingAdminCreateProfessionReset())
+  }, [fetchingAdminCreateProfessionSuccess,fetchingAdminCreateProfessionFailure])
+
+  //Alert delete Profession
+  useEffect(() => {
+    if(fetchingAdminDeleteProfessionSuccess) {
+      alert('Profesion eliminada correctamente')
+    } else if (fetchingAdminDeleteProfessionFailure) {
+      alert('Hubo un error al eliminar la profesion')
+    }
+    dispatch(actionFetchingAdminCreateProfessionReset())
+  }, [fetchingAdminDeleteProfessionSuccess,fetchingAdminDeleteProfessionFailure])
 
   return (
     <div className={s.mainContainer}>
