@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { actionGetAllJobs } from './jobActions'
 import {
   getAllReviews,
   getAllUsers,
@@ -6,7 +7,7 @@ import {
   getUserById,
   getReviewByUserProfessionalId,
   getReviewById,
-  getOrdersByUserid
+  getOrdersById
 } from './adminSlice.js';
 import {
   fetchingAdminDeleteUser,
@@ -233,10 +234,18 @@ export const deleteOrder = (id) => (dispatch) => {
       })
 }
 
+export const actionGetOrdersBylId = (id) => (dispatch) => {
+  axios.get(`/orders/admin/${id}`)
+    .then((res) => {
+      dispatch(getOrdersById([res.data]))
+    })
+    .catch(e => console.error(e))
+}
+
 export const getOrdersByUserProfessionalId = (id) => (dispatch) => {
   axios.get(`/orders/professional/${id}`)
     .then((res) => {
-      dispatch(getOrdersByUserid(res.data.orders))
+      dispatch(getOrdersById(res.data.orders))
     })
     .catch(e => console.error(e))
 }
@@ -244,7 +253,7 @@ export const getOrdersByUserProfessionalId = (id) => (dispatch) => {
 export const getOrdersByUserClientId = (id) => (dispatch) => {
   axios.get(`/orders/client/${id}`)
     .then((res) => {
-      dispatch(getOrdersByUserid(res.data))
+      dispatch(getOrdersById(res.data))
     })
     .catch(e => console.error(e))
 }
@@ -255,4 +264,17 @@ export const actionFetchingAdminEditOrderReset = () => (dispatch) => {
 
 export const actionFetchingAdminDeleteOrderReset = () => (dispatch) => {
   dispatch(fetchingAdminDeleteOrderReset())
+}
+
+
+// ======================= ACTIONS PARA PROFESIONES =================================
+
+export const deleteProfession = (id) => (dispatch) => {
+  axios.delete(`/jobs/admin/${id}`)
+      .then(r => {
+        dispatch(actionGetAllJobs())
+      })
+      .catch(e => {
+        console.error(e)
+      })
 }

@@ -2,25 +2,28 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { getAllUsersForAdmin, 
          getAllReviewsForAdmin,
-         getAllOrdersForAdmin, 
+         getAllOrdersForAdmin,
          actionFetchingAdminDeleteUserReset, 
          actionFetchingAdminRestoreUserReset,
          actionFetchingAdminDeleteReviewReset,
          actionFetchingAdminDeleteOrderReset } from '../../redux/adminActions';
+import { actionGetAllJobs } from "../../redux/jobActions";
 import { useDispatch, useSelector } from "react-redux";
 import s from './AdminDashboard.module.scss'
 import UsersAdminPanel from "./UsersAdminPanel/UsersAdminPanel";
 import ReviewsAdminPanel from "./ReviewsAdminPanel/ReviewsAdminPanel";
 import OrdersAdminPanel from "./OrdersAdminPanel/OrdersAdminPanel"
 import DifussionAdminPanel from "./DiffusionAdminPanel/DifussionAdminPanel";
+import ProfessionsCreationPanel from "./ProfessionsCreationPanel/ProfessionsCreationPanel";
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("professionsPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
   const orders = useSelector( state => state.admin.orders)
+  const professions = useSelector( state => state.jobs.jobs)
   //ESTOS ESTADOS SON PARA EL HANDLING DE ERRORES, DE EXITO Y DE CUANDO ESTA BUSCANDO EN LA DB, SE VAN A USAR PARA LAS ALERTAS
 
   //Fetching user states
@@ -53,6 +56,7 @@ function AdminDashboard() {
     dispatch(getAllUsersForAdmin())
     dispatch(getAllReviewsForAdmin())
     dispatch(getAllOrdersForAdmin())
+    dispatch(actionGetAllJobs())
   }, [dispatch])
 
   //Alert DELETE USER
@@ -105,6 +109,7 @@ function AdminDashboard() {
           <button onClick={handlePanelChange} value="usersPanel">Usuarios</button>
           <button onClick={handlePanelChange} value="reviewsPanel">Reseñas</button>
           <button onClick={handlePanelChange} value="ordersPanel">Ordenes</button>
+          <button onClick={handlePanelChange} value="professionsPanel">Profesiones</button>
           <button onClick={handlePanelChange} value="difussionPanel">Difusión</button>
           <button onClick={handlePanelChange} value="statsPanel">Estadisticas</button>
         </div>
@@ -115,6 +120,7 @@ function AdminDashboard() {
             panelDiplayed === "usersPanel" ? <UsersAdminPanel users={users}/> :
             panelDiplayed === "reviewsPanel" ? <ReviewsAdminPanel reviews={reviews} /> :
             panelDiplayed === "ordersPanel" ? <OrdersAdminPanel orders={orders} /> : 
+            panelDiplayed === "professionsPanel" ? <ProfessionsCreationPanel professions={professions} /> :
             panelDiplayed === "difussionPanel" ? <DifussionAdminPanel /> : null
           }
           

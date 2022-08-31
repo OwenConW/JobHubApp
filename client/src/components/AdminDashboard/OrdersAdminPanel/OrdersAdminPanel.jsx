@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import OrdersDashboardCard from "./OrdersDashboardCard/OrdersDashboardCard"
 import s from './OrdersAdminPanel.module.scss'
-import { getOrdersByUserProfessionalId, getOrdersByUserClientId, getOrderByIdForAdmin, getAllOrdersForAdmin } from '../../../redux/adminActions'
+import { getOrdersByUserProfessionalId, getOrdersByUserClientId, getOrderByIdForAdmin, actionGetOrdersBylId, getAllOrdersForAdmin } from '../../../redux/adminActions'
 import { useDispatch } from "react-redux";
 
 function OrdersAdminPanel(props) {
@@ -36,7 +36,7 @@ function OrdersAdminPanel(props) {
   function handleSearchOrderByIdSubmit(e) {
     e.preventDefault();
     if(!searchByIdInput.order_id) return
-    //dispatch(getOrderByIdForAdmin(searchByIdInput.order_id));
+    dispatch(actionGetOrdersBylId(searchByIdInput.order_id));
   }
 
   return (
@@ -59,11 +59,12 @@ function OrdersAdminPanel(props) {
       <button onClick={getAllOrders}>Traer todas las ordenes</button>
 
       {
-        orders?.map( r => {
+        orders[0]? orders?.map( r => {
           return (
               <OrdersDashboardCard {...r} />
           )
-        })
+        }) :
+        <h1>No existen ordenes</h1>
       }
     </div>
   )

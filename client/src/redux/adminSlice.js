@@ -29,7 +29,7 @@ export const adminSlice = createSlice({
     getAllOrders: (state, action) => {
       state.orders = action.payload;
 		},
-    getOrdersByUserid: (state, action) => {
+    getOrdersById: (state, action) => {
       state.orders = action.payload
     }
 	},
@@ -41,5 +41,5 @@ export const { getAllUsers,
                getReviewById, 
                getAllOrders, 
                getUserById, 
-               getOrdersByUserid } = adminSlice.actions;
+               getOrdersById } = adminSlice.actions;
 export default adminSlice.reducer;
