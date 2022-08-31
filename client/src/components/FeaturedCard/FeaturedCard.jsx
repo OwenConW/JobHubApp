@@ -6,7 +6,6 @@ import { motion } from 'framer-motion/dist/framer-motion.js';
 //assets
 import star from './assets/star.png';
 import background from './assets/backcard.svg';
-import sign from './assets/sign.svg';
 import default_user from './assets/default_user.png';
 
 const FeaturedCard = (prop) => { 
@@ -33,15 +32,6 @@ const FeaturedCard = (prop) => {
         }}
       >{prop?.prop.name ? <h3 style={{textTransform: "capitalize"}}>{prop?.prop.name}</h3> : <h4>Jobs not Find</h4>}
       </motion.div>
-      <motion.img src={background} alt="back" className={s.background} 
-        transition={{duration: 0.3, delay:1}}
-        initial={{
-          opacity:0,
-        }}
-        animate={{
-          opacity: 1,
-        }}
-      />
       {
         prop?.prop.isPremium ? (
           <div className={s.imagePremium}>
