@@ -35,20 +35,15 @@ const Catalog = (props) => {
 		let pages = Math.ceil(professionalsArray.length / proffesionalsPerPage);
 		return parseInt(pages);
 	}
-
+    const [activePages, setActivePages] = useState(setPages)
 	const [currentPage, setCurrentPage] = useState(1) 
     const iOfLastProfessional = currentPage * proffesionalsPerPage
     const iOfFirstProfessional = iOfLastProfessional - proffesionalsPerPage
     const currentProffesionals = professionalsArray.slice(iOfFirstProfessional, iOfLastProfessional) 
-	const paginado = (pageNumber) => {  setCurrentPage(pageNumber) }
-	var pages = setPages();
-	const [activePages, setActivePages] = useState(pages);
 	const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
 	const [nameInputValue, setNameInputValue] = useState('') 
 	const dispatch = useDispatch();
 	
-	
-
 	function addFilterValue(targetName, value) {
 
 		if (targetName === "name") {
@@ -95,6 +90,7 @@ const Catalog = (props) => {
 		setCurrentPage(page)
 	}
 
+	console.log(activePages);
 	return (
 		<>
 			<Navbar />
