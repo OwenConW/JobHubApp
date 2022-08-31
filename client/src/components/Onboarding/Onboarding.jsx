@@ -5,6 +5,8 @@ import s from './Onboarding.module.scss';
 import Loader from '../Login/Loader/Loader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { getDniForm } from '../../redux/userActions'
+import { useDispatch } from 'react-redux';
 
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
@@ -15,14 +17,19 @@ import welcomeImage from './assets/welcome image.svg';
 //validator
 import { validators } from '../../handlers/validators';
 
+
 const Onboarding = () => {
   const email = getLocalStorage().mail;
+  const last_name = getLocalStorage().last_name;
+  const name = getLocalStorage().name;
   const navigate = useNavigate();
   const { logout } = useAuth0();
+  
+  const dispatch = useDispatch();
 
   const [user, setUser] = useStateWithCallbackLazy({
-    name: '',
-    last_Name: '',
+    name: name,
+    last_Name: last_name,
     description: '',
     dni: '',
     image: 'noimage',
@@ -51,18 +58,19 @@ const Onboarding = () => {
       loading: false,
   });
 
-  const [countries, setCountries] = useState({
-    names: [],
-    loading: false
-  });
+  // const [countries, setCountries] = useState({
+  //   names: [],
+  //   loading: false
+  // });
 
 
   const [image, setImage] = useState("");
   const [isUpload, setIsUpload] = useState({
-     done: '',
-     loading: false,
+    done: '',
+    loading: false,
   });
 
+  const [errorDni, setErrorDni] = useState("");
 
   const handleUpload = async () => {
     setIsUpload({
@@ -96,8 +104,19 @@ const Onboarding = () => {
     });
   }
 
+  const handleSearchDni = async (e) => {
+    e.preventDefault();
+    handleChange(e);
+    const{value} = e.target;
+    dispatch(getDniForm(value)).then((res)=>{
+    console.log(res)
+    res !== 'El DNI ingresado puede ser utilizado' ? setErrorDni(res): setErrorDni("")
+    })
+  }
+
   const handleSubmit = async(e) => {
     e.preventDefault();
+    if(Object.keys(errors).length || errorGeometry.error || errorDni.length ) return alert("casi casi atrevido!! modifica el DNI, sino no se envia nada!")
     setErrorGeometry({
       error: '',
       loading: true,
@@ -114,6 +133,7 @@ const Onboarding = () => {
         coordinate: [response.data[0].lat, response.data[0].lon]
       }, async (currentUser) => {
           let response = await axios.post('/users', currentUser);
+          alert (response)
           navigate("../", { replace: true })
           axios.get(`/mails/welcome?name=${currentUser.name}&mail=${currentUser.mail}`  )
       })
@@ -126,31 +146,7 @@ const Onboarding = () => {
     navigate("../", { replace: true });
   }
 
-  useEffect(() => {
 
-    const getCountries = async () =>{
-      setCountries({
-        ...countries,
-        loading: true,
-      });
-
-      try{
-        let response = await axios.get('https://restcountries.com/v3.1/subregion/South%20America');
-        let namesOfCountries = response.data.map(country => country.translations.spa.common);
-        namesOfCountries.sort();
-        setCountries({
-          ...countries,
-          names: namesOfCountries,
-          loading: false,
-        });
-      }catch(e){
-        console.log(e)
-      }
-    }
-
-    getCountries();
-
-  }, []);
 
   useEffect(() => {
     setErrors(validators(user));
@@ -159,7 +155,7 @@ const Onboarding = () => {
 
   return (
     <div className={s.container}>
-      {countries.loading ? <Loader/> : (
+      
       <div className={s.card}>
         <div className={s.welcome}>
           <img src={welcomeImage} alt="welcome" />
@@ -191,13 +187,13 @@ const Onboarding = () => {
                     <label>Pais</label>
                     <select name="country" value={user.country} onChange={e => handleChange(e)}>
                       <option key={'none'} value='none'>Selecciona un país</option>
-                      {
-                        countries.names.map(country => {
-                          return(
-                            <option value={country} key={country}>{country}</option>
-                          )
-                        })
-                      }
+                      <option value="Argentina">Argentina</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Chile">Chile</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Brasil">Brasil</option>
+                      <option value="Peru">Peru</option>
                     </select>
                     {user.country === 'none' || errors.country === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : ''}
                 </div>
@@ -219,8 +215,9 @@ const Onboarding = () => {
                 {/* DNI */}
                 <div className={s.input}>
                   <label>Dni</label>
-                  <input type="text" name="dni" value={user.dni} onChange={e => handleChange(e)}/>
+                  <input type="text" name="dni" value={user.dni} onChange={e => handleChange(e)} onBlur={e => handleSearchDni(e)}/>
                   {errors.dni === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.dni ? <p className={s.error}>{errors.dni}</p> : '')}
+                  {errorDni.length ? <p className={s.error}> {errorDni} </p> : ""}
                 </div>
 
                 {/* DIRECCION */}
@@ -261,11 +258,11 @@ const Onboarding = () => {
                 </div>
               </div>
 
-              {errorGeometry.loading ? <Loader/> : <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length || errorGeometry.error}/>}
+              {errorGeometry.loading ? <Loader/> : <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length || errorGeometry.error || errorDni.length  }/>}
               {errorGeometry.error ? <p className={s.error}>{errorGeometry.error}</p> : ''}
           </form>
         </div>
-      </div>)}
+      </div>
     </div>
   )
 }
