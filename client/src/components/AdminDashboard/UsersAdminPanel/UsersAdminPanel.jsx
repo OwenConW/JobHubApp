@@ -39,6 +39,7 @@ function UsersAdminPanel(props) {
   function handleSearchUserByFilterSubmit(e) {
     e.preventDefault();
     //if(!searchByFiltersInput) return
+    console.log('que miras?');
   }
   
 

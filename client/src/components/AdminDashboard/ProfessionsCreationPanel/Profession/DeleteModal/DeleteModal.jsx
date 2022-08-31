@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProfession } from '../../../../../redux/adminActions'
 import s from './DeleteModal.module.scss'

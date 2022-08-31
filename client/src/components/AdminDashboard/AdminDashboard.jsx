@@ -19,7 +19,7 @@ import ProfessionsCreationPanel from "./ProfessionsCreationPanel/ProfessionsCrea
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);

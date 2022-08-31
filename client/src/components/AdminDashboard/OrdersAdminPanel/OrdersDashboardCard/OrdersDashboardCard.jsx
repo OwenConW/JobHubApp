@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import OrderEditModal from './OrderEditModal/OrderEditModal'
-import { deleteOrder  } from '../../../../redux/adminActions'
+import OrdersDeleteModal from './OrdersDeleteModal/OrdersDeleteModal'
 import s from './OrdersDashboardCard.module.scss'
-import { useDispatch } from "react-redux";
 
 function OrdersDashboardCard(props) {
   const { id, id_user_professional, id_user_client, description, allowReview, date_created, apointment_date, complete, isActive } = props;
-  const dispatch = useDispatch()
 
   const [editModalActive, setEditModalActive] = useState(false)
+  const [deleteModalActive, setDeleteModalActive] = useState(false)
 
   function handleEditOpenModal(e) {
     setEditModalActive(!editModalActive)
   }
 
-  function handleDelete(e) {
-    dispatch(deleteOrder(id));
+  function handleDeleteOpenModal(e) {
+    setDeleteModalActive(!deleteModalActive)
   }
   
   return (
     <div className={`${s.cardContainer}`}>
     {editModalActive? <OrderEditModal handleEditOpenModal={handleEditOpenModal} editModalActive={editModalActive} {...props}/> : null}
+    {deleteModalActive? <OrdersDeleteModal handleDeleteOpenModal={handleDeleteOpenModal} {...props}/> : null}
     <div className={s.importantInformationContainer}>
       {/* <button onClick={handleOpenModal}>Detalles</button> */}
       <div className={s.nameContainer}>
@@ -59,7 +59,7 @@ function OrdersDashboardCard(props) {
         <h4>Finalizada?</h4>
         <h4>{complete ? "Si" : "No"}</h4>
       </div>
-      <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button>
+      <button className={s.deleteBtn} onClick={handleDeleteOpenModal}>Eliminar</button>
       <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>
     </div>
   </div>

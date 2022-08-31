@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, restoreUser, getAllUsersForAdmin, actionFetchingAdminDeleteUserReset, editUser } from '../../../../redux/adminActions'
 import EditModal from "../DashboardUserCard/EditModal/EditModal";
 import DeleteUserModal from "../DashboardUserCard/DeleteUserModal/DeleteUserModal";
+import RestoreUserModal from "../DashboardUserCard/RestoreUserModal/RestoreUserModal";
 import s from './DashboardUserCard.module.scss';
 
 function DashboardUserCard(props) {
@@ -34,8 +35,7 @@ function DashboardUserCard(props) {
   //estado que abre y cierra el MODAL de edicion de usuario.
   const [editModalActive, setEditModalActive] = useState(false)
   const [DeleteModalActive, setDeleteModalActive] = useState(false)
-
-  const dispatch = useDispatch();
+  const [RestoreModalActive, setRestoreModalActive] = useState(false)
 
   //funcion que cambia el estado del DETALLE de usuario
   function handleOpenModal(e) {
@@ -46,9 +46,10 @@ function DashboardUserCard(props) {
   }
 
   //Funcion para "restaurar" el usuario "eliminado"(professions esta hardcodeado porque no hice para que se pueda seleccionar todavia)
-  function handleRestore(e){
-    dispatch(restoreUser(id))
+  function handleRestoreOpenModal(e){
+    setRestoreModalActive(!RestoreModalActive)
   }
+
   
   //funcion que cambia el estado del MODAL DE EDICION de usuario
   function handleEditOpenModal(e){
@@ -63,7 +64,7 @@ function DashboardUserCard(props) {
     <div className={`${s.cardContainer} ${openModal ? s.openModal : null}`}>
       {editModalActive? <EditModal handleEditOpenModal={handleEditOpenModal} editModalActive={editModalActive} {...props}/> : null}
       {DeleteModalActive? <DeleteUserModal handleDeleteOpenModal={handleDeleteOpenModal} DeleteModalActive={DeleteModalActive} {...props}/> : null}
-
+      {RestoreModalActive? <RestoreUserModal handleRestoreOpenModal={handleRestoreOpenModal} RestoreModalActive={RestoreModalActive} {...props}/> : null}
       <div className={s.importantInformationContainer}>
         <button onClick={handleOpenModal}>Detalles</button>
         <div>
@@ -100,7 +101,7 @@ function DashboardUserCard(props) {
         </div>
         {
         isActive ? <button className={s.deleteBtn} onClick={handleDeleteOpenModal}>Eliminar</button> :
-                   <button className={s.restoreBtn} onClick={handleRestore}>Restaurar</button>
+                   <button className={s.restoreBtn} onClick={handleRestoreOpenModal}>Restaurar</button>
         }
         <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>
       </div>

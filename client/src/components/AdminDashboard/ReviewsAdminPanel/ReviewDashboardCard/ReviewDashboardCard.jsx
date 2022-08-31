@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReviewEditModal from './ReviewEditModal/ReviewEditModal'
-import { actionFetchingAdminEditReviewReset, deleteReviews } from '../../../../redux/adminActions'
+import ReviewDeleteModal from './ReviewDeleteModal/ReviewDeleteModal'
+import { deleteReviews } from '../../../../redux/adminActions'
 import s from './ReviewDashboardCard.module.scss'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function ReviewDashboardCard(props) {
   const { id, id_orders, id_user_professional, id_user_client, feedback_client, rating, isActive } = props;
@@ -10,18 +11,20 @@ function ReviewDashboardCard(props) {
   const dispatch = useDispatch();
 
   const [editModalActive, setEditModalActive] = useState(false)
+  const [deleteReviewModalActive, setDeleteReviewModalActive] = useState(false)
 
   function handleEditOpenModal(e) {
     setEditModalActive(!editModalActive)
   }
 
-  function handleDelete(e) {
-    dispatch(deleteReviews(id))
+  function handleDeleteOpenModal(e) {
+    setDeleteReviewModalActive(!deleteReviewModalActive)
   }
   
   return (
     <div className={`${s.cardContainer}`}>
     {editModalActive? <ReviewEditModal handleEditOpenModal={handleEditOpenModal} editModalActive={editModalActive} {...props}/> : null}
+    {deleteReviewModalActive? <ReviewDeleteModal handleDeleteOpenModal={handleDeleteOpenModal} deleteReviewModalActive={deleteReviewModalActive} {...props}/> : null}
     <div className={s.importantInformationContainer}>
       {/* <button onClick={handleOpenModal}>Detalles</button> */}
       <div className={s.nameContainer}>
@@ -52,7 +55,7 @@ function ReviewDashboardCard(props) {
         <h4>Activa?</h4>
         <h4>{isActive ? "Si" : "No"}</h4>
       </div>
-      <button className={s.deleteBtn} onClick={handleDelete}>Eliminar</button>
+      <button className={s.deleteBtn} onClick={handleDeleteOpenModal}>Eliminar</button>
 
       <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>
     </div>
