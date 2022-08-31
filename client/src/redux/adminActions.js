@@ -269,6 +269,16 @@ export const actionFetchingAdminDeleteOrderReset = () => (dispatch) => {
 
 // ======================= ACTIONS PARA PROFESIONES =================================
 
+export const createProfession = (name) => (dispatch) => {
+  axios.post(`/jobs/create`, {name})
+      .then(r => {
+        dispatch(actionGetAllJobs())
+      })
+      .catch(e => {
+        console.error(e)
+      })
+}
+
 export const deleteProfession = (id) => (dispatch) => {
   axios.delete(`/jobs/admin/${id}`)
       .then(r => {

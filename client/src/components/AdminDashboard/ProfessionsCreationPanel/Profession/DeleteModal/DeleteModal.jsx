@@ -11,6 +11,7 @@ function DeleteModal(props){
     if(e.target.name === "cancel-btn") return handleOpenDeleteModal();
     console.log(id);
     dispatch(deleteProfession(id))
+    handleOpenDeleteModal();
   }
 
   return (
