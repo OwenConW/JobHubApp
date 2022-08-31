@@ -8,27 +8,38 @@ export const adminSlice = createSlice({
     orders: []
 	},
 	reducers: {
+    // USERS
 		getAllUsers: (state, action) => {
       state.users = action.payload;
 		},
     getUserById: (state, action) => {
       state.users = [action.payload];
     },
+    // REVIEWS
     getAllReviews: (state, action) => {
       state.reviews = action.payload;
 		},
     getReviewById: (state, action) => {
       state.reviews = action.payload;
     },
-    getReviewByUserId: (state, action) => {
-      console.log(action.payload);
+    getReviewByUserProfessionalId: (state, action) => {
       state.reviews = action.payload.reviews;
     },
+    // ORDERS
     getAllOrders: (state, action) => {
       state.orders = action.payload;
 		},
+    getOrdersByUserid: (state, action) => {
+      state.orders = action.payload
+    }
 	},
 });
  
-export const { getAllUsers, getAllReviews, getReviewByUserId, getReviewById, getAllOrders, getUserById } = adminSlice.actions;
+export const { getAllUsers,
+               getAllReviews, 
+               getReviewByUserProfessionalId, 
+               getReviewById, 
+               getAllOrders, 
+               getUserById, 
+               getOrdersByUserid } = adminSlice.actions;
 export default adminSlice.reducer;

@@ -3,6 +3,7 @@ import s from './PremiumModal.module.scss'
 import { useDispatch, useSelector } from "react-redux";
 import { actionFetchingMercadopagoLink, 
          actionClearMercadopagoRedirectLink, 
+         actionFetchingMercadopagoLinkFailure, 
          actionSetFetchingMercadoPagoLinkFalse } from '../../../redux/fetchingActions'
 import { useEffect } from "react";
 
@@ -40,26 +41,18 @@ function PremiumModal(props) {
 
   useEffect(() => {
     dispatch(actionSetFetchingMercadoPagoLinkFalse())
-  },[dispatch])
+  },[])
 
   return(
     <div className={s.modalContainer}>
       <h1>{name[0].toUpperCase() + name.substring(1)} estos son los beneficios de un usuario premium!</h1>
 
         <ul className={s.benefitsContainer}>
-<<<<<<< HEAD
-          <li>Beneficio 1 Lorem ipsum dolor sit amet.</li>
-          <li>Beneficio 2 Lorem ipsum dolor sit amet consectetur adipisicing.</li>
-          <li>Beneficio 3 Lorem ipsum dolor sit amet consectetur.</li>
-          <li>Beneficio 4 Lorem, ipsum dolor.</li>
-          <li>Beneficio 5 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis!.</li>
-=======
           <li>Mas visibilidad en toda la página.</li>
           <li>Saldras primero y destacado en las busquedas por nombre u oficio.</li>
           <li>Podras agregar y ejercer más de un trabajo en la página.</li>
           <li>Podras tener un gif de perfil.</li>
           <li>Podras buscar profesionales a mayor distancia.</li>
->>>>>>> 86f7172ceaa43944b7f56638ff8e0d7a86f07ae2
         </ul>
 
       <div className={s.fetchingMessagesAndButtonsContainer}>

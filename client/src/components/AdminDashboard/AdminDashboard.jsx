@@ -12,10 +12,11 @@ import s from './AdminDashboard.module.scss'
 import UsersAdminPanel from "./UsersAdminPanel/UsersAdminPanel";
 import ReviewsAdminPanel from "./ReviewsAdminPanel/ReviewsAdminPanel";
 import OrdersAdminPanel from "./OrdersAdminPanel/OrdersAdminPanel"
+import DifussionAdminPanel from "./DiffusionAdminPanel/DifussionAdminPanel";
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("reviewsPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -104,6 +105,7 @@ function AdminDashboard() {
           <button onClick={handlePanelChange} value="usersPanel">Usuarios</button>
           <button onClick={handlePanelChange} value="reviewsPanel">Reseñas</button>
           <button onClick={handlePanelChange} value="ordersPanel">Ordenes</button>
+          <button onClick={handlePanelChange} value="difussionPanel">Difusión</button>
           <button onClick={handlePanelChange} value="statsPanel">Estadisticas</button>
         </div>
 
@@ -112,7 +114,8 @@ function AdminDashboard() {
           {
             panelDiplayed === "usersPanel" ? <UsersAdminPanel users={users}/> :
             panelDiplayed === "reviewsPanel" ? <ReviewsAdminPanel reviews={reviews} /> :
-            panelDiplayed === "ordersPanel" ? <OrdersAdminPanel orders={orders} /> : null
+            panelDiplayed === "ordersPanel" ? <OrdersAdminPanel orders={orders} /> : 
+            panelDiplayed === "difussionPanel" ? <DifussionAdminPanel /> : null
           }
           
         </div>

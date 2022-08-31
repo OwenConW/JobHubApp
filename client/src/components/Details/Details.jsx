@@ -30,12 +30,8 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getCharsById(id))
-<<<<<<< HEAD
-  }, [dispatch, id])
-=======
     dispatch(getChars())
   }, [])
->>>>>>> 86f7172ceaa43944b7f56638ff8e0d7a86f07ae2
 
   const onCoordinate = async() => {
     let data = {
@@ -68,11 +64,6 @@ const Profile = () => {
       <div className={s.container}>
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
-<<<<<<< HEAD
-            <div className={s.profile_Img_container}>
-              {professional.image ? <img src={professional.image} className={s.profile_Img} alt="professional-img"/> : <img src={defaultimage} className={s.profile_Img} alt="professional-default-img"/>}
-            </div>
-=======
             {
               professional.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
@@ -87,7 +78,6 @@ const Profile = () => {
               )
             }
           
->>>>>>> 86f7172ceaa43944b7f56638ff8e0d7a86f07ae2
             <div className={s.profileDetail}>
               {
                 professional.isPremium ? (

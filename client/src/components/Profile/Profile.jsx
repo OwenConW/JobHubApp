@@ -97,15 +97,10 @@ const Profile = () => {
       <div className={s.container}>
         <div className={s.leftContainer}>
           <div className={s.profileInfo}>
-<<<<<<< HEAD
-            <div className={s.profile_Img_container}>
-              <img src={activeUser.image} className={s.profile_Img} alt="profile-img"></img>
-=======
             {
               activeUser?.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
               <img src={activeUser.image} className={s.profile_ImgPremium} alt=""></img>
->>>>>>> 86f7172ceaa43944b7f56638ff8e0d7a86f07ae2
             </div>
               ): (
                 <div className={s.profile_Img_container}>
@@ -139,7 +134,7 @@ const Profile = () => {
           <div className={s.configBox}>
             <div className={s.configImg}>
               <Link to='/ProfileConfig/edit'>
-                <img src={configLogo} alt="logo-img"></img>
+                <img src={configLogo} ></img>
               </Link>
             </div>
             <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>

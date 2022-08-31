@@ -4,8 +4,9 @@ import {
   getAllUsers,
   getAllOrders,
   getUserById,
-  getReviewByUserId,
-  getReviewById
+  getReviewByUserProfessionalId,
+  getReviewById,
+  getOrdersByUserid
 } from './adminSlice.js';
 import {
   fetchingAdminDeleteUser,
@@ -127,15 +128,27 @@ export const getAllReviewsForAdmin = () => (dispatch) => {
     .catch(e => console.error(e))
 }
 
-export const getReviewByUserIdForAdmin = (id) => (dispatch) => {
+export const getReviewByUserProfessionalIdForAdmin = (id) => (dispatch) => {
   axios.get(`/review/${id}`)
     .then((res) => {
       console.log(res.data);
       if (!res.data) res.data = { reviews: []}
-      dispatch(getReviewByUserId(res.data))
+      dispatch(getReviewByUserProfessionalId(res.data))
     })
     .catch(e => console.error(e))
 }
+
+//por ID cliente NECESITA LA RUTA DEL BACKEND!!!!
+export const getReviewByUserClientIdForAdmin = (id) => (dispatch) => {
+  axios.get(`/review/admin/client/${id}`)
+    .then((res) => {
+      console.log(res.data);
+      if (!res.data) res.data = { reviews: []}
+      dispatch(getReviewByUserProfessionalId(res.data))
+    })
+    .catch(e => console.error(e))
+}
+
 
 export const getReviewByIdForAdmin = (id) => (dispatch) => {
   axios.get(`/review/admin/${id}`)
@@ -218,6 +231,22 @@ export const deleteOrder = (id) => (dispatch) => {
         console.error(e)
         dispatch(fetchingAdminDeleteOrderFailure())
       })
+}
+
+export const getOrdersByUserProfessionalId = (id) => (dispatch) => {
+  axios.get(`/orders/professional/${id}`)
+    .then((res) => {
+      dispatch(getOrdersByUserid(res.data.orders))
+    })
+    .catch(e => console.error(e))
+}
+
+export const getOrdersByUserClientId = (id) => (dispatch) => {
+  axios.get(`/orders/client/${id}`)
+    .then((res) => {
+      dispatch(getOrdersByUserid(res.data))
+    })
+    .catch(e => console.error(e))
 }
 
 export const actionFetchingAdminEditOrderReset = () => (dispatch) => {
