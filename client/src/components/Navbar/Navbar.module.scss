@@ -29,7 +29,8 @@
         position: absolute;
         top: 0;
         width: 100%;
-        background-color: rgba(49, 49, 49, 0.287);
+        box-shadow: 26px 0px 15px -3px rgba(0,0,0,0.1);
+        background-color: rgb(236, 236, 236);
         height: 100%;
         transform: translate(0, 0);
     }
@@ -149,6 +150,10 @@
                     scale: 1.02;
                 }
             }
+
+            .logout{
+                margin-left: 5%;
+            }
         }
 
         .nouser{
@@ -159,7 +164,7 @@
             height: 90%;
 
             .link{
-                margin-right: 5%;
+                margin-right: 10%;
                 width: 45%;
                 height: 90%;
                 display: flex;

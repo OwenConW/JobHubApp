@@ -140,18 +140,20 @@
 
     .nouser{
         display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-end;
         width: 100%;
         height: 60%;
-        background-color: blue;
+
 
         .link{
-            margin-right: 5%;
+            margin-left: 5%;
             width: 45%;
-            height: 90%;
+            height: 20%;
             display: flex;
+            color: #222222;
             font-size: 1.8rem;
+            text-decoration: none;
             justify-content: space-around;
             align-items: center;
 

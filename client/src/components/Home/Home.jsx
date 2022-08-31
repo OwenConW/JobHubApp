@@ -65,7 +65,7 @@ const Home = () => {
           </div>
         </aside>
         <div className={s.container2}>
-          <h1 className={s.titlemapa}>Utiliza nuestro {br} sistema de {br} búsqueda por {br} ubicación</h1>
+          <h1 className={s.titlemapa}>Utiliza nuestro sistema de búsqueda por ubicación</h1>
           {isAuthenticated ?
             <Link to='/map' className={s.link}>
               <div className={s.button}>
