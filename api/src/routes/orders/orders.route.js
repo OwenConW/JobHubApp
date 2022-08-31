@@ -65,6 +65,18 @@ orders.delete("/admin/:id", async (req, res, next)=>{
     }
 })
 
+//RUTA PARA TRAER LA ORDEN POR SU ID
+orders.get("/admin/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try{
+        const order = await Orders.findByPk(id);
+        res.status(200).json(order);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 // RUTA PARA TRAER TODAS LAS RESEÑAS POR ID CUANDO SOY PROFESSIONAL
 orders.get("/professional/:id", async (req, res, next)=>{
     const {id} = req.params;
