@@ -19,6 +19,7 @@ const Onboarding = () => {
   const email = getLocalStorage().mail;
   const navigate = useNavigate();
   const { logout } = useAuth0();
+  console.log()
 
   const [user, setUser] = useStateWithCallbackLazy({
     name: '',
@@ -126,31 +127,29 @@ const Onboarding = () => {
     navigate("../", { replace: true });
   }
 
-  useEffect(() => {
+//NO LO USAMOS XQ LA API FUNCIONA MAL
+  // useEffect(() => {
+  //   const getCountries = async () =>{
+  //     setCountries({
+  //       ...countries,
+  //       loading: true,
+  //     });
+  //     try{
+  //       let response = await axios.get('https://restcountries.com/v3.1/subregion/South%20America');
+  //       let namesOfCountries = response.data.map(country => country.translations.spa.common);
+  //       namesOfCountries.sort();
+  //       setCountries({
+  //         ...countries,
+  //         names: namesOfCountries,
+  //         loading: false,
+  //       });
+  //     }catch(e){
+  //       console.log(e)
+  //     }
+  //   }
+  //   getCountries();
+  // }, []);
 
-    const getCountries = async () =>{
-      setCountries({
-        ...countries,
-        loading: true,
-      });
-
-      try{
-        let response = await axios.get('https://restcountries.com/v3.1/subregion/South%20America');
-        let namesOfCountries = response.data.map(country => country.translations.spa.common);
-        namesOfCountries.sort();
-        setCountries({
-          ...countries,
-          names: namesOfCountries,
-          loading: false,
-        });
-      }catch(e){
-        console.log(e)
-      }
-    }
-
-    getCountries();
-
-  }, []);
 
   useEffect(() => {
     setErrors(validators(user));
@@ -191,13 +190,13 @@ const Onboarding = () => {
                     <label>Pais</label>
                     <select name="country" value={user.country} onChange={e => handleChange(e)}>
                       <option key={'none'} value='none'>Selecciona un país</option>
-                      {
-                        countries.names.map(country => {
-                          return(
-                            <option value={country} key={country}>{country}</option>
-                          )
-                        })
-                      }
+                      <option value="Argentina">Argentina</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Chile">Chile</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Brasil">Brasil</option>
+                      <option value="Peru">Peru</option>
                     </select>
                     {user.country === 'none' || errors.country === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : ''}
                 </div>

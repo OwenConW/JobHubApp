@@ -21,17 +21,20 @@ export function validators(userInput) {
     }
 
     //Nombre
-    if (/[^a-zA-Z\s]/g.test(userInput.name)) {
+    if(!userInput.name){
+      errors.name = "Este campo es obligatorio";
+    } else if (/[^a-zA-Z\s]/g.test(userInput.name)) {
       errors.name = "No debe contener caracteres especiales";
-    } else if (userInput.name.length >= 1 && !/^[A-Z]/g.test(userInput.name)) errors.name = "Debe empezar con Mayuscula"
+    } else if (userInput.name.length <= 2 ) errors.name = "El nombre debe tener al menos 3 letras"
 
     //Apellido
-    if (/[^a-zA-Z\s]/g.test(userInput.last_Name)) {
+    if(!userInput.last_Name){
+      errors.last_Name = "Este campo es obligatorio";
+    } else if (/[^a-zA-Z\s]/g.test(userInput.last_Name)) {
       errors.last_Name = "No debe contener caracteres especiales";
-    } else if (userInput.last_Name.length >= 1 && !/^[A-Z]/g.test(userInput.last_Name)) errors.last_Name = "Debe empezar con Mayuscula"
+    } else if (userInput.last_Name.length < 2 ) errors.last_Name = "El apellido debe tener al menos 3 letras"
 
     //DNI
-
     if (!userInput.dni) {
       errors.dni = "Este campo es obligatorio";
     }else if (!/^(\d{1,3})\.(\d{3})\.(\d{3})$/g.test(userInput.dni)) {
@@ -41,7 +44,8 @@ export function validators(userInput) {
     //ciudad
     if (/[^a-zA-Z\s]/g.test(userInput.city)) {
         errors.city = "No debe contener caracteres especiales";
-      } else if (userInput.city.length >= 1 && !/^[A-Z]/g.test(userInput.city)) errors.city = "Debe empezar con Mayuscula"
+      }
+      //  else if (userInput.city.length >= 1 && !/^[A-Z]/g.test(userInput.city)) errors.city = "Debe empezar con Mayuscula"
 
 
     return errors;

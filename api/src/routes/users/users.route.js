@@ -32,6 +32,23 @@ users.get("/all", async (req, res, next)=>{
     }
 })
 
+//RUTA PARA VALIDAR SI EL DNI EXISTE EN BASE DE DATOS
+users.get('/searchDni', async (req, res, next) =>{
+    const { dni } = req.body
+    try {
+        const findDni = await User.findOne({
+            where:{ dni: dni }
+        })
+        console.log('ESTA ES LA RESPUESTA DE FINDDNI',findDni)
+
+        findDni ? res.status(200).send('El DNI ingresado ya esta registrado en nuestra base de datos') 
+        : res.status(200).send('El DNI ingresado puede ser utilizado')
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
     const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession } = req.body;
@@ -204,6 +221,8 @@ users.put('/subscription/:id', async (req, res, next) =>{
         next (error)
     }
 })
+
+
 
 
 
