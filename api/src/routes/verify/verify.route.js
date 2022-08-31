@@ -8,7 +8,9 @@ const verify = Router()
 verify.get("/", (req, res, next) => {
     const { mail } = req.query;
     if(mail){
-        User.findOne({where: {mail}})
+        User.findOne({
+            where: {mail}
+        })
         .then(user => {
             return user ? res.send({user: user, onboarding: false}) : res.send({onboarding: true})
         })
