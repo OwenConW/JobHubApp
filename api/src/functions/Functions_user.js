@@ -169,6 +169,10 @@ const filterByQueris = async(name, profession, rating) => {
     }
 }
 
+// GET ALL USER ADMIN
+const getAllUsersAdmin = async (name, last_Name, profession ) => {
+
+}
 
 // GET PROFESSIONAL BY ID
 const getProffesionalById = async(id) => {
