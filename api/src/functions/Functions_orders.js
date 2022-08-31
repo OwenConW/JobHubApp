@@ -29,7 +29,7 @@ const getAllOrdersByProfessional = async (id) =>{
             include:[
                 {
                     model: Orders,
-                    attributes: ['id','id_user_client','description', 'complete', 'date_created', 'apointment_date', 'allowReview'],
+                    attributes: ['id', 'id_user_professional','id_user_client','description', 'complete', 'date_created', 'apointment_date', 'allowReview'],
                     through: {attributes: []}
                 }
             ]

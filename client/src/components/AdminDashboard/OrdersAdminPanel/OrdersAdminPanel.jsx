@@ -39,11 +39,6 @@ function OrdersAdminPanel(props) {
     //dispatch(getOrderByIdForAdmin(searchByIdInput.order_id));
   }
 
-  useEffect(() => {
-    console.log(searchByIdInput);
-  }, [searchByIdInput])
-  
-
   return (
     <div className={s.cardsContainer}>
       <form onSubmit={handleSearchOrderByIdSubmit}>
