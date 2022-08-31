@@ -13,13 +13,12 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  @import "_component.scss";
 }
 
 .font-weight-bold {
   font-weight: 700;
 }
 
-
+@import "component";
 @import "faq";
 @import "animation";
