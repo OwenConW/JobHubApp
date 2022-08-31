@@ -30,7 +30,8 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
     }
 
     // SUBMIT DE LA ORDEN
-    const handleConfirm = () => {
+    const handleConfirm = (e) => {
+        e.preventDefault()
         Swal.fire({
             title: 'Seguro?',
             text: "Al completar, habilitas al cliente a puntuarte.",
@@ -43,12 +44,11 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
         }).then((result) => {
             let body = {
                 description: orderDescription.description,
-                complete: true,
+                complete: false,
                 allowReview: true,
                 appointment_date: orderDescription.appointment_date.slice(0,10).split('-').reverse().join("-"),
                 // isActive: true,
             }
-            console.log(body)
             if (result.isConfirmed) {
                 axios.put(`/orders/${order.id}`, body).then(() => setProf(profOrders.filter(p => p.id !== order.id)))
                     .then(() => Swal.fire({
@@ -61,8 +61,34 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
         })
     }
 
-    const handleCancel = () => {
-
+    const handleCancel = (e) => {
+        e.preventDefault()
+        Swal.fire({
+            title: 'Seguro?',
+            text: "Al cancelar, daras por cerrada la orden. Ademas, el cliente no podra puntuarte",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#2C666E',
+            cancelButtonColor: '#4e4e4e',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Confirmar'
+        }).then((result) => {
+            let body = {
+                complete: true,
+                allowReview: false,
+                isActive: false,
+            }
+            console.log('body: ', body)
+            if (result.isConfirmed) {
+                axios.put(`/orders/${order.id}`, body).then(() => setProf(profOrders.filter(p => p.id !== order.id)))
+                    .then(() => Swal.fire({
+                        title: 'Genial!',
+                        text: "La orden fue cancelada",
+                        icon: 'success',
+                        confirmButtonColor: '#2C666E',
+                    }))
+            }
+        })
     }
 
 
@@ -132,8 +158,8 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
                     </div>
                     <div className={s.submit}>
                         {/* {loading ? <Loader/> : } */}
-                        <button className={s.btnSubmit} type='submit'>Cancelar</button>
-                        <button className={s.btnSubmit} type='submit' onClick={handleConfirm}>Completar</button>
+                        <button className={s.btnSubmit} type='submit'onClick={(e) => handleCancel(e)}>Cancelar</button>
+                        <button className={s.btnSubmit} type='submit' onClick={(e) => handleConfirm(e)}>Completar</button>
                         {/* {error ? <p>{error}</p> : ''} */}
                     </div>
                 </form>

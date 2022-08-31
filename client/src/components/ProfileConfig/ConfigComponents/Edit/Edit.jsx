@@ -240,10 +240,13 @@ const Edit = () => {
 
 
       {/*VER DESPUES COMO ES EL TEMA DE CAMBIO DE MAIL*/}
-      {/* <div className={s.inputDiv}>
+      <div className={s.inputDiv}>
         <div>Mail</div>
+        <div className={s.errorInput}>
         <input placeholder="mail" name='mail' value={user.mail} onChange={(event) => handleChange(event)}></input>
-      </div> */}
+        {errors.last_Name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.last_Name ? <p className={s.error}>{errors.last_Name}</p> : '')}
+        </div>
+      </div>
 
       <div className={s.inputDiv}>
         <div>Telefono</div>
