@@ -30,20 +30,15 @@ const Catalog = (props) => {
 	let professionalsArray = useSelector(
 		(state) => state.users.filteredProfessionals
 	);
-    const [proffesionalsPerPage, setProffesionalsPerPage] = useState(6) 
-	const setPages = () => {
-		let pages = Math.ceil(professionalsArray.length / proffesionalsPerPage);
-		return parseInt(pages);
-	}
-    const [activePages, setActivePages] = useState(setPages)
-	const [currentPage, setCurrentPage] = useState(1) 
-    const iOfLastProfessional = currentPage * proffesionalsPerPage
-    const iOfFirstProfessional = iOfLastProfessional - proffesionalsPerPage
-    const currentProffesionals = professionalsArray.slice(iOfFirstProfessional, iOfLastProfessional) 
-	const [filters, setFilters] = useState({name:"", profession:"", rating:""}) 
-	const [nameInputValue, setNameInputValue] = useState('') 
+    const [activePages, setActivePages] = useState(0)
+	const [currentPage, setCurrentPage] = useState(1)
+    const iOfLastProfessional = currentPage * 6
+    const iOfFirstProfessional = iOfLastProfessional - 6
+    const currentProffesionals = professionalsArray.slice(iOfFirstProfessional, iOfLastProfessional)
+	const [filters, setFilters] = useState({name:"", profession:"", rating:""})
+	const [nameInputValue, setNameInputValue] = useState('')
 	const dispatch = useDispatch();
-	
+
 	function addFilterValue(targetName, value) {
 
 		if (targetName === "name") {
@@ -64,11 +59,22 @@ const Catalog = (props) => {
 		}))
     }
 
+
+	const setPages = () => {
+		let pages = Math.ceil(professionalsArray.length / 6);
+		return parseInt(pages);
+	}
+
     useEffect(() => {
 	    dispatch(getChars());
+		setActivePages(setPages);
 	    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+	useEffect(() => {
+		setActivePages(setPages);
+	    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [professionalsArray]);
 
     function handleReset() {
 	    setFilters({name:"", profession:"", rating:""})
