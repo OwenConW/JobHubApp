@@ -59,8 +59,8 @@ const Onboarding = () => {
 
   const [image, setImage] = useState("");
   const [isUpload, setIsUpload] = useState({
-     done: '',
-     loading: false,
+    done: '',
+    loading: false,
   });
 
 
