@@ -35,11 +35,11 @@ export function validators(userInput) {
     } else if (userInput.last_Name.length < 2 ) errors.last_Name = "El apellido debe tener al menos 3 letras"
 
     //DNI
-    // if (!userInput.dni) {
-    //   errors.dni = "Este campo es obligatorio";
-    // }else if (!/^(\d{1,3})\.(\d{3})\.(\d{3})$/g.test(userInput.dni)) {
-    //   errors.dni = "El formato del DNI debe ser solo numeros separados por puntos.";
-    // }
+    if (!userInput.dni) {
+      errors.dni = "Este campo es obligatorio";
+    }else if (!/^\d+$/.test(userInput.dni)) {
+      errors.dni = "El formato del DNI debe ser solo numeros sin puntos.";
+    }
 
     //ciudad
     if (/[^a-zA-Z\s]/g.test(userInput.city)) {
