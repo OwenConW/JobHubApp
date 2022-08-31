@@ -33,3 +33,21 @@
         }
     }
 }
+
+//smarthphones
+@media screen and (max-width: 700px) {
+
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .profContainer, .clientContainer{
+            width: 90%;
+            height: 45%;
+            h4{
+                font-size: 2.8rem;  
+            }
+        }
+    }
+}
