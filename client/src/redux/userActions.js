@@ -47,8 +47,19 @@ export const filterProfessionals = (filters) => (dispatch) => {
 		.catch((e) => console.log(e));
 };
 
+
+
+
+//FUNCIONES QUE NO SON ACCIONES PERO QUEDABA BIEN METER ACA
+
 export const modifyUser = (id, payload) => {
 	axios.put(`/users/edit/${id}`, payload);
+	getLocalStorage()
+}
+
+
+export const setInactiveUser = (id, payload) => {
+	axios.put(`/users/destroy/${id}`, payload);
 	getLocalStorage()
 }
 

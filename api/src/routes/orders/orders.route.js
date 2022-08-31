@@ -30,6 +30,7 @@ orders.post("/", async (req, res, next) =>{
 
 orders.put("/:id", async (req, res, next) =>{
     const { description, complete, apointment_date, allowReview } = req.body;
+    console.log('description desde el back', description)
     const { id } = req.params;
     try {
         functions.updateOrden(id, description, complete, apointment_date, allowReview)

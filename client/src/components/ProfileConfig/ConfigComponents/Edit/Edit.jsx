@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
-import { modifyUser } from "../../../../redux/userActions";
+import { modifyUser, setInactiveUser } from "../../../../redux/userActions";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 
@@ -138,51 +138,81 @@ const Edit = () => {
 
 
 
-  const handleSubmit = async () => {
-    let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${user.address},${user.street},${user.city},${user.country}&format=json`);
-    if (!response.data.length) {
-      setErrorGeometry({
-        error: 'Verifica la dirección.',
-        loading: false,
+  const handleSubmit = async (event) => {
+    if(event.target.value === 'Confirmar'){
+      let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${user.address},${user.street},${user.city},${user.country}&format=json`);
+      if (!response.data.length) {
+        setErrorGeometry({
+          error: 'Verifica la dirección.',
+          loading: false,
+        })
+      } else {
+        setUser({
+          ...user,
+          coordinate: [response.data[0].lat, response.data[0].lon]
+        })
+      }
+  
+  
+      let newValues = {
+        ...localSt,
+        name: user.name.toLowerCase(),
+        last_Name: user.last_Name.toLowerCase(),
+        description: user.description,
+        dni: user.dni,
+        image: user.image,
+        date_of_Birth: user.date_of_Birth,
+        mail: user.mail,
+        phone: user.phone,
+        country: user.country,
+        city: user.city,
+        coordinate: [response.data[0].lat, response.data[0].lon],
+        street: user.street,
+        address: user.address,
+        isProfessional: user.isProfessional,
+        professions: user.professions,
+      }
+      console.log('coordenada new values', newValues.coordinate)
+      setUserLocalStorage(newValues)
+  
+      modifyUser(activeUser.id, user)
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Cambios Guardados',
+        showConfirmButton: false,
+        timer: 1500
       })
-    } else {
-      setUser({
-        ...user,
-        coordinate: [response.data[0].lat, response.data[0].lon]
+  
+      navigate("./")
+    }
+    if(event.target.value === 'Eliminar Cuenta'){
+      Swal.fire({
+        title: 'Estas seguro de que quieres eliminar tu cuenta?',
+        text: "Podras restaurar tu cuenta mas adelante si asi lo deseas",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, quiero eliminarla',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        
+        if (result.isConfirmed) {
+          setInactiveUser(activeUser.id, {isActive: false})
+          setUserLocalStorage({})
+          Swal.fire(
+            'Cuenta Eliminada!',
+            'Esperamos que vuelvas pronto',
+            'success'
+          )
+          
+        }
+
+       
       })
     }
     
-
-    let newValues = {
-      ...localSt,
-      name: user.name.toLowerCase(),
-      last_Name: user.last_Name.toLowerCase(),
-      description: user.description,
-      dni: user.dni,
-      image: user.image,
-      date_of_Birth: user.date_of_Birth,
-      mail: user.mail,
-      phone: user.phone,
-      country: user.country,
-      city: user.city,
-      coordinate: user.coordinate,
-      street: user.street,
-      address: user.address,
-      isProfessional: user.isProfessional,
-      professions: user.professions,
-    }
-   setUserLocalStorage(newValues)
-  
-   modifyUser(activeUser.id, user)
-
-   Swal.fire({
-    icon: 'success',
-    title: 'Cambios Guardados',
-    showConfirmButton: false,
-    timer: 1500
-  })
-  
-  navigate("./")
   }
   // console.log('entre a Edit')
   // console.log('activeuser: ', activeUser)
@@ -194,16 +224,16 @@ const Edit = () => {
       <div className={s.inputDiv}>
         <div>Nombre</div>
         <div className={s.errorInput}>
-        <input placeholder="Nombre" name="name" value={user.name} onChange={(event) => handleChange(event)}></input>
-        {errors.name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.name ? <p className={s.error}>{errors.name}</p> : '')}
-      </div>
+          <input placeholder="Nombre" name="name" value={user.name} onChange={(event) => handleChange(event)}></input>
+          {errors.name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.name ? <p className={s.error}>{errors.name}</p> : '')}
+        </div>
       </div>
 
       <div className={s.inputDiv}>
         <div>Apellido</div>
         <div className={s.errorInput}>
-        <input placeholder="Apellido" name='last_Name' value={user.last_Name} onChange={(event) => handleChange(event)}></input>
-        {errors.last_Name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.last_Name ? <p className={s.error}>{errors.last_Name}</p> : '')}
+          <input placeholder="Apellido" name='last_Name' value={user.last_Name} onChange={(event) => handleChange(event)}></input>
+          {errors.last_Name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.last_Name ? <p className={s.error}>{errors.last_Name}</p> : '')}
         </div>
       </div>
 
@@ -218,16 +248,16 @@ const Edit = () => {
       <div className={s.inputDiv}>
         <div>Telefono</div>
         <div className={s.errorInput}>
-        <input placeholder="Telefono" name='phone' value={user.phone} onChange={(event) => handleChange(event)}></input>
+          <input placeholder="Telefono" name='phone' value={user.phone} onChange={(event) => handleChange(event)}></input>
         </div>
       </div>
 
       <div className={s.inputDiv}>
         <div>DNI</div>
         <div className={s.errorInput}>
-        <input placeholder="dni" name='dni' value={user.dni} onChange={(event) => handleChange(event)}></input>
-        {errors.dni === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.dni ? <p className={s.error}>{errors.dni}</p> : '')}
-      </div>
+          <input placeholder="dni" name='dni' value={user.dni} onChange={(event) => handleChange(event)}></input>
+          {errors.dni === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.dni ? <p className={s.error}>{errors.dni}</p> : '')}
+        </div>
       </div>
 
 
@@ -250,25 +280,25 @@ const Edit = () => {
       <div className={s.inputDiv}>
         <div>Ciudad</div>
         <div className={s.errorInput}>
-        <input placeholder="Ciudad" name='city' value={user.city} onChange={(event) => handleChange(event)}></input>
-        {errors.city === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.city ? <p className={s.error}>{errors.city}</p> : '')}
-      </div>
+          <input placeholder="Ciudad" name='city' value={user.city} onChange={(event) => handleChange(event)}></input>
+          {errors.city === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.city ? <p className={s.error}>{errors.city}</p> : '')}
+        </div>
       </div>
 
       <div className={s.inputDiv}>
         <div>Calle</div>
         <div className={s.errorInput}>
-        <input placeholder="Calle" name='street' value={user.street} onChange={(event) => handleChange(event)}></input>
-        {errors.street === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.street ? <p className={s.error}>{errors.street}</p> : '')}
-      </div>
+          <input placeholder="Calle" name='street' value={user.street} onChange={(event) => handleChange(event)}></input>
+          {errors.street === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.street ? <p className={s.error}>{errors.street}</p> : '')}
+        </div>
       </div>
 
       <div className={s.inputDiv}>
         <div>Número</div>
         <div className={s.errorInput}>
-        <input placeholder="Tu direccion" name='address' value={user.address} onChange={(event) => handleChange(event)}></input>
-        {errors.address === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.address ? <p className={s.error}>{errors.address}</p> : '')}
-      </div>
+          <input placeholder="Tu direccion" name='address' value={user.address} onChange={(event) => handleChange(event)}></input>
+          {errors.address === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.address ? <p className={s.error}>{errors.address}</p> : '')}
+        </div>
       </div>
 
       <div className={s.inputDiv}>
@@ -280,8 +310,12 @@ const Edit = () => {
         <div>Descripcion</div>
         <textarea className={s.description} placeholder="Descripcion personal" name='description' value={user.description} onChange={(event) => handleChange(event)}></textarea>
       </div>
+      <div className={s.submitButtons}>
+        <input type="submit" value='Eliminar Cuenta' className={s.disable} onClick={handleSubmit} />
 
-      <input type="submit" value='Confirmar' className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
+        <input type="submit" value='Confirmar' className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
+      </div>
+
 
     </div>
   )
