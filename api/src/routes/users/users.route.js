@@ -168,7 +168,7 @@ users.put('/premium/:id', async (req, res, next) => {
 //RUTA PARA ELIMINAR LOGICAMENTE AL USUARIO
 users.put('/destroy/:id', async (req, res, next) => {
     const { id } = req.params;
-    const { isActive } = req.body
+    const { isActive } = req.body;
     try {
         await functions.destroyUser( id, isActive )
         res.status(200).send(`The user was successfully deleted`)
@@ -177,6 +177,34 @@ users.put('/destroy/:id', async (req, res, next) => {
         next (error)
     }
 })
+
+//RUTA PARA ACTUALIZAR EL ID DE SUSCRIPCION CON FECHA ACTUAL Y VENCIMIENTO
+users.put('/subscription/:id', async (req, res, next) =>{
+    const { id } = req.params;
+    const { preapproval_id } = req.body;
+    let actualDate = new Date();
+    let day = actualDate.getDate();
+    let month = actualDate.getMonth() + 1;
+    let year = actualDate.getFullYear();
+    let nextYear = year +1 
+    
+    try {
+        await User.update({
+            preapproval_id,
+            payment_date: (`${day}-${month}-${year}`),
+            expiration_date: (`${day}-${month}-${nextYear}`)
+        },{
+            where:{
+                id,
+            }
+        })
+        res.status(200).send("subscription expiration date updated")
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
 
 
 module.exports = users;

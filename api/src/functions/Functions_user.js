@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
-const { User, Profession, Review, Orders } = require("../db")
+const { User, Profession, Review, Orders, Subscription } = require("../db");
+
 
 // GET PROFESSIONAL BY NAME AND FILTER BY PROFESSION AND/OR RATING
 // const filterByQueris = async(name, profession, rating) => {
@@ -187,7 +188,7 @@ const getProffesionalById = async(id) => {
                     model: Orders,
                     attributes: ['id_user_client','description', 'complete'],
                     through: {attributes: []},
-                }
+                },
             ]
         })
         return users
@@ -291,6 +292,7 @@ const updateUserNoJobs = async (id, name, last_Name, date_of_Birth, image, dni, 
 
 
 
+
 module.exports = {
     filterByQueris,
     getProffesionalById,
@@ -299,6 +301,7 @@ module.exports = {
     updatePremium,
     destroyUser,
     updateUserNoJobs,
+    
 
 }
 

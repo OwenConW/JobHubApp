@@ -10,4 +10,6 @@ pagos.post("/premium", (req, res, next) => {
     PaymentInstance.getSubscriptionLink(req, res)
 })
 
+
+
 module.exports = pagos;
