@@ -32,6 +32,57 @@ users.get("/all", async (req, res, next)=>{
     }
 })
 
+//RUTA PARA VALIDAR SI EL DNI EXISTE EN BASE DE DATOS
+users.get('/searchDni', async (req, res, next) =>{
+    const { dni } = req.query 
+    try {
+        const findDni = await User.findOne({
+            where:{ dni: dni }
+        })
+
+        findDni 
+        ? res.status(201).send(`El DNI ya esta registrado en nuestra base de datos`) 
+        : res.status(200).send('El DNI ingresado puede ser utilizado')
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
+//RUTA PARA VALIDAR SI EL MAIL EXISTE EN BASE DE DATOS CUANDO EL USUARIO UPDATE
+users.get('/searchMail', async (req, res, next) =>{
+    const { mail } = req.query 
+    try {
+        const findMail = await User.findOne({
+            where:{ mail: mail }
+        })
+
+        findMail 
+        ? res.status(201).send(`El email "${mail}" ingresado ya esta registrado en nuestra base de datos`) 
+        : res.status(200).send('El Mail ingresado puede ser utilizado')
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
+//RUTA PARA FILTRAR TODOS LOS USUARIOS ADMIN
+users.get("/filter", async (req, res, next) => {
+    const { name, last_Name, profession } = req.body;
+    
+    try {
+        const options = await functions.getAllUsersAdmin( name, last_Name, profession )
+console.log('ESTE ES EL OBJETO OPTION', options)
+        const filter = await User.findAll(options)
+console.log('ESTE ES EL OBJETO FILTER', filter)
+        res.status(200).json(filter)
+        
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
     const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession } = req.body;
@@ -89,6 +140,7 @@ users.put('/:id', async (req, res, next) => {
     const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
+    const mailMinuscule = mail.toLowerCase();
     try {
 
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
@@ -106,7 +158,7 @@ users.put('/:id', async (req, res, next) => {
             date_of_Birth,
             image,
             dni,
-            mail,
+            mail: mailMinuscule,
             phone,
             description,
             country,
@@ -204,6 +256,8 @@ users.put('/subscription/:id', async (req, res, next) =>{
         next (error)
     }
 })
+
+
 
 
 
