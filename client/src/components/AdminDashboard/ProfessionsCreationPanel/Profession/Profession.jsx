@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import DeleteModal from './DeleteModal/DeleteModal';
 
 export default function Profession(props) {
@@ -14,8 +14,6 @@ export default function Profession(props) {
     <div>
       {openDeleteModal ? <DeleteModal name={name} id={id} handleOpenDeleteModal={handleOpenDeleteModal}/> : null}
       <button onClick={handleOpenDeleteModal}>{name}</button>
-
-      
     </div>
   )
 }

@@ -67,7 +67,13 @@ export const getUsersByIdForAdmin = (id) => (dispatch) => {
     .catch(e => console.error(e))
 }
 
-
+export const getUsersByFilterForAdmin = (payload) => (dispatch) => {
+  axios.get(`/users/filter`, payload)
+    .then((res) => {
+      dispatch(getAllUsers(res.data))
+    })
+    .catch(e => console.error(e))
+}
 
 export const deleteUser = (id) => (dispatch) => {
   //setea el estado a TRUE, para hacerle saber al usuario que se esta "trabajando" (loading...)

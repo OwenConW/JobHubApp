@@ -25,11 +25,13 @@ function ProfessionsCreationPanel(props) {
     <div>
       <h1>Eliminar profesión</h1>
       <div>
-        {professions?.map(p => {
+        {professions.length ? professions?.map(p => {
           return(
             <Profession {...p}/>
           )
-        })}
+        }) :
+        <h1>No hay profesiones existentes.</h1>
+        }
       <h1>Crear Profesión</h1>
       <form onSubmit={handleProfessionCreationSubmit}>
         <label htmlFor="profession_name">Nombre de la profesión</label>

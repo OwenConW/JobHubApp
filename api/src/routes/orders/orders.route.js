@@ -18,7 +18,7 @@ orders.get("/all", async (req, res, next)=>{
 })
 
 orders.post("/", async (req, res, next) =>{
-    const { id_user_professional, id_user_client  } = req.body;
+    const { id_user_professional, id_user_client } = req.body;
     try {
         if( id_user_professional && id_user_client ){
             const newOrder = await Orders.create({

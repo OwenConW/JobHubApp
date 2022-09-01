@@ -7,7 +7,8 @@ import { getAllUsersForAdmin,
          actionFetchingAdminRestoreUserReset,
          actionFetchingAdminDeleteReviewReset,
          actionFetchingAdminDeleteOrderReset,
-         actionFetchingAdminCreateProfessionReset } from '../../redux/adminActions';
+         actionFetchingAdminCreateProfessionReset,
+         actionFetchingAdminDeleteProfessionReset } from '../../redux/adminActions';
 import { actionGetAllJobs } from "../../redux/jobActions";
 import { useDispatch, useSelector } from "react-redux";
 import s from './AdminDashboard.module.scss'
@@ -19,7 +20,7 @@ import ProfessionsCreationPanel from "./ProfessionsCreationPanel/ProfessionsCrea
 
 function AdminDashboard() {
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("professionsPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -128,7 +129,7 @@ function AdminDashboard() {
     } else if (fetchingAdminDeleteProfessionFailure) {
       alert('Hubo un error al eliminar la profesion')
     }
-    dispatch(actionFetchingAdminCreateProfessionReset())
+    dispatch(actionFetchingAdminDeleteProfessionReset())
   }, [fetchingAdminDeleteProfessionSuccess,fetchingAdminDeleteProfessionFailure])
 
   return (
@@ -141,8 +142,8 @@ function AdminDashboard() {
           <button onClick={handlePanelChange} value="reviewsPanel">Reseñas</button>
           <button onClick={handlePanelChange} value="ordersPanel">Ordenes</button>
           <button onClick={handlePanelChange} value="professionsPanel">Profesiones</button>
-          <button onClick={handlePanelChange} value="difussionPanel">Difusión</button>
-          <button onClick={handlePanelChange} value="statsPanel">Estadisticas</button>
+          {/* <button onClick={handlePanelChange} value="difussionPanel">Difusión</button> */}
+          {/* <button onClick={handlePanelChange} value="statsPanel">Estadisticas</button> */}
         </div>
 
         <div className={s.searchByNameAndUsersContainer}>
@@ -151,8 +152,8 @@ function AdminDashboard() {
             panelDiplayed === "usersPanel" ? <UsersAdminPanel users={users}/> :
             panelDiplayed === "reviewsPanel" ? <ReviewsAdminPanel reviews={reviews} /> :
             panelDiplayed === "ordersPanel" ? <OrdersAdminPanel orders={orders} /> : 
-            panelDiplayed === "professionsPanel" ? <ProfessionsCreationPanel professions={professions} /> :
-            panelDiplayed === "difussionPanel" ? <DifussionAdminPanel /> : null
+            panelDiplayed === "professionsPanel" ? <ProfessionsCreationPanel professions={professions} /> : null
+            // panelDiplayed === "difussionPanel" ? <DifussionAdminPanel /> : null
           }
           
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import s from './UsersAdminPanel.module.scss'
 import DashboardUserCard from "../UsersAdminPanel/DashboardUserCard/DashboardUserCard";
-import { getAllUsersForAdmin, getUsersByIdForAdmin } from '../../../redux/adminActions'
+import { getAllUsersForAdmin, getUsersByIdForAdmin, getUsersByFilterForAdmin } from '../../../redux/adminActions'
 import { actionGetAllJobs } from '../../../redux/jobActions'
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -38,10 +38,9 @@ function UsersAdminPanel(props) {
   //funcion submit del form por ID
   function handleSearchUserByFilterSubmit(e) {
     e.preventDefault();
-    //if(!searchByFiltersInput) return
-    console.log('que miras?');
+    if(!searchByFiltersInput) return
+    dispatch(getUsersByFilterForAdmin(searchByFiltersInput))
   }
-  
 
   //funcion submit del form por ID
   function handleSearchUserByIdSubmit(e) {
@@ -49,8 +48,6 @@ function UsersAdminPanel(props) {
     if(!searchByIdInput) return
     dispatch(getUsersByIdForAdmin(searchByIdInput));
   }
-
-
 
   return(
     <div>
@@ -69,6 +66,8 @@ function UsersAdminPanel(props) {
         <form onSubmit={handleSearchUserByFilterSubmit}>
           <label htmlFor="name">Nombre</label>
           <input type="text" name="name" onChange={handleSearchUserByFilter} />
+          <label htmlFor="last_Name">Apellido</label>
+          <input type="text" name="last_Name" onChange={handleSearchUserByFilter} />
           <label htmlFor="profession">Profesión</label>
           <select name="profession" onChange={handleSearchUserByFilter}>
             <option value=''>Todas las profesiones</option>

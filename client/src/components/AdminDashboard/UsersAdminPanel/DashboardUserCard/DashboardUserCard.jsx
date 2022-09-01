@@ -56,10 +56,6 @@ function DashboardUserCard(props) {
     setEditModalActive(!editModalActive)
   }
 
-  // useEffect(() => {
-  //   dispatch(actionFetchingAdminDeleteUserReset())
-  // }, [dispatch, props])
-
   return (
     <div className={`${s.cardContainer} ${openModal ? s.openModal : null}`}>
       {editModalActive? <EditModal handleEditOpenModal={handleEditOpenModal} editModalActive={editModalActive} {...props}/> : null}
