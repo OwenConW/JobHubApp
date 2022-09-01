@@ -72,9 +72,9 @@ users.get("/filter", async (req, res, next) => {
     
     try {
         const options = await functions.getAllUsersAdmin( name, last_Name, profession )
-console.log('ESTE ES EL OBJETO OPTION', options)
+        //console.log('ESTE ES EL OBJETO OPTION', options)
         const filter = await User.findAll(options)
-console.log('ESTE ES EL OBJETO FILTER', filter)
+        //console.log('ESTE ES EL OBJETO FILTER', filter)
         res.status(200).json(filter)
         
     } catch (error) {
@@ -251,6 +251,19 @@ users.put('/subscription/:id', async (req, res, next) =>{
             }
         })
         res.status(200).send("subscription expiration date updated")
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
+users.put('/myjobs/:id', async (req, res, next) =>{
+    const { id } = req.params;
+    const { obj } = req.body;
+    try {
+        const photos = await functions.updatePhotos(id, obj)
+        console.log('ESTO ES LO QUE LLEGA A RUTAS DEL FRONT', photos)
+        res.status(201).send('La galeria de fotos se actualizo correctamente')
     } catch (error) {
         console.log(error);
         next (error)
