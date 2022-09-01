@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
+import { getLocalStorage } from '../../handlers/localStorage';
+import axios from 'axios';
 
 import s from './scss/Support.module.scss';
 
@@ -15,31 +17,45 @@ function validate(input) {
   return errors;
 }
 
-function handleSubmit(e) {  
-  // if(Object.keys(errors).length === 0) { 
-  //   e.preventDefault()
-  //   dispatch(postRecipe(input))
-  //   alert('Gracias, hemos recibido su problema!')
-  //   setInput({                          
-      
-  //   })
-
-  // }
-  // e.preventDefault()
-}
-
 var asuntos = [
-  "Agregar un nuevo oficio que no aparece en el catálogo o en mi perfil",
-  "Quiero denunciar a un cliente",
-  "Quiero denunciar a un profesional"
+  "Quiero agregar un oficio que no está",
+  "Quiero reportar a un usuario"
 ];
 
 const Support = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userIDreported = useHistory().location.state
   const [errors, setError] = useState({})
+  const id = getLocalStorage().id;
+  const name = getLocalStorage().name;
+  const last_name = getLocalStorage().last_name;
+  const [msgSupport, setMsgSupport] = useStateWithCallbackLazy({
+    userID: id ? id :  "000",
+    name: name ? name : "",
+    last_Name: last_name ? last_name : "",
+    // userIDreported: userIDreported ? userIDreported.id : "",
+    subject: userIDreported ? asuntos[1] : "",
+    description: ""
+  })
   
+  function handleSubmit(e) {  
+    if(Object.keys(errors).length === 0) { 
+      e.preventDefault()
+      alert('Gracias, hemos recibido su problema!')
+      setMsgSupport({
+        userID: "",
+        name: "",
+        last_Name: "",
+        // userIDreported: "",                          
+        subject: "",
+        description: "",
+      })
+      navigate("../home", { replace: true });
+    }
+    e.preventDefault()
+  }
 
   return (
     <>
