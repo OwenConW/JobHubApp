@@ -9,7 +9,7 @@ export default function FormReturn(){
     
     const user = functions.getLocalStorage()    
     const [loading, setLoading] = React.useState(null)
-    const [seconds, setSeconds] = React.useState(12)
+    const [seconds, setSeconds] = React.useState(6)
     const [reset, setReset] = React.useState(null)
     const navigate = useNavigate();
 
@@ -22,12 +22,13 @@ export default function FormReturn(){
                 title: 'Oh no...',
                 html:'<h2>Debes aceptar todos los requerimientos antes de recuperar tu cuenta!</h2>',
                 width: 600,
-                height: 400,
                 padding: '3em',
                 color: '#dfdddd',
                 background: '#2C666E',
                 backdrop: `
-                rgba(172,172,172,0.5424720913756127)`
+                rgba(172,172,172,0.5424720913756127)`,
+                confirmButtonColor: '#e36f6f',
+                confirmButtonText: "Volver"
             })
               
         }else{
@@ -36,7 +37,6 @@ export default function FormReturn(){
                 title: "Lo haremos!",
                 html: '<h2>Intentando recuperar tus datos!</h2>',
                 width: 600,
-                height: 400,
                 padding: '3em',
                 color:'#dfdddd',
                 background: '#2C666E',
@@ -52,13 +52,12 @@ export default function FormReturn(){
         setTimeout(() => {
             if(seconds === 0){
                 setLoading(null)
-                setSeconds(12)
+                setSeconds(6)
                 axios.get(`/verify?mail=${user.mail}`)
                 .then(res => {
                     setReset(res.data)
-                    console.log("LISTO: ",res)
                 })
-            }else if(seconds !== 12){
+            }else if(seconds !== 6){
                 setSeconds(seconds -  1)
             }
         }, 1000);
@@ -72,7 +71,7 @@ export default function FormReturn(){
                 title: 'Lo sentimos :(',
                 html:'<h2>No ha sido posible recuperar tus datos, porfavor vuelve a registrarte</h2>',
                 width: 600,
-                height: 400,
+                heigh: 400,
                 padding: '3em',
                 color: '#dfdddd',
                 background: '#2C666E',
@@ -83,10 +82,10 @@ export default function FormReturn(){
         }else if(reset?.onboarding === false){
             Swal.fire({
                 icon: 'success',
-                title: `Bienvenido de vuelta ${reset?.user.mail || "Owen"}`,
-                text: 'Porfavor no vuelvas a abandonarnos',
+                title: `Bienvenido de vuelta ${reset?.user.name}`,
+                html: '<h2>Porfavor no vuelvas a abandonarnos</h2>',
                 width: 600,
-                height: 400,
+                heigh: 400,
                 padding: '3em',
                 color: '#dfdddd',
                 background: '#2C666E',
@@ -94,6 +93,7 @@ export default function FormReturn(){
                 rgba(172,172,172,0.5424720913756127)`
               })
             functions.setUserLocalStorage(reset?.user)
+            axios.put(`/destroy/${reset?.user.id}`, {isActive: true})
             navigate("/home")
         }
     }, [reset])
@@ -102,7 +102,7 @@ export default function FormReturn(){
         <>
         <div className="contenedor">
             <div className="title">
-                <h1>{`Bienvenido devuelta ${user?.mail || "owen"}! `}<br></br>¿Estas pensando en reactivar tu cuenta?</h1>
+                <h1>{`Bienvenido devuelta ${user?.mail}! `}<br></br>¿Estas pensando en reactivar tu cuenta?</h1>
             </div>
             <div>
                 <h2 className="remember">Te recordamos que lamentablemente has desactivado tu cuenta...</h2>
