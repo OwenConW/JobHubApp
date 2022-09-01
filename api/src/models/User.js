@@ -97,7 +97,7 @@ module.exports = (sequelize) => {
 		},
 
 		photo_gallery:  {
-			type: DataTypes.JSONB
+			type: DataTypes.ARRAY(DataTypes.STRING)
 		},
 		
 		isAdmin: {

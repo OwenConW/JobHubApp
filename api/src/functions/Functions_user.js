@@ -314,16 +314,20 @@ const updateUserNoJobs = async (id, name, last_Name, date_of_Birth, image, dni, 
     }
 }
 
-// //PRUEBA PARA UPDATEAR UN FUTURO ARRAY DE "MIS TRABAJOS"
-const updatePhotos = async (id, obj) =>{
+//UPDATE  ARRAY DE FOTOS "MIS TRABAJOS"
+const updatePhotos = async (id, photo_gallery) =>{
     try {
+        const userPremium = await User.findByPk(id)
+        //console.log('ESTO ES LO QUE ENCUENTRA',userPremium)
+        if(userPremium.isPremium === false) return "The photos in the gallery were not added because the user is not premium"
         await User.update({
-            coordinate: obj
+            photo_gallery
         },{
             where:{
                 id,
             }
         })
+        return "The photos were successfully added to the gallery"
     } catch (error) {
         console.log(error)
         throw error
