@@ -13,6 +13,7 @@ import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import PremiumModal from "./premiumModal/PremiumModal";
 import * as functions from "../../handlers/localStorage";
 import axios from "axios";
+import defaultimage from '../Navbar/assets/deafultimage.png';
 import { useDispatch, useSelector } from "react-redux";
 import { getChars, getCharsById } from "../../redux/userActions";
 import { useEffect } from "react";
@@ -104,11 +105,11 @@ const Profile = () => {
             {
               activeUser?.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
-              <img src={activeUser.image} className={s.profile_ImgPremium} alt=""></img>
+              <img src={activeUser.image !== 'noimage' ? activeUser.image : defaultimage} className={s.profile_ImgPremium} alt=""></img>
             </div>
               ): (
                 <div className={s.profile_Img_container}>
-                <img src={activeUser.image} className={s.profile_Img} alt=""></img>
+                <img src={activeUser.image !== 'noimage' ? activeUser.image : defaultimage} className={s.profile_Img} alt=""></img>
               </div>
               )
             }
