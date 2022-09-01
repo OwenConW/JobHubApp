@@ -63,7 +63,7 @@ const Home = () => {
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
             <div className={s.cards}>
               {/* {console.log("mejores",bestProffesionals)} */}
-              {bestProffesionals.length ? bestProffesionals.slice(0,3).map((obj, i) => {
+              {bestProffesionals?.length ? bestProffesionals?.slice(0,3).map((obj, i) => {
                   return <FeaturedCard key={i} prop={obj}/>
                 })
               : (

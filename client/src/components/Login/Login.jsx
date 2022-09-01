@@ -14,22 +14,29 @@ import background from './assets/background.svg';
 import axios from 'axios';
 import Loader from './Loader/Loader';
 
+
 const Login = () => {
 
 	const {user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 	const navigate = useNavigate();
 
+//console.log('ESTE OBJETO ES LO QUE LLEGA COMO USERS DE GOOGLE',user)
+//family_name, given_name, picture
 	const handleValidate = async (user, validate) => {
-
 		try{
 			if(validate && user){
 				let response = await axios.get(`/verify?mail=${user.email}`);
 				if(!response.data.onboarding){
-					setUserLocalStorage(response.data.user);
-					navigate("../home", { replace: true });
+					if(response.data.user.isActive === true){
+						setUserLocalStorage(response.data.user);
+						navigate("../home", { replace: true });
+					}else{
+						setUserLocalStorage(response.data.email)
+						navigate("../returnUser", { replace: true })
+					}
 
 				}else{
-					setUserLocalStorage({mail: user.email});
+					setUserLocalStorage({mail: user.email, name: user.given_name, last_name: user.family_name});
 					navigate("../onboarding", { replace: true });
 				}
 			}

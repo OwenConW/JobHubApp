@@ -43,6 +43,21 @@ const getAllReview = async (id) =>{
     }
 }
 
+//FUNCION PARA TRAER TODAS LAS REVIERW DEL CLIENTE
+const getAllReviewByClient = async (id) =>{
+    try {
+        const reviewById = await Review.findAll({
+            where:{
+                id_user_client: id
+            }
+        })
+        return reviewById
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 //FUNCION PARA BUSCAR Y PROMEDIAR EL RATING
 const searchRating = async (id, rating) =>{
     try {
@@ -76,5 +91,6 @@ const searchRating = async (id, rating) =>{
 module.exports = {
     updateReview,
     getAllReview,
-    searchRating
+    searchRating,
+    getAllReviewByClient
 }
