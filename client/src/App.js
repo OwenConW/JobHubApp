@@ -13,6 +13,7 @@ import Chat from "./components/LiveChat/Chat/Chat.jsx"
 import ProfileConfig from './components/ProfileConfig/ProfileConfig';
 import Faq from './components/Faq/Faq';
 import Orders from './components/Orders/Orders';
+import FormReturn from "./components/FormReturn/FormReturn"
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         		<Route exact path="/profile" element={<Profile />}/>
 				<Route exact path="/details/:id" element={<Details />}/>
 				<Route exact path="/onboarding" element={<Onboarding />}/>
+				<Route exact path="/returnUser" element={<FormReturn/>}/>
 				<Route exact path="/chat" element={<Chat/>}/>
         		<Route exact path="/faq" element={<Faq />}/>
 				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
