@@ -54,6 +54,17 @@
           div {
             display: flex;
             flex-direction: row;
+            justify-content: space-evenly;
+            input {
+              width: 60px;
+              height: 30px;
+            }
+            .yesBtn {
+              background-color: green;
+            }
+            .noBtn {
+              background-color: red;
+            }
           }
         }
       }

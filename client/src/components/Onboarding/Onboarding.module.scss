@@ -453,6 +453,7 @@
                         align-items: center;
 
                         .description{
+                            margin-top: 20%;
                             width: 90%;
                             height: 50%;
                         }
@@ -477,8 +478,11 @@
                     }
 
                     .submit{
+                        flex-direction: column;
+                        padding-top: 25px;
+                        justify-content: flex-start;
                         width: 100%;
-                        min-height: 8%;
+                        min-height: 15%;
                         border-radius: 0;
                         font-size: 2.4rem;
                     }

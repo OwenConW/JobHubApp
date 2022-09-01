@@ -7,7 +7,8 @@ import {
   getUserById,
   getReviewByUserProfessionalId,
   getReviewById,
-  getOrdersById
+  getOrdersById,
+  getReviewByUserClientId
 } from './adminSlice.js';
 import {
   fetchingAdminDeleteUser,
@@ -68,8 +69,10 @@ export const getUsersByIdForAdmin = (id) => (dispatch) => {
 }
 
 export const getUsersByFilterForAdmin = (payload) => (dispatch) => {
+  console.log(payload);
   axios.get(`/users/filter`, payload)
     .then((res) => {
+      console.log(res.data);
       dispatch(getAllUsers(res.data))
     })
     .catch(e => console.error(e))
@@ -159,8 +162,8 @@ export const getReviewByUserClientIdForAdmin = (id) => (dispatch) => {
   axios.get(`/review/admin/client/${id}`)
     .then((res) => {
       console.log(res.data);
-      if (!res.data) res.data = { reviews: []}
-      dispatch(getReviewByUserProfessionalId(res.data))
+      if (!res.data) res.data = []
+      dispatch(getReviewByUserClientId(res.data))
     })
     .catch(e => console.error(e))
 }

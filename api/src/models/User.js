@@ -81,6 +81,15 @@ module.exports = (sequelize) => {
 			defaultValue: false,
 			allowNull: false
 		},
+		preapproval_id:{
+            type: DataTypes.STRING,
+        },
+        payment_date:{
+            type: DataTypes.STRING,
+        },
+        expiration_date:{
+			type: DataTypes.STRING,
+        },
 		isProfessional: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,

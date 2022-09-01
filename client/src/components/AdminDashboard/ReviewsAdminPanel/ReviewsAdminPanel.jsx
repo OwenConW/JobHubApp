@@ -67,9 +67,9 @@ function ReviewsAdminPanel(props) {
       <button onClick={getAllReviews}>Traer todas las reseñas</button>
 
       {
-        reviews.length !== 0 ? 
+        reviews?.length !== 0 ? 
         <div className={s.cardsContainer}>  
-              { reviews.length && reviews?.map( r => {
+              { reviews?.length && reviews?.map( r => {
                 return(
                   <ReviewDashboardCard key={r.id} {...r} />
                 )

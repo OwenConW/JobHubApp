@@ -1,30 +1,27 @@
 import React from "react";
-// import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 
-// import Profile from "./components/Profile/Profile";
-// import Login from './components/Login/Login';
-// import Home from './components/Home/Home';
-// import Catalog from './components/Catalog/Catalog';
-// import MapView from './components/Map/MapView';
-// import Details from './components/Details/Details'
-// import Onboarding from "./components/Onboarding/Onboarding";
-
-// import Chat from "./components/LiveChat/Chat/Chat.jsx"
-// import ProfileConfig from './components/ProfileConfig/ProfileConfig';
-// import Faq from './components/Faq/Faq';
-
-
-//import restProvider from 'ra-data-simple-rest';
-//https://jsonplaceholder.typicode.com
+import Profile from "./components/Profile/Profile";
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import Catalog from './components/Catalog/Catalog';
+import MapView from './components/Map/MapView';
+import Details from './components/Details/Details'
+import Onboarding from "./components/Onboarding/Onboarding";
+import Chat from "./components/LiveChat/Chat/Chat.jsx"
+import ProfileConfig from './components/ProfileConfig/ProfileConfig';
+import Faq from './components/Faq/Faq';
+import Orders from './components/Orders/Orders';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
 	return (
 		<div className="App">
-			<AdminDashboard />
-			{/* <Routes>
+			<Routes>
+				<Route exact path="/adminDashboard" element={<AdminDashboard />} />
 				<Route exact path="/" element={<Login />} />
 				<Route exact path="/home" element={<Home />} />
 				<Route exact path="/professionals" element={<Catalog />} />
@@ -35,8 +32,9 @@ function App() {
 				<Route exact path="/chat" element={<Chat/>}/>
 				<Route exact path="/faq" element={<Faq />}/>
 				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
-			</Routes> */}
-
+				<Route exact path="/myorders" element={<Orders/>}/>
+				<Route exact path="/nav" element={<Navbar />} />
+			</Routes>
 		</div>
 	);
 }

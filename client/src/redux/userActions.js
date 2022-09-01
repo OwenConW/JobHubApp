@@ -4,7 +4,7 @@ import {
 	getAllUsers,
 	getUserById,
 	getFilteredProfessionals,
-	setActiveUser
+	// setActiveUser
 } from './userSlice.js';
 
 
@@ -57,7 +57,23 @@ export const modifyProfessions = (id, payload) => {
 	getLocalStorage()
 }
 
-export const changeReview = (id, payload) => {
+export const changeReview = (id, payload) =>  {
 	axios.put(`/review/${id}`, payload);
 	getChars()
 }
+
+export const getDniForm = (dni) =>  async (dispatch) => {
+	try {
+		const json = await axios.get(`/users/searchDni?dni=${dni}`)
+		const response = await json.data
+		dispatch({
+			type: 'GET_DNI_FORM_BY_DNI',
+			payload: response,
+		})
+		return response;
+	} catch (error) {
+		console.log(error)
+	}
+	
+}
+

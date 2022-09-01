@@ -25,6 +25,9 @@ export const adminSlice = createSlice({
     getReviewByUserProfessionalId: (state, action) => {
       state.reviews = action.payload.reviews;
     },
+    getReviewByUserClientId: (state, action) => {
+      state.reviews = action.payload;
+    },
     // ORDERS
     getAllOrders: (state, action) => {
       state.orders = action.payload;
@@ -41,5 +44,6 @@ export const { getAllUsers,
                getReviewById, 
                getAllOrders, 
                getUserById, 
-               getOrdersById } = adminSlice.actions;
+               getOrdersById,
+               getReviewByUserClientId } = adminSlice.actions;
 export default adminSlice.reducer;

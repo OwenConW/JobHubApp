@@ -17,10 +17,20 @@ import ReviewsAdminPanel from "./ReviewsAdminPanel/ReviewsAdminPanel";
 import OrdersAdminPanel from "./OrdersAdminPanel/OrdersAdminPanel"
 import DifussionAdminPanel from "./DiffusionAdminPanel/DifussionAdminPanel";
 import ProfessionsCreationPanel from "./ProfessionsCreationPanel/ProfessionsCreationPanel";
+import * as functions from '../../handlers/localStorage'
+import { useNavigate } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
+
 
 function AdminDashboard() {
+  const activeUser = functions.getLocalStorage();
+  const { isAuthenticated } = useAuth0();
   const dispatch = useDispatch()
-  const [panelDiplayed, setPanelDisplayed] = useState("professionsPanel");
+  const navigate = useNavigate()
+  //if(!isAuthenticated) navigate('/')
+  //if(!activeUser?.isAdmin) navigate('/home')
+
+  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -133,32 +143,39 @@ function AdminDashboard() {
   }, [fetchingAdminDeleteProfessionSuccess,fetchingAdminDeleteProfessionFailure])
 
   return (
-    <div className={s.mainContainer}>
-    <Navbar />
-      <h1 className={s.title}>Admin Dashboard</h1>
-      <div className={s.menuAndDisplayContainer}>
-        <div className={s.menuContainer}>
-          <button onClick={handlePanelChange} value="usersPanel">Usuarios</button>
-          <button onClick={handlePanelChange} value="reviewsPanel">Reseñas</button>
-          <button onClick={handlePanelChange} value="ordersPanel">Ordenes</button>
-          <button onClick={handlePanelChange} value="professionsPanel">Profesiones</button>
-          {/* <button onClick={handlePanelChange} value="difussionPanel">Difusión</button> */}
-          {/* <button onClick={handlePanelChange} value="statsPanel">Estadisticas</button> */}
-        </div>
+    <>
+      {
+        // activeUser?.isAdmin ? (
 
-        <div className={s.searchByNameAndUsersContainer}>
-          
-          {
-            panelDiplayed === "usersPanel" ? <UsersAdminPanel users={users}/> :
-            panelDiplayed === "reviewsPanel" ? <ReviewsAdminPanel reviews={reviews} /> :
-            panelDiplayed === "ordersPanel" ? <OrdersAdminPanel orders={orders} /> : 
-            panelDiplayed === "professionsPanel" ? <ProfessionsCreationPanel professions={professions} /> : null
-            // panelDiplayed === "difussionPanel" ? <DifussionAdminPanel /> : null
-          }
-          
-        </div>
-      </div>
-    </div>
+          <div className={s.mainContainer}>
+          <Navbar />
+            <h1 className={s.title}>Admin Dashboard</h1>
+            <div className={s.menuAndDisplayContainer}>
+              <div className={s.menuContainer}>
+                <button onClick={handlePanelChange} value="usersPanel">Usuarios</button>
+                <button onClick={handlePanelChange} value="reviewsPanel">Reseñas</button>
+                <button onClick={handlePanelChange} value="ordersPanel">Ordenes</button>
+                <button onClick={handlePanelChange} value="professionsPanel">Profesiones</button>
+                {/* <button onClick={handlePanelChange} value="difussionPanel">Difusión</button> */}
+                {/* <button onClick={handlePanelChange} value="statsPanel">Estadisticas</button> */}
+              </div>
+    
+              <div className={s.searchByNameAndUsersContainer}>
+                
+                {
+                  panelDiplayed === "usersPanel" ? <UsersAdminPanel users={users}/> :
+                  panelDiplayed === "reviewsPanel" ? <ReviewsAdminPanel reviews={reviews} /> :
+                  panelDiplayed === "ordersPanel" ? <OrdersAdminPanel orders={orders} /> : 
+                  panelDiplayed === "professionsPanel" ? <ProfessionsCreationPanel professions={professions} /> : null
+                  // panelDiplayed === "difussionPanel" ? <DifussionAdminPanel /> : null
+                }
+                
+              </div>
+            </div>
+          </div>
+        //) : (<h1>Este panel es solo para administradores. Y claramente vos no lo sos. c:</h1>)
+      }
+    </>
   )
 }
 
