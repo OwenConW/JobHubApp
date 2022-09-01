@@ -16,6 +16,7 @@
         background-color: rgba(56, 56, 56, 0.364);
 
         h4{
+            text-align: center;
             font-size: 4.7rem;
             color: #EEEEEE;
             text-shadow: 4px 1px 5px rgba(0,0,0,0.31);
@@ -50,6 +51,69 @@
                     cursor: pointer;
                     background-color: #EEEEEE;
                     color: #295157;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1060px){
+
+    .container{
+        .preview{
+            .buttondiv{
+                .button{
+                    font-size: 2.8rem;
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 900px){
+
+    .container{
+        .preview{
+            .buttondiv{
+                .button{
+                    font-size: 2.0rem;
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 700px){
+
+    .container{
+        .preview{
+            h4{
+                font-size: 3.6rem;
+            }
+            .buttondiv{
+                .button{
+                    width: 25%;
+                    font-size: 2.0rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px){
+
+    .container{
+        .preview{
+            h4{
+                font-size: 2.6rem;
+            }
+            .buttondiv{
+                .button{
+                    width: 25%;
+                    height: 35%;
+                    font-size: 1.2rem;
                 }
             }
         }
