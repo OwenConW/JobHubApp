@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { User, Profession, Review, Orders, Subscription } = require("../db");
+const { User, Profession, Review, Orders } = require("../db");
 
 
 // GET PROFESSIONAL BY NAME AND FILTER BY PROFESSION AND/OR RATING
@@ -170,8 +170,108 @@ const filterByQueris = async(name, profession, rating) => {
 }
 
 // GET ALL USER ADMIN
-const getAllUsersAdmin = async (name, last_Name, profession ) => {
+const getAllUsersAdmin = async ( name, last_Name, profession ) => {
 
+    let options = {}
+
+    
+    if (name && last_Name && profession){
+        options = {
+            where: {          
+                name: { [Op.substring]: `%${name}%` },
+                last_Name: { [Op.substring]: `%${last_Name}%` },
+            },
+            include: { 
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+                where: { 
+                    name: { [Op.substring]: `%${profession}%` }
+                }
+            },
+        }
+    }
+    else if (name && last_Name){
+        options = {
+            where: {          
+                name: { [Op.substring]: `%${name}%` },
+                last_Name: { [Op.substring]: `%${last_Name}%` },
+            },
+            include: { 
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        }
+    }
+    else if (last_Name && profession){
+        options = {
+            where: {          
+                last_Name: { [Op.substring]: `%${last_Name}%` },
+            },
+            include: { 
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+                where: { 
+                    name: { [Op.iLike]: `%${profession}%` }
+                }
+            },
+        }
+    }
+    else if (name && profession){
+        options = {
+            where: {          
+                name: { [Op.substring]: `%${name}%` },
+                
+            },
+            include: { 
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+                where: { 
+                    name: { [Op.substring]: `%${profession}%` }
+                }
+            },
+        }
+    }
+    else if (name){
+        options = {
+            where: {          
+                name: { [Op.substring]: `%${name}%` },
+            },
+            include: { 
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        }
+    }
+    else if (last_Name){
+        options = {
+            where: {          
+                last_Name: { [Op.substring]: `%${last_Name}%` },
+            },
+            include: { 
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        }
+    }
+    else if (profession){
+        options = {
+            include: { 
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+                where: { 
+                    name: { [Op.substring]: `%${profession}%` }
+                }
+            },
+        }
+    }
+    return options
 }
 
 // GET PROFESSIONAL BY ID
@@ -305,7 +405,7 @@ module.exports = {
     updatePremium,
     destroyUser,
     updateUserNoJobs,
-    
+    getAllUsersAdmin
 
 }
 

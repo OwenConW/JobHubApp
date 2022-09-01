@@ -45,7 +45,6 @@ export function validators(userInput) {
     if (/[^a-zA-Z\s]/g.test(userInput.city)) {
         errors.city = "No debe contener caracteres especiales";
       }
-      //  else if (userInput.city.length >= 1 && !/^[A-Z]/g.test(userInput.city)) errors.city = "Debe empezar con Mayuscula"
 
 
     return errors;
