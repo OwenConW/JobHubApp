@@ -6,18 +6,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  
+
     // justify-content: center;
     align-items: center;
     padding: 0;
     margin: 0;
 
-    .innerContainer{
+    .innerContainer {
         width: 65%;
         height: 100%;
         margin-left: 35%;
         justify-content: flex-start;
     }
+
     .inputDiv {
         // border: solid red;
         margin: 1%;
@@ -36,12 +37,12 @@
             width: 40%;
         }
 
-        .select{
+        .select {
             width: 65%;
             margin-right: 5%;
         }
 
-        .errorInput{
+        .errorInput {
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -50,7 +51,7 @@
             font-size: 1.2rem;
             text-align: center;
 
-            .error{
+            .error {
                 color: rgb(228, 82, 82);
             }
         }
@@ -65,20 +66,21 @@
             border: solid rgba(136, 136, 136, 0.356);
             border-width: 1px;
         }
-        select{
+
+        select {
             width: 51%;
             margin-left: 10px;
             font-size: 1.4rem;
             // line-height: 3rem;
             padding: 8px;
             border-radius: 0.5rem;
-            background: rgba(255, 255, 255, 0.596); 
+            background: rgba(255, 255, 255, 0.596);
             border: solid rgba(136, 136, 136, 0.356);
             border-width: 1px;
         }
 
 
- 
+
     }
 
 
@@ -128,13 +130,13 @@
         }
     }
 
-    .submitButtons{
+    .submitButtons {
         width: 100%;
         height: 5%;
         display: flex;
         justify-content: space-evenly;
 
-        .disable{
+        .disable {
             transition: 0.5s;
             display: flex;
             justify-content: center;
@@ -144,22 +146,22 @@
             border-radius: 5px;
             background-color: #ff4733b9;
             color: #f5f5f5;
-    
-            &:disabled{
+
+            &:disabled {
                 background-color: rgba(168, 168, 168, 0.47);
                 color: #07393c80;
             }
-    
-            &:not(:disabled):hover{
+
+            &:not(:disabled):hover {
                 transition: 0.3s;
                 cursor: pointer;
                 color: #f5f5f5;
                 background-color: #ff1900;
                 scale: 1.05;
-            } 
+            }
         }
 
-        .submit{
+        .submit {
             transition: 0.5s;
             display: flex;
             justify-content: center;
@@ -169,13 +171,13 @@
             border-radius: 5px;
             background-color: #07393C;
             color: #f5f5f5;
-    
-            &:disabled{
+
+            &:disabled {
                 background-color: rgba(168, 168, 168, 0.47);
                 color: #07393c80;
             }
-    
-            &:not(:disabled):hover{
+
+            &:not(:disabled):hover {
                 transition: 0.3s;
                 cursor: pointer;
                 color: #f5f5f5;
@@ -185,4 +187,89 @@
         }
     }
 
+}
+
+@media screen and (max-width: 1100px) {
+
+    .container {
+        height: 90%;
+        overflow-y: auto;
+
+        .inputDiv {
+            // border: solid red;
+            margin: 1%;
+            height: 15%;
+            width: 80%;
+            transition: 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: black;
+            text-decoration: none;
+            font-size: 2rem;
+            margin-inline: 3%;
+
+            div {
+                width: 40%;
+            }
+
+
+
+            .errorInput {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.2rem;
+                text-align: center;
+
+                .error {
+                    color: rgb(228, 82, 82);
+                }
+            }
+
+            input {
+                font-size: 2rem;
+            }
+
+            select {
+                margin-left: 50px;
+                font-size: 2rem;
+            }
+
+
+
+        }
+
+
+        .descriptionDiv {
+            // border: solid red;
+            height: 30%;
+            width: 90%;
+
+            div {
+                width: 80%;
+                font-size: 2rem;
+            }
+
+            textarea {
+                font-size: 1.8rem;
+            }
+        }
+
+        .submitButtons {
+            height: 10%;
+
+            .disable {
+                font-size: 2rem;
+                width: 25%;
+            }
+
+            .submit {
+                font-size: 2rem;
+                width: 25%;
+            }
+        }
+    }
 }
