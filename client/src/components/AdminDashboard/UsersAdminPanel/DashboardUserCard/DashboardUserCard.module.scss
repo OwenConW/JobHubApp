@@ -1,18 +1,41 @@
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
 .cardContainer {
-  border: 1px solid black;
+  background-color: $white-color;
+  color: $green-color;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 32px;
+  height: 50px;
   transition: height 1s;
   overflow: hidden;
+  border-radius: 10px;
+  font-family: Poppins, sans-serif;
+  box-shadow: 14px 19px 31px -3px rgba(0,0,0,0.1);
 
-   .importantInformationContainer, .notSoRelevantInformationContainer {
+   .importantInformationContainer {
+      background-color: $green-color;
+      color: $white-color;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
+      padding: 10px 0;
       gap: 10px;
 
+      .detailsBtn {
+         width: 80px;
+         height: 30px;
+         border-radius: 5px;
+         color: $darkgreen-color;
+         background-color: $white-color;
+            &:hover{
+               color: $white-color;
+               background-color: $darkgreen-color;
+            }
+      }
       div {
          display: flex;
          flex-direction: column;
@@ -26,32 +49,108 @@
       }
       
       .deleteBtn {
-         color: white;
-         background-color: #8f220e;
+         width: 80px;
+         height: 30px;
+         border-radius: 5px;
+         color: $white-color;
+         background-color: rgba(175, 43, 43, 0.829);
+            &:hover{
+               color: $white-color;
+               background-color: rgb(190, 39, 39);
+            }
       }
 
       .editBtn {
-         color: white;
-         background-color: #0e2c8f;
+         width: 80px;
+         height: 30px;
+         border-radius: 5px;
+         color: $white-color;
+         background-color: rgba(128, 128, 240, 0.534);
+            &:hover{
+               color: $white-color;
+               background-color: rgba(92, 92, 238, 0.534);
+            }
       }
 
       .restoreBtn {
-         color: white;
-         background-color: green;
+         width: 80px;
+         height: 30px;
+         border-radius: 5px;
+         color: $white-color;
+         background-color: rgba(37, 168, 37, 0.829);
+            &:hover{
+               color: $white-color;
+               background-color: rgba(60, 138, 60, 0.829);
+            }
       }
    }
 
-   // .notSoRelevantInformationContainer{
-   //    border: 1px solid black;
-   //    display: flex;
-   //    justify-content: space-evenly;
-   //    align-items: center;
-   //    gap: 10px;
-   // }
+   .notSoRelevantInformationContainer{
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      padding-top: 15px;
+      height: auto;
+         .description {
+            width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            h4{
+               width: 100%;
+               text-overflow: ellipsis;
+               white-space: initial;
+            }
+         }
+         .userDataContainer{
+               display: flex;
+               flex-direction: column;
+               gap: 10px;
+         
+               .dniEmailContainer {
+                  display: flex;
+                  gap: 100px;
+                     div{
+                        text-align: center;
+                  }
+               }
+               .birthDatePhoneContainer {
+                  display: flex;
+                  gap: 115px;
+                  div{
+                     text-align: center;
+               }
+               }
+            }
+
+         .userLocationContainer{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+      
+            .countryCityContainer {
+               display: flex;
+               gap: 50px;
+                  div{
+                     text-align: center;
+               }
+            }
+            .addressContainer {
+               display: flex;
+               gap: 65px;
+               div{
+                  text-align: center;
+            }
+            }
+         }
+      }
 }
+
+
 
 //Efecto copado para el display del detalle
 .openModal {
-   height: 67px;
+   height: 160px;
    transition: height 1s;
 }

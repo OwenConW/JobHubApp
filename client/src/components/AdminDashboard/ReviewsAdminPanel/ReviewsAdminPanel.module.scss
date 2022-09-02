@@ -1,10 +1,57 @@
-.cardsContainer {
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
+.mainContainer {
+  background-color: rgba(192, 192, 192, 0.219);
+  padding: 80px;
+  margin-right: 15px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 10px;
-  width: 100%;
-  height: 100%;
-  margin: 10px 0 10px 0;
+
+  .formsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .submitBtn {
+      background-color: $green-color;
+      border-radius: 5px;
+      color: $white-color;
+      width: 60px;
+      height: 25px;
+      box-shadow: 14px 19px 31px -3px rgba(0,0,0,0.1);
+      transition: 0.2s;
+      &:hover{
+        background-color: $white-color;
+        color: $green-color;
+        scale: 1.03;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .allReviewsBtn {
+     background-color: $green-color;
+     color: $white-color;
+     height: 40px;
+     width: 180px;
+     border-radius: 5px;
+     margin-top: 10px;
+  }
+  .cardsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 10px 0 10px 0;
+  
+  }
+
 }

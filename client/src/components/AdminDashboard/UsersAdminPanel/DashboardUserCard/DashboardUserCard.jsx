@@ -62,7 +62,7 @@ function DashboardUserCard(props) {
       {DeleteModalActive? <DeleteUserModal handleDeleteOpenModal={handleDeleteOpenModal} DeleteModalActive={DeleteModalActive} {...props}/> : null}
       {RestoreModalActive? <RestoreUserModal handleRestoreOpenModal={handleRestoreOpenModal} RestoreModalActive={RestoreModalActive} {...props}/> : null}
       <div className={s.importantInformationContainer}>
-        <button onClick={handleOpenModal}>Detalles</button>
+        <button className={s.detailsBtn} onClick={handleOpenModal}>Detalles</button>
         <div>
           <h3>ID</h3>
           <h3>{id}</h3>
@@ -103,42 +103,54 @@ function DashboardUserCard(props) {
       </div>
       {/* Division */}
       <div className={s.notSoRelevantInformationContainer}>
-        <div>
-          <h4>DNI</h4>
-          <h4>{dni}</h4>
+        <div className={s.userDataContainer}>
+          <div className={s.dniEmailContainer}>
+            <div>
+              <h4>DNI</h4>
+              <h4>{dni}</h4>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <h4>{mail}</h4>
+            </div>
+          </div>
+          <div className={s.birthDatePhoneContainer}>
+            <div>
+              <h4>Fecha de nacimiento</h4>
+              <h4>17/03/1999{date_of_Birth}</h4>
+            </div>
+            <div>
+              <h4>Telefono</h4>
+              <h4>{phone}</h4>
+            </div>
+          </div>
         </div>
-        <div>
-          <h4>Fecha de nacimiento</h4>
-          <h4>17/03/1999{date_of_Birth}</h4>
+        <div className={s.userLocationContainer}>
+          <div className={s.countryCityContainer}>
+            <div>
+              <h4>Pais</h4>
+              <h4>{country}</h4>
+            </div>
+            <div>
+              <h4>Ciudad</h4>
+              <h4>{city}</h4>
+            </div>
+          </div>
+          <div className={s.addressContainer}>
+            <div>
+              <h4>Calle</h4>
+              <h4>{street}</h4>
+            </div>
+            <div>
+              <h4>numero</h4>
+              <h4>{address}</h4>
+            </div>
+          </div>
         </div>
-        <div>
-          <h4>Emai</h4>
-          <h4>{mail}</h4>
-        </div>
-        <div>
-          <h4>Telefono</h4>
-          <h4>{phone}</h4>
-        </div>
-        <div>
-          <h4>Pais</h4>
-          <h4>{country}</h4>
-        </div>
-        <div>
-          <h4>Ciudad</h4>
-          <h4>{city}</h4>
-        </div>
-        <div>
-          <h4>Calle</h4>
-          <h4>{street}</h4>
-        </div>
-        <div>
-          <h4>numero</h4>
-          <h4>{address}</h4>
-        </div>
-        {/* <div>
+        <div className={s.description}>
           <p>Description</p>
           <p>{description}</p>
-        </div> */}
+        </div>
         <div>
         <h4>Profesiones</h4>
         <h4>{professions?.map(p => {

@@ -45,26 +45,28 @@ function ReviewsAdminPanel(props) {
   }
 
   return (
-    <div className={s.cardsContainer}>
+    <div className={s.mainContainer}>
       {fetchingAdminDeleteReview ? <h1>Eliminando...</h1> : null}
-      <form onSubmit={handleSearchReviewByIdSubmit}>
-        <label htmlFor="review_id">Buscar review por ID</label>
-        <input type="text" name="review_id" onChange={handleSearchReviewByUserIdChange} />
-        <input type="submit" value="buscar" />
-      </form>
-      <form onSubmit={handleSearchReviewByUserProfessionalIdSubmit}>
-        <label htmlFor="review_user_professional_id">Buscar reseña por ID del usuario profesional</label>
-        <input type="text" name="review_user_professional_id" onChange={handleSearchReviewByUserIdChange} />
-        <input type="submit" value="buscar" />
-      </form>
-      <form onSubmit={handleSearchReviewByUserClientIdSubmit}>
-        <label htmlFor="review_user_client_id">Buscar reseña por ID del usuario cliente</label>
-        <input type="text" name="review_user_client_id" onChange={handleSearchReviewByUserIdChange} />
-        <input type="submit" value="buscar" />
-      </form>
+      <div className={s.formsContainer}>
+        <form onSubmit={handleSearchReviewByIdSubmit}>
+          <label htmlFor="review_id">Buscar review por ID</label>
+          <input type="text" name="review_id" onChange={handleSearchReviewByUserIdChange} />
+          <input className={s.submitBtn} type="submit" value="buscar" />
+        </form>
+        <form onSubmit={handleSearchReviewByUserProfessionalIdSubmit}>
+          <label htmlFor="review_user_professional_id">Buscar reseña por ID del usuario profesional</label>
+          <input type="text" name="review_user_professional_id" onChange={handleSearchReviewByUserIdChange} />
+          <input className={s.submitBtn} type="submit" value="buscar" />
+        </form>
+        <form onSubmit={handleSearchReviewByUserClientIdSubmit}>
+          <label htmlFor="review_user_client_id">Buscar reseña por ID del usuario cliente</label>
+          <input type="text" name="review_user_client_id" onChange={handleSearchReviewByUserIdChange} />
+          <input className={s.submitBtn} type="submit" value="buscar" />
+        </form>
+      </div>
 
 
-      <button onClick={getAllReviews}>Traer todas las reseñas</button>
+      <button className={s.allReviewsBtn} onClick={getAllReviews}>Traer todas las reseñas</button>
 
       {
         reviews?.length !== 0 ? 

@@ -30,7 +30,9 @@ function AdminDashboard() {
   //if(!isAuthenticated) navigate('/')
   //if(!activeUser?.isAdmin) navigate('/home')
 
-  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
+  const [isActive, setIsActive] = useState({usersPanel: true, reviewsPanel: false, ordersPanel: false, professionsPanel: false})
+
 
   const users = useSelector( state => state.admin.users);
   const reviews = useSelector( state => state.admin.reviews);
@@ -71,6 +73,8 @@ function AdminDashboard() {
   //FUNCION QUE CAMBIA EL PANEL QUE SE MUESTRA (usuarios, reviews, ordenes)
   function handlePanelChange(e) {
     setPanelDisplayed(e.target.value)
+    setIsActive({...!isActive, [e.target.value]: !isActive[e.target.value]})
+    //setIsActive({[e.target.value]: !isActive[e.target.value]})
   }
 
   //FETCH DE LA DB
@@ -149,13 +153,13 @@ function AdminDashboard() {
 
           <div className={s.mainContainer}>
           <Navbar />
-            <h1 className={s.title}>Admin Dashboard</h1>
+            <h1 className={s.title}>Panel de gestión</h1>
             <div className={s.menuAndDisplayContainer}>
               <div className={s.menuContainer}>
-                <button onClick={handlePanelChange} value="usersPanel">Usuarios</button>
-                <button onClick={handlePanelChange} value="reviewsPanel">Reseñas</button>
-                <button onClick={handlePanelChange} value="ordersPanel">Ordenes</button>
-                <button onClick={handlePanelChange} value="professionsPanel">Profesiones</button>
+                <button onClick={handlePanelChange} className={isActive.usersPanel ? s.selected : null} value="usersPanel">Usuarios</button>
+                <button onClick={handlePanelChange} className={isActive.reviewsPanel ? s.selected : null} value="reviewsPanel">Reseñas</button>
+                <button onClick={handlePanelChange} className={isActive.ordersPanel ? s.selected : null} value="ordersPanel">Ordenes</button>
+                <button onClick={handlePanelChange} className={isActive.professionsPanel ? s.selected : null} value="professionsPanel">Profesiones</button>
                 {/* <button onClick={handlePanelChange} value="difussionPanel">Difusión</button> */}
                 {/* <button onClick={handlePanelChange} value="statsPanel">Estadisticas</button> */}
               </div>

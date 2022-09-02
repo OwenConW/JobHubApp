@@ -50,37 +50,35 @@ function UsersAdminPanel(props) {
   }
 
   return(
-    <div>
-      {/* <form>
-        <label>Buscar usuario por nombre:</label>
-        <input type="text" name="name"/>
-      </form> */}
-      <form onSubmit={handleSearchUserByIdSubmit}>
-        <label>Buscar usuario por ID:</label>
-        <input type="text" name="user_id" onChange={handleSearchUserByIdChange}/>
-        <input type="submit" value="buscar"/>
-      </form>
-      <button onClick={getAllUsers}>Traer todos los usuarios</button>
-      <div>
-        <h1>Buscar por Filtros</h1>
-        <form onSubmit={handleSearchUserByFilterSubmit}>
-          <label htmlFor="name">Nombre</label>
-          <input type="text" name="name" onChange={handleSearchUserByFilter} />
-          <label htmlFor="last_Name">Apellido</label>
-          <input type="text" name="last_Name" onChange={handleSearchUserByFilter} />
-          <label htmlFor="profession">Profesión</label>
-          <select name="profession" onChange={handleSearchUserByFilter}>
-            <option value=''>Todas las profesiones</option>
-            {professions?.map( p => {
-              return (
-                <option value={p.name}>{p.name}</option>
-              )
-            })}
-          </select>
-          <input type="submit" value="buscar" />
+    <div className={s.mainContainer}>
+      <div className={s.filtersContainer}>
+        <form className={`${s.forms} ${s.searchByIdForm}`} onSubmit={handleSearchUserByIdSubmit}>
+          <label>Buscar usuario por ID:</label>
+          <input type="text" name="user_id" onChange={handleSearchUserByIdChange}/>
+          <input className={s.submitBtn} type="submit" value="Buscar"/>
         </form>
+        <div className={s.filterByNameContainer}>
+          <h1 className={s.filtersTitle}>Buscar por Filtros</h1>
+          <form className={`${s.forms} ${s.filterNameForm}`} onSubmit={handleSearchUserByFilterSubmit}>
+            <h3 className={s.labels}>Nombre</h3>
+            <input type="text" name="name" onChange={handleSearchUserByFilter} />
+            <h3 className={s.labels}>Apellido</h3>
+            <input type="text" name="last_Name" onChange={handleSearchUserByFilter} />
+            <h3 className={s.labels}>Profesión</h3>
+            <select name="profession" onChange={handleSearchUserByFilter}>
+              <option value=''>Todas las profesiones</option>
+              {professions?.map( p => {
+                return (
+                  <option value={p.name}>{p.name}</option>
+                  )
+                })}
+            </select>
+            <input className={s.submitBtn} type="submit" value="Buscar" />
+          </form>
+        </div>
       </div>
-
+        <button className={s.allUsersBtn} onClick={getAllUsers}>Traer todos los usuarios</button>
+        <div className={s.divisoryLine}></div>
       {
         users[0] !== '' ? 
         <div className={s.cardsContainer}>  
@@ -89,8 +87,8 @@ function UsersAdminPanel(props) {
                   <DashboardUserCard key={u.id} {...u} />
                 )
               })}
-      </div> :
-      <h1>El usuario no existe</h1>
+        </div> :
+        <h1 className={s.noUsersFound}>El usuario no existe</h1>
       }
       
     </div>

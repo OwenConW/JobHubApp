@@ -40,32 +40,38 @@ function OrdersAdminPanel(props) {
   }
 
   return (
-    <div className={s.cardsContainer}>
-      <form onSubmit={handleSearchOrderByIdSubmit}>
-        <label htmlFor="order_id">Buscar orden por ID</label>
-        <input type="text" name="order_id" onChange={handleSearchOrderByUserIdChange} />
-        <input type="submit" value="buscar" />
-      </form>
-      <form onSubmit={handleSearchOrderByUserProfessionalIdSubmit}>
-        <label htmlFor="order_user_professional_id">Buscar orden por ID del usuario profesional</label>
-        <input type="text" name="order_user_professional_id" onChange={handleSearchOrderByUserIdChange} />
-        <input type="submit" value="buscar" />
-      </form>
-      <form onSubmit={handleSearchOrderByUserClientIdSubmit}>
-        <label htmlFor="order_user_client_id">Buscar orden por ID del usuario cliente</label>
-        <input type="text" name="order_user_client_id" onChange={handleSearchOrderByUserIdChange} />
-        <input type="submit" value="buscar" />
-      </form>
-      <button onClick={getAllOrders}>Traer todas las ordenes</button>
+    <div className={s.mainContainer}>
+      <div className={s.formsContainer}>
+        <form onSubmit={handleSearchOrderByIdSubmit}>
+          <label htmlFor="order_id">Buscar orden por ID</label>
+          <input type="text" name="order_id" onChange={handleSearchOrderByUserIdChange} />
+          <input className={s.submitBtn} type="submit" value="buscar" />
+        </form>
+        <form onSubmit={handleSearchOrderByUserProfessionalIdSubmit}>
+          <label htmlFor="order_user_professional_id">Buscar orden por ID del usuario profesional</label>
+          <input type="text" name="order_user_professional_id" onChange={handleSearchOrderByUserIdChange} />
+          <input className={s.submitBtn} type="submit" value="buscar" />
+        </form>
+        <form onSubmit={handleSearchOrderByUserClientIdSubmit}>
+          <label htmlFor="order_user_client_id">Buscar orden por ID del usuario cliente</label>
+          <input type="text" name="order_user_client_id" onChange={handleSearchOrderByUserIdChange} />
+          <input className={s.submitBtn} type="submit" value="buscar" />
+        </form>
+      </div>
 
-      {
-        orders[0]? orders?.map( r => {
-          return (
-              <OrdersDashboardCard {...r} />
-          )
-        }) :
-        <h1>No existen ordenes</h1>
-      }
+      <button className={s.allOrdersBtn} onClick={getAllOrders}>Traer todas las ordenes</button>
+      <div className={s.divisoryLine}></div>
+
+      <div className={s.ordersContainer}>
+        {
+          orders[0]? orders?.map( r => {
+            return (
+                <OrdersDashboardCard {...r} />
+                )
+              }) :
+          <h1>No existen ordenes</h1>
+        }
+      </div>
     </div>
   )
 }
