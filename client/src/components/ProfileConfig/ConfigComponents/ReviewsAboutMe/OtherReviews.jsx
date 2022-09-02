@@ -57,13 +57,12 @@ const OtherReviews = () => {
   // console.log(users)
   return (
     <div className={s.container}>
-      <label>Filtrar</label>
-      <input name="filter"  value={filter} onChange={event => onFilterChange(event)}></input>
+      <input name="filter" className={s.filter} placeholder="Busqueda por nombre..." value={filter} onChange={event => onFilterChange(event)}></input>
       {
         allReviews ? allReviews.map(review => 
           
             <RevCards review={review}/>
-        ) : <p>Aun no han hecho ninguna reseña sobre ti</p>
+        ) : <p className={s.voidReviews}>Aun no han hecho ninguna reseña sobre ti</p>
       }
 
     </div>
