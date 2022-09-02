@@ -66,6 +66,23 @@ users.get('/searchMail', async (req, res, next) =>{
     }
 })
 
+//RUTA PARA FILTRAR TODOS LOS USUARIOS ADMIN
+users.get("/filter", async (req, res, next) => {
+    const { name, last_Name, profession } = req.body;
+    
+    try {
+        const options = await functions.getAllUsersAdmin( name, last_Name, profession )
+        //console.log('ESTE ES EL OBJETO OPTION', options)
+        const filter = await User.findAll(options)
+        //console.log('ESTE ES EL OBJETO FILTER', filter)
+        res.status(200).json(filter)
+        
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
     const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession } = req.body;
@@ -123,6 +140,7 @@ users.put('/:id', async (req, res, next) => {
     const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
+    const mailMinuscule = mail.toLowerCase();
     try {
 
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
@@ -140,7 +158,7 @@ users.put('/:id', async (req, res, next) => {
             date_of_Birth,
             image,
             dni,
-            mail,
+            mail: mailMinuscule,
             phone,
             description,
             country,
@@ -233,6 +251,19 @@ users.put('/subscription/:id', async (req, res, next) =>{
             }
         })
         res.status(200).send("subscription expiration date updated")
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
+users.put('/myjobs/:id', async (req, res, next) =>{
+    const { id } = req.params;
+    const { obj } = req.body;
+    try {
+        const photos = await functions.updatePhotos(id, obj)
+        console.log('ESTO ES LO QUE LLEGA A RUTAS DEL FRONT', photos)
+        res.status(201).send('La galeria de fotos se actualizo correctamente')
     } catch (error) {
         console.log(error);
         next (error)

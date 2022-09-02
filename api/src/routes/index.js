@@ -8,6 +8,7 @@ const review = require("./review/review.route");
 const conversation = require("./conversation/conversation")
 const message = require("./messages/message")
 const orders = require("./orders/orders.route")
+const claims = require("./claims/claims.route")
 // Importar todos los routers;
 
 const router = Router();
@@ -21,7 +22,7 @@ router.use("/review", review);
 router.use("/conversation", conversation);
 router.use("/messages", message);
 router.use("/orders", orders)
-
+router.use("/claims", claims)
 
 
 module.exports = router;
