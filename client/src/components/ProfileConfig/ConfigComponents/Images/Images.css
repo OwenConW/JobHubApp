@@ -102,11 +102,7 @@
     border-radius: 15px;
     filter: opacity(0,2);
     transition: 0.5s ;
-}
-
-.imagen1:hover, .imagen2:hover, .imagen3:hover, .imagen4:hover{
-    transform: scale(1.01);
-    transition: 0.5s ;
+    object-fit: cover;
 }
 
 .imagen3, .imagen4{
@@ -165,6 +161,28 @@
 }
 
 .botonAdd4:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.5s ;
+}
+
+
+.botonDelete{
+    background-image: url("./assets/eliminar\ \(2\).png");
+    background-position: center;
+    width: 33px;
+    height: 32px;
+    background-color: #eeeeee8a;
+    border-radius: 30%;
+    cursor: pointer;
+    z-index: 100;
+    position: absolute;
+    bottom: 85%;
+    left: 85%;
+    transition: 0.5s ; 
+}
+
+.botonDelete:hover{
     cursor: pointer;
     transform: scale(1.05);
     transition: 0.5s ;

@@ -1,23 +1,43 @@
 import React from "react"
 import "./Images.css"
-import img  from "./assets/noimage.jpg"
 import axios from "axios"
 import Loader from '../../../Login/Loader/Loader';
+import { getLocalStorage, setUserLocalStorage } from "../../../../handlers/localStorage";
 
 const Images = () => {
-    let imgs = []
+        
+    const activeUser = getLocalStorage()
+  
+    let imagenesEnTiempoReal = {
+        imagen1: activeUser?.photo_gallery?.imagen1,
+        imagen2: activeUser?.photo_gallery?.imagen2,
+        imagen3: activeUser?.photo_gallery?.imagen3,
+        imagen4: activeUser?.photo_gallery?.imagen4
+    }
+
+    const [imagenes, setImagenes] = React.useState(imagenesEnTiempoReal)
+
+    React.useEffect(() => {
+        if(Object.keys(activeUser?.photo_gallery).length){
+            setImagenes({
+                imagen1: activeUser?.photo_gallery?.imagen1,
+                imagen2: activeUser?.photo_gallery?.imagen2,
+                imagen3: activeUser?.photo_gallery?.imagen3,
+                imagen4: activeUser?.photo_gallery?.imagen4
+            })
+        }
+    }, [])
+
     const [PreImage1, setPreImage1] = React.useState(null)
     const [PreImage2, setPreImage2] = React.useState(null)
     const [PreImage3, setPreImage3] = React.useState(null)
     const [PreImage4, setPreImage4] = React.useState(null)
-    const [imagen1, setImagen1] = React.useState(null)
-    const [imagen2, setImagen2] = React.useState(null)
-    const [imagen3, setImagen3] = React.useState(null)
-    const [imagen4, setImagen4] = React.useState(null)
     const [loading1, setLoading1] = React.useState(null)
     const [loading2, setLoading2] = React.useState(null)
     const [loading3, setLoading3] = React.useState(null)
     const [loading4, setLoading4] = React.useState(null)
+
+
     const handleUploadImage = async (e) => {
         if(PreImage1){
             setLoading1(true)
@@ -26,10 +46,13 @@ const Images = () => {
             formData.append("upload_preset", "jobhub");
             const res = await axios.post("https://api.cloudinary.com/v1_1/jobhubapp/image/upload", formData);
             const file = await res.data;
-            setImagen1(file.secure_url)
-            imgs.push(file.secure_url)
-            setPreImage1(null)
+            imagenesEnTiempoReal = {
+                ...imagenesEnTiempoReal,
+                imagen1: file.secure_url
+            }
+            setImagenes(imagenesEnTiempoReal)
             setLoading1(null)
+            setPreImage1(null)
         }
         if(PreImage2){
             setLoading2(true)
@@ -38,10 +61,13 @@ const Images = () => {
             formData2.append("upload_preset", "jobhub");
             const res = await axios.post("https://api.cloudinary.com/v1_1/jobhubapp/image/upload", formData2);
             const file = await res.data;
-            setImagen2(file.secure_url)
-            imgs[1] = file.secure_url
-            setPreImage2(null)
             setLoading2(null)
+            setPreImage2(null)
+            imagenesEnTiempoReal = {
+                ...imagenesEnTiempoReal,
+                imagen2: file.secure_url
+            }
+            setImagenes(imagenesEnTiempoReal)
         }
         if(PreImage3){
             setLoading3(true)
@@ -50,10 +76,13 @@ const Images = () => {
             formData3.append("upload_preset", "jobhub");
             const res = await axios.post("https://api.cloudinary.com/v1_1/jobhubapp/image/upload", formData3);
             const file = await res.data;
-            setImagen3(file.secure_url)
-            imgs[2] = file.secure_url
+            setLoading3(null)
             setPreImage3(null)
-            setLoading2(null)
+            imagenesEnTiempoReal = {
+                ...imagenesEnTiempoReal,
+                imagen3: file.secure_url
+            }
+            setImagenes(imagenesEnTiempoReal)
         }
         if(PreImage4){
             setLoading4(true)
@@ -62,19 +91,55 @@ const Images = () => {
             formData4.append("upload_preset", "jobhub");
             const res = await axios.post("https://api.cloudinary.com/v1_1/jobhubapp/image/upload", formData4);
             const file = await res.data;
-            setImagen4(file.secure_url)
-            imgs[3] = file.secure_url
-            setPreImage4(null)
             setLoading4(null)
+            setPreImage4(null)
+            imagenesEnTiempoReal = {
+                ...imagenesEnTiempoReal,
+                imagen4: file.secure_url
+            }
+            setImagenes(imagenesEnTiempoReal)
         }
+        await axios.put(`/users/myjobs/${activeUser.id}`, imagenesEnTiempoReal) 
+        const res = await axios.get(`/users/${activeUser.id}`)
+        setUserLocalStorage(res.data)
+    }
+
+    const handleDelete = async (num) => {
+        console.log("name:", `imagen${num}`)
+        // imagenesEnTiempoReal = {
+        //     ...imagenesEnTiempoReal,
+        //     [`imagen${num}`]: null
+        // }
+        imagenesEnTiempoReal[`imagen${num}`] = null
+        // {
+        //     imagen1: "https://api.cloudinary.com/v1_1/jobhubapp/image/upload", 
+        //     imagen2: "https://api.cloudinary.com/v1_1/jobhubapp/image/upload",
+        //     imagen3: null,
+        //     imagen4: null,
+        // }
+        setImagenes({
+            ...imagenes,
+            [`imagen${num}`]: null
+        })
+        console.log(`se elimina el ${num}`, imagenesEnTiempoReal)
+        await axios.put(`/users/myjobs/${activeUser.id}`, imagenesEnTiempoReal) 
+        const res = await axios.get(`/users/${activeUser.id}`)
+        setUserLocalStorage(res.data)
+        console.log("respuesta:", res.data);
     }
 
     React.useEffect(() => {
-       console.log("array para el back:", [imagen1, imagen2, imagen3, imagen4]);
-    }, [imgs, imagen1, imagen2, imagen3, imagen4])
+        return () => {
+            
+        }
+    }, [imagenes])
+
 
     return (
         <>
+        {
+            console.log("estado:", imagenes)
+        }
             <div className="contenedorImagenes">
                 <div className="contenedorHeader">
                 <h1 className="Title">Añadí fotos de tus mejores trabajos!</h1>
@@ -82,11 +147,10 @@ const Images = () => {
                     <p>Guardar imagenes</p>
                 </div>
                 </div>
-                {/* <button onClick={handleUploadImage}>Guardar Cambios</button> */}
                 <div className="contenedorImagenes12">
                     <div className="Contenedorimagen1">
                         {
-                            PreImage1 || imagen1 ? (
+                            PreImage1 ||  imagenes.imagen1 ? (
                                 <></>
                             ) : (
                                 <>
@@ -107,8 +171,11 @@ const Images = () => {
                                 </div>
                             ) : (
                                 
-                                imagen1 ? (
-                                    <img className="imagen1" src={imagen1} alt=""/>
+                                imagenes.imagen1 ? (
+                                    <>
+                                    <div className="botonDelete" onClick={() => handleDelete(1)}></div>
+                                    <img className="imagen1" src={imagenes.imagen1} alt=""/>
+                                    </>
                                 ) : (
                                     <div className="noImage12"></div>
                                 )
@@ -119,7 +186,7 @@ const Images = () => {
                     </div>
                     <div className="Contenedorimagen2">
                     {
-                            PreImage2 || imagen2 ? (
+                            PreImage2 ||  imagenes.imagen2? (
                                 <></>
                             ) : (
                                 <>
@@ -140,8 +207,11 @@ const Images = () => {
                                 </div>
                             ) : (
                                 
-                                imagen2 ? (
-                                    <img className="imagen2" src={imagen2} alt=""/>
+                                imagenes.imagen2 ? (
+                                    <>
+                                    <div className="botonDelete" onClick={() => handleDelete(2)}></div>
+                                    <img className="imagen2" src={imagenes.imagen2} alt=""/>
+                                    </>
                                 ) : (
                                     <div className="noImage12"></div>
                                 )
@@ -153,7 +223,7 @@ const Images = () => {
                 <div className="contenedorImagenes34">
                     <div className="Contenedorimagen3">
                     {
-                            PreImage3 || imagen3 ? (
+                            PreImage3 || imagenes.imagen3 ? (
                                 <></>
                             ) : (
                                 <>
@@ -174,8 +244,11 @@ const Images = () => {
                             </div>
                             ) : (
                                 
-                                imagen3 ? (
-                                    <img className="imagen3" src={imagen3} alt=""/>
+                                imagenes.imagen3 ? (
+                                    <>
+                                    <div className="botonDelete" onClick={() => handleDelete(3)}></div>
+                                    <img className="imagen3" src={imagenes.imagen3} alt=""/>
+                                    </>
                                 ) : (
                                     <div className="noImage34"></div>
                                 )
@@ -185,7 +258,7 @@ const Images = () => {
                     </div>
                     <div className="Contenedorimagen4" >
                     {
-                            PreImage4 || imagen4 ? (
+                            PreImage4 || imagenes.imagen4 ? (
                                 <></>
                             ) : (
                                 <>
@@ -206,8 +279,11 @@ const Images = () => {
                             </div>
                             ) : (
                                 
-                                imagen4 ? (
-                                    <img className="imagen4" src={imagen4} alt=""/>
+                                imagenes.imagen4 ? (
+                                    <>
+                                    <div className="botonDelete" onClick={() => handleDelete(4)}></div>
+                                    <img className="imagen4" src={imagenes.imagen4} alt=""/>
+                                    </>
                                 ) : (
                                     <div className="noImage34"></div>
                                 )
