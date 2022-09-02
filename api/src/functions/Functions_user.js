@@ -318,7 +318,7 @@ const updateUserNoJobs = async (id, name, last_Name, date_of_Birth, image, dni, 
 const updatePhotos = async (id, obj) =>{
     try {
         await User.update({
-            coordinate: obj
+            photo_gallery: obj
         },{
             where:{
                 id,

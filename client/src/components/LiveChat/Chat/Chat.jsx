@@ -154,10 +154,10 @@ const Chat = (props) => {
                         {
                             currentChat ?
                             <>
-                            <div className="chatBoxTop">
+                            <div className="chatBoxTop" >
                             {
                                 messages.map(m => (
-                                    <div ref={scrollRef}>
+                                    <div  ref={scrollRef}>
                                     <Message message={m} own={m.sender === currentUser.id} current={currentUser} friendImage={currentImage}/>
                                     </div>
                                 ))

@@ -89,6 +89,15 @@ users.post("/", async (req, res, next) =>{
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
     const mailMinuscule = mail.toLowerCase();
+
+    let photo_gallery = {
+        imagen1: null,
+        imagen2: null,
+        imagen3: null,
+        imagen4: null
+    }
+
+
     try {
         if( name &&  last_Name && mail && country  && city && coordinate ){
             const [newUser, created] = await User.findOrCreate({
@@ -109,6 +118,7 @@ users.post("/", async (req, res, next) =>{
                     street,
                     address,
                     isProfessional,
+                    photo_gallery
                 }
             })
             if(profession){
@@ -167,7 +177,6 @@ users.put('/:id', async (req, res, next) => {
             street,
             address,
             isProfessional,
-
         })
         await userUpdated.save()
         res.status(200).send(`The user "${name}" updated successfully`)
@@ -259,10 +268,9 @@ users.put('/subscription/:id', async (req, res, next) =>{
 
 users.put('/myjobs/:id', async (req, res, next) =>{
     const { id } = req.params;
-    const { obj } = req.body;
+    const obj = req.body; 
     try {
-        const photos = await functions.updatePhotos(id, obj)
-        console.log('ESTO ES LO QUE LLEGA A RUTAS DEL FRONT', photos)
+        await functions.updatePhotos(id, obj)
         res.status(201).send('La galeria de fotos se actualizo correctamente')
     } catch (error) {
         console.log(error);
