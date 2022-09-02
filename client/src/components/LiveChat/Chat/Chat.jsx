@@ -26,6 +26,12 @@ const Chat = (props) => {
     const currentUser = functions.getLocalStorage()
     const scrollRef = useRef()
 
+    const [activeMenu, setActiveMenu] = useState(false);
+
+    const onActivemenu = () => {
+        activeMenu ? setActiveMenu(false) : setActiveMenu(true);
+    }
+
 
     if(!isAuthenticated) navigate("/")
 
@@ -137,17 +143,22 @@ const Chat = (props) => {
          <NavBar/>
             {
                 <div className="messenger">
-                <div className="chatMenu">
+                <div className={`chatMenu ${activeMenu ? '' : 'inactiveChat'}`}>
+                    <div className="closeChatmenu" onClick={onActivemenu}>x</div>
                     <div className="chatMenuWrapper">
                         <h3 className='headerChats'>Chats</h3>
                         {conversations?.map((c, i) => (
                             <div onClick={() => {
                                 setCurrentChat(c)
+                                onActivemenu();
                             }}>
                             <Conversation key={i} conversations={c} currentUser={currentUser} online={onlineUsers}/>
                             </div>
                         ))}
                     </div>
+                </div>
+                <div className="openButton">
+                    <div className="openbtn" onClick={onActivemenu}>Chats</div>
                 </div>
                 <div className="chatBox">
                     <div className="chatBoxWrapper">
