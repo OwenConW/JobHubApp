@@ -30,10 +30,33 @@
         align-items: center;
         color: black;
         text-decoration: none;
-        font-size: 1.4rem;
+        font-size: 1.0rem;
         margin-inline: 3%;
+        .submit {
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            height: 80%;
+            border-radius: 3px;
+            background-color: #07393C;
+            color: #f5f5f5;
 
-        div {
+            &:disabled {
+                background-color: rgba(168, 168, 168, 0.47);
+                color: #07393c80;
+            }
+
+            &:not(:disabled):hover {
+                transition: 0.3s;
+                cursor: pointer;
+                color: #f5f5f5;
+                background-color: #07393c46;
+                scale: 1.05;
+            }
+        }
+        .title {
             width: 40%;
         }
 
@@ -54,6 +77,8 @@
             .error {
                 color: rgb(228, 82, 82);
             }
+
+
         }
 
         input {
@@ -65,6 +90,48 @@
             background: rgba(255, 255, 255, 0.596);
             border: solid rgba(136, 136, 136, 0.356);
             border-width: 1px;
+        }
+
+        .imgContainer {
+            width: 60%;
+            margin-left: 10%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            object-fit: cover;
+            img {
+                width: 55%;
+                height: 100%;
+                border-radius: 50%;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .imgButton {
+                background-image: url("./assets/editImage.png");
+                background-position: center;
+                background-color: transparent;
+                width: 30px;
+                height: 28px;
+                cursor: pointer;
+                z-index: 100;
+                transition: 0.5s;
+                mask-repeat: no-repeat;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .imgButton::-webkit-file-upload-button {
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            .imgButton:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+                transition: 0.5s;
+            }
+
         }
 
         select {
@@ -141,7 +208,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 15%;
+            width: 20%;
             height: 100%;
             border-radius: 5px;
             background-color: #ff4733b9;
@@ -166,7 +233,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 15%;
+            width: 20%;
             height: 100%;
             border-radius: 5px;
             background-color: #07393C;
@@ -213,8 +280,27 @@
                 width: 40%;
             }
 
+            .imgContainer {
+                width: 60%;
+                margin-left: 10%;
+                height: 80px;
+                display: flex;
+                justify-content: center;
 
+                img {
+                    width: 45%;
+                    height: 100%;
+                    border-radius: 50%;
+                    margin: 0px;
+                    padding: 0px;
+                }
+            }
+            .submit{
+                max-height: 60%;
+                font-size: 1.6rem;
+                flex-wrap: wrap;
 
+            }
             .errorInput {
                 width: 100%;
                 display: flex;

@@ -13,6 +13,8 @@ const Edit = () => {
   const navigate = useNavigate()
   let localSt = getLocalStorage()
   let activeUser = { ...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1) }
+  
+  const [imgChange, setImgChange] = useState(undefined)
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
 
@@ -135,11 +137,23 @@ const Edit = () => {
     loading: false,
   });
 
+  const handleUpload = async () => {
+    const formData = new FormData();
+    formData.append("file", imgChange);
+    formData.append("upload_preset", "jobhub");
+    const res = await axios.post("https://api.cloudinary.com/v1_1/jobhubapp/image/upload", formData);
+    const file = await res.data;
+    setUser({
+      ...user,
+      image: file.secure_url
+    })
+  }
+
 
 
 
   const handleSubmit = async (event) => {
-    if(event.target.value === 'Confirmar'){
+    if (event.target.value === 'Guardar Cambios') {
       let response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${user.address},${user.street},${user.city},${user.country}&format=json`);
       if (!response.data.length) {
         setErrorGeometry({
@@ -152,8 +166,8 @@ const Edit = () => {
           coordinate: [response.data[0].lat, response.data[0].lon]
         })
       }
-  
-  
+
+
       let newValues = {
         ...localSt,
         name: user.name.toLowerCase(),
@@ -174,19 +188,19 @@ const Edit = () => {
       }
       console.log('coordenada new values', newValues.coordinate)
       setUserLocalStorage(newValues)
-  
+
       modifyUser(activeUser.id, user)
-  
+
       Swal.fire({
         icon: 'success',
         title: 'Cambios Guardados',
         showConfirmButton: false,
         timer: 1500
       })
-  
+
       navigate("./")
     }
-    if(event.target.value === 'Eliminar Cuenta'){
+    if (event.target.value === 'Eliminar Cuenta') {
       Swal.fire({
         title: 'Estas seguro de que quieres eliminar tu cuenta?',
         text: "Podras restaurar tu cuenta mas adelante si asi lo deseas",
@@ -197,32 +211,44 @@ const Edit = () => {
         confirmButtonText: 'Si, quiero eliminarla',
         cancelButtonText: 'Cancelar',
       }).then((result) => {
-        
+
         if (result.isConfirmed) {
-          setInactiveUser(activeUser.id, {isActive: false})
+          setInactiveUser(activeUser.id, { isActive: false })
           setUserLocalStorage({})
           Swal.fire(
             'Cuenta Eliminada!',
             'Esperamos que vuelvas pronto',
             'success'
           )
-          
+
         }
 
-       
+
       })
     }
-    
+
   }
   // console.log('entre a Edit')
   // console.log('activeuser: ', activeUser)
   return (
     <div className={s.container}>
 
+      <div className={s.inputDiv}>
+        <div>Foto de Perfil</div>
+        <div className={s.errorInput}>
+          <div className={s.imgContainer}>
+            <img src={user.image} alt="" />
+            <input type='file' className={s.imgButton} onChange={(event) => setImgChange(event.target.files[0])}></input>
+            
+          </div>
+         
+        </div>
+        <button onClick={handleUpload} className={s.submit}>Subir Imagen</button>
+      </div>
 
 
       <div className={s.inputDiv}>
-        <div>Nombre</div>
+        <div className={s.title}>Nombre</div>
         <div className={s.errorInput}>
           <input placeholder="Nombre" name="name" value={user.name} onChange={(event) => handleChange(event)}></input>
           {errors.name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.name ? <p className={s.error}>{errors.name}</p> : '')}
@@ -230,33 +256,30 @@ const Edit = () => {
       </div>
 
       <div className={s.inputDiv}>
-        <div>Apellido</div>
+        <div className={s.title}>Apellido</div>
         <div className={s.errorInput}>
           <input placeholder="Apellido" name='last_Name' value={user.last_Name} onChange={(event) => handleChange(event)}></input>
           {errors.last_Name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.last_Name ? <p className={s.error}>{errors.last_Name}</p> : '')}
         </div>
       </div>
 
-
-
-      {/*VER DESPUES COMO ES EL TEMA DE CAMBIO DE MAIL*/}
       <div className={s.inputDiv}>
-        <div>Mail</div>
+        <div className={s.title}>Mail</div>
         <div className={s.errorInput}>
-        <input placeholder="mail" name='mail' value={user.mail} onChange={(event) => handleChange(event)}></input>
-        {errors.last_Name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.last_Name ? <p className={s.error}>{errors.last_Name}</p> : '')}
+          <input placeholder="mail" name='mail' value={user.mail} onChange={(event) => handleChange(event)}></input>
+          {errors.last_Name === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.last_Name ? <p className={s.error}>{errors.last_Name}</p> : '')}
         </div>
       </div>
 
       <div className={s.inputDiv}>
-        <div>Telefono</div>
+        <div className={s.title}>Telefono</div>
         <div className={s.errorInput}>
           <input placeholder="Telefono" name='phone' value={user.phone} onChange={(event) => handleChange(event)}></input>
         </div>
       </div>
 
       <div className={s.inputDiv}>
-        <div>DNI</div>
+        <div className={s.title}>DNI</div>
         <div className={s.errorInput}>
           <input placeholder="dni" name='dni' value={user.dni} onChange={(event) => handleChange(event)}></input>
           {errors.dni === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.dni ? <p className={s.error}>{errors.dni}</p> : '')}
@@ -265,7 +288,7 @@ const Edit = () => {
 
 
       <div className={s.inputDiv}>
-        <div>Pais</div>
+        <div className={s.title}>Pais</div>
         <select name='country' value={user.country} onChange={(event) => handleChange(event)} className={s.select}>
 
           <option key={'none'} value={user.country}>{user.country}</option>
@@ -281,7 +304,7 @@ const Edit = () => {
       </div>
 
       <div className={s.inputDiv}>
-        <div>Ciudad</div>
+        <div className={s.title}> Ciudad</div>
         <div className={s.errorInput}>
           <input placeholder="Ciudad" name='city' value={user.city} onChange={(event) => handleChange(event)}></input>
           {errors.city === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.city ? <p className={s.error}>{errors.city}</p> : '')}
@@ -289,7 +312,7 @@ const Edit = () => {
       </div>
 
       <div className={s.inputDiv}>
-        <div>Calle</div>
+        <div className={s.title}>Calle</div>
         <div className={s.errorInput}>
           <input placeholder="Calle" name='street' value={user.street} onChange={(event) => handleChange(event)}></input>
           {errors.street === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.street ? <p className={s.error}>{errors.street}</p> : '')}
@@ -297,7 +320,7 @@ const Edit = () => {
       </div>
 
       <div className={s.inputDiv}>
-        <div>Número</div>
+        <div className={s.title}>Número</div>
         <div className={s.errorInput}>
           <input placeholder="Tu direccion" name='address' value={user.address} onChange={(event) => handleChange(event)}></input>
           {errors.address === 'Este campo es obligatorio' ? <p className={s.required}>*</p> : (errors.address ? <p className={s.error}>{errors.address}</p> : '')}
@@ -305,7 +328,7 @@ const Edit = () => {
       </div>
 
       <div className={s.inputDiv}>
-        <div>Ser Profesional</div>
+        <div className={s.title}>Ser Profesional</div>
         <input type="checkbox" name='isProfessional' checked={user.isProfessional} onClick={clickToBeProffessional}></input>
       </div>
 
@@ -316,7 +339,7 @@ const Edit = () => {
       <div className={s.submitButtons}>
         <input type="submit" value='Eliminar Cuenta' className={s.disable} onClick={handleSubmit} />
 
-        <input type="submit" value='Confirmar' className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
+        <input type="submit" value='Guardar Cambios' className={s.submit} onClick={handleSubmit} disabled={changeValidator(comparative, user) || Object.keys(errors).length} />
       </div>
 
 
