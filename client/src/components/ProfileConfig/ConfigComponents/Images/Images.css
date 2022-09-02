@@ -1,0 +1,171 @@
+.contenedorHeader{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.Title{
+    font-weight: 200;
+    font-size: 40px;
+    font-family: Poppins;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.contenedorBotonSave{
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    margin-bottom: 16px;
+    width: 220px;
+    height: 36px;
+    border-radius: 5px;
+    background-color: #2c666e;
+    color: #eeeeee;
+    box-shadow: 0px 7px 15px -7px rgba(0,0,0,0.7);
+}
+   
+.alertSave{
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: center;
+    justify-self: center;
+    font-weight: 300;
+    text-align: center;
+}
+
+.contenedorBotonSave p{
+    font-size: 2rem;
+    text-decoration: none;
+    
+}
+
+.contenedorBotonSave:hover {
+    transition: 0.5s;
+    scale: 1.02;
+    cursor: pointer;
+    color: #2c666e;
+    background-color: #d1d1d1;
+}
+
+.contenedorImagenes{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.contenedorImagenes12{
+    width: 100%;
+    height: 42.5%;
+    display: flex;
+    justify-content: space-evenly;
+
+
+}
+
+.contenedorImagenes34{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 42.5%;
+}
+
+.Contenedorimagen1, .Contenedorimagen2, .Contenedorimagen3, .Contenedorimagen4{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+}
+
+
+.loaderOk{
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.imagen1, .imagen2, .imagen3, .imagen4{
+    width: 90%;
+    height: 95%;
+    margin-top: 8px;
+    margin-left: 18px;
+    margin-right: 20px;
+    border: 2px solid #2C666E;
+    border-radius: 15px;
+    filter: opacity(0,2);
+    transition: 0.5s ;
+}
+
+.imagen1:hover, .imagen2:hover, .imagen3:hover, .imagen4:hover{
+    transform: scale(1.01);
+    transition: 0.5s ;
+}
+
+.imagen3, .imagen4{
+    width: 90%;
+    height: 92%;
+    margin-top: 12px;
+    margin-left: 18px;
+    margin-right: 20px;
+    border: 2px solid #2C666E;
+}
+
+
+.noImage12{
+    width: 90%;
+    height: 95%;
+    margin-top: 8px;
+    margin-left: 18px;
+    margin-right: 20px;
+    border-radius: 15px;
+    background-color: rgba(128, 128, 128, 0.267);
+    border: 2px solid #2C666E;
+    filter: opacity(0,2);
+}
+
+.noImage34{
+    width: 90%;
+    height: 92%;
+    margin-top: 12px;
+    margin-left: 18px;
+    margin-right: 20px;
+    border-radius: 15px;
+    background-color: rgba(128, 128, 128, 0.267);
+    border: 2px solid #2C666E;
+    filter: opacity(0,2);
+}
+
+
+
+.botonAdd4{ 
+    background-image: url("./assets/picture.png");
+    background-position: center;
+    width: 64px;
+    height: 64px;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 100;
+    position: absolute;
+    top: 41%;
+    left: 41%;
+    transition: 0.5s ;
+}
+
+.botonAdd4::-webkit-file-upload-button{
+    opacity: 0;
+    cursor: pointer;
+}
+
+.botonAdd4:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.5s ;
+}
