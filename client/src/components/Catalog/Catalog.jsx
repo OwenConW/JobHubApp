@@ -8,6 +8,7 @@ import Filter from './Filter/Filter';
 import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
 import Navbar from '../Navbar/Navbar';
+import SliderComponent from './slider/Slider';
 
 const theme = createTheme({
 	palette: {
@@ -126,9 +127,9 @@ const Catalog = (props) => {
 						</form>
 					</aside>
 				<div className={estilos.professionals}>
-					<header className={estilos.header}>
-						<span>Catálogo de profesionales</span>
-					</header>
+					<div className={estilos.slider}>
+						<SliderComponent />
+					</div>
 					<div className={estilos.paginate}>
 						<h3 className={asideActive ? estilos.activefilter : ''} onClick={() => {
 							asideActive ? setAsideActive(false) : setAsideActive(true);

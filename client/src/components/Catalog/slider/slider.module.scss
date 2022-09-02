@@ -1,0 +1,15 @@
+.sample {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+
+    .div1, .div2, .div3{
+        width: 100%;
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+}
