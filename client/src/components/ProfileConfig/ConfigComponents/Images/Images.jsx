@@ -20,13 +20,13 @@ const Images = () => {
     React.useEffect(() => {
         if(Object.keys(activeUser?.photo_gallery).length){
             setImagenes({
-                imagen1: activeUser?.photo_gallery?.imagen1,
-                imagen2: activeUser?.photo_gallery?.imagen2,
-                imagen3: activeUser?.photo_gallery?.imagen3,
-                imagen4: activeUser?.photo_gallery?.imagen4
+                imagen1: imagenesEnTiempoReal.imagen1,
+                imagen2: imagenesEnTiempoReal.imagen2,
+                imagen3: imagenesEnTiempoReal.imagen3,
+                imagen4: imagenesEnTiempoReal.imagen4
             })
         }
-    }, [])
+    }, [activeUser.id])
 
     const [PreImage1, setPreImage1] = React.useState(null)
     const [PreImage2, setPreImage2] = React.useState(null)
@@ -104,33 +104,41 @@ const Images = () => {
         setUserLocalStorage(res.data)
     }
 
+    let img1 = imagenesEnTiempoReal.imagen1
+    let img2 = imagenesEnTiempoReal.imagen2
+    let img3 = imagenesEnTiempoReal.imagen3
+    let img4 = imagenesEnTiempoReal.imagen4
+    
     const handleDelete = async (num) => {
-        console.log("name:", `imagen${num}`)
-        // imagenesEnTiempoReal = {
-        //     ...imagenesEnTiempoReal,
-        //     [`imagen${num}`]: null
-        // }
-        imagenesEnTiempoReal[`imagen${num}`] = null
-        // {
-        //     imagen1: "https://api.cloudinary.com/v1_1/jobhubapp/image/upload", 
-        //     imagen2: "https://api.cloudinary.com/v1_1/jobhubapp/image/upload",
-        //     imagen3: null,
-        //     imagen4: null,
-        // }
+        if(num === 1){
+            img1 = null
+        }
+        if(num === 2){
+            img2 = null
+        }
+        if(num === 3){
+            img3 = null
+        }
+        if(num === 4){
+            img4 = null
+        }
+        imagenesEnTiempoReal = {
+            ...imagenesEnTiempoReal,
+            [`imagen${num}`]: null
+        }
         setImagenes({
             ...imagenes,
             [`imagen${num}`]: null
         })
-        console.log(`se elimina el ${num}`, imagenesEnTiempoReal)
+        console.log("en tiempo real", imagenesEnTiempoReal);
         await axios.put(`/users/myjobs/${activeUser.id}`, imagenesEnTiempoReal) 
         const res = await axios.get(`/users/${activeUser.id}`)
         setUserLocalStorage(res.data)
-        console.log("respuesta:", res.data);
     }
 
     React.useEffect(() => {
         return () => {
-            
+
         }
     }, [imagenes])
 
