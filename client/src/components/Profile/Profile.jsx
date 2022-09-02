@@ -13,6 +13,7 @@ import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import PremiumModal from "./premiumModal/PremiumModal";
 import * as functions from "../../handlers/localStorage";
 import axios from "axios";
+import defaultimage from '../Navbar/assets/deafultimage.png';
 import { useDispatch, useSelector } from "react-redux";
 import { getChars, getCharsById } from "../../redux/userActions";
 import { useEffect } from "react";
@@ -34,7 +35,7 @@ const Profile = () => {
   let allOrders = useSelector((state) => state.orders.orders)
 
   if(preapproval_id){
-    axios.put(`users/premium/${currentUser.id}`, {isPremium: true, idPago: preapproval_id})
+    axios.put(`users/premium/${currentUser.id}`, { isPremium: true })
     .then(() => {
       Swal.fire({
         icon: 'success',
@@ -54,9 +55,13 @@ const Profile = () => {
       })
       .then(() => {
         Swal.close(navigate("/profile"))
-        axios.get(`/users/${currentUser.id}`)
+        axios.put(`/subscription/${currentUser.id}`, {preapproval_id})
+        .then(() => {
+          return axios.get(`/users/${currentUser.id}`)
+        })
         .then(res => {
-          setUserLocalStorage(res.data)
+          setUserLocalStorage(res.data)   
+          console.log("tiene que estas las fechas: ",res.data)
           window.location.reload()
           axios.get(`/mails/bienvenido/premium?name=${currentUser.name}&mail=${currentUser.mail}`)
         })
@@ -100,11 +105,11 @@ const Profile = () => {
             {
               activeUser?.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
-              <img src={activeUser.image} className={s.profile_ImgPremium} alt=""></img>
+              <img src={activeUser.image !== 'noimage' ? activeUser.image : defaultimage} className={s.profile_ImgPremium} alt=""></img>
             </div>
               ): (
                 <div className={s.profile_Img_container}>
-                <img src={activeUser.image} className={s.profile_Img} alt=""></img>
+                <img src={activeUser.image !== 'noimage' ? activeUser.image : defaultimage} className={s.profile_Img} alt=""></img>
               </div>
               )
             }

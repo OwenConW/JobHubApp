@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //assets
 import logo from './assets/logo.svg';
@@ -10,14 +10,17 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 //styles and utilities
 import s from './Navbar.module.scss';
+import { Sling as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
 
 //UserTest
 import login from './assets/Login.png';
 import logouticon from './assets/Logout.png';
 import { getLocalStorage } from '../../handlers/localStorage';
+import Menu from './mobile/Menu';
 
 const Navbar = () => {
+	const [openBurger, setOpenBurger] = useState(false);
 	const { isAuthenticated, logout } = useAuth0();
 	const activeUser = getLocalStorage();
 
@@ -28,6 +31,12 @@ const Navbar = () => {
 
 	return (
 		<div className={s.container}>
+			<div className={s.burgerbtn}>
+				<Hamburger toggled={openBurger} toggle={setOpenBurger} duration={0.5} rounded color="#54a7b1"/>
+			</div>
+			<div className={openBurger ? s.burgerActive :  s.burgerInactive}>
+				<Menu isAuthenticated={isAuthenticated} activeUser={activeUser} handleLogout={handleLogout}/>
+			</div>
 			<div className={s.menu}>
 				<Link to="/home" className={s.link}>
 					Inicio
@@ -60,11 +69,11 @@ const Navbar = () => {
 						{
 							activeUser.isPremium ?
 							<Link to={'/profile'} className={s.profileimgPremium}>
-							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image !== 'noimage' ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
 							</Link>
 							:
 							<Link to={'/profile'} className={s.profileimg}>
-							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image !== 'noimage' ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
 							</Link>
 						}
 
@@ -81,6 +90,7 @@ const Navbar = () => {
 					</div>
 				)}
 			</div>
+
 		</div>
 	);
 };

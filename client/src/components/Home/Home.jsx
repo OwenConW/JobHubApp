@@ -37,6 +37,21 @@ const Home = () => {
     <>
       <Navbar />
       <div className={s.container}>
+      <div className={s.maptop}>
+          <h1 className={s.titlemapa}>Utiliza nuestro sistema de búsqueda por ubicación</h1>
+          {isAuthenticated ?
+            <Link to='/map' className={s.link}>
+              <div className={s.button}>
+					      <p>Buscar</p>
+				      </div>
+            </Link>
+          : <Link to='/' className={s.link}> 
+              <div className={s.button}>
+					      <p>Iniciar Sesión</p>
+				      </div>
+            </Link>
+          }
+        </div>
         <aside className={s.aside}>
           <div className={s.presentation}>
             <h1 className={s.title}>El buen servicio de un profesional está a tu alcance!</h1>
@@ -48,7 +63,7 @@ const Home = () => {
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
             <div className={s.cards}>
               {/* {console.log("mejores",bestProffesionals)} */}
-              {bestProffesionals.length ? bestProffesionals.slice(0,3).map((obj, i) => {
+              {bestProffesionals?.length ? bestProffesionals?.slice(0,3).map((obj, i) => {
                   return <FeaturedCard key={i} prop={obj}/>
                 })
               : (
@@ -65,7 +80,7 @@ const Home = () => {
           </div>
         </aside>
         <div className={s.container2}>
-          <h1 className={s.titlemapa}>Utiliza nuestro {br} sistema de {br} búsqueda por {br} ubicación</h1>
+          <h1 className={s.titlemapa}>Utiliza nuestro sistema de búsqueda por ubicación</h1>
           {isAuthenticated ?
             <Link to='/map' className={s.link}>
               <div className={s.button}>

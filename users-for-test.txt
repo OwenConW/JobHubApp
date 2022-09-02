@@ -15,7 +15,7 @@ https://jobhub-pg.herokuapp.com/
     "name":"programador"
 }
 {
-    "name":"programador"
+    "name":"jardinero"
 }
 {
     "name":"albanil"
@@ -27,7 +27,7 @@ https://jobhub-pg.herokuapp.com/
     "name":"pintor"
 }
 {
-    "name":"tecnico de aires acondicionado"
+    "name":"tecnico de aires acondicionados"
 }
 
 
@@ -191,7 +191,7 @@ https://jobhub-pg.herokuapp.com/
 
 
 5031 7557 3453 0604             123                    11/25                        APRO
-
+test_user_8943112@testuser.com
 
 {
     "name": "Valentino",
