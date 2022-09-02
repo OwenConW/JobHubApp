@@ -95,6 +95,11 @@ module.exports = (sequelize) => {
 			defaultValue: false,
 			allowNull: false
 		},
+
+		photo_gallery:  {
+			type: DataTypes.JSONB
+		},
+		
 		isAdmin: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,

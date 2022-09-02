@@ -15,7 +15,7 @@ https://jobhub-pg.herokuapp.com/
     "name":"programador"
 }
 {
-    "name":"programador"
+    "name":"jardinero"
 }
 {
     "name":"albanil"
@@ -27,7 +27,7 @@ https://jobhub-pg.herokuapp.com/
     "name":"pintor"
 }
 {
-    "name":"tecnico de aires acondicionado"
+    "name":"tecnico de aires acondicionados"
 }
 
 
