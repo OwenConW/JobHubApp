@@ -95,7 +95,7 @@ users.get('/searchMail', async (req, res, next) =>{
 
 //RUTA PARA FILTRAR TODOS LOS USUARIOS ADMIN
 users.get("/filter", async (req, res, next) => {
-    const { name, last_Name, profession } = req.body;
+    const { name, last_Name, profession } = req.query;
     console.log(name);
     console.log(last_Name);
     console.log(profession);

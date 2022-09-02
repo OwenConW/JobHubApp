@@ -69,8 +69,8 @@ export const getUsersByIdForAdmin = (id) => (dispatch) => {
 }
 
 export const getUsersByFilterForAdmin = (payload) => (dispatch) => {
-  console.log(payload);
-  axios.get(`/users/filter`, payload)
+  const { name, last_Name, profession } = payload;
+  axios.get(`/users/filter?name=${name}&last_Name=${last_Name}&profession=${profession}`, payload)
     .then((res) => {
       console.log(res.data);
       dispatch(getAllUsers(res.data))

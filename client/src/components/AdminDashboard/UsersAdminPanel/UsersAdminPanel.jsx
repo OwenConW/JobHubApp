@@ -13,7 +13,7 @@ function UsersAdminPanel(props) {
   const dispatch = useDispatch()
   //estado del inuput de busqueda por ID (el de nombre todavia no esta hecho)
   const [searchByIdInput, setSearchByIdInput] = useState('');
-  const [searchByFiltersInput, setSearchByFiltersInput] = useState({});
+  const [searchByFiltersInput, setSearchByFiltersInput] = useState({name: '', last_Name: '', profession: ''});
 
   const professions = useSelector(state => state.jobs.jobs)
 
