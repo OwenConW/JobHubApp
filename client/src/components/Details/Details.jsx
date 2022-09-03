@@ -114,18 +114,21 @@ const Profile = () => {
 
         {/*----- CONTENEDOR DERECHO -----*/}
         <div className={s.rightContainer}>
-          <div className={s.professionContainer}>
+          <div className={ professional?.isPremium ? s.professionContainerPremium : s.professionContainer}>
             <p className={s.professionText}>Oficios publicados</p>
             <ProfessionBox professional={professional}/>
           </div>
           {
             
           }
-          <div className={professional.isPremium ? s.moreReviews : s.poorMoreReviews}>
+          <div className={professional?.isPremium ? s.moreImages : s.moreReviews}> {/* : s.poorMoreReviews */}
             <span className={s.premiumText}>
-              <h1>Imagenes</h1>
+              {
+                professional?.isPremium ? <h1>Trabajos destacados del Profesional</h1> : <h1>Otras reseñas</h1>
+              }
+              
             </span>
-            <ReviewBox/>
+            <ReviewBox professional={professional} allUsers={allUsers}/>
           </div>
         </div>
 

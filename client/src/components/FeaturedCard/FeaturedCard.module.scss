@@ -1,3 +1,36 @@
+.linkPremium{
+    transition: 0.5s;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+margin-left: 4%;
+text-decoration: none;
+padding-left: 2px;
+padding-bottom: 2px;
+padding-right: 2px;
+position: relative;
+border-radius: 5px;
+}
+
+.link{
+    transition: 0.5s;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+margin-left: 4%;
+text-decoration: none;
+padding-left: 2px;
+padding-bottom: 2px;
+padding-right: 2px;
+position: relative;
+border-radius: 5px;
+}
 
 .containerPremium{
     transition: 0.5s;
@@ -21,6 +54,7 @@
         transition: 0.5s;
         background: #a7a03d;
     }
+    text-decoration: none;
 
 
     .oficio{
@@ -81,18 +115,23 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-
+            align-items: center;    
+            text-decoration: none;
+            color: black;
             h4{
                 margin-top: 20px;
                 font-size: 2rem;
                 font-weight: 400;
+                text-decoration: none;
+                color: black;
             }
 
             p{
                 font-size: 1.7rem;
                 font-weight: 300;
                 color: #666666;
+                text-decoration: none;
+                color: black;
             }
         }
 
@@ -111,10 +150,13 @@
                 justify-content: center;
                 align-items: center;
                 padding-bottom: 1%;
-
+                text-decoration: none;
+                color: black;
                 h4{
                     font-weight: 300;
                     font-size: 1.7rem;
+                    text-decoration: none;
+                color: black;
                 }
 
                 .rating{
@@ -148,6 +190,7 @@
     align-items: center;
     justify-content: space-between;
     margin-left: 4%;
+    border: 2px solid #2C666E;
     background: #2C666E;
     padding-left: 2px;
     padding-bottom: 2px;
@@ -159,7 +202,7 @@
         transition: 0.5s;
         background: #3e909b;
     }
-
+    text-decoration: none;
     .oficio{
         margin-top: 2%;
         font-size: 1.8rem;
@@ -203,11 +246,14 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-
-            h4{
+            text-decoration: none;
+            color: black;
+            h4{ 
                 margin-top: 20px;
                 font-size: 2rem;
                 font-weight: 400;
+                text-decoration: none;
+            color: black;
             }
 
             p{
@@ -233,10 +279,13 @@
                 justify-content: center;
                 align-items: center;
                 padding-bottom: 1%;
-
+                text-decoration: none;
+                color: black;
                 h4{
                     font-weight: 300;
                     font-size: 1.7rem;
+                    text-decoration: none;
+                    color: black;
                 }
 
                 .rating{

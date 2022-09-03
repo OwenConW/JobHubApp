@@ -74,7 +74,7 @@ const ProfileConfig = () => {
             </button>
 
             {
-              activeUser ? (
+              activeUser?.isProfessional && activeUser?.isPremium ? (
                 <button className={s.optionList} name='images' onClick={paginado}>
                 Mis Imagenes
               </button>
