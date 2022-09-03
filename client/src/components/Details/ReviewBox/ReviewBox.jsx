@@ -1,8 +1,6 @@
 import React from "react";
 import s from './ReviewBox.module.scss'
 import CardReview from '../CardReview/CardReview.jsx'
-import axios from "axios";
-import noImage from "./assets/noimage.png"
 
 const ReviewBox = ({professional, allUsers}) => {
   return (
@@ -47,7 +45,6 @@ const ReviewBox = ({professional, allUsers}) => {
           </>
         )
       }
-     
     </div>
   )
 }

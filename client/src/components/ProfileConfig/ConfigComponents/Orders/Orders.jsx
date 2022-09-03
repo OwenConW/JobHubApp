@@ -1,11 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import OrderCard from './OrderCard/OrderCard';
 import s from './Orders.module.scss';
 import { getLocalStorage } from "../../../../handlers/localStorage";
 
 const Orders = (props) => {
+  // eslint-disable-next-line no-unused-vars
   let activeUser = getLocalStorage()
 
   let users = useSelector((state) => state.users.users)
@@ -24,7 +25,7 @@ const Orders = (props) => {
       filteredProfessionals = users.filter(prof => prof.name.toLowerCase().includes(filter.toLowerCase()) || prof.last_Name.toLowerCase().includes(filter.toLowerCase()))
       for (let x = 0; x < filteredProfessionals.length; x++) {
         let filteredProfessional = filteredProfessionals[x];
-        let ordersForFilteredProfessional = saveAllOrders.filter(review => review.id_user_professional == filteredProfessional.id);
+        let ordersForFilteredProfessional = saveAllOrders.filter(review => review.id_user_professional === filteredProfessional.id);
         ordersForFilteredProfessional.forEach(review => filteredOrders.push(review))
       }
       setMyOrders(filteredOrders)
@@ -40,6 +41,7 @@ const Orders = (props) => {
   useEffect(() => {
     console.log(myOrders)
     filterByName(filter)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter])
 
 

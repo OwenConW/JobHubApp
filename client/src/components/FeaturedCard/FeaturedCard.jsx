@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 //assets
 import star from './assets/star.png';
-import background from './assets/backcard.svg';
 import default_user from './assets/default_user.png';
 
 const FeaturedCard = (prop) => { 

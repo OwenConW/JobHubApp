@@ -18,6 +18,7 @@ export default function RestoreUserModal(props) {
     if (fetchingAdminRestoreUserSuccess) {
       handleRestoreOpenModal();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[fetchingAdminRestoreUserSuccess])
 
 

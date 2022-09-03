@@ -6,6 +6,7 @@ import s from './OrderCard.module.scss'
 
 const OrderCard = ({ order, users }) => {
 
+  // eslint-disable-next-line no-self-assign
   order = order
 
 

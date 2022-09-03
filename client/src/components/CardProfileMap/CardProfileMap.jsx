@@ -1,6 +1,5 @@
 import React from "react";
 import s from './CardProfileMap.module.scss';
-import userImg from './assets/userimage.jpg'
 import star from './assets/star.svg'
 import { useSelector } from "react-redux";
 
@@ -20,7 +19,7 @@ const CardProfileMap = ({order}) => {
             <h2>{professional?.professions[0]?.name}</h2>
           </div>
           <div className={s.orderDetail2}>
-            {professional?.rating === -1 ? '' : <h3><img src={star} /> {professional?.rating}</h3>}
+            {professional?.rating === -1 ? '' : <h3><img src={star} alt="" /> {professional?.rating}</h3>}
 
           </div>
         </div>
