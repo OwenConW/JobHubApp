@@ -8,9 +8,17 @@
     padding: 0;
     margin: 0;
 
+    .filter {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        border: 2px solid rgba(128, 128, 128, 0.39);
+        border-radius: 0.2rem;
+        margin-bottom: 20px;
+    }
 
-
-
-       
-
+    .voidReviews {
+        font-size: 3rem;
+        line-height: 3.5rem;
+        margin-top: 50px;
+    }
 }

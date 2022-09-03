@@ -15,10 +15,10 @@ dotenv.config();
 
 axios.defaults.baseURL =   process.env.REACT_APP_URL || 'http://localhost:3001';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<Auth0Provider
+
 	domain='dev-gv15gu89.us.auth0.com'
 	clientId='qTXIkxKGxhYY76ZJ14YegPBAz4oeZ20P'
 	redirectUri={window.location.origin}
