@@ -20,10 +20,37 @@ users.get("/", (req, res, next) => {
     })
 })
 
+//RUTA PARA TRAER TODOS LOS USUARIOS QUE MATCHEEN EL NOMBRE
+// users.get("/admin", async (req, res, next) => {
+//     const {name} = req.query;
+//     try {
+//         const users = await User.findAll({
+//             where: {
+//                 name: {
+//                     [Op.startsWith]: name,
+//                 },
+//                 last_Name: {
+//                     [Op.startsWith]: name,
+//                 }
+//             }
+//         })
+//         res.status(200).json(users)
+//     } catch (error) {
+//         console.error(error);
+//         next(error)
+//     }
+// })
+
 //RUTA QUE TRAE TODOS LOS USUARIOS SIN FILTRO
 users.get("/all", async (req, res, next)=>{
     try {
-        const allUsers = await User.findAll()
+        const allUsers = await User.findAll({
+            include: {
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        })
         res.status(200).json(allUsers)
     
     } catch (error) {
@@ -68,7 +95,10 @@ users.get('/searchMail', async (req, res, next) =>{
 
 //RUTA PARA FILTRAR TODOS LOS USUARIOS ADMIN
 users.get("/filter", async (req, res, next) => {
-    const { name, last_Name, profession } = req.body;
+    const { name, last_Name, profession } = req.query;
+    console.log(name);
+    console.log(last_Name);
+    console.log(profession);
     
     try {
         const options = await functions.getAllUsersAdmin( name, last_Name, profession )
@@ -76,6 +106,7 @@ users.get("/filter", async (req, res, next) => {
         const filter = await User.findAll(options)
         //console.log('ESTE ES EL OBJETO FILTER', filter)
         res.status(200).json(filter)
+        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',filter);
         
     } catch (error) {
         console.log(error);
@@ -86,6 +117,7 @@ users.get("/filter", async (req, res, next) => {
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
     const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession } = req.body;
+
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
     const mailMinuscule = mail.toLowerCase();
@@ -96,7 +128,6 @@ users.post("/", async (req, res, next) =>{
         imagen3: null,
         imagen4: null
     }
-
 
     try {
         if( name &&  last_Name && mail && country  && city && coordinate ){
@@ -143,20 +174,18 @@ users.post("/", async (req, res, next) =>{
     
 })
 
-
 //RUTA PARA EDITAR EL USUARIO
 users.put('/:id', async (req, res, next) => {
     const { id } = req.params
     const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
-    const nameMinuscule = name.toLowerCase();
-    const lastNameMinuscule = last_Name.toLowerCase();
-    const mailMinuscule = mail.toLowerCase();
-    try {
+    const nameMinuscule = name?.toLowerCase();
+    const lastNameMinuscule = last_Name?.toLowerCase();
+    const mailMinuscule = mail?.toLowerCase();
 
+    try {
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
         const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
         await userUpdated.removeProfession(oldProfessions)
-
         if(professions.length > 0){
             const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: professions } } })
             await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
@@ -186,6 +215,70 @@ users.put('/:id', async (req, res, next) => {
     }
 })
 
+// RUTA DEL ADMIN PARA EDITAR EL USUARIO
+users.put('/admin/:id', async (req, res) => {
+        const { id } = req.params
+        const { name, 
+                last_Name, 
+                date_of_Birth, 
+                image, 
+                dni, 
+                mail, 
+                phone, 
+                description, 
+                country, 
+                city, 
+                coordinate, 
+                street, 
+                address, 
+                isProfessional, 
+                professions,
+                isPremium,         
+                isActive,
+                isBanned,
+                isAdmin } = req.body;
+        const nameMinuscule = name?.toLowerCase();
+        const lastNameMinuscule = last_Name?.toLowerCase();
+        const mailMinuscule = mail?.toLowerCase();
+    
+        try {
+            const userUpdated = await User.findOne({ where: { id }, include: Profession })
+            const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
+            await userUpdated.removeProfession(oldProfessions)
+            console.log(professions);
+            if(professions.length > 0){
+                const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: professions } } })
+                await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
+            }
+    
+            userUpdated.set({
+                name: nameMinuscule,
+                last_Name: lastNameMinuscule,
+                date_of_Birth,
+                image,
+                dni,
+                mail: mailMinuscule,
+                phone,
+                description,
+                country,
+                city,
+                coordinate,
+                street,
+                address,
+                isPremium,
+                isProfessional,
+                isActive,
+                isBanned,
+                isAdmin
+            })
+            await userUpdated.save()
+            res.status(200).send(`The user "${name}" updated successfully`)
+            } catch (error) {
+            console.log(error);
+            res.status(400).send(error)
+        }
+    })
+    
 //RUTA PARA EDITAR USUARIO SIN JOBS
 users.put("/edit/:id" , async (req, res, next) => {
     const { id } = req.params

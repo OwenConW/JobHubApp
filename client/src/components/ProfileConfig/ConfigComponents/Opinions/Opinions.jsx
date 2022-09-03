@@ -55,13 +55,13 @@ const Opinions = () => {
 
   return (
     <div className={s.container}>
-      <label>Filtrar</label>
-      <input name="filter" value={filter} onChange={event => onFilterChange(event)}></input>
+      
+      <input name="filter" value={filter} placeholder="Busqueda por nombre..." className={s.filter} onChange={event => onFilterChange(event)}></input>
       {
         allReviews.length ? allReviews.map(review =>
           <OpinionCard review={review} users={users} key={review?.id}/>
 
-        ) : <p>No se encontraron reseñas</p>
+        ) : <p className={s.voidOpinions}>No se encontraron reseñas</p>
       }
 
     </div>

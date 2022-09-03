@@ -43,7 +43,7 @@ jobs.post("/create", async (req, res, next) =>{
 jobs.delete("/admin/:id", async (req, res, next)=>{
     const {id} = req.params
     try{
-        await jobs.Profession({
+        await Profession.destroy({
             where:{id:id}
         }) 
         res.status(201).send("The Profession was successfully deleted")

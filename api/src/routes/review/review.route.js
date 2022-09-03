@@ -5,6 +5,19 @@ const { User, Review, Profession} = require("../../db.js")
 
 const review = Router()
 
+
+review.get("/all", async (req, res, next)=>{
+    try {
+        const allReviews = await Review.findAll()
+        res.status(200).json(allReviews)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+
 // RUTA QUE CREA RESEÑAS
 review.post("/:id", async (req, res, next) =>{
     let { id_orders, id_user_client ,feedback_client, rating  } = req.body;
@@ -44,8 +57,8 @@ review.post("/:id", async (req, res, next) =>{
 review.put("/:id", async (req, res, next)=> {
     const { id } = req.params;
     const { feedback_client, rating, id_user_professional } = req.body;
-    try {
 
+    try {
         await functions.updateReview(id, feedback_client, rating);
         await functions.searchRating(id_user_professional, rating)
         res.status(201).send(`The Review  was successfully modified`);
@@ -54,7 +67,6 @@ review.put("/:id", async (req, res, next)=> {
         console.log(error)
         next(error)
     }
-    
 })
 
 // RUTA PARA TRAER TODAS LAS RESEÑAS POR ID (del professional)
@@ -72,6 +84,7 @@ review.get("/:id", async (req, res, next)=>{
 // RUTA PARA TRAER TODAS LAS RESEÑAS POR ID (del cliente)
 review.get("/admin/client/:id", async (req, res, next)=>{
     const {id} = req.params;
+    console.log(id);
     try{
         const allReviewByClient = await functions.getAllReviewByClient(id);
         res.status(200).json(allReviewByClient);
@@ -106,5 +119,20 @@ review.delete("/admin/:id", async (req, res, next)=>{
     }
 })
 
+//RUTA PARA BUSCAR REVIEW POR ID (de la review)
+review.get("/admin/:id", async (req, res, next)=>{
+    const { id } = req.params;
+    try {
+        const reviewFoundById = await Review.findOne({
+            where: {
+                id
+            }
+        })
+        res.status(200).json(reviewFoundById)
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
 
 module.exports = review;

@@ -1,0 +1,18 @@
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
+.professionBtn {
+  width: 120px;
+  height: 40px;
+  font-size: 1.7rem;
+  border-radius: 5px;
+  background-color: $green-color;
+  color: $white-color;
+  transition: .2s;
+   &:hover {
+    background-color: rgb(153, 55, 55);
+    transition: .2s;
+   }
+}

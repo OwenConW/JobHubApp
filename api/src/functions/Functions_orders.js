@@ -2,13 +2,14 @@ const { Op } = require("sequelize");
 const { User, Review, Orders } = require("../db")
 
 //FUNCION PARA QUE EL PROFESIONAL COMPLETE LA ORDEN
-const updateOrden = async (id, description, complete, apointment_date, allowReview ) =>{
+const updateOrden = async (id, description, complete, apointment_date, allowReview, isActive ) =>{
     try {
         await Orders.update({
             description, 
             complete,
             apointment_date,
             allowReview,
+            isActive
         },{
             where:{
                 id: id
@@ -29,7 +30,7 @@ const getAllOrdersByProfessional = async (id) =>{
             include:[
                 {
                     model: Orders,
-                    attributes: ['id','id_user_client','description', 'complete', 'date_created', 'apointment_date', 'allowReview'],
+                    attributes: ['id', 'id_user_professional','id_user_client','description', 'complete', 'date_created', 'apointment_date', 'allowReview'],
                     through: {attributes: []}
                 }
             ]
