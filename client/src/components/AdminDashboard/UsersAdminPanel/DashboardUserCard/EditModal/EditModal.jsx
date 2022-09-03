@@ -138,11 +138,11 @@ function EditModal(props) {
           </div>
           <div>
             <label htmlFor="name">Profesiones</label>
-            {userData?.professions?.length && userData?.professions?.map(p => {
+            {userData.professions.length ? userData?.professions?.length && userData?.professions?.map(p => {
               return (
                 <h4>{p.name}</h4>
               )
-            })}
+            }) : <h4>No tiene</h4>}
             {/* <select onClick={handleProfessionsClick} name="add-professions">
                   <option name="main-option" value=''>Selecciona profesiones</option>
               {professionFromDb?.map(p => {
@@ -152,8 +152,10 @@ function EditModal(props) {
               })}
             </select> */}
           </div>
-          <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>
-          <input type="submit" value='Editar' />
+          <div>
+            <input className={s.editBtn} type="submit" value='Editar' />
+            <button className={s.cancelBtn} name="cancel-btn" onClick={handleEdit}>Cancelar</button>
+          </div>
         </div>
       </form>
     </div>

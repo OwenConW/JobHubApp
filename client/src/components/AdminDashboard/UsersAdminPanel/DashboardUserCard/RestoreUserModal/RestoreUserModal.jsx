@@ -26,8 +26,8 @@ export default function RestoreUserModal(props) {
       <div className={s.infoContainer}>
         <h1>Estas seguro que deseas restaurar el usuario {name}?</h1>
         <div className={s.btnContainer}>
-          <button type="button" onClick={handleRestore}>Restaurar</button>
-          <button type="button" name="cancel-btn" onClick={handleRestore}>Cancelar</button>
+          <button className={s.restoreBtn} type="button" onClick={handleRestore}>Restaurar</button>
+          <button className={s.cancelBtn} type="button" name="cancel-btn" onClick={handleRestore}>Cancelar</button>
         </div>
       </div>
     </div>
