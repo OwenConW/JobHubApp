@@ -102,9 +102,9 @@ users.get("/filter", async (req, res, next) => {
     
     try {
         const options = await functions.getAllUsersAdmin( name, last_Name, profession )
-console.log('ESTE ES EL OBJETO OPTION', options)
+        //console.log('ESTE ES EL OBJETO OPTION', options)
         const filter = await User.findAll(options)
-console.log('ESTE ES EL OBJETO FILTER', filter)
+        //console.log('ESTE ES EL OBJETO FILTER', filter)
         res.status(200).json(filter)
         console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',filter);
         
@@ -117,9 +117,18 @@ console.log('ESTE ES EL OBJETO FILTER', filter)
 // RUTA QUE BUSCA O CREA USUARIOS
 users.post("/", async (req, res, next) =>{
     const { name, last_Name, date_of_Birth, mail, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession } = req.body;
-    const nameMinuscule = name?.toLowerCase();
-    const lastNameMinuscule = last_Name?.toLowerCase();
-    const mailMinuscule = mail?.toLowerCase();
+
+    const nameMinuscule = name.toLowerCase();
+    const lastNameMinuscule = last_Name.toLowerCase();
+    const mailMinuscule = mail.toLowerCase();
+
+    let photo_gallery = {
+        imagen1: null,
+        imagen2: null,
+        imagen3: null,
+        imagen4: null
+    }
+
     try {
         if( name &&  last_Name && mail && country  && city && coordinate ){
             const [newUser, created] = await User.findOrCreate({
@@ -140,6 +149,7 @@ users.post("/", async (req, res, next) =>{
                     street,
                     address,
                     isProfessional,
+                    photo_gallery
                 }
             })
             if(profession){
@@ -343,6 +353,18 @@ users.put('/subscription/:id', async (req, res, next) =>{
             }
         })
         res.status(200).send("subscription expiration date updated")
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
+users.put('/myjobs/:id', async (req, res, next) =>{
+    const { id } = req.params;
+    const obj = req.body; 
+    try {
+        await functions.updatePhotos(id, obj)
+        res.status(201).send('La galeria de fotos se actualizo correctamente')
     } catch (error) {
         console.log(error);
         next (error)

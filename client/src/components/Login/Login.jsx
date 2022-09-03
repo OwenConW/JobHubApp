@@ -27,8 +27,13 @@ const Login = () => {
 			if(validate && user){
 				let response = await axios.get(`/verify?mail=${user.email}`);
 				if(!response.data.onboarding){
-					setUserLocalStorage(response.data.user);
-					navigate("../home", { replace: true });
+					if(response.data.user.isActive === true){
+						setUserLocalStorage(response.data.user);
+						navigate("../home", { replace: true });
+					}else{
+						setUserLocalStorage(response.data.email)
+						navigate("../returnUser", { replace: true })
+					}
 
 				}else{
 					setUserLocalStorage({mail: user.email, name: user.given_name, last_name: user.family_name});

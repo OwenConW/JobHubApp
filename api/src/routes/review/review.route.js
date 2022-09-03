@@ -21,7 +21,7 @@ review.get("/all", async (req, res, next)=>{
 // RUTA QUE CREA RESEÑAS
 review.post("/:id", async (req, res, next) =>{
     let { id_orders, id_user_client ,feedback_client, rating  } = req.body;
-    console.log('ESTE ES EL RATING QUE LLEGA A LA RUTA POR BODY',rating)
+    //console.log('ESTE ES EL RATING QUE LLEGA A LA RUTA POR BODY',rating)
     const { id } = req.params;
     id_user_client = parseInt(id_user_client)
     try {
@@ -73,7 +73,7 @@ review.put("/:id", async (req, res, next)=> {
 review.get("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
-        const allReview = await functions.getAllReview(id);
+        const allReview = await functions.getAllReviewByProfessional(id);
         res.status(200).json(allReview);
     } catch (error) {
         console.log(error)

@@ -23,11 +23,17 @@ const OrdersProfessional = ({order, setProf, profOrders}) => {
             title: 'Seguro?',
             text: "Al completar, habilitas al cliente a puntuarte.",
             icon: 'question',
+            width: 600,
+            padding: '3em',
+            color: '#dfdddd',
+            background: '#2C666E',
+            backdrop: `
+            rgba(172,172,172,0.5424720913756127)`,
             showCancelButton: true,
             confirmButtonColor: '#2C666E',
             cancelButtonColor: '#4e4e4e',
             cancelButtonText: 'Cancelar',
-            confirmButtonText: 'Completar'
+            confirmButtonText: 'Completar',
           }).then((result) => {
             let body = {
                 complete: false,
@@ -40,6 +46,12 @@ const OrdersProfessional = ({order, setProf, profOrders}) => {
                     text: "Ahora el cliente podrá puntuarte",
                     icon: 'success',
                     confirmButtonColor: '#2C666E',
+                    width: 600,
+                    padding: '3em',
+                    color: '#dfdddd',
+                    background: '#2C666E',
+                    backdrop: `
+                    rgba(172,172,172,0.5424720913756127)`,
                 }))
              }
           })

@@ -45,6 +45,12 @@ const OrdersClient = ({order, activeUser, setCli, clientOrders}) => {
             title: 'Publicar reseña?',
             text: "Podrás modificarla en la configuración de tu perfil.",
             icon: 'question',
+            width: 600,
+            padding: '3em',
+            color: '#dfdddd',
+            background: '#2C666E',
+            backdrop: `
+            rgba(172,172,172,0.5424720913756127)`,
             showCancelButton: true,
             confirmButtonColor: '#2C666E',
             cancelButtonColor: '#4e4e4e',
@@ -65,6 +71,12 @@ const OrdersClient = ({order, activeUser, setCli, clientOrders}) => {
                         text: "Gracias por puntuar a los usuarios :)",
                         icon: 'success',
                         confirmButtonColor: '#2C666E',
+                        width: 600,
+                        padding: '3em',
+                        color: '#dfdddd',
+                        background: '#2C666E',
+                        backdrop: `
+                        rgba(172,172,172,0.5424720913756127)`,
                     })
                 })
           }else{

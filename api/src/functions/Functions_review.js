@@ -23,10 +23,10 @@ const updateReview = async (id, feedback_client, rating) =>{
     }
 }
 
-//FUNCION PARA TRAER TODAS LAS REVIERW DEL USUARIO
-const getAllReview = async (id) =>{
+//FUNCION PARA TRAER TODAS LAS REVIERW
+const getAllReviewByProfessional = async (id) =>{
     try {
-        const ratingById = await User.findByPk(id,{
+        const reviewById = await User.findByPk(id,{
             attributes: ['name', 'last_Name'],
             include:[
                 {
@@ -36,7 +36,7 @@ const getAllReview = async (id) =>{
                 }
             ]
         })
-        return ratingById
+        return reviewById
     } catch (error) {
         console.log(error)
         throw error
@@ -90,7 +90,7 @@ const searchRating = async (id, rating) =>{
 
 module.exports = {
     updateReview,
-    getAllReview,
+    getAllReviewByProfessional,
     searchRating,
     getAllReviewByClient
 }

@@ -72,8 +72,13 @@ const ProfileConfig = () => {
             <button className={s.optionList} name='opinions' onClick={paginado}>
               Mis Opiniones
             </button>
-
-
+            {
+              activeUser ? (
+                <button className={s.optionList} name='images' onClick={paginado}>
+                Mis Imagenes
+              </button>
+              ) : <></>
+            }
             {
               activeUser.isProfessional ?
                 <button className={s.optionList} name='professions' onClick={paginado}>
