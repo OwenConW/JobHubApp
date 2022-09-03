@@ -98,6 +98,7 @@ const Edit = () => {
 
     getCountries();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -135,6 +136,7 @@ const Edit = () => {
         [event.target.name]: true
       })
   }
+  // eslint-disable-next-line no-unused-vars
   const [errorGeometry, setErrorGeometry] = useState({
     error: '',
     loading: false,

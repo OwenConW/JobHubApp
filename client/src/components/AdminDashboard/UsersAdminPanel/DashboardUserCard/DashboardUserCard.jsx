@@ -1,8 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, restoreUser, getAllUsersForAdmin, actionFetchingAdminDeleteUserReset, editUser } from '../../../../redux/adminActions'
 import EditModal from "../DashboardUserCard/EditModal/EditModal";
 import DeleteUserModal from "../DashboardUserCard/DeleteUserModal/DeleteUserModal";
 import RestoreUserModal from "../DashboardUserCard/RestoreUserModal/RestoreUserModal";
@@ -14,6 +11,7 @@ function DashboardUserCard(props) {
             last_Name, 
             description, 
             dni, 
+            // eslint-disable-next-line no-unused-vars
             image, 
             date_of_Birth, 
             mail,

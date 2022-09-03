@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Menu.module.scss';
 import {Link} from 'react-router-dom';
 import defaultimage from '../assets/deafultimage.png';
-import logouticon from '../assets/Logout.png';
 import login from '../assets/Login.png';
 import chatlogo from '../assets/chat.png';
 
@@ -30,11 +29,11 @@ const Menu = ({activeUser, isAuthenticated, handleLogout}) => {
             {
 							activeUser.isPremium ?
 							<Link to={'/profile'} className={s.profileimgPremium}>
-							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image ?  <img src={activeUser.image} alt=""/> : <img src={defaultimage} alt=""/>}
 							</Link>
 							:
 							<Link to={'/profile'} className={s.profileimg}>
-							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image ?  <img src={activeUser.image} alt=""/> : <img src={defaultimage} alt=""/>}
 							</Link>
 						}
 						<Link to={`/myorders`} className={s.link}>

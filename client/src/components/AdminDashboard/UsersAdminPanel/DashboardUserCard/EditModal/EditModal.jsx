@@ -39,6 +39,7 @@ function EditModal(props) {
       alert('Hubo un error al editar el usuario')
     }
     dispatch(actionFetchingAdminEditUserReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[fetchingAdminEditUserSuccess, fetchingAdminEditUserFailure])
 
   useEffect(() => {
