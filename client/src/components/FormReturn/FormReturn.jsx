@@ -13,10 +13,8 @@ export default function FormReturn(){
     const [reset, setReset] = React.useState(null)
     const navigate = useNavigate();
 
-    const checkeds = document.getElementsByName("obligatorio")
-
     const handleSubmit = (e) => {
-        if(!checkeds[0].checked || !checkeds[1].checked || !checkeds[2].checked || !checkeds[3].checked){
+        if(!document.getElementById("force1").checked || !document.getElementById("force2").checked  || !document.getElementById("force3").checked  || !document.getElementById("force4").checked ){
             Swal.fire({
                 icon: 'error',
                 title: 'Oh no...',
@@ -53,7 +51,8 @@ export default function FormReturn(){
             if(seconds === 0){
                 setLoading(null)
                 setSeconds(6)
-                axios.get(`/verify?mail=${user.mail}`)
+                console.log("mail", user)
+                axios.get(`/verify?mail=${user}`)
                 .then(res => {
                     setReset(res.data)
                 })
@@ -65,6 +64,7 @@ export default function FormReturn(){
 
 
     React.useEffect(() => {
+        console.log(reset)
         if(reset?.onboarding){
             Swal.fire({
                 icon: 'error',
@@ -92,9 +92,13 @@ export default function FormReturn(){
                 backdrop: `
                 rgba(172,172,172,0.5424720913756127)`
               })
-            functions.setUserLocalStorage(reset?.user)
-            axios.put(`/destroy/${reset?.user.id}`, {isActive: true})
-            navigate("/home")
+              console.log(reset)
+              let isActive = true
+              axios.put(`/destroy/${reset?.user.id}`, isActive)
+              .then(() => {
+                functions.setUserLocalStorage(reset?.user)
+                navigate("/home")
+            })
         }
     }, [reset])
 

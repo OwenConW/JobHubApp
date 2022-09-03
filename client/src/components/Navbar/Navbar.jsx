@@ -50,6 +50,15 @@ const Navbar = () => {
 				<Link to="/faq" className={s.link}>
 					Faq
 				</Link>
+				{
+					activeUser?.isAdmin ? (
+						<Link to="/adminDashboard" className={s.link}>
+							Administrador
+						</Link>
+					) : (
+						<></>
+					)
+				}
 			</div>
 
 			<div className={s.logo}>

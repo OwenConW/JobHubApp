@@ -48,16 +48,16 @@ const ProfileConfig = () => {
   }, [configPage])
 
 
+  
   return (
     <>
       <Navbar />
-
       <div className={s.outerContainer}>
         <div className={s.innerContainer}>
 
           {/*----- CONTENEDOR IZQUIERDO -----*/}
           <div className={s.leftContainer}>
-            <button to='edit' className={s.optionList} name='edit' onClick={paginado}>
+            <button to='edit' className={configPage === "edit" ? s.activeOptionList : s.optionList} name='edit' onClick={paginado}>
               Editar perfil
             </button>
             {/* <button className={s.optionList} name='password' onClick={paginado}>
@@ -66,14 +66,15 @@ const ProfileConfig = () => {
             {/* <button className={s.optionList} name='notifications' onClick={paginado}>
               Notificaciones por correo
             </button> */}
-            <button className={s.optionList} name='orders' onClick={paginado}>
+            <button className={configPage === "orders" ? s.activeOptionList : s.optionList} name='orders' onClick={paginado}>
               Mis Ordenes
             </button>
-            <button className={s.optionList} name='opinions' onClick={paginado}>
+            <button className={configPage === "opinions" ? s.activeOptionList : s.optionList} name='opinions' onClick={paginado}>
               Mis Opiniones
             </button>
+
             {
-              activeUser ? (
+              activeUser?.isProfessional && activeUser?.isPremium ? (
                 <button className={s.optionList} name='images' onClick={paginado}>
                 Mis Imagenes
               </button>
@@ -81,13 +82,13 @@ const ProfileConfig = () => {
             }
             {
               activeUser.isProfessional ?
-                <button className={s.optionList} name='professions' onClick={paginado}>
+                <button className={configPage === "professions" ? s.activeOptionList : s.optionList} name='professions' onClick={paginado}>
                   Profesiones
                 </button> : <></>
             }
             {
               activeUser.isProfessional ?
-                <button className={s.optionList} name='otherReviews' onClick={paginado}>
+                <button className={configPage === "otherReviews" ? s.activeOptionList : s.optionList} name='otherReviews' onClick={paginado}>
                   Mis Reseñas
                 </button> : <></>
             }
@@ -97,12 +98,7 @@ const ProfileConfig = () => {
                   Premium
                 </button> : <></>
             } */}
-
-
-
           </div>
-
-
           {/*----- CONTENEDOR DERECHO -----*/}
           <div className={s.rightContainer}>
             <ConfigPages configPage={configPage} />

@@ -55,7 +55,7 @@ const Profile = () => {
       })
       .then(() => {
         Swal.close(navigate("/profile"))
-        axios.put(`/subscription/${currentUser.id}`, {preapproval_id})
+        axios.put(`/users/subscription/${currentUser.id}`, {preapproval_id})
         .then(() => {
           return axios.get(`/users/${currentUser.id}`)
         })
@@ -83,10 +83,6 @@ const Profile = () => {
     dispatch(actionGetAllOrders(currentUser.id))
   }, [])
 
- 
-
-
-
   const handlePremiumModal = async () => {
   setModalActive(!modalActive)
   }
@@ -113,7 +109,6 @@ const Profile = () => {
               </div>
               )
             }
-
             <div className={s.profileDetail}>
               {
                 activeUser?.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
@@ -130,9 +125,8 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-
-               allOrders ?
-               allOrders.map(order => <CardProfileMap order={order}/>) : <></>
+                allOrders?.length ?
+                allOrders?.map(order => <CardProfileMap order={order}/>) : <></>
               }
             </div>
           </div>

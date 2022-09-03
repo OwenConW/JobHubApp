@@ -45,11 +45,20 @@ const ProfessionConfig = () => {
     if(!user.professions){
       user.professions = []
     }
-    if (user.professions.includes(event.target.value)) return
-    setUser({
-      ...user,
-      professions: [...user.professions, {name: event.target.value}]
-    })
+    let addValidator = true
+    for(let x = 0; x < user.professions.length; x++){
+      if (user.professions[x].name === event.target.value){
+        addValidator = false
+        break
+      }
+    }
+    if(addValidator){
+      setUser({
+        ...user,
+        professions: [...user.professions, {name: event.target.value}]
+      })
+    }
+
   }
 
 
