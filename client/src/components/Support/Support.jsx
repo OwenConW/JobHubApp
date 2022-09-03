@@ -13,7 +13,7 @@ function validate(msgSupport) {
     errors.subject = "Por favor seleccione un asunto";
   } 
   if (!msgSupport.description) {
-    errors.description = "Por favor déjenos una descripción de su problema";  
+    errors.description = "Por favor déjenos una descripción de su consulta";  
   } 
   return errors;
 }
@@ -68,7 +68,7 @@ const Support = () => {
   }  
   
   function handleSubmit(e) {
-    if(msgSupport.subject == "" || msgSupport.description == "") {
+    if(msgSupport.subject === "" || msgSupport.description === "") {
       setError(                          
         validate({
           ...msgSupport,
