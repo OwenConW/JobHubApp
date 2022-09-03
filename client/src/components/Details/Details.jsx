@@ -56,6 +56,10 @@ const Profile = () => {
     }
   }
 
+  const onReport = () => {
+    navigate('/support', id)
+  }
+
 
   return (
     <>
@@ -69,11 +73,13 @@ const Profile = () => {
                 <div className={s.profile_Img_containerPremium}>
                   {professional.image ? <img src={professional.image} className={s.profile_ImgPremium}/> : <img src={defaultimage} className={s.profile_Img}/>}
                   <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
+                  <div onClick={() => onReport()} className={s.btnReport}>Reportar</div>
                 </div>
               ) : (
                 <div className={s.profile_Img_container}>
                   {professional.image ? <img src={professional.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
                   <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
+                  <div onClick={() => onReport()} className={s.btnReport}>Reportar</div>
                 </div>
               )
             }
