@@ -102,26 +102,11 @@ const Images = () => {
         await axios.put(`/users/myjobs/${activeUser.id}`, imagenesEnTiempoReal) 
         const res = await axios.get(`/users/${activeUser.id}`)
         setUserLocalStorage(res.data)
+
     }
 
-    let img1 = imagenesEnTiempoReal.imagen1
-    let img2 = imagenesEnTiempoReal.imagen2
-    let img3 = imagenesEnTiempoReal.imagen3
-    let img4 = imagenesEnTiempoReal.imagen4
     
     const handleDelete = async (num) => {
-        if(num === 1){
-            img1 = null
-        }
-        if(num === 2){
-            img2 = null
-        }
-        if(num === 3){
-            img3 = null
-        }
-        if(num === 4){
-            img4 = null
-        }
         imagenesEnTiempoReal = {
             ...imagenesEnTiempoReal,
             [`imagen${num}`]: null
@@ -130,15 +115,16 @@ const Images = () => {
             ...imagenes,
             [`imagen${num}`]: null
         })
-        console.log("en tiempo real", imagenesEnTiempoReal);
-        await axios.put(`/users/myjobs/${activeUser.id}`, imagenesEnTiempoReal) 
+        await axios.put(`/users/myjobs/${activeUser.id}`, imagenes) 
         const res = await axios.get(`/users/${activeUser.id}`)
         setUserLocalStorage(res.data)
     }
 
     React.useEffect(() => {
-        return () => {
-
+        return async () => {
+            await axios.put(`/users/myjobs/${activeUser.id}`, imagenes) 
+            const res = await axios.get(`/users/${activeUser.id}`)
+            setUserLocalStorage(res.data)
         }
     }, [imagenes])
 
