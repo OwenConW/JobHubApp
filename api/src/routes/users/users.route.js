@@ -251,7 +251,7 @@ users.put('/admin/:id', async (req, res, next) => {
             const userUpdated = await User.findOne({ where: { id }, include: Profession })
             const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
             await userUpdated.removeProfession(oldProfessions)
-        console.log('ESTA SON LAS PROFESIONES QUE TIENE EL USUARIO',profession);
+            //console.log('ESTA SON LAS PROFESIONES QUE TIENE EL USUARIO',profession);
             if(profession.length > 0){
                 const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
                 await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
@@ -376,7 +376,6 @@ users.put('/gallery/:id', async (req, res, next) =>{
         next (error)
     }
 })
-
 
 
 

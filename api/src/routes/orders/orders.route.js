@@ -21,18 +21,8 @@ orders.get("/all", async (req, res, next)=>{
 orders.post("/", async (req, res, next) =>{
     const { id_user_professional, id_user_client } = req.body;
     try {
-        if( id_user_professional && id_user_client ){
-            const newOrder = await Orders.create({
-                id_user_client,
-                id_user_professional,
-            })
-
-            let userFind = await User.findByPk(id_user_professional)
-            await newOrder.addUser(userFind)
-
-            return res.status(201).send(`The Order created successfully`);
-        
-        } return res.status(200).send("Missing data");
+        const newOrder = await functions.postOrder( id_user_professional, id_user_client )
+        res.status(201).send(newOrder)
 
     } catch (error) {
         console.log(error)
@@ -79,7 +69,7 @@ orders.get("/admin/:id", async (req, res, next)=>{
     }
 })
 
-// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID CUANDO SOY PROFESSIONAL
+// RUTA PARA TRAER TODAS LAS ORDENES POR ID CUANDO SOY PROFESSIONAL
 orders.get("/professional/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
