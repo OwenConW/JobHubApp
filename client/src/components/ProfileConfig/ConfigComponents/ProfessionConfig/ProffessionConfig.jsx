@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 //Nuestros Archivos
 import { getLocalStorage } from '../../../../handlers/localStorage';
+// eslint-disable-next-line no-unused-vars
 import { actionGetAllJobs } from "../../../../redux/jobActions";
 import CardProfessions from "../../../CardProfessions/CardProfessions";
 import { changeValidator, PremiumValidator } from "../../../../handlers/ChangeValidator";
@@ -120,7 +121,7 @@ const ProfessionConfig = () => {
           user.professions.map(job => (
             <div className={s.individualProfession} key={job}>
               <CardProfessions job={job} />
-              <img src={deleteIcon} name={job.name} onClick={deleteProfession} />
+              <img src={deleteIcon} name={job.name} onClick={deleteProfession} alt=""/>
             </div>
           ))
         ) : (

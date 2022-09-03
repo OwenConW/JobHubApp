@@ -31,6 +31,7 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getCharsById(id))
     dispatch(getChars())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onCoordinate = async() => {
@@ -67,12 +68,12 @@ const Profile = () => {
             {
               professional.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
-                  {professional.image ? <img src={professional.image} className={s.profile_ImgPremium}/> : <img src={defaultimage} className={s.profile_Img}/>}
+                  {professional.image ? <img src={professional.image} className={s.profile_ImgPremium} alt=""/> : <img src={defaultimage} className={s.profile_Img} alt=""/>}
                   <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
                 </div>
               ) : (
                 <div className={s.profile_Img_container}>
-                  {professional.image ? <img src={professional.image} className={s.profile_Img}/> : <img src={defaultimage} className={s.profile_Img}/>}
+                  {professional.image ? <img src={professional.image} className={s.profile_Img} alt=""/> : <img src={defaultimage} className={s.profile_Img} alt=""/>}
                   <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
                 </div>
               )

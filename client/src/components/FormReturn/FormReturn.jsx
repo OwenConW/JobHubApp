@@ -9,7 +9,7 @@ export default function FormReturn(){
     
     const user = functions.getLocalStorage()    
     const [loading, setLoading] = React.useState(null)
-    const [seconds, setSeconds] = React.useState(6)
+    const [seconds, setSeconds] = React.useState(13)
     const [reset, setReset] = React.useState(null)
     const navigate = useNavigate();
 
@@ -50,16 +50,17 @@ export default function FormReturn(){
         setTimeout(() => {
             if(seconds === 0){
                 setLoading(null)
-                setSeconds(6)
+                setSeconds(13)
                 console.log("mail", user)
                 axios.get(`/verify?mail=${user}`)
                 .then(res => {
                     setReset(res.data)
                 })
-            }else if(seconds !== 6){
+            }else if(seconds !== 13){
                 setSeconds(seconds -  1)
             }
         }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading, seconds])
 
 
@@ -82,7 +83,7 @@ export default function FormReturn(){
         }else if(reset?.onboarding === false){
             Swal.fire({
                 icon: 'success',
-                title: `Bienvenido de vuelta ${reset?.user.name}`,
+                title: `Bienvenido de vuelta ${reset?.user.name[0] + reset?.user.name.substring(1)}`,
                 html: '<h2>Porfavor no vuelvas a abandonarnos</h2>',
                 width: 600,
                 heigh: 400,
@@ -92,21 +93,20 @@ export default function FormReturn(){
                 backdrop: `
                 rgba(172,172,172,0.5424720913756127)`
               })
-              console.log(reset)
-              let isActive = true
-              axios.put(`/destroy/${reset?.user.id}`, isActive)
+              axios.put(`/users/destroy/${reset?.user.id}`,  { isActive: false })
               .then(() => {
                 functions.setUserLocalStorage(reset?.user)
                 navigate("/home")
             })
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reset])
 
     return(
         <>
         <div className="contenedor">
             <div className="title">
-                <h1>{`Bienvenido devuelta ${user?.mail}! `}<br></br>¿Estas pensando en reactivar tu cuenta?</h1>
+                <h1>{`Bienvenido devuelta ${user}! `}<br></br>¿Estas pensando en reactivar tu cuenta?</h1>
             </div>
             <div>
                 <h2 className="remember">Te recordamos que lamentablemente has desactivado tu cuenta...</h2>

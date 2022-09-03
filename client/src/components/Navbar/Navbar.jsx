@@ -78,11 +78,11 @@ const Navbar = () => {
 						{
 							activeUser.isPremium ?
 							<Link to={'/profile'} className={s.profileimgPremium}>
-							{activeUser.image !== 'noimage' ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image !== 'noimage' ?  <img src={activeUser.image} alt=""/> : <img src={defaultimage} alt=""/>}
 							</Link>
 							:
 							<Link to={'/profile'} className={s.profileimg}>
-							{activeUser.image !== 'noimage' ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image !== 'noimage' ?  <img src={activeUser.image} alt=""/> : <img src={defaultimage} alt=""/>}
 							</Link>
 						}
 

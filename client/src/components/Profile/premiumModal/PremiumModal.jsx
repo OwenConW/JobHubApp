@@ -3,6 +3,7 @@ import s from './PremiumModal.module.scss'
 import { useDispatch, useSelector } from "react-redux";
 import { actionFetchingMercadopagoLink, 
          actionClearMercadopagoRedirectLink, 
+         // eslint-disable-next-line no-unused-vars
          actionFetchingMercadopagoLinkFailure, 
          actionSetFetchingMercadoPagoLinkFalse } from '../../../redux/fetchingActions'
 import { useEffect } from "react";
@@ -41,6 +42,7 @@ function PremiumModal(props) {
 
   useEffect(() => {
     dispatch(actionSetFetchingMercadoPagoLinkFalse())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return(

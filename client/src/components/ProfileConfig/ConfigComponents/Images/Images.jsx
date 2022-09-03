@@ -26,6 +26,7 @@ const Images = () => {
                 imagen4: imagenesEnTiempoReal.imagen4
             })
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeUser.id])
 
     const [PreImage1, setPreImage1] = React.useState(null)
@@ -126,6 +127,7 @@ const Images = () => {
             const res = await axios.get(`/users/${activeUser.id}`)
             setUserLocalStorage(res.data)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [imagenes])
 
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import s from './DifussionAdminPanel.module.scss'
 
 function DifussionAdminPanel(){

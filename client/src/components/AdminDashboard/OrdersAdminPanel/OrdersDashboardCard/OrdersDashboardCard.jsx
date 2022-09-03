@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import OrderEditModal from './OrderEditModal/OrderEditModal'
 import OrdersDeleteModal from './OrdersDeleteModal/OrdersDeleteModal'
 import s from './OrdersDashboardCard.module.scss'
-import { useEffect } from "react";
 
 function OrdersDashboardCard(props) {
-  const { id, id_user_professional, id_user_client, description, allowReview, date_created, apointment_date, complete, isActive } = props;
+  const { id, id_user_professional, id_user_client, description, allowReview, date_created, apointment_date, complete } = props;
 
   const [editModalActive, setEditModalActive] = useState(false)
   const [deleteModalActive, setDeleteModalActive] = useState(false)

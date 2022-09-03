@@ -15,7 +15,7 @@ return (
     <div className={s.orders} >
       <div className={s.imgDetail}>
         {
-          reviewer ? <img src={reviewer.image} alt="imagen"></img> : <img src={noUserImg}></img>
+          reviewer ? <img src={reviewer.image} alt="imagen"></img> : <img src={noUserImg} alt=""></img>
         }
       </div>
 
@@ -27,7 +27,7 @@ return (
         <h2>{review.feedback_client}</h2>
       </div>
       <div className={s.orderDetail2}>
-      <h3><img src={star} />{review.rating}</h3>
+      <h3><img src={star} alt=""/>{review.rating}</h3>
       </div>
     </div>
   )

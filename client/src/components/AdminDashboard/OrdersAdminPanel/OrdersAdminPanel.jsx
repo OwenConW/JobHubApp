@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import OrdersDashboardCard from "./OrdersDashboardCard/OrdersDashboardCard"
 import s from './OrdersAdminPanel.module.scss'
-import { getOrdersByUserProfessionalId, getOrdersByUserClientId, getOrderByIdForAdmin, actionGetOrdersBylId, getAllOrdersForAdmin } from '../../../redux/adminActions'
+import { getOrdersByUserProfessionalId, getOrdersByUserClientId, actionGetOrdersBylId, getAllOrdersForAdmin } from '../../../redux/adminActions'
 import { useDispatch } from "react-redux";
 
 function OrdersAdminPanel(props) {
