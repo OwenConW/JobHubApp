@@ -1,4 +1,5 @@
 .container {
+  animation: init 0.3s;
   height: 90%;
   width: 100%;
   display: flex;
@@ -274,6 +275,7 @@
       display: flex;
     }
   }
+
   .poorMoreReviews {
     height: 35%;
     margin-bottom: 15.4%;
@@ -489,5 +491,16 @@
         }
       }
     }
+}
+
+@keyframes init {
+  0%{
+      opacity: 0;
+    transform: translateY(5vh);
+  }
+  100%{
+      opacity: 1;
+    transform: translateY(0);
+
   }
 }

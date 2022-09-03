@@ -1,4 +1,5 @@
 .container {
+  animation: init .8s;
   height: 90%;
   width: 100%;
   display: flex;
@@ -643,3 +644,13 @@
 
 }
 
+@keyframes init {
+  0%{
+      opacity: 0;
+    transform: translateY(5vh);
+  }
+  100%{
+      opacity: 1;
+    transform: translateY(0);
+  }
+}
