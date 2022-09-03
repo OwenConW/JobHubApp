@@ -118,9 +118,12 @@ const Profile = () => {
             <p className={s.professionText}>Oficios publicados</p>
             <ProfessionBox professional={professional}/>
           </div>
-          <div className={s.moreReviews}>
+          {
+            
+          }
+          <div className={professional.isPremium ? s.moreReviews : s.poorMoreReviews}>
             <span className={s.premiumText}>
-              <h1>Otras reseñas</h1>
+              <h1>Imagenes</h1>
             </span>
             <ReviewBox/>
           </div>

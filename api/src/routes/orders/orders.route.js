@@ -29,10 +29,11 @@ orders.post("/", async (req, res, next) =>{
 
 
 orders.put("/:id", async (req, res, next) =>{
-    const { description, complete, apointment_date, allowReview } = req.body;
+    const { description, complete, apointment_date, allowReview, isActive } = req.body;
+    console.log('description desde el back', description)
     const { id } = req.params;
     try {
-        functions.updateOrden(id, description, complete, apointment_date, allowReview)
+        functions.updateOrden(id, description, complete, apointment_date, allowReview, isActive)
         res.status(200).send(`The order updated successfully`)
     } catch (error) {
         console.log(error)

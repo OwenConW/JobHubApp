@@ -11,7 +11,7 @@ const Faq = () => {
 
   return (
     <>
-      {isAuthenticated && <Navbar />}
+    <Navbar />
       <div className="container">
         <div className="component">
           <Accordion />
