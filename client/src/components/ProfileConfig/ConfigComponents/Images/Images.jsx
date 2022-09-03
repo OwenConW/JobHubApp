@@ -131,9 +131,6 @@ const Images = () => {
 
     return (
         <>
-        {
-            console.log("estado:", imagenes)
-        }
             <div className="contenedorImagenes">
                 <div className="contenedorHeader">
                 <h1 className="Title">Añadí fotos de tus mejores trabajos!</h1>
