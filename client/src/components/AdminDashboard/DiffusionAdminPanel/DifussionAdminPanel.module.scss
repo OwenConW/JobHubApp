@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+    .textareaInput{
+      border-radius: 12px;
+      width: 500px;
+      height: 250px;
+    }
+}

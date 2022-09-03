@@ -1,0 +1,60 @@
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
+.mainContainer {
+  background-color: rgba(192, 192, 192, 0.219);
+  padding: 80px;
+  margin-right: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+
+    .professionDeleteTitle {
+      margin: 0 0 10px 35px;
+    }
+
+    .formContainer {
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+        .submitBtn {
+          background-color: $green-color;
+          color: $white-color;
+          height: 30px;
+          border-radius: 5px;
+        }
+        .professionCreationInputAndLabel {
+          display: flex;
+          flex-direction: column;
+          label {
+            font-family: Poppins, sans-serif;
+          }
+          input {
+            margin-top: 10px;
+            height: 25px;
+          }
+        }
+    }
+
+    .professionDeleteContainer {
+     width: 300px;
+
+      .divisoryLine {
+        height: 1px;
+        background-color: $green-color;
+        width: 80%;
+        margin-bottom: 20px;
+        margin-left: 6px;
+      }
+
+      .existingProfessionsContainer {
+        display:  flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+    }
+}

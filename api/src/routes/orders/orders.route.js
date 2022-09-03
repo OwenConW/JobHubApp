@@ -5,8 +5,20 @@ const { User, Review, Orders} = require("../../db.js")
 
 const orders = Router()
 
+//RUTA QUE TRAE TODOS LOS USUARIOS SIN FILTRO
+orders.get("/all", async (req, res, next)=>{
+    try {
+        const allOrders = await Orders.findAll()
+        res.status(200).json(allOrders)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 orders.post("/", async (req, res, next) =>{
-    const { id_user_professional, id_user_client  } = req.body;
+    const { id_user_professional, id_user_client } = req.body;
     try {
         if( id_user_professional && id_user_client ){
             const newOrder = await Orders.create({
@@ -50,6 +62,18 @@ orders.delete("/admin/:id", async (req, res, next)=>{
         }) 
         res.status(201).send("The order was successfully deleted")
     } catch (error) {
+        next(error)
+    }
+})
+
+//RUTA PARA TRAER LA ORDEN POR SU ID
+orders.get("/admin/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try{
+        const order = await Orders.findByPk(id);
+        res.status(200).json(order);
+    } catch (error) {
+        console.log(error)
         next(error)
     }
 })

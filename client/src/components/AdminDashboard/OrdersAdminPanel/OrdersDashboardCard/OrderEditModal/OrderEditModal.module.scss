@@ -1,0 +1,60 @@
+.modalMainContainer {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* From https://css.glass */
+  background: rgba(24, 24, 24, 0.40);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(24, 24, 24, 0.3);
+
+    .modalContainer {
+      width: 50%;
+      height: 80%;
+      border-radius: 16px;
+      background-color: #F0EDEE;
+      display: flex;
+      
+      .informationLeftSide, .informationRightSide {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+          label, input, h4 {
+            font-size: 1.7rem;
+            width: 80%;
+          }
+      }
+
+      .informationLeftSide {
+        justify-content: space-evenly;
+        align-items: center;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 90%;
+        }
+      }
+
+      .informationRightSide {
+        justify-content: space-evenly;
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 90%;
+          div {
+            display: flex;
+            flex-direction: row;
+          }
+        }
+      }
+    }
+}
