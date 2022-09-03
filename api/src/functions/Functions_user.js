@@ -1,7 +1,68 @@
 const { Op } = require("sequelize");
 const { User, Profession, Review, Orders, Claims } = require("../db");
 
+const allUsers = async () =>{
+    try {
+        const allUsers = await User.findAll({
+            include: {
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        })
+        return allUsers
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
 
+const allUsersActives = async() =>{
+    try {
+        const allUsers = await User.findAll({
+            where:{
+                isActive: 'true',
+                isBanned: 'false',
+            },
+            include: {
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        })
+        return allUsers
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
+
+const searchDni = async(dni) =>{
+    try {
+        const findDni = await User.findOne({
+            where:{ dni: dni }
+        })
+        if(findDni !== null) return "El DNI ya esta registrado en nuestra base de datos"
+        return "El DNI ingresado puede ser utilizado"
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
+
+const searchMail = async(mail) =>{
+    try {
+        const findMail = await User.findOne({
+            where:{ mail: mail }
+        })
+        if(findMail !== null) return "El DNI ya esta registrado en nuestra base de datos"
+        return "El DNI ingresado puede ser utilizado"
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
 
 const filterByQueris = async(name, profession, rating) => {
     try{
@@ -82,114 +143,118 @@ const filterByQueris = async(name, profession, rating) => {
             : user
             return user.filter(obj => obj.isProfessional === true && obj.isActive === true && obj.isBanned === false)
         }
-    }catch(e){
-        console.log(e)
-        throw new Error(e)
+    }catch(error){
+        console.log(error)
+        throw error
     }
 }
 
 // GET ALL USER ADMIN
 const getAllUsersAdmin = async ( name, last_Name, profession ) => {
+    try {
+        let options = {}
 
-    let options = {}
-
-    if (name && last_Name && profession){
-        options = {
-            where: {          
-                name: { [Op.substring]: `%${name}%` },
-                last_Name: { [Op.substring]: `%${last_Name}%` },
-            },
-            include: { 
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-                where: { 
-                    name: { [Op.substring]: `%${profession}%` }
-                }
-            },
+        if (name && last_Name && profession){
+            options = {
+                where: {          
+                    name: { [Op.substring]: `%${name}%` },
+                    last_Name: { [Op.substring]: `%${last_Name}%` },
+                },
+                include: { 
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                    where: { 
+                        name: { [Op.substring]: `%${profession}%` }
+                    }
+                },
+            }
         }
-    }
-    else if (name && last_Name){
-        options = {
-            where: {          
-                name: { [Op.substring]: `%${name}%` },
-                last_Name: { [Op.substring]: `%${last_Name}%` },
-            },
-            include: { 
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-            },
+        else if (name && last_Name){
+            options = {
+                where: {          
+                    name: { [Op.substring]: `%${name}%` },
+                    last_Name: { [Op.substring]: `%${last_Name}%` },
+                },
+                include: { 
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                },
+            }
         }
-    }
-    else if (last_Name && profession){
-        options = {
-            where: {          
-                last_Name: { [Op.substring]: `%${last_Name}%` },
-            },
-            include: { 
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-                where: { 
-                    name: { [Op.iLike]: `%${profession}%` }
-                }
-            },
+        else if (last_Name && profession){
+            options = {
+                where: {          
+                    last_Name: { [Op.substring]: `%${last_Name}%` },
+                },
+                include: { 
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                    where: { 
+                        name: { [Op.iLike]: `%${profession}%` }
+                    }
+                },
+            }
         }
-    }
-    else if (name && profession){
-        options = {
-            where: {          
-                name: { [Op.substring]: `%${name}%` },
-                
-            },
-            include: { 
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-                where: { 
-                    name: { [Op.substring]: `%${profession}%` }
-                }
-            },
+        else if (name && profession){
+            options = {
+                where: {          
+                    name: { [Op.substring]: `%${name}%` },
+                    
+                },
+                include: { 
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                    where: { 
+                        name: { [Op.substring]: `%${profession}%` }
+                    }
+                },
+            }
         }
-    }
-    else if (name){
-        options = {
-            where: {          
-                name: { [Op.substring]: `%${name}%` },
-            },
-            include: { 
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-            },
+        else if (name){
+            options = {
+                where: {          
+                    name: { [Op.substring]: `%${name}%` },
+                },
+                include: { 
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                },
+            }
         }
-    }
-    else if (last_Name){
-        options = {
-            where: {          
-                last_Name: { [Op.substring]: `%${last_Name}%` },
-            },
-            include: { 
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-            },
+        else if (last_Name){
+            options = {
+                where: {          
+                    last_Name: { [Op.substring]: `%${last_Name}%` },
+                },
+                include: { 
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                },
+            }
         }
-    }
-    else if (profession){
-        options = {
-            include: { 
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-                where: { 
-                    name: { [Op.substring]: `%${profession}%` }
-                }
-            },
+        else if (profession){
+            options = {
+                include: { 
+                    model: Profession,
+                    attributes: ['name'],
+                    through: {attributes: []},
+                    where: { 
+                        name: { [Op.substring]: `%${profession}%` }
+                    }
+                },
+            }
         }
+        return options
+    } catch (error) {
+        console.log(error)
+        throw error
     }
-    return options
 }
 
 // GET PROFESSIONAL BY ID
@@ -339,6 +404,10 @@ const updatePhotos = async (id, obj) =>{
 
 
 module.exports = {
+    allUsers,
+    allUsersActives,
+    searchDni,
+    searchMail,
     filterByQueris,
     getProffesionalById,
     getAllJobs,

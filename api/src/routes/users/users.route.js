@@ -22,15 +22,8 @@ users.get("/", (req, res, next) => {
 //RUTA QUE TRAE TODOS LOS USUARIOS SIN FILTRO
 users.get("/all", async (req, res, next)=>{
     try {
-        const allUsers = await User.findAll({
-            include: {
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-            },
-        })
+        const allUsers = await functions.allUsers();
         res.status(200).json(allUsers)
-    
     } catch (error) {
         console.log(error)
         next(error)
@@ -40,17 +33,7 @@ users.get("/all", async (req, res, next)=>{
 //RUTA QUE TRAE TODOS LOS USUARIOS ACTIVOS Y NO BANEADOS
 users.get('/all/actives', async (req, res, next)=>{
     try {
-        const allUsers = await User.findAll({
-            where:{
-                isActive: 'true',
-                isBanned: 'false',
-            },
-            include: {
-                model: Profession,
-                attributes: ['name'],
-                through: {attributes: []},
-            },
-        })
+        const allUsers = await functions.allUsersActives();
         res.status(200).json(allUsers)
     
     } catch (error) {
@@ -77,12 +60,8 @@ users.get('/home', async (req, res, next)=>{
 users.get('/searchDni', async (req, res, next) =>{
     const { dni } = req.query 
     try {
-        const findDni = await User.findOne({
-            where:{ dni: dni }
-        })
-        findDni 
-        ? res.status(201).send(`El DNI ya esta registrado en nuestra base de datos`) 
-        : res.status(200).send('El DNI ingresado puede ser utilizado')
+        const findDni = await functions.searchDni(dni);
+        res.status(200).send(findDni)
     } catch (error) {
         console.log(error);
         next (error)
@@ -93,12 +72,8 @@ users.get('/searchDni', async (req, res, next) =>{
 users.get('/searchMail', async (req, res, next) =>{
     const { mail } = req.query 
     try {
-        const findMail = await User.findOne({
-            where:{ mail: mail }
-        })
-        findMail 
-        ? res.status(201).send(`El email "${mail}" ingresado ya esta registrado en nuestra base de datos`) 
-        : res.status(200).send('El Mail ingresado puede ser utilizado')
+        const findMail = await functions.searchMail(mail);
+        res.status(200).send(findMail)
     } catch (error) {
         console.log(error);
         next (error)
@@ -245,7 +220,7 @@ users.put('/admin/:id', async (req, res, next) => {
             const userUpdated = await User.findOne({ where: { id }, include: Profession })
             const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
             await userUpdated.removeProfession(oldProfessions)
-            //console.log('ESTA SON LAS PROFESIONES QUE TIENE EL USUARIO',profession);
+            
             if(profession.length > 0){
                 const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
                 await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
