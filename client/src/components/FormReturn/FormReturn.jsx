@@ -13,10 +13,8 @@ export default function FormReturn(){
     const [reset, setReset] = React.useState(null)
     const navigate = useNavigate();
 
-    const checkeds = document.getElementsByName("obligatorio")
-
     const handleSubmit = (e) => {
-        if(!checkeds[0].checked || !checkeds[1].checked || !checkeds[2].checked || !checkeds[3].checked){
+        if(document.querySelector("#force1").checked || document.querySelector("#force2").checked  || document.querySelector("#force3").checked  || document.querySelector("#force4").checked ){
             Swal.fire({
                 icon: 'error',
                 title: 'Oh no...',
