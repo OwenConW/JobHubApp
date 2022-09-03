@@ -11,6 +11,14 @@ $darkgreen-color: #07393C;
   display: flex;
   flex-direction: column;
 
+  .divisoryLine {
+    align-self: center;
+    margin: 20px 0 10px 0;
+    height: 1px;
+    width: 100%;
+    background-color: $green-color;
+  }
+
   .formsContainer {
     display: flex;
     flex-direction: column;

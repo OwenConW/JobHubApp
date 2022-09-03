@@ -30,7 +30,7 @@ function AdminDashboard() {
   //if(!isAuthenticated) navigate('/')
   //if(!activeUser?.isAdmin) navigate('/home')
 
-  const [panelDiplayed, setPanelDisplayed] = useState("ordersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
   const [isActive, setIsActive] = useState({usersPanel: true, reviewsPanel: false, ordersPanel: false, professionsPanel: false})
 
 

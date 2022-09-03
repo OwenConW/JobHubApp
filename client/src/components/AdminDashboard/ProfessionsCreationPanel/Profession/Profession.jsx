@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import DeleteModal from './DeleteModal/DeleteModal';
+import s from './Profession.module.scss'
 
 export default function Profession(props) {
   const { name, id } = props
@@ -13,7 +14,7 @@ export default function Profession(props) {
   return (
     <div>
       {openDeleteModal ? <DeleteModal name={name} id={id} handleOpenDeleteModal={handleOpenDeleteModal}/> : null}
-      <button onClick={handleOpenDeleteModal}>{name}</button>
+      <button className={s.professionBtn} onClick={handleOpenDeleteModal}>{name}</button>
     </div>
   )
 }

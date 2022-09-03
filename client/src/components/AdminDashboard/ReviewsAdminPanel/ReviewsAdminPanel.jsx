@@ -68,6 +68,8 @@ function ReviewsAdminPanel(props) {
 
       <button className={s.allReviewsBtn} onClick={getAllReviews}>Traer todas las reseñas</button>
 
+      <div className={s.divisoryLine}></div>
+
       {
         reviews?.length !== 0 ? 
         <div className={s.cardsContainer}>  
