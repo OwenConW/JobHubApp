@@ -14,18 +14,23 @@ const ReviewBox = ({professional, allUsers}) => {
               professional?.photo_gallery.imagen1 !== null || professional?.photo_gallery.imagen2 !== null || professional?.photo_gallery.imagen3 !== null || professional?.photo_gallery.imagen4 !== null 
               ? (
                 <>
-                <img className={s.imagenPremium}src={ professional?.photo_gallery?.imagen1 || noImage} alt=""/>
-                <img className={s.imagenPremium}src={ professional?.photo_gallery?.imagen2 || noImage} alt=""/>
-                <img className={s.imagenPremium}src={ professional?.photo_gallery?.imagen3 || noImage} alt=""/>
-                <img className={s.imagenPremium}src={ professional?.photo_gallery?.imagen4 || noImage} alt=""/>
+                {
+                  professional?.photo_gallery?.imagen1 && <img className={s.imagenPremium}src={ professional?.photo_gallery?.imagen1} alt=""/>
+                }
+                {
+                  professional?.photo_gallery?.imagen2 &&  <img className={s.imagenPremium}src={ professional?.photo_gallery?.imagen2} alt=""/>
+                }
+                {
+                  professional?.photo_gallery?.imagen3 && <img className={s.imagenPremium}src={ professional?.photo_gallery?.imagen3} alt=""/>
+                }
+                {
+                  professional?.photo_gallery?.imagen4 && <img className={s.imagenPremium}src={ professional?.photo_gallery?.imagen4} alt=""/>
+                }
                 </>
               )
               : (
                 <>
-                <img className={s.imagenPremium}src={noImage} alt=""/>
-                <img className={s.imagenPremium}src={noImage} alt=""/>
-                <img className={s.imagenPremium}src={noImage} alt=""/>
-                <img className={s.imagenPremium}src={noImage} alt=""/>
+                  <h1>El profesional todavia no subio sus trabajos</h1>
                 </>
               )
             } 
