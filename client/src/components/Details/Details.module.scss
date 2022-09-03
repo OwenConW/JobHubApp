@@ -72,14 +72,15 @@
           border-radius: 10px;
           width: 60%;
           height: 20%;
-          background-color: rgba(105, 105, 105, 0.545);
+          background-color: #2C666E;
+          color: #EEEEEE;
           font-size: 1.8rem;
 
           &:hover {
             transition: 0.5s;
             cursor: pointer;
-            background-color: #2C666E;
-            color: #EEEEEE;
+            background-color: rgba(105, 105, 105, 0.545);
+            color: black;
           }
         }
 
@@ -237,8 +238,29 @@
       color: #000000;
     }
 
+  }
 
+  .professionContainerPremium{
+    height: 25%;
+    width: 90%;
+    
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    align-content: space-around;
+    // justify-content: space-evenly;
+    border-radius: 10px;
+    background: #D9D9D9;
 
+    .professionText {
+
+      font-weight: 300;
+      margin-top: 2%;
+      margin-left: 4.9%;
+      font-size: 3.2rem;
+      line-height: 5.4rem;
+      color: #000000;
+    }
   }
 
   .moreReviews {
@@ -255,6 +277,40 @@
       width: 80%;
       height: 20%;
 
+
+      h1 {
+        font-weight: 300;
+        margin-top: 4%;
+        margin-left: 12%;
+        margin-bottom: 2%;
+        font-size: 3.2rem;
+        line-height: 3.0rem;
+        color: #000000;
+      }
+
+    }
+
+    .OtherReviews {
+      width: 95%;
+      height: 80%;
+      margin-left: 2.5%;
+      display: flex;
+    }
+  }
+  .moreImages{
+    height: 55%;
+    margin-bottom: 15.4%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border-radius: 10px;
+    background: #D9D9D9;
+    box-shadow: 0px 0px 6px 4px #FFF780;
+    .premiumText {
+      width: 90%;
+      height: 20%;
+      text-align: center;
 
       h1 {
         font-weight: 300;
@@ -311,6 +367,8 @@
     }
   }
 }
+
+
 
 @media screen and (max-width: 1100px) {
   .container {
