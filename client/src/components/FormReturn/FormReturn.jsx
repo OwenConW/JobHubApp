@@ -14,7 +14,7 @@ export default function FormReturn(){
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        if(document.querySelector("#force1").checked || document.querySelector("#force2").checked  || document.querySelector("#force3").checked  || document.querySelector("#force4").checked ){
+        if(!document.querySelector("#force1").checked || !document.querySelector("#force2").checked  || !document.querySelector("#force3").checked  || !document.querySelector("#force4").checked ){
             Swal.fire({
                 icon: 'error',
                 title: 'Oh no...',
