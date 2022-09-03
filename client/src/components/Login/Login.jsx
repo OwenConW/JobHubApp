@@ -31,7 +31,7 @@ const Login = () => {
 						setUserLocalStorage(response.data.user);
 						navigate("../home", { replace: true });
 					}else{
-						setUserLocalStorage(response.data.email)
+						setUserLocalStorage(response.data.user.mail)
 						navigate("../returnUser", { replace: true })
 					}
 
