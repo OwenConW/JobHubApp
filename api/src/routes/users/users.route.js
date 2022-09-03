@@ -44,7 +44,6 @@ users.get('/all/actives', async (req, res, next)=>{
             where:{
                 isActive: 'true',
                 isBanned: 'false',
-
             },
             include: {
                 model: Profession,
@@ -67,8 +66,7 @@ users.get('/home', async (req, res, next)=>{
         if (coordinate){
             const allNearbyUsers = await functions.nearbyUsers(coordinate)
         }
-        
-        
+///////////////
     } catch (error) {
         console.log(error)
         next(error)
@@ -82,7 +80,6 @@ users.get('/searchDni', async (req, res, next) =>{
         const findDni = await User.findOne({
             where:{ dni: dni }
         })
-
         findDni 
         ? res.status(201).send(`El DNI ya esta registrado en nuestra base de datos`) 
         : res.status(200).send('El DNI ingresado puede ser utilizado')
@@ -99,7 +96,6 @@ users.get('/searchMail', async (req, res, next) =>{
         const findMail = await User.findOne({
             where:{ mail: mail }
         })
-
         findMail 
         ? res.status(201).send(`El email "${mail}" ingresado ya esta registrado en nuestra base de datos`) 
         : res.status(200).send('El Mail ingresado puede ser utilizado')
@@ -114,9 +110,7 @@ users.get("/filter", async (req, res, next) => {
     const { name, last_Name, profession } = req.query;
     try {
         const options = await functions.getAllUsersAdmin( name, last_Name, profession )
-        //console.log('ESTE ES EL OBJETO OPTION', options)
         const filter = await User.findAll(options)
-        //console.log('ESTE ES EL OBJETO FILTER', filter)
         res.status(200).json(filter)
     } catch (error) {
         console.log(error);
