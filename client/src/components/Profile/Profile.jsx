@@ -55,7 +55,7 @@ const Profile = () => {
       })
       .then(() => {
         Swal.close(navigate("/profile"))
-        axios.put(`/subscription/${currentUser.id}`, {preapproval_id})
+        axios.put(`/users/subscription/${currentUser.id}`, {preapproval_id})
         .then(() => {
           return axios.get(`/users/${currentUser.id}`)
         })
