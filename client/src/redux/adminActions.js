@@ -53,8 +53,10 @@ import {
 
 // ======================= ACTIONS PARA USERS =================================
 export const getAllUsersForAdmin = () => (dispatch) => {
+  console.log('entro');
   axios.get('/users/all')
-    .then((res) => {
+  .then((res) => {
+      console.log('entr2');
       dispatch(getAllUsers(res.data))
     })
     .catch(e => console.error(e))

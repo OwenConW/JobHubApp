@@ -45,7 +45,7 @@ users.get("/", (req, res, next) => {
 users.get("/all", async (req, res, next)=>{
     try {
         const allUsers = await User.findAll({
-           include: {
+            include: {
                 model: Profession,
                 attributes: ['name'],
                 through: {attributes: []},
