@@ -37,6 +37,44 @@ users.get("/all", async (req, res, next)=>{
     }
 })
 
+//RUTA QUE TRAE TODOS LOS USUARIOS ACTIVOS Y NO BANEADOS
+users.get('/all/actives', async (req, res, next)=>{
+    try {
+        const allUsers = await User.findAll({
+            where:{
+                isActive: 'true',
+                isBanned: 'false',
+
+            },
+            include: {
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        })
+        res.status(200).json(allUsers)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+//RUTA PARA TRAER USUARIOS FILTRADOS POR COORDENADAS CERCANAS AL HOME
+users.get('/home', async (req, res, next)=>{
+    const { coordinate } = res.params;
+    try {
+        if (coordinate){
+            const allNearbyUsers = await functions.nearbyUsers(coordinate)
+        }
+        
+        
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 //RUTA PARA VALIDAR SI EL DNI EXISTE EN BASE DE DATOS
 users.get('/searchDni', async (req, res, next) =>{
     const { dni } = req.query 
@@ -184,7 +222,7 @@ users.put('/:id', async (req, res, next) => {
 })
 
 // RUTA DEL ADMIN PARA EDITAR EL USUARIO
-users.put('/admin/:id', async (req, res) => {
+users.put('/admin/:id', async (req, res, next) => {
         const { id } = req.params
         const { name, 
                 last_Name, 
@@ -200,7 +238,7 @@ users.put('/admin/:id', async (req, res) => {
                 street, 
                 address, 
                 isProfessional, 
-                professions,
+                profession,
                 isPremium,         
                 isActive,
                 isBanned,
@@ -213,9 +251,9 @@ users.put('/admin/:id', async (req, res) => {
             const userUpdated = await User.findOne({ where: { id }, include: Profession })
             const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
             await userUpdated.removeProfession(oldProfessions)
-            console.log(professions);
-            if(professions.length > 0){
-                const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: professions } } })
+        console.log('ESTA SON LAS PROFESIONES QUE TIENE EL USUARIO',profession);
+            if(profession.length > 0){
+                const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
                 await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
             }
     
@@ -243,7 +281,7 @@ users.put('/admin/:id', async (req, res) => {
             res.status(200).send(`The user "${name}" updated successfully`)
             } catch (error) {
             console.log(error);
-            res.status(400).send(error)
+            next (error)
         }
     })
     
@@ -256,7 +294,7 @@ users.put("/edit/:id" , async (req, res, next) => {
         return res.status(200).send(`The user "${name}" updated successfully`)
     } catch (error) {
         console.log(error);
-        res.status(400).send(error)
+        next (error)
     }
 })
 
@@ -326,7 +364,7 @@ users.put('/subscription/:id', async (req, res, next) =>{
         next (error)
     }
 })
-
+//ACTUALIZAR LA GALERIA DE IMAGENES DEL USER
 users.put('/gallery/:id', async (req, res, next) =>{
     const { id } = req.params;
     const obj = req.body; 

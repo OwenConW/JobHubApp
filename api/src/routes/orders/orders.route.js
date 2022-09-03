@@ -17,6 +17,7 @@ orders.get("/all", async (req, res, next)=>{
     }
 })
 
+// RUTA PARA CREAR POST Y BUSCAR ORDER ACTIVA
 orders.post("/", async (req, res, next) =>{
     const { id_user_professional, id_user_client } = req.body;
     try {
@@ -42,7 +43,7 @@ orders.post("/", async (req, res, next) =>{
 
 orders.put("/:id", async (req, res, next) =>{
     const { description, complete, apointment_date, allowReview, isActive } = req.body;
-    console.log('description desde el back', description)
+    //console.log('description desde el back', description)
     const { id } = req.params;
     try {
         functions.updateOrden(id, description, complete, apointment_date, allowReview, isActive)

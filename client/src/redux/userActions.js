@@ -10,7 +10,7 @@ import {
 
 export const getChars = () => (dispatch) => {
 	axios
-		.get('/users')
+		.get('/users/all/actives') 
 		.then((res) => {
 			dispatch(getAllUsers(res.data));
 		})
