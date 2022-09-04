@@ -103,9 +103,13 @@
                     height: 100%;
 
                     h3{
+                        width: 100%;
                         font-size: 3.0rem;
                         font-weight: 300;
                         color: #F0EDEE;
+                        overflow:hidden;
+                        white-space:nowrap;
+                        text-overflow: ellipsis;
                     }
 
                     p{

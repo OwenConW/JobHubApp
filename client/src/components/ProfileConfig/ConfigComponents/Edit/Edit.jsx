@@ -6,10 +6,12 @@ import axios from "axios";
 import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
 import { modifyUser, setInactiveUser } from "../../../../redux/userActions";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
+  const {logout} = useAuth0();
   const navigate = useNavigate()
   let localSt = getLocalStorage()
   let activeUser = { ...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1) }
@@ -220,6 +222,7 @@ const Edit = () => {
             'Esperamos que vuelvas pronto',
             'success'
           )
+          logout();
 
         }
 
