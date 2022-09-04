@@ -1,6 +1,34 @@
 const { Op } = require("sequelize");
 const { User, Review, Orders } = require("../db")
 
+//FUNCION PARA CREAR LA ORDEN
+const postOrder = async ( id_user_professional,  id_user_client ) =>{
+    try {
+        if( id_user_professional && id_user_client ){
+            const [newOrder, created] = await Orders.findOrCreate({
+                where:{
+                    id_user_professional,
+                    id_user_client,
+                    complete: "false",
+                },
+                defaults:{
+                    id_user_professional,
+                    id_user_client,
+                }
+            })
+            let idFind = await User.findByPk(id_user_professional)
+            await newOrder.addUser(idFind)
+
+            if(!created)  return "Cannot create an Order, you must complete a pending order";
+            return "The Order created successfully";
+        } return "Missing data";
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+
 //FUNCION PARA QUE EL PROFESIONAL COMPLETE LA ORDEN
 const updateOrden = async (id, description, complete, apointment_date, allowReview, isActive ) =>{
     try {
@@ -63,6 +91,7 @@ const getAllOrdersByClient = async (id) =>{
 
 
 module.exports = {
+    postOrder,
     updateOrden,
     getAllOrdersByProfessional,
     getAllOrdersByClient
