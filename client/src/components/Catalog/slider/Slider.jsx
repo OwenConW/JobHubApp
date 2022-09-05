@@ -1,24 +1,30 @@
 import React from 'react';
 import Slider from 'react-slick';
 import s from './slider.module.scss';
-import div1 from './assets/div1.jpg';
-import div2 from './assets/div2.jpg';
-import div3 from './assets/div3.jpg';
+
+import fst_header from './assets/div1.jpg';
+import scd_header from './assets/div2.jpg';
+import tr_header from './assets/div3.jpg';
 
 const SliderComponent = () => {
 
     let settings = {
-        className: s.sample,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 3000
     }
 
       return (
-        <Slider {...settings}>
-            <div className={s.div1}><img src={div1} alt="" /></div>
-            <div className={s.div2}><img src={div2} alt="" /></div>
-            <div className={s.div3}><img src={div3} alt="" /></div>
-         </Slider>
+        <div className={s.container}>
+          <Slider {...settings}>
+              <div><img src={fst_header} alt="" /></div>
+              <div><img src={scd_header} alt="" /></div>
+              <div><img src={tr_header} alt="" /></div>
+          </Slider>
+         </div>
       );
     }
 
