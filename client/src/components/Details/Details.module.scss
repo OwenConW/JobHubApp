@@ -415,7 +415,7 @@
 }
 
 
-
+//Responsive Tablets
 @media screen and (max-width: 1100px) {
   .container {
     flex-direction: column;
@@ -431,6 +431,7 @@
       .profileInfo {
         height: 40%;
         width: 100%;
+        margin-top: 2%;
         margin-bottom: 3%;
 
         .profileDetail {
@@ -466,14 +467,21 @@
             width: 70%;
             height: 25%;
             font-size: 2.5rem;
-            margin-bottom: 5%;
-            margin-top: 5%;
+            margin-bottom: 2%;
+            margin-top: 2%;
           }
 
+          .btnReport{
+            width: 70%;
+            height: 25%;
+            font-size: 2.5rem;
+            margin-bottom: 2%;
+            margin-top: 2%;
+          }
 
           .profile_Img {
-            width: 55%;
-            height: 55%;
+            width: 40%;
+            height: 50%;
           }
         }
 
@@ -489,15 +497,20 @@
             margin-top: 5%;
           }
 
+          .btnReport{
+            width: 70%;
+            height: 25%;
+            font-size: 2.5rem;
+            margin-bottom: 2%;
+            margin-top: 2%;
+          }
+
           .profile_ImgPremium {
             width: 55%;
             height: 55%;
           }
         }
       }
-
-
-
 
       .orderBox {
         display: flex;
