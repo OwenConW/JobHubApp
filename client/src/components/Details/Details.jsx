@@ -43,11 +43,6 @@ const Profile = () => {
       Swal.fire("No puedes chatear ni crear ordenes contigo mismo");
     }else{
       try{
-        let body = {
-          id_user_professional: id * 1,
-          id_user_client : activeUser.id,
-        }
-        await axios.post('/orders', body);
         await axios.post('/conversation', data);
         navigate('/chat');
       }catch(e){
