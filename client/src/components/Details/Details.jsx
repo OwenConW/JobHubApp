@@ -137,7 +137,7 @@ const Profile = () => {
           <div className={professional?.isPremium ? s.moreImages : s.moreReviews}> {/* : s.poorMoreReviews */}
             <span className={s.premiumText}>
               {
-                professional?.isPremium ? <h1>Trabajos destacados del Profesional</h1> : <h1>Otras reseñas</h1>
+                professional?.isPremium ? <h1>Trabajos destacados del Profesional</h1> : <h1>Todas las reseñas</h1>
               }
               
             </span>
