@@ -339,6 +339,38 @@ const updateAdmin = async(id, isAdmin) => {
     }
 }
 
+// UPDATE ISPROFESSIONAL
+const updateProfessional = async(id, isProfessional) => {
+    try {
+        await User.update({
+            isProfessional,
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+// UPDATE ISBANNED
+const updateBanned = async(id, isBanned) => {
+    try {
+        await User.update({
+            isBanned
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 //UPDATE ISACTIVE
 const destroyUser = async(id, isActive) => {
     try {
@@ -467,6 +499,7 @@ module.exports = {
     updateAdmin,
     updatePremium,
     updateProfessional,
+    updateBanned,
     destroyUser,
     updateUserNoJobs,
     getAllUsersAdmin,

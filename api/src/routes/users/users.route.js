@@ -313,12 +313,26 @@ users.put('/professional/:id', async (req, res, next) => {
     const { isProfessional } = req.body
     try {
         await functions.updateProfessional(id, isProfessional)
-        res.status(200).send(`The user is now Professional`)
+        res.status(200).send(`The user is now ${isProfessional === false ? "noProfesional" : "Profesional"}`)
     } catch (error) {
         console.log(error);
         next (error)
     }
 })
+
+//RUTA PARA BANEAR A UN USUARIO 
+users.put('/banned/:id', async (req, res, next) => {
+    const { id } = req.params;
+    const { isBanned } = req.body
+    try {
+        await functions.updateBanned(id, isBanned)
+        res.status(200).send(`The user is now ${isBanned === false ? "noBanned" : "Banned"}`)
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
 
 //RUTA PARA ELIMINAR LOGICAMENTE AL USUARIO
 users.put('/destroy/:id', async (req, res, next) => {
@@ -332,6 +346,8 @@ users.put('/destroy/:id', async (req, res, next) => {
         next (error)
     }
 })
+
+
 
 //RUTA PARA ACTUALIZAR EL ID DE SUSCRIPCION CON FECHA ACTUAL Y VENCIMIENTO
 users.put('/subscription/:id', async (req, res, next) =>{
