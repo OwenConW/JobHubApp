@@ -8,7 +8,7 @@ const Review = require('../../models/Review.js');
 
 const conversation = Router()
 
-// new conv
+// CREAR UNA NUEVA CONVERSACION
 conversation.post("/", async (req, res, next) => {
     const { emisor_id,  receptor_id } = req.body
     try{
@@ -38,11 +38,10 @@ conversation.post("/", async (req, res, next) => {
     }
 })
 
-
+// RUTA CONVERSACION POR USUARIO
 conversation.get("/:userId", async(req, res, next) => {
     const { userId } = req.params 
     try{
-   
         const conversation = await Conversation.findAll({
             where: {
                 [Op.or]: [{
@@ -64,6 +63,21 @@ conversation.get("/:userId", async(req, res, next) => {
         return res.send(e)
     }
 })
+
+// RUTA PARA ELIMINAR REPORTES
+conversation.delete("/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try {
+        await Conversation.destroy({
+            where: {id:id}
+        })
+        res.status(200).send("the Conversation was successfully deleted")
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 
 
 module.exports = conversation;
