@@ -99,94 +99,37 @@ users.post("/", async (req, res, next) =>{
     const nameMinuscule = name.toLowerCase();
     const lastNameMinuscule = last_Name.toLowerCase();
     const mailMinuscule = mail.toLowerCase();
-    let photo_gallery = {
+    const photo_gallery = {
         imagen1: null,
         imagen2: null,
         imagen3: null,
         imagen4: null
     }
     try {
-        if( name &&  last_Name && mail && country  && city && coordinate ){
-            const [newUser, created] = await User.findOrCreate({
-                where:{
-                    mail: mailMinuscule
-                },
-                defaults:{
-                    name: nameMinuscule,
-                    last_Name: lastNameMinuscule,
-                    date_of_Birth,
-                    image,
-                    dni,
-                    phone,
-                    description,
-                    country,
-                    city,
-                    coordinate,
-                    street,
-                    address,
-                    isProfessional,
-                    photo_gallery
-                }
-            })
-            if(profession){
-                let jobFind = await Profession.findAll({
-                    where:{
-                        name:{
-                            [Op.or]: profession
-                        }
-                    }
-                })
-                await newUser.addProfession(jobFind)
-            }
-
-            if(!created)  res.status(200).send(`The User cannot be created, the email "${mail}" has already been used`);
-            return res.status(201).send(`The User "${name}" created successfully`);
-        } return res.status(200).send("Missing data");
+        const postUser = await functions.userPost(nameMinuscule, lastNameMinuscule, date_of_Birth, mailMinuscule, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession, photo_gallery)
+        res.status(200).send(postUser)
     } catch (error) {
-        console.log(error)
-        next(error)
+        console.log(error);
+        next (error)
     }
+    
     
 })
 
-//RUTA PARA EDITAR EL USUARIO
+//RUTA PARA EDITAR EL USUARIO (con trabajo)
 users.put('/:id', async (req, res, next) => {
     const { id } = req.params
-    const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, professions } = req.body;
+    const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
     const nameMinuscule = name?.toLowerCase();
     const lastNameMinuscule = last_Name?.toLowerCase();
     const mailMinuscule = mail?.toLowerCase();
 
     try {
-        const userUpdated = await User.findOne({ where: { id }, include: Profession })
-        const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
-        await userUpdated.removeProfession(oldProfessions)
-        if(professions.length > 0){
-            const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: professions } } })
-            await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
-        }
-
-        userUpdated.set({
-            name: nameMinuscule,
-            last_Name: lastNameMinuscule,
-            date_of_Birth,
-            image,
-            dni,
-            mail: mailMinuscule,
-            phone,
-            description,
-            country,
-            city,
-            coordinate,
-            street,
-            address,
-            isProfessional,
-        })
-        await userUpdated.save()
-        res.status(200).send(`The user "${name}" updated successfully`)
-        } catch (error) {
+        const updateUser = await functions.updateUser(id, nameMinuscule, lastNameMinuscule, date_of_Birth, image, dni, mailMinuscule, phone, description, country, city, coordinate, street, address, isProfessional, profession )
+        res.status(200).send(updateUser)
+    } catch (error) {
         console.log(error);
-        res.status(400).send(error)
+        next (error)
     }
 })
 
@@ -257,10 +200,13 @@ users.put('/admin/:id', async (req, res, next) => {
 //RUTA PARA EDITAR USUARIO SIN JOBS
 users.put("/edit/:id" , async (req, res, next) => {
     const { id } = req.params
-    const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession } = req.body;
+    const { name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional} = req.body;
+    const nameMinuscule = name?.toLowerCase();
+    const lastNameMinuscule = last_Name?.toLowerCase();
+    const mailMinuscule = mail?.toLowerCase();
     try {
-        await functions.updateUserNoJobs(id, name.toLowerCase(), last_Name.toLowerCase(), date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional, profession)
-        return res.status(200).send(`The user "${name}" updated successfully`)
+        const userUpdateNoJob = await functions.updateUserNoJobs(id, nameMinuscule, lastNameMinuscule, date_of_Birth, image, dni, mailMinuscule, phone, description, country, city, coordinate, street, address, isProfessional)
+        return res.status(200).send(userUpdateNoJob)
     } catch (error) {
         console.log(error);
         next (error)
@@ -380,8 +326,8 @@ users.put('/gallery/:id', async (req, res, next) =>{
     const { id } = req.params;
     const obj = req.body; 
     try {
-        await functions.updatePhotos(id, obj)
-        res.status(201).send('La galeria de fotos se actualizo correctamente')
+        const updatePhoto = await functions.updatePhotos(id, obj)
+        res.status(201).send(updatePhoto)
     } catch (error) {
         console.log(error);
         next (error)

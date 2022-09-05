@@ -65,6 +65,7 @@ const searchMail = async(mail) =>{
     }
 }
 
+
 const filterByQueris = async(name, profession, rating) => {
     try{
         if(profession){
@@ -289,7 +290,116 @@ const getProffesionalById = async(id) => {
     } 
 }
 
+// POST USERS
+const userPost = async (nameMinuscule, lastNameMinuscule, date_of_Birth, mailMinuscule, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession, photo_gallery) =>{
+    try {
+        if( nameMinuscule &&  lastNameMinuscule && mailMinuscule && country  && city && coordinate ){
+            const [newUser, created] = await User.findOrCreate({
+                where:{
+                    mail: mailMinuscule
+                },
+                defaults:{
+                    name: nameMinuscule,
+                    last_Name: lastNameMinuscule,
+                    date_of_Birth,
+                    image,
+                    dni,
+                    phone,
+                    description,
+                    country,
+                    city,
+                    coordinate,
+                    street,
+                    address,
+                    isProfessional,
+                    photo_gallery
+                }
+            })
+            if(profession){
+                let jobFind = await Profession.findAll({
+                    where:{
+                        name:{
+                            [Op.or]: profession
+                        }
+                    }
+                })
+                await newUser.addProfession(jobFind)
+            }
 
+            if(!created)  return `The User cannot be created, the email "${mailMinuscule}" has already been used`;
+            return `The User "${nameMinuscule}" created successfully`;
+        } return "Missing data";
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+//UPDATE USER CON JOB
+const updateUser = async (id, nameMinuscule, lastNameMinuscule, date_of_Birth, image, dni, mailMinuscule, phone, description, country, city, coordinate, street, address, isProfessional, profession)=>{
+    try {
+        const userUpdated = await User.findOne({ where: { id }, include: Profession })
+        const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
+        await userUpdated.removeProfession(oldProfessions)
+        if(profession.length > 0){
+            const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
+            await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
+        }
+
+        userUpdated.set({
+            name: nameMinuscule,
+            last_Name: lastNameMinuscule,
+            date_of_Birth,
+            image,
+            dni,
+            mail: mailMinuscule,
+            phone,
+            description,
+            country,
+            city,
+            coordinate,
+            street,
+            address,
+            isProfessional,
+        })
+        await userUpdated.save()
+        return `The user "${nameMinuscule}" updated successfully`
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+//UPDATE USER SIN JOBS
+const updateUserNoJobs = async (id, nameMinuscule, lastNameMinuscule, date_of_Birth, image, dni, mailMinuscule, phone, description, country, city, coordinate, street, address, isProfessional ) => {
+    try {
+        await User.update({
+            name: nameMinuscule,
+            last_Name: lastNameMinuscule,
+            date_of_Birth,
+            image,
+            dni,
+            mail: mailMinuscule,
+            phone,
+            description,
+            country,
+            city,
+            coordinate,
+            street,
+            address,
+            isProfessional,
+
+        },{
+            where:{
+                id,
+            }
+        })
+        return `The user "${nameMinuscule}" updated successfully`
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
 
 // UPDATE RATING
 const updateRating = async(id, rating) => {
@@ -387,41 +497,11 @@ const destroyUser = async(id, isActive) => {
     }
 }
 
-//UPDATE USER SIN JOBS
-const updateUserNoJobs = async (id, name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional ) => {
-    try {
-        await User.update({
-            name,
-            last_Name,
-            date_of_Birth,
-            image,
-            dni,
-            mail,
-            phone,
-            description,
-            country,
-            city,
-            coordinate,
-            street,
-            address,
-            isProfessional,
-
-        },{
-            where:{
-                id,
-            }
-        })
-    } catch (error) {
-        console.log(error)
-        throw error
-    }
-}
 
 //UPDATE  ARRAY DE FOTOS "MIS TRABAJOS"
 const updatePhotos = async (id, obj) =>{
     try {
         const userPremium = await User.findByPk(id)
-        //console.log('ESTO ES LO QUE ENCUENTRA',userPremium)
         if(userPremium.isPremium === false) return "The photos in the gallery were not added because the user is not premium"
         await User.update({
             photo_gallery: obj
@@ -477,7 +557,7 @@ const nearbyUsers = async ( id, coordinate ) =>{
         })
         //console.log("ESTO ES LO QUE DEJO LA FUNCION PARA FILTRAR POR RATING",allUsersRating)
         const userFilter = allUsersRating.filter(user => closeToOne(coordinate, user.coordinate) && id !== user.id);
-        console.log("ARRAY FILTRADO", userFilter)
+        //console.log("ARRAY FILTRADO", userFilter)
         return userFilter;
     } catch (error) {
         console.log(error)
@@ -495,6 +575,9 @@ module.exports = {
     searchMail,
     filterByQueris,
     getProffesionalById,
+    userPost,
+    updateUser,
+    updateUserNoJobs,
     updateRating,
     updateAdmin,
     updatePremium,
