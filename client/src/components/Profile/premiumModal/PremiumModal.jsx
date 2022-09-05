@@ -53,8 +53,7 @@ function PremiumModal(props) {
           <li>Mas visibilidad en toda la página.</li>
           <li>Saldras primero y destacado en las busquedas por nombre u oficio.</li>
           <li>Podras agregar y ejercer más de un trabajo en la página.</li>
-          <li>Podras tener un gif de perfil.</li>
-          <li>Podras buscar profesionales a mayor distancia.</li>
+          <li>Podras agregar imagenes de tus mejores trabajos realizados.</li>
         </ul>
 
       <div className={s.fetchingMessagesAndButtonsContainer}>

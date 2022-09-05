@@ -93,7 +93,7 @@ export default function FormReturn(){
                 backdrop: `
                 rgba(172,172,172,0.5424720913756127)`
               })
-              axios.put(`/users/destroy/${reset?.user.id}`,  { isActive: false })
+              axios.put(`/users/destroy/${reset?.user.id}`,  { isActive: true })
               .then(() => {
                 functions.setUserLocalStorage(reset?.user)
                 navigate("/home")

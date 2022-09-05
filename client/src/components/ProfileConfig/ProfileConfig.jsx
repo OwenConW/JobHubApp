@@ -94,7 +94,7 @@ const ProfileConfig = () => {
                 </button> : <></>
             }
              {
-              activeUser.isPremium ?
+              activeUser ?
                 <button className={s.optionList} name='premium' onClick={paginado}>
                   Premium
                 </button> : <></>
