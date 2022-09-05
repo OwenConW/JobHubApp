@@ -1,9 +1,9 @@
 const { User, Claims, Profession } = require("../db")
 
 
-const postClaims = async ( id, id_user_client,  feedback_claims ) =>{
+const postClaims = async ( id, id_user_client, feedback_claims ) =>{
     try {
-        if( id_user_client && feedback_claims ){
+        if( id && id_user_client && feedback_claims ){
             const [newClaims, created] = await Claims.findOrCreate({
                 where:{
                     id_user_client,
