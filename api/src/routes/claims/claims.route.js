@@ -42,11 +42,10 @@ claims.get("/client/:id", async (req, res, next)=>{
 })
 
 // RUTA QUE CREA DENUNCIAS
-claims.post("/:id", async (req, res, next) =>{
-    const { id_user_client, feedback_claims  } = req.body;
-    const { id } = req.params;
+claims.post("/", async (req, res, next) =>{
+    const { id ,id_user_client, feedback_claims, subject } = req.body;
     try {
-        const responseClaims = await functions.postClaims( id, id_user_client, feedback_claims)
+        const responseClaims = await functions.postClaims(id, id_user_client, feedback_claims, subject)
         res.status(201).send(responseClaims)
     } catch (error) {
         console.log(error)
