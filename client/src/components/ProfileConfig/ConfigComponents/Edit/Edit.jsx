@@ -9,7 +9,6 @@ import { modifyUser, setInactiveUser } from "../../../../redux/userActions";
 import Swal from 'sweetalert2';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from "react-router-dom";
-import { useAuth0 } from '@auth0/auth0-react';
 
 const Edit = () => {
 
