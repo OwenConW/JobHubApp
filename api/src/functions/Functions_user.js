@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const { User, Profession, Review, Orders, Claims } = require("../db");
 
+
 const allUsers = async () =>{
     try {
         const allUsers = await User.findAll({
@@ -290,17 +291,6 @@ const getProffesionalById = async(id) => {
 
 
 
-// GET ALL JOBS
-const getAllJobs = async() => {
-    try{
-        const jobs = Profession.findAll()
-        return jobs;
-    }catch(error){
-        console.log(error)
-        throw error
-    }
-}
-
 // UPDATE RATING
 const updateRating = async(id, rating) => {
     try {
@@ -322,6 +312,21 @@ const updatePremium = async(id, isPremium) => {
     try {
         await User.update({
             isPremium,
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+const updateProfessional = async(id, isProfessional) =>{
+    try {
+        await User.update({
+            isProfessional,
         },{
             where:{
                 id,
@@ -400,6 +405,53 @@ const updatePhotos = async (id, obj) =>{
 }
 
 
+//FUNCION PARA SACAR LA DISTANCIA EN CORDENADAS
+const pitagorasDistance = (coord1, coord2) => {
+    let x1 = coord1[0];
+    let y1 = coord1[1];
+
+    let x2 = coord2[0];
+    let y2 = coord2[1];
+
+    let difx = x2 - x1;
+    let dify = y2 - y1;
+
+    let powx = Math.pow(difx, 2);
+    let powy = Math.pow(dify, 2);
+
+    return (Math.sqrt(powx+powy)*100);
+}
+
+const closeToOne = (coords1, coords2) => {
+    if(pitagorasDistance(coords1, coords2) < 5000){ //distancia en kilometros
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//ALL USERS CERCANOS
+const nearbyUsers = async ( id, coordinate ) =>{
+    try {
+        const allUsersRating = await User.findAll({
+            order: [["rating", "DESC"]],
+            where:{
+                rating:{
+                    [Op.gte]: 4 
+                }
+            },
+            
+        })
+        //console.log("ESTO ES LO QUE DEJO LA FUNCION PARA FILTRAR POR RATING",allUsersRating)
+        const userFilter = allUsersRating.filter(user => closeToOne(coordinate, user.coordinate) && id !== user.id);
+        console.log("ARRAY FILTRADO", userFilter)
+        return userFilter;
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 
 
@@ -410,13 +462,14 @@ module.exports = {
     searchMail,
     filterByQueris,
     getProffesionalById,
-    getAllJobs,
     updateRating,
     updatePremium,
+    updateProfessional,
     destroyUser,
     updateUserNoJobs,
     getAllUsersAdmin,
-    updatePhotos
+    updatePhotos,
+    nearbyUsers
 
 }
 

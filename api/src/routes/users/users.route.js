@@ -44,11 +44,11 @@ users.get('/all/actives', async (req, res, next)=>{
 
 //RUTA PARA TRAER USUARIOS FILTRADOS POR COORDENADAS CERCANAS AL HOME
 users.get('/home', async (req, res, next)=>{
-    const { coordinate } = res.params;
+    const { id, coordinate } = req.body;
     try {
-        if (coordinate){
-            const allNearbyUsers = await functions.nearbyUsers(coordinate)
-        }
+        const allNearbyUsers = await functions.nearbyUsers( id, coordinate )
+        console.log("ESTO LLEGA DE LA FUNCION",allNearbyUsers)
+        res.status(200).json(allNearbyUsers)
 ///////////////
     } catch (error) {
         console.log(error)
@@ -220,7 +220,7 @@ users.put('/admin/:id', async (req, res, next) => {
             const userUpdated = await User.findOne({ where: { id }, include: Profession })
             const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
             await userUpdated.removeProfession(oldProfessions)
-            
+
             if(profession.length > 0){
                 const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
                 await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
@@ -288,6 +288,19 @@ users.put('/premium/:id', async (req, res, next) => {
     try {
         await functions.updatePremium(id, isPremium)
         res.status(200).send(`The user is now premium`)
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
+//RUTA PARA PASAR UN USUARIO A PROFESIONAL
+users.put('/professional/:id', async (req, res, next) => {
+    const { id } = req.params;
+    const { isProfessional } = req.body
+    try {
+        await functions.updateProfessional(id, isProfessional)
+        res.status(200).send(`The user is now Professional`)
     } catch (error) {
         console.log(error);
         next (error)
