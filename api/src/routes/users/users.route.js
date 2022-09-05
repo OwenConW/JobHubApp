@@ -221,7 +221,7 @@ users.put('/admin/:id', async (req, res, next) => {
             const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
             await userUpdated.removeProfession(oldProfessions)
             
-            if(profession.length > 0){
+            if(profession?.length > 0){
                 const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
                 await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
             }

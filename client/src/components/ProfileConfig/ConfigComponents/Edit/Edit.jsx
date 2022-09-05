@@ -299,13 +299,13 @@ const Edit = () => {
         <select name='country' value={user.country} onChange={(event) => handleChange(event)} className={s.select}>
 
           <option key={'none'} value={user.country}>{user.country}</option>
-          {
-            countries.names.map(country => {
-              return (
-                <option value={country} key={country}>{country}</option>
-              )
-            })
-          }
+                      <option value="Argentina">Argentina</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Chile">Chile</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Brasil">Brasil</option>
+                      <option value="Peru">Peru</option>
 
         </select>
       </div>
