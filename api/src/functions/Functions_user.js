@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const { User, Profession, Review, Orders, Claims } = require("../db");
 
+
 const allUsers = async () =>{
     try {
         const allUsers = await User.findAll({
@@ -63,6 +64,7 @@ const searchMail = async(mail) =>{
         next(error)
     }
 }
+
 
 const filterByQueris = async(name, profession, rating) => {
     try{
@@ -288,14 +290,112 @@ const getProffesionalById = async(id) => {
     } 
 }
 
+// POST USERS
+const userPost = async (nameMinuscule, lastNameMinuscule, date_of_Birth, mailMinuscule, dni, image, phone, country, city, coordinate, street, address, description, isProfessional, profession, photo_gallery) =>{
+    try {
+        if( nameMinuscule &&  lastNameMinuscule && mailMinuscule && country  && city && coordinate ){
+            const [newUser, created] = await User.findOrCreate({
+                where:{
+                    mail: mailMinuscule
+                },
+                defaults:{
+                    name: nameMinuscule,
+                    last_Name: lastNameMinuscule,
+                    date_of_Birth,
+                    image,
+                    dni,
+                    phone,
+                    description,
+                    country,
+                    city,
+                    coordinate,
+                    street,
+                    address,
+                    isProfessional,
+                    photo_gallery
+                }
+            })
+            if(profession){
+                let jobFind = await Profession.findAll({
+                    where:{
+                        name:{
+                            [Op.or]: profession
+                        }
+                    }
+                })
+                await newUser.addProfession(jobFind)
+            }
 
+            if(!created)  return `The User cannot be created, the email "${mailMinuscule}" has already been used`;
+            return `The User "${nameMinuscule}" created successfully`;
+        } return "Missing data";
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
 
-// GET ALL JOBS
-const getAllJobs = async() => {
-    try{
-        const jobs = Profession.findAll()
-        return jobs;
-    }catch(error){
+//UPDATE USER CON JOB
+const updateUser = async (id, nameMinuscule, lastNameMinuscule, date_of_Birth, image, dni, mailMinuscule, phone, description, country, city, coordinate, street, address, isProfessional, profession)=>{
+    try {
+        const userUpdated = await User.findOne({ where: { id }, include: Profession })
+        const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
+        await userUpdated.removeProfession(oldProfessions)
+        if(profession.length > 0){
+            const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
+            await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
+        }
+
+        userUpdated.set({
+            name: nameMinuscule,
+            last_Name: lastNameMinuscule,
+            date_of_Birth,
+            image,
+            dni,
+            mail: mailMinuscule,
+            phone,
+            description,
+            country,
+            city,
+            coordinate,
+            street,
+            address,
+            isProfessional,
+        })
+        await userUpdated.save()
+        return `The user "${nameMinuscule}" updated successfully`
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+//UPDATE USER SIN JOBS
+const updateUserNoJobs = async (id, nameMinuscule, lastNameMinuscule, date_of_Birth, image, dni, mailMinuscule, phone, description, country, city, coordinate, street, address, isProfessional ) => {
+    try {
+        await User.update({
+            name: nameMinuscule,
+            last_Name: lastNameMinuscule,
+            date_of_Birth,
+            image,
+            dni,
+            mail: mailMinuscule,
+            phone,
+            description,
+            country,
+            city,
+            coordinate,
+            street,
+            address,
+            isProfessional,
+
+        },{
+            where:{
+                id,
+            }
+        })
+        return `The user "${nameMinuscule}" updated successfully`
+    } catch (error) {
         console.log(error)
         throw error
     }
@@ -349,6 +449,37 @@ const updateAdmin = async(id, isAdmin) => {
     }
 }
 
+// UPDATE ISPROFESSIONAL
+const updateProfessional = async(id, isProfessional) => {
+    try {
+        await User.update({
+            isProfessional,
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+// UPDATE ISBANNED
+const updateBanned = async(id, isBanned) => {
+    try {
+        await User.update({
+            isBanned
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
 
 //UPDATE ISACTIVE
 const destroyUser = async(id, isActive) => {
@@ -366,41 +497,11 @@ const destroyUser = async(id, isActive) => {
     }
 }
 
-//UPDATE USER SIN JOBS
-const updateUserNoJobs = async (id, name, last_Name, date_of_Birth, image, dni, mail, phone, description, country, city, coordinate, street, address, isProfessional ) => {
-    try {
-        await User.update({
-            name,
-            last_Name,
-            date_of_Birth,
-            image,
-            dni,
-            mail,
-            phone,
-            description,
-            country,
-            city,
-            coordinate,
-            street,
-            address,
-            isProfessional,
-
-        },{
-            where:{
-                id,
-            }
-        })
-    } catch (error) {
-        console.log(error)
-        throw error
-    }
-}
 
 //UPDATE  ARRAY DE FOTOS "MIS TRABAJOS"
 const updatePhotos = async (id, obj) =>{
     try {
         const userPremium = await User.findByPk(id)
-        //console.log('ESTO ES LO QUE ENCUENTRA',userPremium)
         if(userPremium.isPremium === false) return "The photos in the gallery were not added because the user is not premium"
         await User.update({
             photo_gallery: obj
@@ -417,6 +518,53 @@ const updatePhotos = async (id, obj) =>{
 }
 
 
+//FUNCION PARA SACAR LA DISTANCIA EN CORDENADAS
+const pitagorasDistance = (coord1, coord2) => {
+    let x1 = coord1[0];
+    let y1 = coord1[1];
+
+    let x2 = coord2[0];
+    let y2 = coord2[1];
+
+    let difx = x2 - x1;
+    let dify = y2 - y1;
+
+    let powx = Math.pow(difx, 2);
+    let powy = Math.pow(dify, 2);
+
+    return (Math.sqrt(powx+powy)*100);
+}
+
+const closeToOne = (coords1, coords2) => {
+    if(pitagorasDistance(coords1, coords2) < 5000){ //distancia en kilometros
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//ALL USERS CERCANOS
+const nearbyUsers = async ( id, coordinate ) =>{
+    try {
+        const allUsersRating = await User.findAll({
+            order: [["rating", "DESC"]],
+            where:{
+                rating:{
+                    [Op.gte]: 4 
+                }
+            },
+            
+        })
+        //console.log("ESTO ES LO QUE DEJO LA FUNCION PARA FILTRAR POR RATING",allUsersRating)
+        const userFilter = allUsersRating.filter(user => closeToOne(coordinate, user.coordinate) && id !== user.id);
+        //console.log("ARRAY FILTRADO", userFilter)
+        return userFilter;
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 
 
@@ -427,14 +575,19 @@ module.exports = {
     searchMail,
     filterByQueris,
     getProffesionalById,
-    getAllJobs,
+    userPost,
+    updateUser,
+    updateUserNoJobs,
     updateRating,
     updateAdmin,
     updatePremium,
+    updateProfessional,
+    updateBanned,
     destroyUser,
     updateUserNoJobs,
     getAllUsersAdmin,
-    updatePhotos
+    updatePhotos,
+    nearbyUsers
 
 }
 

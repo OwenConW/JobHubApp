@@ -20,7 +20,19 @@ const postJobs = async (jobsMinuscule) =>{
     }
 }
 
+// GET ALL JOBS
+const getAllJobs = async() => {
+    try{
+        const jobs = await Profession.findAll()
+        return jobs;
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+}
+
 module.exports = {
     postJobs,
+    getAllJobs,
 }
 

@@ -1,18 +1,17 @@
 const { Router } = require('express');
-const functions = require("../../functions/Functions_user");
-const functionsJob = require("../../functions/Functions_jobs")
+const functions = require("../../functions/Functions_jobs")
 const { Profession } = require("../../db.js")
 
 const jobs = Router()
 
-jobs.get("/", (req, res, next) => {
-    functions.getAllJobs()
-    .then(jobs => {
-        return jobs ? res.status(200).send(jobs) : `No se encontraron trabajos registrados`
-    }, error => {
-        return res.status(404).send(error)
-    })
-    
+jobs.get("/", async (req, res, next) => {
+    try {
+        const jobs = await functions.getAllJobs();
+        res.status(200).json(jobs) 
+    } catch (error) {
+        console.log(error)
+            next(error)
+    }
 })
 
 
@@ -21,7 +20,7 @@ jobs.post("/create", async (req, res, next) =>{
     const { name } = req.body;
     const jobsMinuscule = name.toLowerCase();
         try {
-            const newJob = await functionsJob.postJobs( jobsMinuscule )
+            const newJob = await functions.postJobs( jobsMinuscule )
             res.status(201).send(newJob)
         } catch (error) {
             console.log(error)
