@@ -54,4 +54,19 @@ claims.post("/:id", async (req, res, next) =>{
     }
 })
 
+
+// RUTA PARA ELIMINAR REPORTES
+claims.delete("/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try {
+        await Orders.destroy({
+            where: {id:id}
+        })
+        res.status(200).send("the Claims was successfully deleted")
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 module.exports = claims;

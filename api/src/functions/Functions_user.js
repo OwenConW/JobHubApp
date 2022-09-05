@@ -39,6 +39,27 @@ const allUsersActives = async() =>{
     }
 }
 
+const allProfessionalActives = async() =>{
+    try {
+        const allUsers = await User.findAll({
+            where:{
+                isActive: 'true',
+                isBanned: 'false',
+                isProfessional: 'true',
+            },
+            include: {
+                model: Profession,
+                attributes: ['name'],
+                through: {attributes: []},
+            },
+        })
+        return allUsers
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
+
 const searchDni = async(dni) =>{
     try {
         const findDni = await User.findOne({
@@ -571,6 +592,7 @@ const nearbyUsers = async ( id, coordinate ) =>{
 module.exports = {
     allUsers,
     allUsersActives,
+    allProfessionalActives,
     searchDni,
     searchMail,
     filterByQueris,

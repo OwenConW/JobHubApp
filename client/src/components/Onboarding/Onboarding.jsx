@@ -22,6 +22,7 @@ const Onboarding = () => {
   const email = getLocalStorage().mail;
   const last_name = getLocalStorage().last_name;
   const name = getLocalStorage().name;
+  
   const navigate = useNavigate();
   const { logout } = useAuth0();
   
