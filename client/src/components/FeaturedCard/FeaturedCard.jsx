@@ -3,6 +3,7 @@ import s from './FeaturedCard.module.scss';
 import { motion } from 'framer-motion/dist/framer-motion.js';
 import { Link } from 'react-router-dom';
 
+
 //assets
 import star from './assets/star.png';
 import default_user from './assets/default_user.png';

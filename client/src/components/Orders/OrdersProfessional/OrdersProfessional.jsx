@@ -91,7 +91,6 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
                 allowReview: false,
                 isActive: false,
             }
-            console.log('body: ', body)
             if (result.isConfirmed) {
                 axios.put(`/orders/${order.id}`, body).then(() => setProf(profOrders.filter(p => p.id !== order.id)))
                     .then(() => Swal.fire({
