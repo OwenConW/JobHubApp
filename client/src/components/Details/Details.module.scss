@@ -35,8 +35,10 @@
           justify-content: center;
           align-items: center;
           border-radius: 10px;
-          width: 60%;
+          width: 70%;
           height: 20%;
+          margin-top: 3%;
+          background-color: rgba(105, 105, 105, 0.545);
           background-color: #2C666E;
           color: #D9D9D9;
           font-size: 1.8rem;
@@ -47,6 +49,26 @@
             cursor: pointer;
             color: #2C666E;
             background-color: #EEEEEE;
+          }
+        }
+
+        .btnReport{
+          transition: 0.5s;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+          width: 70%;
+          height: 20%;
+          margin-top: 4%;
+          background-color: rgba(105, 105, 105, 0.545);
+          font-size: 1.8rem;
+
+          &:hover{
+            transition: 0.5s;
+            cursor: pointer;
+            background-color: #d55a5a;
+            color: #EEEEEE;
           }
         }
 
@@ -74,6 +96,8 @@
           border-radius: 10px;
           width: 60%;
           height: 20%;
+          margin-top: 3%;
+          background-color: rgba(105, 105, 105, 0.545);
           background-color: #2C666E;
           color: #EEEEEE;
           font-size: 1.8rem;
@@ -83,6 +107,26 @@
             cursor: pointer;
             background-color: rgba(105, 105, 105, 0.545);
             color: black;
+          }
+        }
+
+        .btnReport{
+          transition: 0.5s;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+          width: 70%;
+          height: 20%;
+          margin-top: 4%;
+          background-color: rgba(105, 105, 105, 0.545);
+          font-size: 1.8rem;
+
+          &:hover{
+            transition: 0.5s;
+            cursor: pointer;
+            background-color: #d55a5a;
+            color: #EEEEEE;
           }
         }
 

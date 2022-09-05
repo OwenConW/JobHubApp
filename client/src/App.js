@@ -17,6 +17,7 @@ import Faq from './components/Faq/Faq';
 import Orders from './components/Orders/Orders';
 import FormReturn from "./components/FormReturn/FormReturn"
 import Navbar from './components/Navbar/Navbar';
+import Support from './components/Support/Support';
 
 function App() {
 	return (
@@ -36,6 +37,7 @@ function App() {
 				<Route exact path="/ProfileConfig/:id" element={<ProfileConfig />}/>
 				<Route exact path="/myorders" element={<Orders/>}/>
 				<Route exact path="/nav" element={<Navbar />} />
+				<Route exact path="/support" element={<Support />} />
 			</Routes>
 		</div>
 	);
