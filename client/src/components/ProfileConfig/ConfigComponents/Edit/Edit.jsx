@@ -9,9 +9,11 @@ import { modifyUser, setInactiveUser } from "../../../../redux/userActions";
 import Swal from 'sweetalert2';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Edit = () => {
-  const {logout} = useAuth0();
+
+  const { logout } = useAuth0();
   const navigate = useNavigate()
   let localSt = getLocalStorage()
   let activeUser = { ...localSt, name: localSt.name[0].toUpperCase() + localSt.name.substring(1), last_Name: localSt.last_Name[0].toUpperCase() + localSt.last_Name.substring(1) }
@@ -97,6 +99,7 @@ const Edit = () => {
 
     getCountries();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -134,6 +137,7 @@ const Edit = () => {
         [event.target.name]: true
       })
   }
+  // eslint-disable-next-line no-unused-vars
   const [errorGeometry, setErrorGeometry] = useState({
     error: '',
     loading: false,
@@ -223,7 +227,8 @@ const Edit = () => {
             'success'
           )
           logout();
-
+          localStorage.clear()
+          navigate("/")
         }
 
 
@@ -295,13 +300,13 @@ const Edit = () => {
         <select name='country' value={user.country} onChange={(event) => handleChange(event)} className={s.select}>
 
           <option key={'none'} value={user.country}>{user.country}</option>
-          {
-            countries.names.map(country => {
-              return (
-                <option value={country} key={country}>{country}</option>
-              )
-            })
-          }
+                      <option value="Argentina">Argentina</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Chile">Chile</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Brasil">Brasil</option>
+                      <option value="Peru">Peru</option>
 
         </select>
       </div>

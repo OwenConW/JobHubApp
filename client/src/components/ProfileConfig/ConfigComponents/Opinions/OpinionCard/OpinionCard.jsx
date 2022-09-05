@@ -9,6 +9,7 @@ import Swal from "sweetalert2"
 
 const OpinionCard = ({review, users}) => {
 
+  // eslint-disable-next-line no-self-assign
   review = review
 
 
@@ -17,6 +18,7 @@ const OpinionCard = ({review, users}) => {
     professional ={...professional, name:professional.name[0].toUpperCase() + professional.name.substring(1)} 
   }
   const [error, setError] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [modifiedReview, setModifiedReview] = useState({
     id_orders: review?.id_orders,

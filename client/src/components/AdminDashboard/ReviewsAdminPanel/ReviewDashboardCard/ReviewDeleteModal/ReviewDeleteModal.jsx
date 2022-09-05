@@ -4,6 +4,7 @@ import { deleteReviews } from '../../../../../redux/adminActions';
 import s from './ReviewDeleteModal.module.scss'
 
 export default function ReviewDeleteModal(props) {
+  // eslint-disable-next-line no-unused-vars
   const { name, id, handleDeleteOpenModal } = props;
   const fetchingAdminDeleteReviewSuccess = useSelector(state => state.fetching.fetchingAdminDeleteReviewSuccess)
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function ReviewDeleteModal(props) {
     if(fetchingAdminDeleteReviewSuccess) {
       handleDeleteOpenModal();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminDeleteReviewSuccess])
   
 

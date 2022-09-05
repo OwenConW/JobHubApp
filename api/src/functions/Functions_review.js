@@ -1,12 +1,11 @@
 const { Op } = require("sequelize");
 const { User, Review } = require("../db")
-const { updateRating } = require("../functions/Functions_user.js")
+const { searchRating } = require("../functions/Functions_handlers.js")
 
 
 
 //FUNCION PARA ACTUALIZAR REVIEW
 const updateReview = async (id, feedback_client, rating) =>{
-
     try {
         await Review.update({
             feedback_client, 
@@ -17,6 +16,34 @@ const updateReview = async (id, feedback_client, rating) =>{
             }
         }
         )
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+//FUNCION PARA SUBIR UNA REVIEW
+const postReview = async ( id, id_orders, id_user_client ,feedback_client, rating ) =>{
+    try {
+        if( id_orders && id_user_client && feedback_client && rating ){
+            const [newReview, created] = await Review.findOrCreate({
+                where:{
+                    id_orders,
+                },
+                defaults:{
+                    id_user_client,
+                    id_user_professional: id,
+                    feedback_client,
+                    rating,
+                }
+            })
+            let idFind = await User.findByPk(id)
+            await newReview.addUser(idFind)
+            await searchRating(id, rating);
+
+            if(!created)  return "The Review cannot be created, the Review has already exist";
+            return "The Review  created successfully";
+        } return "Missing data";
     } catch (error) {
         console.log(error)
         throw error
@@ -58,38 +85,10 @@ const getAllReviewByClient = async (id) =>{
     }
 }
 
-//FUNCION PARA BUSCAR Y PROMEDIAR EL RATING
-const searchRating = async (id, rating) =>{
-    try {
-        const ratingValue = await User.findByPk(id,{
-            include:[
-                {
-                    model: Review,
-                    attributes: [ 'rating'],
-                    through: {attributes: []},
-                }
-            ]
-        })
-
-        if(ratingValue.rating === -1) return await updateRating(id, rating)
-        let catidadReview= ratingValue.dataValues.reviews.length
-        const reviewNumber = parseInt(catidadReview)
-
-        let ratingOld = ratingValue.dataValues.reviews.length && ratingValue.dataValues.reviews.map(obj=>obj.rating).reduce( (a,p)=> a + p, 0 )
-        const ratingTotalOld = parseInt(ratingOld)
-
-        let ratingNew = ratingTotalOld  / reviewNumber 
-        return await updateRating(id, (ratingNew + "").slice(0,3))
-        
-    } catch (error) {
-        console.log(error)
-        throw error
-    }
-}
-
 
 module.exports = {
     updateReview,
+    postReview,
     getAllReviewByProfessional,
     searchRating,
     getAllReviewByClient
