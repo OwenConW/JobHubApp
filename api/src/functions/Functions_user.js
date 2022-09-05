@@ -323,10 +323,11 @@ const updatePremium = async(id, isPremium) => {
     }
 }
 
-const updateProfessional = async(id, isProfessional) =>{
+// UPDATE ISADMIN
+const updateAdmin = async(id, isAdmin) => {
     try {
         await User.update({
-            isProfessional,
+            isAdmin,
         },{
             where:{
                 id,
@@ -463,6 +464,7 @@ module.exports = {
     filterByQueris,
     getProffesionalById,
     updateRating,
+    updateAdmin,
     updatePremium,
     updateProfessional,
     destroyUser,

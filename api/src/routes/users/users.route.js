@@ -220,8 +220,8 @@ users.put('/admin/:id', async (req, res, next) => {
             const userUpdated = await User.findOne({ where: { id }, include: Profession })
             const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
             await userUpdated.removeProfession(oldProfessions)
-
-            if(profession.length > 0){
+            
+            if(profession?.length > 0){
                 const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
                 await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
             }
@@ -280,6 +280,19 @@ users.get("/:id", (req, res, next) => {
     })
 })
 
+// RUTA PARA PASAR UN USUARIO A ADMIN
+users.put("/updateadmin/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const { isAdmin } = req.body
+    try {
+        await functions.updateAdmin(id, isAdmin)
+        res.status(200).send(`The user is now ${isAdmin === false ? "noAdmin" : "Admin"}`)
+    } catch (error) {
+        console.log(error);
+        next (error)
+    }
+})
+
 
 // RUTA PARA PASAR UN USUARIO A PREMIUM
 users.put('/premium/:id', async (req, res, next) => {
@@ -287,7 +300,7 @@ users.put('/premium/:id', async (req, res, next) => {
     const { isPremium } = req.body
     try {
         await functions.updatePremium(id, isPremium)
-        res.status(200).send(`The user is now premium`)
+        res.status(200).send(`The user is now ${isPremium === false ? "noPremium" : "Premium"}`)
     } catch (error) {
         console.log(error);
         next (error)

@@ -61,7 +61,6 @@ const Profile = () => {
         })
         .then(res => {
           setUserLocalStorage(res.data)   
-          console.log("tiene que estas las fechas: ",res.data)
           window.location.reload()
           axios.get(`/mails/bienvenido/premium?name=${currentUser.name}&mail=${currentUser.mail}`)
         })
