@@ -83,6 +83,7 @@ const getAllClaimsBySubject = async ( subject ) =>{
 }
 
 
+
 module.exports = {
     postClaims,
     getAllClaimsByProfessional,
