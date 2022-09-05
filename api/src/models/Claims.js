@@ -22,7 +22,8 @@ module.exports = (sequelize) => {
         },
         subject: {
             type: DataTypes.ENUM({
-                values: ["jobs", "report", "recoverAccount", "otherSubject"]
+                values: ['jobs', 'report', 'recoverAccount', 'otherSubject'],
+                allowNull: false,
             })
         },
         date_created:{

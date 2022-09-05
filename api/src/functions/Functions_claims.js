@@ -68,9 +68,24 @@ const getAllClaimsByClient = async ( id ) =>{
     
 }
 
+const getAllClaimsBySubject = async ( subject ) =>{
+    try {
+        const claimsBySubject = await Claims.findAll({
+            where:{
+                subject,
+            }
+        })
+        return claimsBySubject
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 module.exports = {
     postClaims,
     getAllClaimsByProfessional,
     getAllClaimsByClient,
+    getAllClaimsBySubject,
 }
