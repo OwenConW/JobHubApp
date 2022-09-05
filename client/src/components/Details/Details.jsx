@@ -57,6 +57,7 @@ const Profile = () => {
     }
   }
 
+  
 
   return (
     <>
@@ -99,7 +100,18 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-                professional.reviews && professional.reviews.map(review => {
+                console.log("ACAAAAAAAAAAAAAA:", professional) // "rating"
+              }
+              {
+                professional?.reviews?.slice().sort((x, y) => {  
+                  if(x.rating > y.rating){
+                      return -1 
+                  }
+                  if(x.rating < y.rating){
+                      return 1;
+                  }
+                  return 0
+                }).slice(0, 4).map(review => {
                   let reviewer = allUsers.find(user => user.id === review.id_user_client)
                   return (
                   <CardReview dataObj={review} reviewer={reviewer} key={review.id_orders}/>
