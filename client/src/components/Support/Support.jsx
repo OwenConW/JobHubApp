@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { getLocalStorage } from '../../handlers/localStorage';
@@ -35,17 +35,21 @@ const Support = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const userIDreported = navigate().location.state || "";
+  const location = useLocation();
+  var userIDreported = "";
+  if (location.state) {
+    userIDreported = location.state.id;
+  }
   const [errors, setError] = useState({})
-  const id = getLocalStorage().id;
+  const userID = getLocalStorage().id;
   const name = getLocalStorage().name;
   const last_name = getLocalStorage().last_name;
   const [msgSupport, setMsgSupport] = useStateWithCallbackLazy({
-    userID: id ? id :  "000",
+    userID: userID ? userID :  "000",
     name: name ? name : "",
     last_Name: last_name ? last_name : "",
-    // userIDreported: userIDreported && userIDreported.id || "",
-    subject: "",
+    userIDreported: userIDreported,
+    subject: location.state ? asuntos2[1] : "",
     description: ""
   })
 
@@ -82,8 +86,8 @@ const Support = () => {
         userID: "",
         name: "",
         last_Name: "",
-        // userIDreported: "",                          
-        subject: [],
+        userIDreported: "",                          
+        subject: "",
         description: ""
       })
       navigate("../home", { replace: true });
@@ -103,9 +107,13 @@ const Support = () => {
               <h2 id={s.select}>Selecciona el asunto de tu problema:</h2>
               <select className={s.subjects} value={msgSupport.subject} onChange={(e) => handleSelect(e)}>
                 <option hidden selected value='vacio'>Elige un asunto...</option>
-                {asuntos?.map( a => {
+                {location.state ? asuntos2.map( a => {
                   return (<option key={a} value={a}>{a}</option>)
-                })}
+                }) 
+                : asuntos.map( a => {
+                  return (<option key={a} value={a}>{a}</option>)
+                }) 
+                }
               </select>
               {errors.subject && <p className={s.err}>{errors.subject}</p>}
             </div>
