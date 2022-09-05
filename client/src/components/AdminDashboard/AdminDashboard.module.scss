@@ -1,0 +1,78 @@
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $white-color;
+
+  .title {
+    justify-self: flex-start;
+    align-self: flex-start;
+    margin-left: 18px;
+    font-size: 3.8rem;
+    font-weight: 500;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.212);
+  }
+  
+  .menuAndDisplayContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+  
+    .menuContainer {
+      align-self: center;
+      height: 90%;
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-right: solid 1px rgba(0, 0, 0, 0.212);
+      gap: 10px;
+        button {
+          width: 80%;
+          height: 30px;
+          font-size: 1.8rem;
+          font-family: Poppins, sans-serif;
+          font-weight: 300;
+          border-radius: 5px;
+          box-shadow: 14px 19px 31px -3px rgba(0,0,0,0.1);
+          color: $white-color;
+          background-color: $green-color;
+          transition: 0.3s;
+            &:hover {
+              background-color: $white-color;
+              color: $green-color;
+              scale: 1.05;
+              transition: 0.3s;
+              cursor: pointer;
+            }
+        }
+        .selected {
+          background-color: $white-color;
+          color: $green-color;
+          scale: 1.05;
+          transition: 0.3s;
+          cursor: pointer;
+        }
+    }
+  
+    .searchByNameAndUsersContainer {
+      width: 80%;
+      form {
+        display: flex;
+        gap: 10px;
+        label {
+          font-size: 1.5rem;
+        }
+      }
+        
+    }
+  }
+}

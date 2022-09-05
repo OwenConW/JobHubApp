@@ -56,6 +56,7 @@ const MapView = () => {
 			&& activeUser?.id !== user.id);
 			setCloseUsers([...aux])}
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [users, distance]);
 
 	const handleSubmit = async (e) => {
@@ -115,6 +116,7 @@ const MapView = () => {
 						{search.searchUsers.length ? (
 						<>
 						<h3>Busqueda</h3>
+						<div className={s.professionalsContainer}>
 						{search.searchUsers.map(user => {
 							return(
 								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
@@ -129,6 +131,7 @@ const MapView = () => {
 								</Link>
 							)
 						})}
+						</div>
 						</>) : (
 						<>
 						<h3>Profesionales cercanos</h3>
@@ -142,6 +145,7 @@ const MapView = () => {
 								<option value="15">15 Km</option>
 							</select>
 						</div>
+						<div className={s.professionalsContainer}>
 						{closeUsers.length ? closeUsers.map(user => {
 							return(
 								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
@@ -156,6 +160,7 @@ const MapView = () => {
 								</Link>
 							)
 						}) : 'No hay profesionales cercanos a tí.'}
+						</div>
 						</>
 						)}
 					</div>

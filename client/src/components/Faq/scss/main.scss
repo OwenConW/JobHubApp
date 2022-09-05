@@ -1,6 +1,7 @@
 @import "config";
 
 .container {
+  animation: init 0.3s;
   width: 100%;
   height: 100%;
   background-image: url(../assets/background.svg);
@@ -17,6 +18,17 @@
 
 .font-weight-bold {
   font-weight: 700;
+}
+
+@keyframes init {
+  0%{
+    opacity: 0;
+    transform: translateY(5vh);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @import "component";

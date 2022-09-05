@@ -3,11 +3,13 @@ import s from './Opinions.module.scss'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocalStorage } from "../../../../handlers/localStorage";
+// eslint-disable-next-line no-unused-vars
 import { getChars, getCharsById } from "../../../../redux/userActions";
 import OpinionCard from "./OpinionCard/OpinionCard";
 import { useState } from "react";
 
 const Opinions = () => {
+  // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch()
   let activeUser = getLocalStorage()
 
@@ -35,7 +37,7 @@ const Opinions = () => {
       filteredProfessionals = users.filter(prof => prof.name.toLowerCase().includes(filter.toLowerCase()) || prof.last_Name.toLowerCase().includes(filter.toLowerCase()))
       for (let x = 0; x < filteredProfessionals.length; x++) {
         let filteredProfessional = filteredProfessionals[x];
-        let reviewsForFilteredProfessional = myReviews.filter(review => review.id_user_professional == filteredProfessional.id);
+        let reviewsForFilteredProfessional = myReviews.filter(review => review.id_user_professional === filteredProfessional.id);
         reviewsForFilteredProfessional.forEach(review => filteredReviews.push(review))
       }
       setAllReviews(filteredReviews)
@@ -50,18 +52,19 @@ const Opinions = () => {
 
   useEffect(() => {
     filterByName(filter)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter])
 
 
   return (
     <div className={s.container}>
-      <label>Filtrar</label>
-      <input name="filter" value={filter} onChange={event => onFilterChange(event)}></input>
+      
+      <input name="filter" value={filter} placeholder="Busqueda por nombre..." className={s.filter} onChange={event => onFilterChange(event)}></input>
       {
         allReviews.length ? allReviews.map(review =>
           <OpinionCard review={review} users={users} key={review?.id}/>
 
-        ) : <p>No se encontraron reseñas</p>
+        ) : <p className={s.voidOpinions}>No se encontraron reseñas</p>
       }
 
     </div>

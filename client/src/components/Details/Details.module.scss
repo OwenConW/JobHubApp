@@ -1,4 +1,5 @@
 .container {
+  animation: init 0.3s;
   height: 90%;
   width: 100%;
   display: flex;
@@ -28,7 +29,7 @@
         justify-content: space-around;
         align-items: center;
 
-        .btnCoordinate{
+        .btnCoordinate {
           transition: 0.5s;
           display: flex;
           justify-content: center;
@@ -38,13 +39,16 @@
           height: 20%;
           margin-top: 3%;
           background-color: rgba(105, 105, 105, 0.545);
+          background-color: #2C666E;
+          color: #D9D9D9;
           font-size: 1.8rem;
+          box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
 
-          &:hover{
+          &:hover {
             transition: 0.5s;
             cursor: pointer;
-            background-color: #2C666E;
-            color: #EEEEEE;
+            color: #2C666E;
+            background-color: #EEEEEE;
           }
         }
 
@@ -84,7 +88,7 @@
         justify-content: space-around;
         align-items: center;
 
-        .btnCoordinate{
+        .btnCoordinate {
           transition: 0.5s;
           display: flex;
           justify-content: center;
@@ -94,13 +98,15 @@
           height: 20%;
           margin-top: 3%;
           background-color: rgba(105, 105, 105, 0.545);
+          background-color: #2C666E;
+          color: #EEEEEE;
           font-size: 1.8rem;
 
-          &:hover{
+          &:hover {
             transition: 0.5s;
             cursor: pointer;
-            background-color: #2C666E;
-            color: #EEEEEE;
+            background-color: rgba(105, 105, 105, 0.545);
+            color: black;
           }
         }
 
@@ -149,7 +155,7 @@
           color: #000000;
         }
 
-        .namePremium{
+        .namePremium {
           display: flex;
           justify-content: flex-start;
           text-transform: capitalize;
@@ -159,11 +165,11 @@
           color: #000000;
         }
 
-        .corona{
+        .corona {
           width: 50px;
           height: 50px;
           margin-right: 5px;
-        
+
         }
 
         .location {
@@ -278,8 +284,29 @@
       color: #000000;
     }
 
-    
+  }
 
+  .professionContainerPremium{
+    height: 25%;
+    width: 90%;
+    
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    align-content: space-around;
+    // justify-content: space-evenly;
+    border-radius: 10px;
+    background: #D9D9D9;
+
+    .professionText {
+
+      font-weight: 300;
+      margin-top: 2%;
+      margin-left: 4.9%;
+      font-size: 3.2rem;
+      line-height: 5.4rem;
+      color: #000000;
+    }
   }
 
   .moreReviews {
@@ -309,11 +336,276 @@
 
     }
 
-    .OtherReviews{
+    .OtherReviews {
       width: 95%;
       height: 80%;
       margin-left: 2.5%;
       display: flex;
     }
+  }
+  .moreImages{
+    height: 55%;
+    margin-bottom: 15.4%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border-radius: 10px;
+    background: #D9D9D9;
+    box-shadow: 0px 0px 6px 4px #FFF780;
+    .premiumText {
+      width: 90%;
+      height: 20%;
+      text-align: center;
+
+      h1 {
+        font-weight: 300;
+        margin-top: 4%;
+        margin-left: 12%;
+        margin-bottom: 2%;
+        font-size: 3.2rem;
+        line-height: 3.0rem;
+        color: #000000;
+      }
+
+    }
+
+    .OtherReviews {
+      width: 95%;
+      height: 80%;
+      margin-left: 2.5%;
+      display: flex;
+    }
+  }
+
+  .poorMoreReviews {
+    height: 35%;
+    margin-bottom: 15.4%;
+    width: 90%;
+    display: none;
+    flex-direction: column;
+    align-content: center;
+    border-radius: 10px;
+    background: #D9D9D9;
+
+    .premiumText {
+      width: 80%;
+      height: 20%;
+
+
+      h1 {
+        font-weight: 300;
+        margin-top: 4%;
+        margin-left: 12%;
+        margin-bottom: 2%;
+        font-size: 3.2rem;
+        line-height: 3.0rem;
+        color: #000000;
+      }
+
+    }
+
+    .OtherReviews {
+      width: 95%;
+      height: 80%;
+      margin-left: 2.5%;
+      display: flex;
+    }
+  }
+}
+
+
+
+@media screen and (max-width: 1100px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+
+    .leftContainer {
+      width: 80%;
+      min-height: 65vh;
+      margin-right: 0;
+      height: auto;
+
+      .profileInfo {
+        height: 40%;
+        width: 100%;
+        margin-bottom: 3%;
+
+        .profileDetail {
+          width: 70%;
+
+          .name {
+            text-transform: capitalize;
+            font-size: 4.4rem;
+            line-height: 5rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            color: #000000;
+          }
+
+          .corona {
+            width: 50px;
+            height: 50px;
+            margin-right: 8px;
+          }
+
+          .description {
+            font-weight: 280;
+            font-size: 2rem;
+          }
+        }
+
+        .profile_Img_container {
+          min-width: 45%;
+          height: 100%;
+
+          .btnCoordinate {
+            width: 70%;
+            height: 25%;
+            font-size: 2.5rem;
+            margin-bottom: 5%;
+            margin-top: 5%;
+          }
+
+
+          .profile_Img {
+            width: 55%;
+            height: 55%;
+          }
+        }
+
+        .profile_Img_containerPremium {
+          min-width: 45%;
+          height: 100%;
+
+          .btnCoordinate {
+            width: 70%;
+            height: 25%;
+            font-size: 2.5rem;
+            margin-bottom: 5%;
+            margin-top: 5%;
+          }
+
+          .profile_ImgPremium {
+            width: 55%;
+            height: 55%;
+          }
+        }
+      }
+
+
+
+
+      .orderBox {
+        display: flex;
+        height: 60%;
+        width: 100%;
+
+        .lastOrders {
+          // flex-direction: column;
+          height: 85%;
+          justify-content: space-evenly;
+          overflow-y: auto;
+        }
+
+      }
+
+      .configBox {
+        display: none;
+      }
+    }
+
+    .rightContainer {
+      margin-top: 5%;
+      width: 80%;
+      min-height: 75vh;
+
+      .professionContainer {
+        width: 100%;
+
+        .noProfessional {
+          height: 80%;
+          width: 80%;
+          margin-left: 10%;
+          display: flex;
+          justify-content: center;
+          font-size: 3.8rem;
+
+          .intNoProf {
+            height: 30%;
+            width: 95%;
+          }
+        }
+      }
+
+      .isPremiumTRUE {
+        height: 20vh;
+        width: 100%;
+
+        h1 {
+          font-weight: 300;
+          margin-top: 2%;
+          margin-left: 6%;
+          font-size: 4rem;
+          line-height: 5.4rem;
+        }
+
+        .premiumDetailTRUE {
+          h4 {
+            font-size: 1.8rem;
+          }
+        }
+      }
+
+      .moreReviews {
+        height: 35%;
+        margin-bottom: 15.4%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        border-radius: 10px;
+        background: #D9D9D9;
+    
+        .premiumText {
+          width: 80%;
+          height: 20%;
+    
+    
+          h1 {
+            font-weight: 300;
+            margin-top: 4%;
+            margin-left: 12%;
+            margin-bottom: 2%;
+            font-size: 3.2rem;
+            line-height: 3.0rem;
+            color: #000000;
+          }
+    
+        }
+    
+        .OtherReviews {
+          width: 95%;
+          height: 80%;
+          margin-left: 2.5%;
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+@keyframes init {
+  0%{
+      opacity: 0;
+    transform: translateY(5vh);
+  }
+  100%{
+      opacity: 1;
+    transform: translateY(0);
+
   }
 }

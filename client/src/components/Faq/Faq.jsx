@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -11,7 +12,7 @@ const Faq = () => {
 
   return (
     <>
-      {isAuthenticated && <Navbar />}
+    <Navbar />
       <div className="container">
         <div className="component">
           <Accordion />

@@ -4,6 +4,8 @@ import ProfessionConfig from './ProfessionConfig/ProffessionConfig';
 import Orders from './Orders/Orders';
 import Opinions from './Opinions/Opinions'
 import OtherReviews from "./ReviewsAboutMe/OtherReviews";
+import Images from "./Images/Images"
+import Premium from "./Premium/Premium"
 
 import { getLocalStorage } from '../../../handlers/localStorage.js';
 
@@ -48,12 +50,18 @@ const ConfigPages = (configPage) => {
     }
 
 
-    // if (option === 'premium') {
-    //     return (
-    //         <Edit/>
-    //         )
-    // }
+    if (option === 'premium') {
+        return (
+            <Premium/>
+            )
+    }
 
+
+    if (option === "images"){
+        return (
+            <Images/>
+        )
+    }
 
     if (option === 'otherReviews') {
         return (

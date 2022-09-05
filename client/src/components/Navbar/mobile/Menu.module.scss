@@ -69,7 +69,7 @@
             img{
                 border-radius: 5px;
                 width: 40%;
-                height: 50%;
+                height: 80%;
             }
         }
         }
@@ -101,7 +101,7 @@
             object-fit: cover;
 
             img{
-                width: 60%;
+                width: 30%;
                 height: 70%;
                 border: 5px solid #c9c9c997;
                 border-radius: 50%;
@@ -115,8 +115,8 @@
         }
         .profileimgPremium{
             transition: 0.5s;
-            width: 15%;
-            height: 40%;
+            width: 25%;
+            height: 30%;
             margin-left: 5%;
             border-radius: 50%;
             border: 2px solid #fdc644;
@@ -125,8 +125,8 @@
             object-fit: cover;
 
             img{
-                width: 100%;
-                height: 100%;
+                width: 30%;
+                height: 70%;
                 border-radius: 50%;
                 object-fit: cover
             }
@@ -163,4 +163,32 @@
         }
     }
   }
+}
+
+
+@media screen and (max-width: 550px) {
+    .container{
+        .profileUser{
+            .user{
+                .profile{
+                    .link{
+                        img{
+                            width: 60%;
+                        }
+                    }
+                }
+
+                .profileimg{
+                    img{
+                        width: 50%;
+                    }
+                }
+                .profileimgPremium{
+                    img{
+                        width: 50%;
+                    }
+                }
+            }
+        }
+    }
 }

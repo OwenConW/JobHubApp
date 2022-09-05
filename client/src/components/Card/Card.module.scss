@@ -103,9 +103,13 @@
                     height: 100%;
 
                     h3{
+                        width: 100%;
                         font-size: 3.0rem;
                         font-weight: 300;
                         color: #F0EDEE;
+                        overflow:hidden;
+                        white-space:nowrap;
+                        text-overflow: ellipsis;
                     }
 
                     p{
@@ -211,4 +215,36 @@
     }
 
 
+}
+
+@media screen and (max-width: 900px){
+	.card{
+        min-height: 35%;
+        min-width: 65%;
+	}
+}
+
+@media screen and (max-width: 650px){
+	.card{
+        min-height: 35%;
+        min-width: 85%;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.card{
+        min-height: 35%;
+        min-width: 90%;
+        .data{
+            .info{
+                .user{
+                    .userinfo{
+                        h3{
+                            font-size: 2.2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

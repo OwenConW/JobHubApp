@@ -20,6 +20,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "hamburger-react": "^2.5.0",
+    "force": "^0.0.3",
     "mercadopago": "^1.5.14",
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.8",
@@ -30,8 +32,9 @@
     "supertest-as-promised": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/helper-compilation-targets": "^7.18.9",
     "chai": "^4.2.0",
-    "mocha": "^8.2.1",
+    "mocha": "^10.0.0",
     "supertest": "^6.0.1",
     "supertest-session": "^4.1.0"
   }

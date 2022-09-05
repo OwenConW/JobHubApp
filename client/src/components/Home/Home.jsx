@@ -28,6 +28,7 @@ const Home = () => {
 
 
   const { isAuthenticated } = useAuth0();
+  // eslint-disable-next-line no-unused-vars
   const br = <br></br>;
   
   // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
@@ -37,6 +38,21 @@ const Home = () => {
     <>
       <Navbar />
       <div className={s.container}>
+      <div className={s.maptop}>
+          <h1 className={s.titlemapa}>Utiliza nuestro sistema de búsqueda por ubicación</h1>
+          {isAuthenticated ?
+            <Link to='/map' className={s.link}>
+              <div className={s.button}>
+					      <p>Buscar</p>
+				      </div>
+            </Link>
+          : <Link to='/' className={s.link}> 
+              <div className={s.button}>
+					      <p>Iniciar Sesión</p>
+				      </div>
+            </Link>
+          }
+        </div>
         <aside className={s.aside}>
           <div className={s.presentation}>
             <h1 className={s.title}>El buen servicio de un profesional está a tu alcance!</h1>
@@ -44,7 +60,7 @@ const Home = () => {
             <h3 className={s.text}>L@s mejores trabajador@s te están esperando! búscalos cerca de tu área o por catálogo, contactá, acordá a un acuerdo, fecha, pago y listo.</h3>
          </div>
           <div className={s.destacados}>
-            <h1 className={s.subtitle}>Trabajadores destacados de la semana</h1>
+            <h1 className={s.subtitle}>¡Trabajadores destacados de la semana!</h1>
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
             <div className={s.cards}>
               {/* {console.log("mejores",bestProffesionals)} */}

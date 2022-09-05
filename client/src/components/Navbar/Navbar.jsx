@@ -50,6 +50,15 @@ const Navbar = () => {
 				<Link to="/faq" className={s.link}>
 					Faq
 				</Link>
+				{
+					activeUser?.isAdmin ? (
+						<Link to="/adminDashboard" className={s.link}>
+							Administrador
+						</Link>
+					) : (
+						<></>
+					)
+				}
 			</div>
 
 			<div className={s.logo}>
@@ -69,11 +78,11 @@ const Navbar = () => {
 						{
 							activeUser.isPremium ?
 							<Link to={'/profile'} className={s.profileimgPremium}>
-							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image !== 'noimage' ?  <img src={activeUser.image} alt=""/> : <img src={defaultimage} alt=""/>}
 							</Link>
 							:
 							<Link to={'/profile'} className={s.profileimg}>
-							{activeUser.image ?  <img src={activeUser.image}/> : <img src={defaultimage}/>}
+							{activeUser.image !== 'noimage' ?  <img src={activeUser.image} alt=""/> : <img src={defaultimage} alt=""/>}
 							</Link>
 						}
 

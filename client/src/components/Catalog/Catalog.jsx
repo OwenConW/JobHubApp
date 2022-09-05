@@ -8,6 +8,7 @@ import Filter from './Filter/Filter';
 import estilos from './Catalog.module.scss';
 import Card from '../Card/Card';
 import Navbar from '../Navbar/Navbar';
+import SliderComponent from './slider/Slider';
 
 const theme = createTheme({
 	palette: {
@@ -30,6 +31,7 @@ const Catalog = (props) => {
 	let professionalsArray = useSelector(
 		(state) => state.users.filteredProfessionals
 	);
+	const [asideActive, setAsideActive] = useState(false);
     const [activePages, setActivePages] = useState(0)
 	const [currentPage, setCurrentPage] = useState(1)
     const iOfLastProfessional = currentPage * 6
@@ -81,6 +83,7 @@ const Catalog = (props) => {
 	    dispatch(getChars())
 		setActivePages(setPages)
 		setCurrentPage(1)
+		setAsideActive(false);
 	    setNameInputValue('')
     }
 
@@ -89,6 +92,7 @@ const Catalog = (props) => {
 	    dispatch(filterProfessionals({...filters}))
 	    setActivePages(setPages)
 		setCurrentPage(1)
+		setAsideActive(false);
 	    e.target.reset()
     }
 
@@ -101,7 +105,10 @@ const Catalog = (props) => {
 		<>
 			<Navbar />
 			<div className={estilos.container}>
-				<aside className={estilos.aside}>
+				<aside className={asideActive ? estilos.aside : estilos.asideInactive}>
+						{asideActive ? <h2 onClick={() => {
+							asideActive ? setAsideActive(false) : setAsideActive(true);
+						}}>x</h2> : ''}
 						<form onSubmit={handleSubmit} className={estilos.filtersFormMainContainer}>
 							<h1>Filtrar</h1>
 							<SearchBar addFilterValue={addFilterValue} handleReset={handleReset} valueState={nameInputValue}/>
@@ -120,10 +127,13 @@ const Catalog = (props) => {
 						</form>
 					</aside>
 				<div className={estilos.professionals}>
-					<header className={estilos.header}>
-						<span>Catálogo de profesionales</span>
-					</header>
+					<div className={estilos.slider}>
+						<SliderComponent />
+					</div>
 					<div className={estilos.paginate}>
+						<h3 className={asideActive ? estilos.activefilter : ''} onClick={() => {
+							asideActive ? setAsideActive(false) : setAsideActive(true);
+						}}>Filtros</h3>
 					    <ThemeProvider theme={theme}>
                             <Pagination 
 							    count={activePages} 

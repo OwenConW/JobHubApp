@@ -24,6 +24,7 @@ const OrdersClient = ({order, activeUser, setCli, clientOrders}) => {
         }
 
         fetchProf();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleReview = () =>{

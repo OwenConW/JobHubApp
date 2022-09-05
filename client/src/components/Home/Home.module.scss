@@ -1,7 +1,12 @@
 .container {
+    animation: init 0.8s;
     width: 100%;
 	height: 90%;
     display: flex;
+
+    .maptop{
+        display: none;
+    }
 
     .aside{
         width: 60%;
@@ -51,7 +56,7 @@
             .subtitle{
                 padding-bottom: 2%;
                 font-weight: 300;
-                font-size: 2.5rem;
+                font-size: 3.5rem;
             }
 
             .cards {
@@ -156,15 +161,62 @@
 
 @media screen and (max-width: 1200px) {
     .container{
-        flex-direction: column-reverse;
+        flex-direction: column;
         overflow-y: scroll;
 
         .aside{
             width: 100%;
         }
 
-        .container2{
+        .maptop{
+            background-image: url(assets/mapa_fondo.svg);
             width: 100%;
+            min-height: 100%;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .link{
+                text-decoration: none;
+            }
+
+            .titlemapa{
+                margin-left: 16%;
+                margin-bottom: 15%;
+                font-weight: 400;
+                font-size: 6rem;
+                text-decoration: wavy;
+                text-transform: capitalize;
+                text-shadow: 0 0 3px rgb(51, 108, 114), 0 0 3px rgb(53, 102, 119), 0 0 8px rgb(103, 233, 201);
+            }
+
+            .button{
+                transition: 0.5s;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 220px;
+                height: 46px;
+                border-radius: 5px;
+                background-color: #2c666e;
+                color: #eeeeee;
+                box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.7);
+
+                p {
+                    font-size: 2rem;
+                    text-decoration: none;
+                }
+
+                &:hover {
+                    transition: 0.5s;
+                    scale: 1.02;
+                    cursor: pointer;
+                    color: #2c666e;
+                    background-color: #d1d1d1;
+                }
+            }
 
             .titlemapa{
                 text-align: center;
@@ -176,12 +228,15 @@
                 width: 90%;
             }
         }
+
+        .container2{
+            display: none;
+        }
     }
 }
 
 @media screen and (max-width: 900px) {
     .container{
-        flex-direction: column-reverse;
         min-height: 100%;
         overflow-y: scroll;
 
@@ -211,7 +266,7 @@
             }
         }
 
-        .container2{
+        .maptop{
 
             .titlemapa{
                 font-size: 3.8rem;
@@ -219,3 +274,14 @@
         }
     }
 }
+
+@keyframes init {
+    0%{
+        opacity: 0;
+      transform: translateY(5vh);
+    }
+    100%{
+        opacity: 1;
+      transform: translateY(0);
+    }
+  }
