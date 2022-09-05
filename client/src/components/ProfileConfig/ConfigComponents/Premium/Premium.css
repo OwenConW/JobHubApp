@@ -28,6 +28,8 @@
     flex-direction: column;
     justify-content: space-between;
     margin-top: 0px;
+    margin-bottom: -5%;
+    margin-left: -2%;
 }
 
 .ulBeneficios{
