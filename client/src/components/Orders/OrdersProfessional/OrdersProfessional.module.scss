@@ -611,10 +611,12 @@
                     color: #b7b7b7;
                     border-radius: 10px;
                     font-weight: 500;
+                    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
 
                     &:hover{
                         cursor: pointer;
                         transition: 0.3s;
+                        border: 1px solid #1c464c;
                         background-color: #EEEEEE;
                         color: #0e2427;
                         border-radius: 5px;

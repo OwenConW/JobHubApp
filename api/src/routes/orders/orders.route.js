@@ -89,6 +89,19 @@ orders.get("/client/:id", async (req, res, next)=>{
         next(error)
     }
 })
+// RUTA PARA ELIMINAR ORDENES
+orders.delete("/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try {
+        await Orders.destroy({
+            where: {id:id}
+        })
+        res.status(200).send("the Order was successfully deleted")
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
 
 
 module.exports = orders;
