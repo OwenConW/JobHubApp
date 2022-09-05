@@ -333,6 +333,23 @@ const updatePremium = async(id, isPremium) => {
     }
 }
 
+// UPDATE ISADMIN
+const updateAdmin = async(id, isAdmin) => {
+    try {
+        await User.update({
+            isAdmin,
+        },{
+            where:{
+                id,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+
 //UPDATE ISACTIVE
 const destroyUser = async(id, isActive) => {
     try {
@@ -412,6 +429,7 @@ module.exports = {
     getProffesionalById,
     getAllJobs,
     updateRating,
+    updateAdmin,
     updatePremium,
     destroyUser,
     updateUserNoJobs,
