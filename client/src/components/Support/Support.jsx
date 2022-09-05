@@ -71,7 +71,7 @@ const Support = () => {
     }
   }  
   
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     if(msgSupport.subject === "" || msgSupport.description === "") {
       setError(                          
         validate({
@@ -81,16 +81,29 @@ const Support = () => {
       )
     } else {
       e.preventDefault()
-      alert('Gracias, hemos recibido su problema!')
-      setMsgSupport({
-        userID: "",
-        name: "",
-        last_Name: "",
-        userIDreported: "",                          
-        subject: "",
-        description: ""
-      })
-      navigate("../home", { replace: true });
+      try{
+        let body = {
+          userID: msgSupport.userID,
+          name: msgSupport.name,
+          last_Name: msgSupport.last_Name,
+          userIDreported: msgSupport.userIDreported,                          
+          subject: msgSupport.subject,
+          feedback_claims: msgSupport.description
+        }
+        await axios.post('/claims', body);
+        alert('Gracias, hemos recibido su problema!')
+        setMsgSupport({
+          userID: "",
+          name: "",
+          last_Name: "",
+          userIDreported: "",                          
+          subject: "",
+          description: ""
+        })
+        location.state ? navigate(`../details/${msgSupport.userIDreported}`, { replace: true }) : navigate("../home", { replace: true });
+      }catch(e){
+        console.log(e);
+      }
     }  
     e.preventDefault()
   }
