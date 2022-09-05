@@ -33,6 +33,7 @@ function ReviewEditModal(props) {
       alert('Error al modificar la reseña')
     }
     dispatch(actionFetchingAdminEditReviewReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[fetchingAdminEditReviewSuccess, fetchingAdminEditReviewFailure])
 
   return (

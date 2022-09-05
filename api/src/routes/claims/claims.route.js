@@ -5,26 +5,12 @@ const { User, Claims, Profession} = require("../../db.js")
 
 const claims = Router()
 
-// RUTA QUE CREA DENUNCIAS
-claims.post("/:id", async (req, res, next) =>{
-    const { id_user_client, feedback_claims  } = req.body;
-    const { id } = req.params;
-    try {
-        const responseClaims = await functions.postClaims( id, id_user_client, feedback_claims)
-        console.log('ESTA ES LA RESPUESTA DE LA FUNCION CLAIMS',responseClaims)
-        res.status(201).send(responseClaims)
-    } catch (error) {
-        console.log(error)
-        next(error)
-    }
-})
 
 //RUTA PARA OBTENER TODAS LAS DENUNCIAS
 claims.get("/", async (req, res, next)=>{
     try {
         const allClaims = await Claims.findAll()
         res.status(200).json(allClaims)
-    
     } catch (error) {
         console.log(error)
         next(error)
@@ -37,7 +23,6 @@ claims.get("/:id", async (req, res, next)=>{
     try {
         const allClaimsProfessional = await functions.getAllClaimsByProfessional(id)
         res.status(200).json(allClaimsProfessional)
-    
     } catch (error) {
         console.log(error)
         next(error)
@@ -56,5 +41,17 @@ claims.get("/client/:id", async (req, res, next)=>{
     }
 })
 
+// RUTA QUE CREA DENUNCIAS
+claims.post("/:id", async (req, res, next) =>{
+    const { id_user_client, feedback_claims  } = req.body;
+    const { id } = req.params;
+    try {
+        const responseClaims = await functions.postClaims( id, id_user_client, feedback_claims)
+        res.status(201).send(responseClaims)
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
 
 module.exports = claims;

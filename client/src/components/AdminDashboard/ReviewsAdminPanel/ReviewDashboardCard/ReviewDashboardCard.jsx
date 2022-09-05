@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import ReviewEditModal from './ReviewEditModal/ReviewEditModal'
 import ReviewDeleteModal from './ReviewDeleteModal/ReviewDeleteModal'
-import { deleteReviews } from '../../../../redux/adminActions'
 import s from './ReviewDashboardCard.module.scss'
-import { useDispatch } from "react-redux";
 
 function ReviewDashboardCard(props) {
   const { id, id_orders, id_user_professional, id_user_client, feedback_client, rating, isActive } = props;

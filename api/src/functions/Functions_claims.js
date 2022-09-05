@@ -2,7 +2,6 @@ const { User, Claims, Profession } = require("../db")
 
 
 const postClaims = async ( id, id_user_client,  feedback_claims ) =>{
-
     try {
         if( id_user_client && feedback_claims ){
             const [newClaims, created] = await Claims.findOrCreate({
@@ -20,7 +19,6 @@ const postClaims = async ( id, id_user_client,  feedback_claims ) =>{
             let idFind = await User.findByPk(id)
             await newClaims.addUser(idFind)
 
-
             if(!created)  return "The Claims cannot be created, the Claims has already exist";
             return "The Claims  created successfully";
         } return "Missing data";
@@ -29,6 +27,7 @@ const postClaims = async ( id, id_user_client,  feedback_claims ) =>{
         throw error
     }
 }
+
 const getAllClaimsByProfessional = async ( id ) =>{
     try {
         const claimsById = await User.findByPk(id,{

@@ -56,6 +56,7 @@ const MapView = () => {
 			&& activeUser?.id !== user.id);
 			setCloseUsers([...aux])}
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [users, distance]);
 
 	const handleSubmit = async (e) => {

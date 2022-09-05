@@ -20,6 +20,7 @@ export default function Conversation({conversations, currentUser, online}){
             }
         }
         getUser()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const onlineOrNo = online?.find(o => o.userId === user?.id)

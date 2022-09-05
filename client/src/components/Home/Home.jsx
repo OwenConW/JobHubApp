@@ -28,6 +28,7 @@ const Home = () => {
 
 
   const { isAuthenticated } = useAuth0();
+  // eslint-disable-next-line no-unused-vars
   const br = <br></br>;
   
   // GET A LOS MEJORES TRABAJADORES DESTACADOS DE LA SEMANA::::::
@@ -59,7 +60,7 @@ const Home = () => {
             <h3 className={s.text}>L@s mejores trabajador@s te están esperando! búscalos cerca de tu área o por catálogo, contactá, acordá a un acuerdo, fecha, pago y listo.</h3>
          </div>
           <div className={s.destacados}>
-            <h1 className={s.subtitle}>Trabajadores destacados de la semana</h1>
+            <h1 className={s.subtitle}>¡Trabajadores destacados de la semana!</h1>
             {/* {Aqui van las 3 cards de los destacados!!!!} */}
             <div className={s.cards}>
               {/* {console.log("mejores",bestProffesionals)} */}

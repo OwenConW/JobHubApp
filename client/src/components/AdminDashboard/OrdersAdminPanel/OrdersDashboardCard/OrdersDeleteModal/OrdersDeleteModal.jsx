@@ -18,6 +18,7 @@ export default function OrdersDeleteModal(props) {
     if(fetchingAdminDeleteOrderSuccess) {
       handleDeleteOpenModal();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminDeleteOrderSuccess])
   
  return (

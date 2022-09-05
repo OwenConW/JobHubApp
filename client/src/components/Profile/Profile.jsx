@@ -61,7 +61,6 @@ const Profile = () => {
         })
         .then(res => {
           setUserLocalStorage(res.data)   
-          console.log("tiene que estas las fechas: ",res.data)
           window.location.reload()
           axios.get(`/mails/bienvenido/premium?name=${currentUser.name}&mail=${currentUser.mail}`)
         })
@@ -81,6 +80,7 @@ const Profile = () => {
     dispatch(getChars())
     dispatch(getCharsById(myUser.id))
     dispatch(actionGetAllOrders(currentUser.id))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handlePremiumModal = async () => {
@@ -133,7 +133,7 @@ const Profile = () => {
           <div className={s.configBox}>
             <div className={s.configImg}>
               <Link to='/ProfileConfig/edit'>
-                <img src={configLogo} ></img>
+                <img src={configLogo} alt=""></img>
               </Link>
             </div>
             <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>

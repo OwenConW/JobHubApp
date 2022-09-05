@@ -18,6 +18,7 @@ export default function DeleteUserModal(props) {
     if(fetchingAdminDeleteUserSuccess) {
       handleDeleteOpenModal();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminDeleteUserSuccess])
   
 
