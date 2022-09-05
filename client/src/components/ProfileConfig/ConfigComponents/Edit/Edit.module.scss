@@ -6,14 +6,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     // justify-content: center;
     align-items: center;
     padding: 0;
     margin: 0;
 
     .innerContainer {
-        width: 65%;
+        width: 75%;
         height: 100%;
         margin-left: 35%;
         justify-content: flex-start;
@@ -23,14 +22,14 @@
         // border: solid red;
         margin: 1%;
         height: 8%;
-        width: 50%;
+        width: 60%;
         transition: 0.2s;
         display: flex;
         justify-content: space-between;
         align-items: center;
         color: black;
         text-decoration: none;
-        font-size: 1.0rem;
+        font-size: 1.7rem;
         margin-inline: 3%;
         .submit {
             transition: 0.5s;
@@ -83,7 +82,7 @@
 
         input {
             margin-left: 10px;
-            font-size: 1.4rem;
+            font-size: 1.7rem;
             // line-height: 3rem;
             padding: 8px;
             border-radius: 0.5rem;
@@ -137,7 +136,7 @@
         select {
             width: 51%;
             margin-left: 10px;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             // line-height: 3rem;
             padding: 8px;
             border-radius: 0.5rem;
@@ -153,7 +152,8 @@
 
     .descriptionDiv {
         // border: solid red;
-        margin: 3%;
+        // margin: 3%;
+        margin-bottom: 10px;
         height: 20%;
         transition: 0.2s;
         justify-content: center;
@@ -166,7 +166,7 @@
 
         display: flex;
         flex-direction: column;
-        width: 50%;
+        width: 60%;
 
         div {
             width: 80%;
@@ -199,7 +199,7 @@
 
     .submitButtons {
         width: 100%;
-        height: 5%;
+        height: 15%;
         display: flex;
         justify-content: space-evenly;
 
@@ -253,7 +253,6 @@
             }
         }
     }
-
 }
 
 @media screen and (max-width: 1100px) {

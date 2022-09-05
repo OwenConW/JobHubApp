@@ -17,6 +17,7 @@ function DeleteModal(props){
     if (fetchingAdminDeleteProfessionSuccess) {
       handleOpenDeleteModal();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[fetchingAdminDeleteProfessionSuccess])
 
   return (

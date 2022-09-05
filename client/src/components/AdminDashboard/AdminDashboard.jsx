@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { getAllUsersForAdmin, 
@@ -93,6 +94,7 @@ function AdminDashboard() {
       alert('Hubo un error al eliminar el usuario')
     }
     dispatch(actionFetchingAdminDeleteUserReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminDeleteUserSuccess, fetchingAdminDeleteUserFailure])
 
   //Alert RESTORE USER
@@ -103,6 +105,7 @@ function AdminDashboard() {
       alert('Hubo un error al restaurar el usuario')
     }
     dispatch(actionFetchingAdminRestoreUserReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminRestoreUserFailure, fetchingAdminRestoreUserSuccess])
   
   //Alert DELETE REVIEW
@@ -114,6 +117,7 @@ function AdminDashboard() {
     }
     dispatch(actionFetchingAdminDeleteReviewReset())
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminDeleteReviewSuccess,fetchingAdminDeleteReviewFailure])
    
   //Alert DELETE ORDER
@@ -124,6 +128,7 @@ function AdminDashboard() {
       alert('Hubo un error al eliminar la Orden')
     }
     dispatch(actionFetchingAdminDeleteOrderReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminDeleteOrderSuccess,fetchingAdminDeleteOrderFailure])
 
   //Alert create Profession
@@ -134,6 +139,7 @@ function AdminDashboard() {
       alert('Hubo un error al crear la profesion')
     }
     dispatch(actionFetchingAdminCreateProfessionReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminCreateProfessionSuccess,fetchingAdminCreateProfessionFailure])
 
   //Alert delete Profession
@@ -144,6 +150,7 @@ function AdminDashboard() {
       alert('Hubo un error al eliminar la profesion')
     }
     dispatch(actionFetchingAdminDeleteProfessionReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminDeleteProfessionSuccess,fetchingAdminDeleteProfessionFailure])
 
   return (

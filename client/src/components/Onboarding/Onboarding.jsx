@@ -22,6 +22,7 @@ const Onboarding = () => {
   const email = getLocalStorage().mail;
   const last_name = getLocalStorage().last_name;
   const name = getLocalStorage().name;
+  
   const navigate = useNavigate();
   const { logout } = useAuth0();
   
@@ -64,7 +65,7 @@ const Onboarding = () => {
   // });
 
 
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [isUpload, setIsUpload] = useState({
     done: '',
     loading: false,
@@ -73,23 +74,27 @@ const Onboarding = () => {
   const [errorDni, setErrorDni] = useState("");
 
   const handleUpload = async () => {
-    setIsUpload({
-      ...isUpload,
-      loading: true,
-    });
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("upload_preset", "jobhub");
-    const res = await axios.post("https://api.cloudinary.com/v1_1/jobhubapp/image/upload", formData);
-    const file = await res.data;
-    setIsUpload({
-      done:'Image upload!',
-      loading: false,
-    });
-    setUser({
-      ...user,
-      image: file.secure_url
-    })
+    if(!image){
+      return
+    }else{
+      setIsUpload({
+        ...isUpload,
+        loading: true,
+      });
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", "jobhub");
+      const res = await axios.post("https://api.cloudinary.com/v1_1/jobhubapp/image/upload", formData);
+      const file = await res.data;
+      setIsUpload({
+        done:'Image upload!',
+        loading: false,
+      });
+      setUser({
+        ...user,
+        image: file.secure_url
+      })
+    }
   }
 
 

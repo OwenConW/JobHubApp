@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {getAllReviewsForAdmin, getReviewByUserProfessionalIdForAdmin, getReviewByIdForAdmin, getReviewByUserClientIdForAdmin } from '../../../redux/adminActions'
 import ReviewDashboardCard from './ReviewDashboardCard/ReviewDashboardCard'

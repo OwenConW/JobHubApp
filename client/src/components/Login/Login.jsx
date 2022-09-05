@@ -20,7 +20,7 @@ const Login = () => {
 	const {user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 	const navigate = useNavigate();
 
-//console.log('ESTE OBJETO ES LO QUE LLEGA COMO USERS DE GOOGLE',user)
+console.log('ESTE OBJETO ES LO QUE LLEGA COMO USERS DE GOOGLE',user)
 //family_name, given_name, picture
 	const handleValidate = async (user, validate) => {
 		try{
@@ -31,12 +31,12 @@ const Login = () => {
 						setUserLocalStorage(response.data.user);
 						navigate("../home", { replace: true });
 					}else{
-						setUserLocalStorage(response.data.email)
+						setUserLocalStorage(response.data.user.mail)
 						navigate("../returnUser", { replace: true })
 					}
 
 				}else{
-					setUserLocalStorage({mail: user.email, name: user.given_name, last_name: user.family_name});
+					setUserLocalStorage({mail: user.email, name: user.given_name, last_name: user.family_name, image: user.picture});
 					navigate("../onboarding", { replace: true });
 				}
 			}

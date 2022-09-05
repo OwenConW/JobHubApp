@@ -55,13 +55,12 @@ const Profile = () => {
       })
       .then(() => {
         Swal.close(navigate("/profile"))
-        axios.put(`/subscription/${currentUser.id}`, {preapproval_id})
+        axios.put(`/users/subscription/${currentUser.id}`, {preapproval_id})
         .then(() => {
           return axios.get(`/users/${currentUser.id}`)
         })
         .then(res => {
           setUserLocalStorage(res.data)   
-          console.log("tiene que estas las fechas: ",res.data)
           window.location.reload()
           axios.get(`/mails/bienvenido/premium?name=${currentUser.name}&mail=${currentUser.mail}`)
         })
@@ -81,11 +80,8 @@ const Profile = () => {
     dispatch(getChars())
     dispatch(getCharsById(myUser.id))
     dispatch(actionGetAllOrders(currentUser.id))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
- 
-
-
 
   const handlePremiumModal = async () => {
   setModalActive(!modalActive)
@@ -113,7 +109,6 @@ const Profile = () => {
               </div>
               )
             }
-
             <div className={s.profileDetail}>
               {
                 activeUser?.isPremium ? <div className={s.name}><img src={corona} alt="" className={s.corona}/>{activeUser.name} {activeUser.last_Name}</div>
@@ -130,16 +125,15 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-
-               allOrders ?
-               allOrders.map(order => <CardProfileMap order={order}/>) : <></>
+                allOrders?.length ?
+                allOrders?.map(order => <CardProfileMap order={order}/>) : <></>
               }
             </div>
           </div>
           <div className={s.configBox}>
             <div className={s.configImg}>
               <Link to='/ProfileConfig/edit'>
-                <img src={configLogo} ></img>
+                <img src={configLogo} alt=""></img>
               </Link>
             </div>
             <Link to='/ProfileConfig/edit' className={s.configText}>Panel de configuración</Link>

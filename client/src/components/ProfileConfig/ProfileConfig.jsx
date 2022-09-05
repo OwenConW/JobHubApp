@@ -1,12 +1,11 @@
 import React from "react";
-import { Link, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import s from './ProfileConfig.module.scss';
 
 
 import Navbar from "../Navbar/Navbar";
 import { getLocalStorage } from "../../handlers/localStorage";
-import axios from "axios";
 import ConfigPages from "./ConfigComponents/ConfigPages";
 import { useDispatch } from "react-redux";
 import { getChars, getCharsById } from "../../redux/userActions";
@@ -27,6 +26,7 @@ const ProfileConfig = () => {
     dispatch(actionGetAllReviews())
     dispatch(actionGetAllJobs())
     dispatch(actionGetAllOrders(activeUser.id))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   
@@ -45,6 +45,7 @@ const ProfileConfig = () => {
   useEffect(() => {
     dispatch(getChars())
     dispatch(actionGetAllReviews())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [configPage])
 
 
@@ -74,7 +75,7 @@ const ProfileConfig = () => {
             </button>
 
             {
-              activeUser ? (
+              activeUser?.isProfessional && activeUser?.isPremium ? (
                 <button className={s.optionList} name='images' onClick={paginado}>
                 Mis Imagenes
               </button>
@@ -92,12 +93,12 @@ const ProfileConfig = () => {
                   Mis Reseñas
                 </button> : <></>
             }
-            {/* {
-              activeUser.isProfessional ?
+             {
+              activeUser ?
                 <button className={s.optionList} name='premium' onClick={paginado}>
                   Premium
                 </button> : <></>
-            } */}
+            } 
           </div>
           {/*----- CONTENEDOR DERECHO -----*/}
           <div className={s.rightContainer}>

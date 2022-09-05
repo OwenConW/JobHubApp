@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { Op } = require("sequelize");
 const functions = require("../../functions/Functions_review");
+const { searchRating } = require("../../functions/Functions_handlers.js")
 const { User, Review, Profession} = require("../../db.js")
 
 const review = Router()
@@ -10,7 +11,6 @@ review.get("/all", async (req, res, next)=>{
     try {
         const allReviews = await Review.findAll()
         res.status(200).json(allReviews)
-    
     } catch (error) {
         console.log(error)
         next(error)
@@ -20,33 +20,11 @@ review.get("/all", async (req, res, next)=>{
 
 // RUTA QUE CREA RESEÑAS
 review.post("/:id", async (req, res, next) =>{
-    let { id_orders, id_user_client ,feedback_client, rating  } = req.body;
-    //console.log('ESTE ES EL RATING QUE LLEGA A LA RUTA POR BODY',rating)
+    const { id_orders, id_user_client ,feedback_client, rating  } = req.body;
     const { id } = req.params;
-    id_user_client = parseInt(id_user_client)
     try {
-        if( id_orders && id_user_client && feedback_client && rating ){
-        const [newReview, created] = await Review.findOrCreate({
-            where:{
-                id_orders,
-            },
-            defaults:{
-                id_user_client,
-                id_user_professional: id,
-                feedback_client,
-                rating,
-            }
-        })
-        let idFind = await User.findByPk(id)
-        await newReview.addUser(idFind)
-        await functions.searchRating(id, rating);
-    
-
-        if(!created)  res.status(200).send(`The Review cannot be created, the Review has already exist`);
-        return res.status(201).send(`The Review  created successfully`);
-    } return res.status(200).send("Missing data");
-        
-
+        const newJob = await functions.postReview( id, id_orders, id_user_client ,feedback_client, rating )
+        res.status(201).send(newJob)
     } catch (error) {
         console.log(error)
         next(error)
@@ -60,7 +38,7 @@ review.put("/:id", async (req, res, next)=> {
 
     try {
         await functions.updateReview(id, feedback_client, rating);
-        await functions.searchRating(id_user_professional, rating)
+        await searchRating(id_user_professional, rating)
         res.status(201).send(`The Review  was successfully modified`);
         
     } catch (error) {
@@ -84,7 +62,6 @@ review.get("/:id", async (req, res, next)=>{
 // RUTA PARA TRAER TODAS LAS RESEÑAS POR ID (del cliente)
 review.get("/admin/client/:id", async (req, res, next)=>{
     const {id} = req.params;
-    console.log(id);
     try{
         const allReviewByClient = await functions.getAllReviewByClient(id);
         res.status(200).json(allReviewByClient);
@@ -115,6 +92,7 @@ review.delete("/admin/:id", async (req, res, next)=>{
         }) 
         res.status(201).send("the review was successfully deleted")
     } catch (error) {
+        console.log(error)
         next(error)
     }
 })

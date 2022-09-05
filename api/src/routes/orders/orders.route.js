@@ -10,42 +10,30 @@ orders.get("/all", async (req, res, next)=>{
     try {
         const allOrders = await Orders.findAll()
         res.status(200).json(allOrders)
-    
     } catch (error) {
         console.log(error)
         next(error)
     }
 })
 
+// RUTA PARA CREAR POST Y BUSCAR ORDER ACTIVA
 orders.post("/", async (req, res, next) =>{
     const { id_user_professional, id_user_client } = req.body;
     try {
-        if( id_user_professional && id_user_client ){
-            const newOrder = await Orders.create({
-                id_user_client,
-                id_user_professional,
-            })
-
-            let userFind = await User.findByPk(id_user_professional)
-            await newOrder.addUser(userFind)
-
-            return res.status(201).send(`The Order created successfully`);
-        
-        } return res.status(200).send("Missing data");
-
+        const newOrder = await functions.postOrder( id_user_professional, id_user_client )
+        res.status(201).send(newOrder)
     } catch (error) {
         console.log(error)
         next(error)
     }
 })
 
-
+// RUTA PARA COMPLETAR POR EL PROFESIONAL LAS ORDENES CREADAS
 orders.put("/:id", async (req, res, next) =>{
     const { description, complete, apointment_date, allowReview, isActive } = req.body;
-    console.log('description desde el back', description)
     const { id } = req.params;
     try {
-        functions.updateOrden(id, description, complete, apointment_date, allowReview, isActive)
+        await functions.updateOrden(id, description, complete, apointment_date, allowReview, isActive)
         res.status(200).send(`The order updated successfully`)
     } catch (error) {
         console.log(error)
@@ -78,7 +66,7 @@ orders.get("/admin/:id", async (req, res, next)=>{
     }
 })
 
-// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID CUANDO SOY PROFESSIONAL
+// RUTA PARA TRAER TODAS LAS ORDENES POR ID CUANDO SOY PROFESSIONAL
 orders.get("/professional/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
@@ -96,6 +84,19 @@ orders.get("/client/:id", async (req, res, next)=>{
     try{
         const allOrders = await functions.getAllOrdersByClient(parseInt(id));
         res.status(200).json(allOrders);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+// RUTA PARA ELIMINAR ORDENES
+orders.delete("/:id", async (req, res, next)=>{
+    const {id} = req.params;
+    try {
+        await Orders.destroy({
+            where: {id:id}
+        })
+        res.status(200).send("the Order was successfully deleted")
     } catch (error) {
         console.log(error)
         next(error)

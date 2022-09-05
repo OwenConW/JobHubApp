@@ -11,15 +11,16 @@ import default_user from './assets/default_user.png';
 const FeaturedCard = (prop) => {
 
   return (
+
     <Link to={`/details/${prop.prop.id}`} className={s.link}>
     <motion.div className={prop?.prop.isPremium ? s.containerPremium : s.container}
-      transition={{duration: 0.5}}
-      initial={{
-        opacity:0,
-      }}
-      animate={{
-        opacity:1,
-      }}
+    transition={{duration: 0.5}}
+    initial={{
+      opacity:0,
+    }}
+    animate={{
+      opacity:1,
+    }}
     >
       <motion.div className={s.oficio}
         transition={{duration: 0.3, delay:1}}
