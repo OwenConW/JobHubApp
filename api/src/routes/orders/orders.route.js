@@ -89,7 +89,7 @@ orders.get("/client/:id", async (req, res, next)=>{
         next(error)
     }
 })
-
+// RUTA PARA ELIMINAR ORDENES
 orders.delete("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try {
