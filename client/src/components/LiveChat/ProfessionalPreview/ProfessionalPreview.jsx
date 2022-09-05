@@ -7,7 +7,7 @@ import corona from "./asset/corona.png";
 import { getLocalStorage } from '../../../handlers/localStorage';
 import Swal from 'sweetalert2';
 
-const ProfessionalPreview = ({id}) => {
+const ProfessionalPreview = ({id, coversationId}) => {
     let activeUser = getLocalStorage();
     const [professional, setProfessional] = useState({});
     const [activeCoversation, setActiveConversation] = useState({});
@@ -39,8 +39,8 @@ const ProfessionalPreview = ({id}) => {
     const handleCoordinate = async() => {
         Swal.fire({
             title: 'Seguro?',
-            text: "Al crear la orden deberas completar los datos en la seccion ordenes.",
-            icon: 'question',
+            text: "Al crear la orden se elimina el chat y deberas completar los datos en la seccion ordenes.",
+            icon: 'danger',
             showCancelButton: true,
             confirmButtonColor: '#2C666E',
             cancelButtonColor: '#4e4e4e',
@@ -53,12 +53,15 @@ const ProfessionalPreview = ({id}) => {
                     id_user_professional : activeUser.id,
                     }
                 axios.post('/orders', body)
-                .then(() => Swal.fire({
-                    title: 'Orden creada',
-                    text: "Se creo la orden, completala en la seccion de ordenes.",
-                    icon: 'success',
-                    confirmButtonColor: '#2C666E',
-                }))
+                .then(() => {
+                    axios.delete(`/conversation/${coversationId}`)
+                    .then(() => Swal.fire({
+                        title: 'Orden creada',
+                        text: "Se creo la orden, completala en la seccion de ordenes.",
+                        icon: 'success',
+                        confirmButtonColor: '#2C666E',
+                    }))
+                })
             }
         })
     }
