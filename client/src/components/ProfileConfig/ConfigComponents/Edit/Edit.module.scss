@@ -97,11 +97,11 @@
             height: 60px;
             display: flex;
             justify-content: center;
-            object-fit: cover;
             img {
-                width: 55%;
+                width: 45%;
                 height: 100%;
                 border-radius: 50%;
+                object-fit: cover;
                 margin: 0px;
                 padding: 0px;
             }

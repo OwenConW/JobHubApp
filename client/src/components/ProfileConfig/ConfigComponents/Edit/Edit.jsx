@@ -6,9 +6,9 @@ import axios from "axios";
 import { validators } from "../../../../handlers/validators.js";
 import { changeValidator } from "../../../../handlers/ChangeValidator.js";
 import { modifyUser, setInactiveUser } from "../../../../redux/userActions";
-import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
 
