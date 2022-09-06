@@ -10,7 +10,9 @@ import etiqueta from "./assets/etiqueta-del-precio.png"
 import activo from "./assets/activo.png"
 import calendar from "./assets/calendar.png"
 import { useDispatch } from "react-redux"
-import { actionFetchingMercadopagoLink } from "../../../../redux/fetchingActions"
+import { actionFetchingMercadopagoLink, 
+  actionClearMercadopagoRedirectLink, 
+  actionSetFetchingMercadoPagoLinkFalse } from "../../../../redux/fetchingActions"
 
 const Premium = () => {
 
@@ -20,14 +22,29 @@ const Premium = () => {
     const activeUser = functions.getLocalStorage()
   
     const handlePremium = () => {
-      dispatch(actionFetchingMercadopagoLink())
+      if(true){
+        dispatch(actionFetchingMercadopagoLink())
+      }
+      dispatch(actionClearMercadopagoRedirectLink())
     }
+
+       
+  useEffect(() => {
+    return () => {
+      dispatch(actionClearMercadopagoRedirectLink())
+    }
+  }, [dispatch])
 
     useEffect(() => {
       if(mercadopagoRedirectLink) {
         window.location.replace(mercadopagoRedirectLink)
       } 
     }, [mercadopagoRedirectLink])
+
+    useEffect(() => {
+      dispatch(actionSetFetchingMercadoPagoLinkFalse())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     return (
       <div className={s.contenedorPadre}>
