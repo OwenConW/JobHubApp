@@ -39,20 +39,10 @@ const Profile = () => {
       emisor_id: activeUser.id,
       receptor_id: id * 1
     }
-    console.log('datadatadata',data)
     if(data.emisor_id === data.receptor_id ){
       Swal.fire("No puedes chatear ni crear ordenes contigo mismo");
     }else{
       try{
-        let body = {
-          id_user_professional: id * 1,
-          id_user_client : activeUser.id,
-        }
-        let receptor = allUsers.find(p => p.id === data.receptor_id)
-        console.log('USUARIO RECEPTOR', receptor.isProfessional)
-        if(receptor.isProfessional){
-          await axios.post('/orders', body);
-        }
         await axios.post('/conversation', data);
         navigate('/chat');
       }catch(e){
