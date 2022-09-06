@@ -82,7 +82,7 @@ const Navbar = () => {
 				</Link>
 				{isAuthenticated && 
 				    <Link to="/support" className={s.link}>
-				        Support
+				        Soporte
 			        </Link>
 				}
 				{

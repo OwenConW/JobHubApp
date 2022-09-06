@@ -28,6 +28,7 @@ $darkgreen-color: #07393C;
       .detailsBtn {
          width: 80px;
          height: 30px;
+         margin-top: -7px;
          border-radius: 5px;
          color: $darkgreen-color;
          background-color: $white-color;
@@ -41,6 +42,26 @@ $darkgreen-color: #07393C;
          flex-direction: column;
          align-items: center;
       }
+      .statusBtn {
+        width: 80px;
+        height: 20px;
+        border-radius: 5px;
+        margin-bottom: 3px;
+        background-color: $lightgreen-color;
+        color: $white-color;
+         &:hover{
+            color: $white-color;
+            background-color: $darkgreen-color;
+         }
+      }
+      .yesStatus {
+         color: rgba(164, 238, 164, 0.726);
+      }
+      
+      .noStatus {
+         color: rgb(218, 129, 129);
+      }
+
       .nameContainer {
          h1 {
             font-size: 1rem;

@@ -1,3 +1,8 @@
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
 .modalMainContainer {
   display: flex;
   position: absolute;
@@ -39,6 +44,7 @@
           display: flex;
           flex-direction: column;
           align-items: center;
+          text-align: center;
           width: 90%;
         }
       }
@@ -48,13 +54,54 @@
         div {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: space-evenly;
           width: 90%;
+          .editBtn {
+            width: 80px;
+            height: 30px;
+            border-radius: 5px;
+            color: $white-color;
+            background-color: rgba(128, 128, 240, 0.534);
+              &:hover{
+                  color: $white-color;
+                  background-color: rgba(92, 92, 238, 0.534);
+              }
+          }
+
+          .cancelBtn {
+              width: 80px;
+              height: 30px;
+              border-radius: 5px;
+              color: $white-color;
+              background-color: rgba(175, 43, 43, 0.829);
+                 &:hover{
+                    color: $white-color;
+                    background-color: rgb(190, 39, 39);
+                 }
+          }
           div {
             display: flex;
             flex-direction: row;
+            .yesBtn {
+              // width: 80px;
+              // height: 30px;
+              border-radius: 5px;
+              color: $white-color;
+              background-color: rgba(37, 168, 37, 0.829);
+            }
+            .noBtn {
+              // width: 80px;
+              // height: 30px; 
+              border-radius: 5px;
+              color: $white-color;
+              background-color: rgba(175, 43, 43, 0.829);
+                 &:hover{
+                    color: $white-color;
+                    background-color: rgb(190, 39, 39);
+                 }
           }
         }
       }
     }
+  }
 }
