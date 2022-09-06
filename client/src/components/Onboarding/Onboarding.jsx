@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getDniForm } from '../../redux/userActions'
 import { useDispatch } from 'react-redux';
-
+import Swal from "sweetalert2";
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -58,11 +58,6 @@ const Onboarding = () => {
       error: '',
       loading: false,
   });
-
-  // const [countries, setCountries] = useState({
-  //   names: [],
-  //   loading: false
-  // });
 
 
   const [image, setImage] = useState(null);
@@ -122,6 +117,7 @@ const Onboarding = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     if(Object.keys(errors).length || errorGeometry.error || errorDni.length ) return alert("casi casi atrevido!! modifica el DNI, sino no se envia nada!")
+    
     setErrorGeometry({
       error: '',
       loading: true,
@@ -138,7 +134,14 @@ const Onboarding = () => {
         coordinate: [response.data[0].lat, response.data[0].lon]
       }, async (currentUser) => {
           let response = await axios.post('/users', currentUser);
-          alert (response)
+  
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: response.data,
+            showConfirmButton: false,
+            timer: 1500
+          })
           navigate("../", { replace: true })
           axios.get(`/mails/welcome?name=${currentUser.name}&mail=${currentUser.mail}`  )
       })
@@ -263,7 +266,7 @@ const Onboarding = () => {
                 </div>
               </div>
 
-              {errorGeometry.loading ? <Loader/> : <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length || errorGeometry.error || errorDni.length  }/>}
+              {errorGeometry.loading ? <Loader/> : <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length || errorGeometry.error || errorDni.length }/>}
               {errorGeometry.error ? <p className={s.error}>{errorGeometry.error}</p> : ''}
           </form>
         </div>

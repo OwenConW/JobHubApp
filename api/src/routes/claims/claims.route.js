@@ -43,7 +43,7 @@ claims.get("/:id", async (req, res, next)=>{
 
 
 
-// RUTA PARA TRAER TODAS LAS RESEÑAS POR ID (del cliente)
+// RUTA PARA TRAER TODAS LAS DENUNCIAS POR ID (del cliente)
 claims.get("/client/:id", async (req, res, next)=>{
     const {id} = req.params;
     try{
