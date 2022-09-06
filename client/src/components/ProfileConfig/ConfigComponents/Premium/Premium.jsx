@@ -20,6 +20,7 @@ const Premium = () => {
 
     const mercadopagoRedirectLink = useSelector(state => state.fetching.mercadopagoRedirectLink)
     const activeUser = functions.getLocalStorage()
+
   
     const handlePremium = () => {
       if(true){
@@ -45,7 +46,6 @@ const Premium = () => {
       dispatch(actionSetFetchingMercadoPagoLinkFalse())
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-
     return (
       <div className={s.contenedorPadre}>
         <h1 className={s.titleActivo}>
@@ -105,7 +105,7 @@ const Premium = () => {
             <div className={s.bePremium}>
               <div className={s.premiumText}>
                 <h1>Plan Premium</h1>
-                <h2 className={s.descuento}>Contratalo ahora por tan solo <h3>AR$5000</h3></h2>
+                <h2 className="descuento">Contratalo ahora por tan solo por <h3>AR$5000</h3></h2>
                 <div className={s.contenedorPrecio}>
                 <img src={etiqueta} alt=""/><h2>AR$4000</h2> 
                 </div>
