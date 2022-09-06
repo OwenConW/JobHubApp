@@ -34,6 +34,7 @@ const Profile = () => {
   const activeUser = useSelector((state) => state.users.detail);
   let allOrders = useSelector((state) => state.orders.orders)
 
+
   if(preapproval_id){
     axios.put(`users/premium/${currentUser.id}`, { isPremium: true })
     .then(() => {

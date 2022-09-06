@@ -9,7 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 //style and utilities
 import s from './Login.module.scss';
-import logo from './assets/logo.svg';
+import logo from './assets/logo.png';
 import background from './assets/background.svg';
 import axios from 'axios';
 import Loader from './Loader/Loader';
@@ -21,8 +21,6 @@ const Login = () => {
 	const navigate = useNavigate();
 
 
-
-//family_name, given_name, picture
 	const handleValidate = async (user, validate) => {
 		try{
 			if(validate && user){
@@ -37,7 +35,7 @@ const Login = () => {
 					}
 
 				}else{
-					setUserLocalStorage({mail: user.email, name: user.given_name, last_name: user.family_name });
+					setUserLocalStorage({mail: user.email, name: user.given_name, last_name: user.family_name});
 					navigate("../onboarding", { replace: true });
 				}
 			}

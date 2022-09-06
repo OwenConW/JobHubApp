@@ -64,7 +64,7 @@ conversation.get("/:userId", async(req, res, next) => {
     }
 })
 
-// RUTA PARA ELIMINAR REPORTES
+// RUTA PARA ELIMINAR CONVERSACION
 conversation.delete("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try {
