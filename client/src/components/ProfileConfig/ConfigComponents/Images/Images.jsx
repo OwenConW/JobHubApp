@@ -100,7 +100,7 @@ const Images = () => {
             }
             setImagenes(imagenesEnTiempoReal)
         }
-        await axios.put(`/users/myjobs/${activeUser.id}`, imagenesEnTiempoReal) 
+        await axios.put(`/users/gallery/${activeUser.id}`, imagenesEnTiempoReal) 
         const res = await axios.get(`/users/${activeUser.id}`)
         setUserLocalStorage(res.data)
 
@@ -116,14 +116,14 @@ const Images = () => {
             ...imagenes,
             [`imagen${num}`]: null
         })
-        await axios.put(`/users/myjobs/${activeUser.id}`, imagenes) 
+        await axios.put(`/users/gallery/${activeUser.id}`, imagenes) 
         const res = await axios.get(`/users/${activeUser.id}`)
         setUserLocalStorage(res.data)
     }
 
     React.useEffect(() => {
         return async () => {
-            await axios.put(`/users/myjobs/${activeUser.id}`, imagenes) 
+            await axios.put(`/users/gallery/${activeUser.id}`, imagenes) 
             const res = await axios.get(`/users/${activeUser.id}`)
             setUserLocalStorage(res.data)
         }

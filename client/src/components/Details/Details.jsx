@@ -61,6 +61,7 @@ const Profile = () => {
     }
   }
 
+  
   const onReport = () => {
     navigate('/support', {state: {id: id}});
   }
@@ -109,7 +110,18 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-                professional.reviews && professional.reviews.map(review => {
+                console.log("ACAAAAAAAAAAAAAA:", professional) // "rating"
+              }
+              {
+                professional?.reviews?.slice().sort((x, y) => {  
+                  if(x.rating > y.rating){
+                      return -1 
+                  }
+                  if(x.rating < y.rating){
+                      return 1;
+                  }
+                  return 0
+                }).slice(0, 4).map(review => {
                   let reviewer = allUsers.find(user => user.id === review.id_user_client)
                   return (
                   <CardReview dataObj={review} reviewer={reviewer} key={review.id_orders}/>
@@ -135,7 +147,7 @@ const Profile = () => {
           <div className={professional?.isPremium ? s.moreImages : s.moreReviews}> {/* : s.poorMoreReviews */}
             <span className={s.premiumText}>
               {
-                professional?.isPremium ? <h1>Trabajos destacados del Profesional</h1> : <h1>Otras reseñas</h1>
+                professional?.isPremium ? <h1>Trabajos destacados del Profesional</h1> : <h1>Todas las reseñas</h1>
               }
               
             </span>

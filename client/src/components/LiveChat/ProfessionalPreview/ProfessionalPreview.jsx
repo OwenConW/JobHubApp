@@ -5,12 +5,14 @@ import { useEffect } from 'react';
 import s from './ProfessionalPreview.module.scss';
 import corona from "./asset/corona.png";
 import { getLocalStorage } from '../../../handlers/localStorage';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const ProfessionalPreview = ({id, coversationId}) => {
     let activeUser = getLocalStorage();
     const [professional, setProfessional] = useState({});
     const [activeCoversation, setActiveConversation] = useState({});
+    const navigate = useNavigate();
 
     useEffect(()=>{
         const fetchUser = async() =>{
@@ -39,7 +41,7 @@ const ProfessionalPreview = ({id, coversationId}) => {
     const handleCoordinate = async() => {
         Swal.fire({
             title: 'Seguro?',
-            text: "Al crear la orden se elimina el chat y deberas completar los datos en la seccion ordenes.",
+            text: "Al crear la orden se eliminará el chat y deberas completar los datos de la cita en ordenes.",
             icon: 'danger',
             showCancelButton: true,
             confirmButtonColor: '#2C666E',
@@ -55,12 +57,14 @@ const ProfessionalPreview = ({id, coversationId}) => {
                 axios.post('/orders', body)
                 .then(() => {
                     axios.delete(`/conversation/${coversationId}`)
-                    .then(() => Swal.fire({
+                    .then(() => {Swal.fire({
                         title: 'Orden creada',
                         text: "Se creo la orden, completala en la seccion de ordenes.",
                         icon: 'success',
                         confirmButtonColor: '#2C666E',
-                    }))
+                    })
+                    navigate('/myorders');
+                    })
                 })
             }
         })
