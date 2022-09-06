@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 //assets
-import logo from './assets/logo.svg';
+import logo from './assets/logo.png';
 import defaultimage from './assets/deafultimage.png';
 import chatlogo from './assets/chat.png';
 
