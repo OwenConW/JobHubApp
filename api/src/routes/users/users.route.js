@@ -42,6 +42,18 @@ users.get('/all/actives', async (req, res, next)=>{
     }
 })
 
+//RUTA QUE TRAE TODOS LOS PROFESIONALES ACTIVOS Y NO BANEADOS
+users.get('/allprofessional/actives', async (req, res, next)=>{
+    try {
+        const allUsers = await functions.allProfessionalActives();
+        res.status(200).json(allUsers)
+    
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 //RUTA PARA TRAER USUARIOS FILTRADOS POR COORDENADAS CERCANAS AL HOME
 users.get('/home', async (req, res, next)=>{
     const { id, coordinate } = req.body;
@@ -132,7 +144,6 @@ users.put('/:id', async (req, res, next) => {
         next (error)
     }
 })
-
 
 //RUTA PARA EDITAR USUARIO SIN JOBS
 users.put("/edit/:id" , async (req, res, next) => {

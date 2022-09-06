@@ -20,6 +20,12 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        subject: {
+            type: DataTypes.ENUM({
+                values: ['jobs', 'report', 'recoverAccount', 'otherSubject'],
+                allowNull: false,
+            })
+        },
         date_created:{
             type: DataTypes.DATEONLY,
             defaultValue: DataTypes.NOW,

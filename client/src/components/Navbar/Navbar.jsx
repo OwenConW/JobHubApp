@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //assets
 import logo from './assets/logo.svg';
@@ -12,6 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import s from './Navbar.module.scss';
 import { Sling as Hamburger } from 'hamburger-react'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 //UserTest
 import login from './assets/Login.png';
@@ -20,6 +21,7 @@ import { getLocalStorage } from '../../handlers/localStorage';
 import Menu from './mobile/Menu';
 
 const Navbar = () => {
+	const [notifications, setNotifications] = useState(0);
 	const [openBurger, setOpenBurger] = useState(false);
 	const { isAuthenticated, logout } = useAuth0();
 	const activeUser = getLocalStorage();
@@ -28,6 +30,25 @@ const Navbar = () => {
         logout();
         localStorage.clear();
     }
+
+	useEffect(() => {
+		const fetchOrders = async () => {
+			try{
+				let ordersToComplete = await axios.get(`orders/professional/${activeUser.id}`);
+				let cantOrders = ordersToComplete.data.orders.filter(o => !o.complete && !o.allowReview);
+
+				let reviewsToComplete = await axios.get(`orders/client/${activeUser.id}`);
+				let cantReviews = reviewsToComplete.data.filter(r => !r.complete && r.allowReview);
+
+				setNotifications(cantOrders.length + cantReviews.length);
+
+			}catch(e) {
+				console.log(e);
+			}
+		};
+
+		fetchOrders();
+	}, []);
 
 	return (
 		<div className={s.container}>
@@ -69,6 +90,7 @@ const Navbar = () => {
 				{isAuthenticated ? (
 					<div className={s.user}>
 						<Link to={`/myorders`} className={s.link}>
+							{notifications ? <div className={s.notification}>{notifications}</div> : ''}
 							Ordenes
 						</Link>
 						<Link to={`/chat`} className={s.link}>

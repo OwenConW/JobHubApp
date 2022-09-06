@@ -44,17 +44,17 @@ const Profile = () => {
       Swal.fire("No puedes chatear ni crear ordenes contigo mismo");
     }else{
       try{
-        let body = {
-          id_user_professional: id * 1,
-          id_user_client : activeUser.id,
-        }
-        await axios.post('/orders', body);
         await axios.post('/conversation', data);
         navigate('/chat');
       }catch(e){
         console.log(e);
       }
     }
+  }
+
+  
+  const onReport = () => {
+    navigate('/support', {state: {id: id}});
   }
 
 
@@ -70,11 +70,13 @@ const Profile = () => {
                 <div className={s.profile_Img_containerPremium}>
                   {professional.image ? <img src={professional.image} className={s.profile_ImgPremium} alt=""/> : <img src={defaultimage} className={s.profile_Img} alt=""/>}
                   <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
+                  <div onClick={() => onReport()} className={s.btnReport}>Reportar</div>
                 </div>
               ) : (
                 <div className={s.profile_Img_container}>
                   {professional.image ? <img src={professional.image} className={s.profile_Img} alt=""/> : <img src={defaultimage} className={s.profile_Img} alt=""/>}
                   <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
+                  <div onClick={() => onReport()} className={s.btnReport}>Reportar</div>
                 </div>
               )
             }
@@ -99,7 +101,18 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-                professional.reviews && professional.reviews.map(review => {
+                console.log("ACAAAAAAAAAAAAAA:", professional) // "rating"
+              }
+              {
+                professional?.reviews?.slice().sort((x, y) => {  
+                  if(x.rating > y.rating){
+                      return -1 
+                  }
+                  if(x.rating < y.rating){
+                      return 1;
+                  }
+                  return 0
+                }).slice(0, 4).map(review => {
                   let reviewer = allUsers.find(user => user.id === review.id_user_client)
                   return (
                   <CardReview dataObj={review} reviewer={reviewer} key={review.id_orders}/>
@@ -125,7 +138,7 @@ const Profile = () => {
           <div className={professional?.isPremium ? s.moreImages : s.moreReviews}> {/* : s.poorMoreReviews */}
             <span className={s.premiumText}>
               {
-                professional?.isPremium ? <h1>Trabajos destacados del Profesional</h1> : <h1>Otras reseñas</h1>
+                professional?.isPremium ? <h1>Trabajos destacados del Profesional</h1> : <h1>Todas las reseñas</h1>
               }
               
             </span>

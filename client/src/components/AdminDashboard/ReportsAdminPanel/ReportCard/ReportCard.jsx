@@ -3,7 +3,7 @@ import s from "./ReportCard.module.scss"
 
 
 export default function ReportCard(props) {
-  const { id, id_user_professional, id_user_client, feedback_claims, date_created, isActive} = props;
+  const { id, id_user_professional, id_user_client, feedback_claims, date_created } = props;
 
 
   return (
