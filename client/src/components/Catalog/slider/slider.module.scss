@@ -1,15 +1,5 @@
-.sample {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container {
     width: 70%;
+    height: 200px;
 
-    .div1, .div2, .div3{
-        width: 100%;
-        min-height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-    }
 }
