@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useSelector } from "react-redux"
 import * as functions from "../../../../handlers/localStorage"
 import s from "./Premium.module.scss"
 import check from "./assets/comprobado.png"
@@ -8,13 +9,43 @@ import rocket from "./assets/rocket.png"
 import etiqueta from "./assets/etiqueta-del-precio.png"
 import activo from "./assets/activo.png"
 import calendar from "./assets/calendar.png"
-
+import { useDispatch } from "react-redux"
+import { actionFetchingMercadopagoLink, 
+  actionClearMercadopagoRedirectLink, 
+  actionSetFetchingMercadoPagoLinkFalse } from "../../../../redux/fetchingActions"
 
 const Premium = () => {
 
-    const activeUser = functions.getLocalStorage()
-  
+    const dispatch = useDispatch()
 
+    const mercadopagoRedirectLink = useSelector(state => state.fetching.mercadopagoRedirectLink)
+    const activeUser = functions.getLocalStorage()
+
+  
+    const handlePremium = () => {
+      if(true){
+        dispatch(actionFetchingMercadopagoLink())
+      }
+      dispatch(actionClearMercadopagoRedirectLink())
+    }
+
+       
+  useEffect(() => {
+    return () => {
+      dispatch(actionClearMercadopagoRedirectLink())
+    }
+  }, [dispatch])
+
+    useEffect(() => {
+      if(mercadopagoRedirectLink) {
+        window.location.replace(mercadopagoRedirectLink)
+      } 
+    }, [mercadopagoRedirectLink])
+
+    useEffect(() => {
+      dispatch(actionSetFetchingMercadoPagoLinkFalse())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     return (
       <div className={s.contenedorPadre}>
         <h1 className={s.titleActivo}>
@@ -74,16 +105,15 @@ const Premium = () => {
             <div className={s.bePremium}>
               <div className={s.premiumText}>
                 <h1>Plan Premium</h1>
-                <h2 className={s.descuento}>Contratalo ahora por tan solo <h3>AR$5000</h3></h2>
+                <h2 className="descuento">Contratalo ahora por tan solo por <h3>AR$5000</h3></h2>
                 <div className={s.contenedorPrecio}>
                 <img src={etiqueta} alt=""/><h2>AR$4000</h2> 
                 </div>
-                <div className={s.contenedorBotonBuy} onClick={""}>
+                <div className={s.contenedorBotonBuy} onClick={handlePremium}>
                     <p>Obtener ahora</p>
                 </div>
               </div>
-
-              <div className={s.premiumRocketButton} onClick={'handlePremiumModal'}>
+              <div className={s.premiumRocketButton}>
                 <div>
                   <img src={rocket} alt="Premium Logo"></img>
                 </div>

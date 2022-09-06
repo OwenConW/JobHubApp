@@ -40,7 +40,6 @@ const Profile = () => {
       emisor_id: activeUser.id,
       receptor_id: id * 1
     }
-    console.log('datadatadata', data)
     if (data.emisor_id === data.receptor_id) {
       Swal.fire("No puedes chatear ni crear ordenes contigo mismo");
     } else {
