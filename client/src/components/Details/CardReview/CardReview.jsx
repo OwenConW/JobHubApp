@@ -4,16 +4,10 @@ import star from './assets/star.svg'
 
 const CardReview = ({ dataObj, reviewer }) => {
   const data = dataObj
-
-  console.log('reviewer:', reviewer)
+  
   return (
-
-
     <div className={s.orders}>
       <div className={s.imgDetail}>
-        {
-          console.log(reviewer)
-        }
         <img src={reviewer?.image} alt=""></img>
       </div>
 
