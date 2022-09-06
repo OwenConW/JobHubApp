@@ -39,6 +39,8 @@ export function validators(userInput) {
       errors.dni = "Este campo es obligatorio";
     }else if (!/^\d+$/.test(userInput.dni)) {
       errors.dni = "El formato del DNI debe ser solo numeros sin puntos.";
+    }else if (userInput.dni.length > 9) {
+      errors.dni = "El DNI no debe ser mayor a 9 caracteres";
     }
 
     //ciudad

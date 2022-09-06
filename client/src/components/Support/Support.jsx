@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { getLocalStorage } from '../../handlers/localStorage';
 import axios from 'axios';
@@ -33,7 +33,6 @@ var asuntos2 = [
 
 const Support = () => {
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   var userIDreported = "";
@@ -42,12 +41,8 @@ const Support = () => {
   }
   const [errors, setError] = useState({})
   const userID = getLocalStorage().id;
-  const name = getLocalStorage().name;
-  const last_name = getLocalStorage().last_name;
   const [msgSupport, setMsgSupport] = useStateWithCallbackLazy({
     userID: userID ? userID :  "000",
-    name: name ? name : "",
-    last_Name: last_name ? last_name : "",
     userIDreported: userIDreported,
     subject: location.state ? asuntos2[1] : "",
     description: ""
@@ -63,7 +58,7 @@ const Support = () => {
 
   function handleSelect(e) {
     e.preventDefault()
-    if(asuntos.includes(e.target.value) && e.target.value !== 'vacio') {
+    if(asuntos2.includes(e.target.value) && e.target.value !== 'vacio') {
       setMsgSupport({
         ...msgSupport,
         subject: e.target.value
@@ -82,20 +77,30 @@ const Support = () => {
     } else {
       e.preventDefault()
       try{
-        let body = {
-          userID: msgSupport.userID,
-          name: msgSupport.name,
-          last_Name: msgSupport.last_Name,
-          userIDreported: msgSupport.userIDreported,                          
-          subject: msgSupport.subject,
-          feedback_claims: msgSupport.description
+        switch (msgSupport.subject) {
+          case asuntos2[0]:
+            var realSubject = "jobs";
+          break;
+          case asuntos2[1]:
+            var realSubject = "report";
+          break;
+          case asuntos2[2]:
+            var realSubject = "recoverAccount";
+          break; 
+          default: var realSubject = "otherSubject";   
         }
+        
+        let body = {
+          id_user_client: msgSupport.userID,
+          feedback_claims: msgSupport.description,
+          id: msgSupport.userIDreported,
+          subject: realSubject
+        }
+
         await axios.post('/claims', body);
         alert('Gracias, hemos recibido su problema!')
         setMsgSupport({
           userID: "",
-          name: "",
-          last_Name: "",
           userIDreported: "",                          
           subject: "",
           description: ""
