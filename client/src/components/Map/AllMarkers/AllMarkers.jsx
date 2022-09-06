@@ -102,7 +102,7 @@ const AllMarkers = () => {
                             </div>
                             <div style={dataDiv}>
                                 <p style={nameStyle}>{user.name} {user.last_Name}</p>
-                                <p style={oficioStyle}>{user.professions[0].name === 'albanil' ? 'Albañil' : user.professions[0].name}</p>
+                                <p style={oficioStyle}>{user.professions[0]?.name === 'albanil' ? 'Albañil' : user.professions[0]?.name}</p>
                             </div>
                         </div>
                     </Popup>
