@@ -78,23 +78,23 @@ function DashboardUserCard(props) {
           <h1>{name} {last_Name}</h1>
         </div>
         <div>
-          <button onClick={handleModifyStatus} value='premium' name="isPremium">Premium</button>
+          <button className={s.statusBtn} onClick={handleModifyStatus} value='premium' name="isPremium">Premium</button>
           <h4 className={isPremium ? s.yesStatus : s.noStatus}>{isPremium ? "Si" : "No"}</h4>
         </div>
         <div>
-          <button onClick={handleModifyStatus} value='updateadmin' name="isAdmin">Admin</button>
+          <button className={s.statusBtn} onClick={handleModifyStatus} value='updateadmin' name="isAdmin">Admin</button>
           <h4 className={isAdmin ? s.yesStatus : s.noStatus}>{isAdmin ? "Si": "No"}</h4>
         </div>
         <div>
-          <button onClick={handleModifyStatus} value='destroy' name="isActive">Activo</button>
+          <button className={s.statusBtn} onClick={handleModifyStatus} value='destroy' name="isActive">Activo</button>
           <h4 className={isActive ? s.yesStatus : s.noStatus}>{isActive ? "Si" : "No"}</h4>
         </div>
         <div>
-          <button onClick={handleModifyStatus} value='professional' name='isProfessional'>Profesional</button>
+          <button className={s.statusBtn} onClick={handleModifyStatus} value='professional' name='isProfessional'>Profesional</button>
           <h4 className={isProfessional ? s.yesStatus : s.noStatus}>{isProfessional ? "Si" : "No"}</h4>
         </div>
         <div>
-          <button onClick={handleModifyStatus} value='banned' name='isBanned'>Suspendido</button>
+          <button className={s.statusBtn} onClick={handleModifyStatus} value='banned' name='isBanned'>Suspendido</button>
           <h4 className={isBanned ? s.yesStatus : s.noStatus}>{isBanned ? "Si" : "No"}</h4>
         </div>
         <div>
@@ -154,7 +154,7 @@ function DashboardUserCard(props) {
           </div>
         </div>
         <div className={s.description}>
-          <p>Description</p>
+          <h4>Description</h4>
           <p>{description}</p>
         </div>
         <div>
