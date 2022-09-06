@@ -54,7 +54,7 @@ const Premium = () => {
           </ul>
         </div>
         {activeUser.isPremium ? (
-                  <div className={"bePremium"}>
+                <div className={"bePremium"}>
                   <div className={"premiumText"}>
                     <h1>Plan Premium ACTIVO</h1>
                     <h2 className="vence"><img src={calendar} alt=""/>{`Vence el ${activeUser?.expiration_date}`}</h2>
@@ -74,9 +74,9 @@ const Premium = () => {
             <div className={"bePremium"}>
               <div className={"premiumText"}>
                 <h1>Plan Premium</h1>
-                <h2 className="descuento">Contratalo ahora por tan solo <h3>AR$5000</h3></h2>
+                <h2 className="descuento">Contratalo ahora por tan solo por <h3>AR$5000</h3></h2>
                 <div className="contenedorPrecio">
-                <img src={etiqueta} alt=""/><h2>AR$4000</h2> 
+                  <img src={etiqueta} alt=""/><h2>AR$4000</h2> 
                 </div>
                 <div className="contenedorBotonBuy" onClick={""}>
                     <p>Obtener ahora</p>
