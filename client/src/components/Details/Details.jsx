@@ -61,11 +61,9 @@ const Profile = () => {
     }
   }
 
-  
   const onReport = () => {
     navigate('/support', {state: {id: id}});
   }
-
 
   return (
     <>
