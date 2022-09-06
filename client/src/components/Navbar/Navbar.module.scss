@@ -41,6 +41,7 @@
         transition: 0.5s;
         height: 100%;
         display: flex;
+        position: relative;
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -49,6 +50,16 @@
         font-size: 1.6rem;
         margin-inline: 3%;
         border-bottom: 3px solid #dfdddd;
+
+        .notification{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: rgba(250, 65, 65, 0.7);
+            position: absolute;
+            top: 10px;
+            right: -5px;
+        }
 
         &:hover{
             cursor: pointer;
