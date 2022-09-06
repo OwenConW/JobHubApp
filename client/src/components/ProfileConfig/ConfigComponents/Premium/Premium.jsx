@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useSelector } from "react-redux"
 import * as functions from "../../../../handlers/localStorage"
 import "./Premium.css"
 import check from "./assets/comprobado.png"
@@ -8,12 +9,25 @@ import rocket from "./assets/rocket.png"
 import etiqueta from "./assets/etiqueta-del-precio.png"
 import activo from "./assets/activo.png"
 import calendar from "./assets/calendar.png"
-
+import { useDispatch } from "react-redux"
+import { actionFetchingMercadopagoLink } from "../../../../redux/fetchingActions"
 
 const Premium = () => {
 
+    const dispatch = useDispatch()
+
+    const mercadopagoRedirectLink = useSelector(state => state.fetching.mercadopagoRedirectLink)
     const activeUser = functions.getLocalStorage()
   
+    const handlePremium = () => {
+      dispatch(actionFetchingMercadopagoLink())
+    }
+
+    useEffect(() => {
+      if(mercadopagoRedirectLink) {
+        window.location.replace(mercadopagoRedirectLink)
+      } 
+    }, [mercadopagoRedirectLink])
 
     return (
       <div className="contenedorPadre">
@@ -59,11 +73,11 @@ const Premium = () => {
                     <h1>Plan Premium ACTIVO</h1>
                     <h2 className="vence"><img src={calendar} alt=""/>{`Vence el ${activeUser?.expiration_date}`}</h2>
                     <h2 className="id">{`ID de reclamo: `}</h2>
-                    <h2 className="idP">{activeUser.preapproval_id}</h2>
-                    <h2 className="pago">{`Pago realizado el ${activeUser.payment_date}`}</h2>
+                    <h2 className="idP">{activeUser?.preapproval_id}</h2>
+                    <h2 className="pago">{`Pago realizado el ${activeUser?.payment_date}`}</h2>
                   </div>
     
-                  <div className={"premiumRocketButton"} onClick={"handlePremiumModal"}>
+                  <div className={"premiumRocketButton"}>
                     <div>
                       <img src={activo} alt="Premium Logo"></img>
                     </div>
@@ -83,7 +97,7 @@ const Premium = () => {
                 </div>
               </div>
 
-              <div className={"premiumRocketButton"} onClick={"handlePremiumModal"}>
+              <div className={"premiumRocketButton"} onClick={handlePremium}>
                 <div>
                   <img src={rocket} alt="Premium Logo"></img>
                 </div>
