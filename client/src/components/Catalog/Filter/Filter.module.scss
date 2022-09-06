@@ -39,6 +39,25 @@
           color: white;
 
         }
+
+        .active{
+          cursor: pointer;
+          background-color: #2C666E;
+          transition: background-color 0.2s;
+          color: white;
+        }
+
+        .active:hover {
+          width: 80%;
+          height: 15%;
+          border-radius: 5px;
+          transition: all 0.1s;
+          font-family: Poppins;
+          text-transform: capitalize;
+          font-size: 1.6rem;
+          background-color: #ffffff54;
+        }
+
         .professionsButtonsContainer{
           display: flex;
           flex-direction: column;
