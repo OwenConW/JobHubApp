@@ -100,7 +100,6 @@ const Catalog = (props) => {
 		setCurrentPage(page)
 	}
 
-	console.log(activePages);
 	return (
 		<>
 			<Navbar />
