@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Marker, Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
+import defaultimage from '../../Navbar/assets/deafultimage.png';
 import 'leaflet/dist/leaflet.css';
 
 import {nameStyle , imgDiv, imgStyle, containerStyle, dataDiv, oficioStyle} from './styles';
@@ -98,7 +99,7 @@ const AllMarkers = () => {
                     <Popup className='professional-popup'>
                         <div style={containerStyle}>
                             <div style={imgDiv}>
-                                <img src={user.image} alt="userImage" style={imgStyle} />
+                                <img src={user.image === 'noimage' ? defaultimage : user.image} alt="userImage" style={imgStyle} />
                             </div>
                             <div style={dataDiv}>
                                 <p style={nameStyle}>{user.name} {user.last_Name}</p>
