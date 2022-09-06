@@ -79,7 +79,7 @@ const Premium = () => {
                   <img src={etiqueta} alt=""/><h2>AR$4000</h2> 
                 </div>
                 <div className="contenedorBotonBuy" onClick={""}>
-                    <p>Obtener ahora</p>
+                  <p>Obtener ahora</p>
                 </div>
               </div>
 

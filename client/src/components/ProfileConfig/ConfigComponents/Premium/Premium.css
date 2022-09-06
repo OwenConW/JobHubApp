@@ -249,21 +249,41 @@ li img{
         font-size: 2.7rem;
     }
 
+    .bePremium {
+        height: 280px;
+        margin-bottom: 0%;
+    }
+
+    .descuento{
+        margin-bottom: 12%;
+    }
+
+    .premiumText h3{
+        font-size: 3rem;
+    }
+
+    .contenedorPrecio img{
+        left: 80px;
+    }
+
     .contenedorPrecio h2{
-        line-height: 2.8rem;
+        font-size: 3rem;
+        left: 125px;
     }
 
     .premiumRocketButton div img{
-        width: 90%;
-        height: 60%;
+        margin-left: -25%;
+        width: 150px;
+        height: 150px;
     }
 
     .contenedorBotonBuy{
+        font-size: 2.2rem;
+        width: 55%;
         margin: 0 auto;
-        margin-top: 4%;
-        margin-left: 55%;
+        margin-top: -8%;
+        margin-left: 100%;
     }
-
 }
 
 /* responsive smartphones ----------------------------------------------*/
@@ -284,9 +304,8 @@ li img{
     }
 
     .ulBeneficios{
-        margin-top: -2%;
+        margin-top: -5%;
     }
-    
     
     li img{
         width: 20px;
@@ -358,8 +377,7 @@ li img{
     .contenedorPrecio h2{
         font-size: 1.6rem;
         font-weight: 800;
-        top: -25px;
+        top: -41px;
         left: 57px;
     }
-
 }
