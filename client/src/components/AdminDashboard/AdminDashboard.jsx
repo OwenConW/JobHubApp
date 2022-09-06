@@ -10,7 +10,9 @@ import { getAllUsersForAdmin,
          actionFetchingAdminDeleteReviewReset,
          actionFetchingAdminDeleteOrderReset,
          actionFetchingAdminCreateProfessionReset,
-         actionFetchingAdminDeleteProfessionReset } from '../../redux/adminActions';
+         actionFetchingAdminDeleteProfessionReset,
+         actionFetchingAdminDeleteClaimReset,
+         actionFetchingUsersReset } from '../../redux/adminActions';
 import { actionGetAllJobs } from "../../redux/jobActions";
 import { useDispatch, useSelector } from "react-redux";
 import s from './AdminDashboard.module.scss'
@@ -23,6 +25,7 @@ import * as functions from '../../handlers/localStorage'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import ReportsAdminPanel from "./ReportsAdminPanel/ReportsAdminPanel";
+import Swal from 'sweetalert2'
 
 
 function AdminDashboard() {
@@ -33,7 +36,7 @@ function AdminDashboard() {
   //if(!isAuthenticated) navigate('/')
   //if(!activeUser?.isAdmin) navigate('/home')
 
-  const [panelDiplayed, setPanelDisplayed] = useState("claimsPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
   const [isActive, setIsActive] = useState({usersPanel: true, reviewsPanel: false, ordersPanel: false, professionsPanel: false})
 
 
@@ -41,30 +44,27 @@ function AdminDashboard() {
   const reviews = useSelector( state => state.admin.reviews);
   const orders = useSelector( state => state.admin.orders)
   const professions = useSelector( state => state.jobs.jobs)
+
   //ESTOS ESTADOS SON PARA EL HANDLING DE ERRORES, DE EXITO Y DE CUANDO ESTA BUSCANDO EN LA DB, SE VAN A USAR PARA LAS ALERTAS
 
   //Fetching user states
+  //Fetch
+  const fetchingUsersFailure = useSelector(state => state.fetching.fetchingUsersFailure)
+
   //delete
   const fetchingAdminDeleteUserSuccess = useSelector(state => state.fetching.fetchingAdminDeleteUserSuccess)
   const fetchingAdminDeleteUserFailure = useSelector(state => state.fetching.fetchingAdminDeleteUserFailure)
-  //edit
-  const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
-  const fetchingAdminEditUserFailure = useSelector(state => state.fetching.fetchingAdminEditUserFailure)
   //restore
   const fetchingAdminRestoreUserFailure = useSelector(state => state.fetching.fetchingAdminRestoreUserFailure)
   const fetchingAdminRestoreUserSuccess = useSelector(state => state.fetching.fetchingAdminRestoreUserSuccess)
 
-  //Fetching reviews states
+  //Fetching REVIEWS states
   const fetchingAdminDeleteReviewSuccess = useSelector(state => state.fetching.fetchingAdminDeleteReviewSuccess)
   const fetchingAdminDeleteReviewFailure = useSelector(state => state.fetching.fetchingAdminDeleteReviewFailure)
-  const fetchingAdminEditReviewSuccess = useSelector(state => state.fetching.fetchingAdminEditReviewSuccess)
-  const fetchingAdminEditReviewFailure = useSelector(state => state.fetching.fetchingAdminEditReviewFailure)
 
-  //Fetching orders states
+  //Fetching ORDERS states
   const fetchingAdminDeleteOrderSuccess = useSelector(state => state.fetching.fetchingAdminDeleteOrderSuccess)
   const fetchingAdminDeleteOrderFailure = useSelector(state => state.fetching.fetchingAdminDeleteOrderFailure)
-  const fetchingAdminEditOrderSuccess = useSelector(state => state.fetching.fetchingAdminEditOrderSuccess)
-  const fetchingAdminEditOrderFailure = useSelector(state => state.fetching.fetchingAdminEditOrderFailure)
   
   //Fetching Profession creation states
   const fetchingAdminCreateProfessionSuccess = useSelector(state => state.fetching.fetchingAdminCreateProfessionSuccess)
@@ -72,6 +72,12 @@ function AdminDashboard() {
   //Fetching Profession delete states
   const fetchingAdminDeleteProfessionSuccess = useSelector(state => state.fetching.fetchingAdminDeleteProfessionSuccess)
   const fetchingAdminDeleteProfessionFailure = useSelector(state => state.fetching.fetchingAdminDeleteProfessionFailure)
+  
+  //Fetching CLAIM states
+  //DELETE
+  const fetchingAdminDeleteClaimFailure = useSelector(state => state.fetching.fetchingAdminDeleteClaimFailure)
+  const fetchingAdminDeleteClaimSuccess = useSelector(state => state.fetching.fetchingAdminDeleteClaimSuccess)
+
 
   //FUNCION QUE CAMBIA EL PANEL QUE SE MUESTRA (usuarios, reviews, ordenes)
   function handlePanelChange(e) {
@@ -89,12 +95,42 @@ function AdminDashboard() {
     dispatch(getAllClaimsForAdmin())
   }, [dispatch])
 
+  //Alert fetchUsers
+  useEffect(() => {
+    if(fetchingUsersFailure) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un problema al traer los usuarios',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
+    }
+    dispatch(actionFetchingUsersReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchingUsersFailure])
+
   //Alert DELETE USER
   useEffect(() => {
     if(fetchingAdminDeleteUserSuccess) {
-      alert('Usuario eliminado correctamundo')
+      Swal.fire({
+        icon: 'success',
+        title: 'El usuario fue eliminado correctamente',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     } else if (fetchingAdminDeleteUserFailure) {
-      alert('Hubo un error al eliminar el usuario')
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un problema al eliminar el usuario',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     }
     dispatch(actionFetchingAdminDeleteUserReset())
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,9 +139,23 @@ function AdminDashboard() {
   //Alert RESTORE USER
   useEffect(() => {
     if(fetchingAdminRestoreUserSuccess) {
-      alert('Usuario restaurado correctamundo')
+      Swal.fire({
+        icon: 'success',
+        title: 'El usuario fue restaurado correctamente',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     } else if (fetchingAdminRestoreUserFailure) {
-      alert('Hubo un error al restaurar el usuario')
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un problema al restaurar el usuario',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     }
     dispatch(actionFetchingAdminRestoreUserReset())
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,9 +164,23 @@ function AdminDashboard() {
   //Alert DELETE REVIEW
   useEffect(() => {
     if(fetchingAdminDeleteReviewSuccess) {
-      alert('Reseña eliminada correctamundo')
+      Swal.fire({
+        icon: 'success',
+        title: 'La reseña ha sido eliminada correctamente.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     } else if (fetchingAdminDeleteReviewFailure) {
-      alert('Hubo un error al eliminar la reseña')
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un problema al eliminar la reseña',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     }
     dispatch(actionFetchingAdminDeleteReviewReset())
     
@@ -126,9 +190,23 @@ function AdminDashboard() {
   //Alert DELETE ORDER
   useEffect(() => {
     if(fetchingAdminDeleteOrderSuccess) {
-      alert('Orden eliminada correctamundo')
+      Swal.fire({
+        icon: 'success',
+        title: 'La orden ha sido eliminada correctamente.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     } else if (fetchingAdminDeleteOrderFailure) {
-      alert('Hubo un error al eliminar la Orden')
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un problema al eliminar la orden.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     }
     dispatch(actionFetchingAdminDeleteOrderReset())
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -137,9 +215,23 @@ function AdminDashboard() {
   //Alert create Profession
   useEffect(() => {
     if(fetchingAdminCreateProfessionSuccess) {
-      alert('Profesion creada correctamente')
+      Swal.fire({
+        icon: 'success',
+        title: 'La profesión ha sido creada correctamente.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     } else if (fetchingAdminCreateProfessionFailure) {
-      alert('Hubo un error al crear la profesion')
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un problema al crear la profesión',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     }
     dispatch(actionFetchingAdminCreateProfessionReset())
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,13 +240,52 @@ function AdminDashboard() {
   //Alert delete Profession
   useEffect(() => {
     if(fetchingAdminDeleteProfessionSuccess) {
-      alert('Profesion eliminada correctamente')
+      Swal.fire({
+        icon: 'success',
+        title: 'La profesión ha sido eliminada correctamente.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     } else if (fetchingAdminDeleteProfessionFailure) {
-      alert('Hubo un error al eliminar la profesion')
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un problema al eliminar la profesión.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     }
     dispatch(actionFetchingAdminDeleteProfessionReset())
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchingAdminDeleteProfessionSuccess,fetchingAdminDeleteProfessionFailure])
+
+  useEffect(() => {
+    if(fetchingAdminDeleteClaimSuccess) {
+      Swal.fire({
+        icon: 'success',
+        title: 'El reporte ha sido eliminado correctamente.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
+    } else if (fetchingAdminDeleteClaimFailure) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un problema al eliminar el reporte.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
+    }
+    dispatch(actionFetchingAdminDeleteClaimReset())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchingAdminDeleteClaimSuccess,fetchingAdminDeleteClaimFailure])
+
 
   return (
     <>

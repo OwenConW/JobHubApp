@@ -1,6 +1,12 @@
-.cardsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin-top: 15px;
+.mainContainer {
+  width: 80%;
+  background-color: rgba(192, 192, 192, 0.219);
+  margin-right: 15px;
+  border-radius: 10px;
+  .cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 15px;
+  }
 }

@@ -48,18 +48,29 @@ import {
   fetchingAdminDeleteProfession,
   fetchingAdminDeleteProfessionSuccess,
   fetchingAdminDeleteProfessionFailure,
-  fetchingAdminDeleteProfessionReset
-  
-
+  fetchingAdminDeleteProfessionReset,
+  fetchingUsers,
+  fetchingUsersSuccess,
+  fetchingUsersFailure,
+  fetchingUsersReset,
+  fetchingAdminDeleteClaim,
+  fetchingAdminDeleteClaimSuccess,
+  fetchingAdminDeleteClaimFailure,
+  fetchingAdminDeleteClaimReset
 } from './fetchingSlice.js';
 
 // ======================= ACTIONS PARA USERS =================================
 export const getAllUsersForAdmin = () => (dispatch) => {
+  dispatch(fetchingUsers())
   axios.get('/users/all')
   .then((res) => {
-      dispatch(getAllUsers(res.data))
-    })
-    .catch(e => console.error(e))
+    dispatch(getAllUsers(res.data))
+    dispatch(fetchingUsersSuccess())
+  })
+  .catch(e => {
+    console.error(e)
+    dispatch(fetchingUsersFailure())
+  })
 }
 
 export const getUsersByIdForAdmin = (id) => (dispatch) => {
@@ -138,6 +149,9 @@ export const modifyUserStatus = (field, id, payload) => (dispatch) => {
     })
 }
 
+export const actionFetchingUsersReset = () => (dispatch) => {
+  dispatch(fetchingUsersReset())
+}
 
 export const actionFetchingAdminDeleteUserReset = () => (dispatch) => {
   dispatch(fetchingAdminDeleteUserReset())
@@ -361,4 +375,32 @@ export const getClaimsByClientIdForAdmin = (id) => (dispatch) => {
       dispatch(getClaimsById(res.data))
     })
     .catch(e => console.error(e))
+}
+
+export const getClaimsByTypeForAdmin = (type) => (dispatch) => {
+  axios.get(`/claims/reason?subject=${type}`)
+  .then((res) => {
+    console.log(res.data);
+      dispatch(getClaimsById(res.data))
+    })
+    .catch(e => console.error(e))
+}
+
+export const deleteClaim = (id) => (dispatch) => {
+  dispatch(fetchingAdminDeleteClaim())
+  console.log('action');
+  axios.delete(`/claims/${id}`)
+  .then(r => {
+    dispatch(fetchingAdminDeleteClaimSuccess())
+        dispatch(getAllClaimsForAdmin())
+      })
+      .catch(e => {
+        console.log('action errors');
+        dispatch(fetchingAdminDeleteClaimFailure())
+        console.error(e)
+      })
+}
+
+export const actionFetchingAdminDeleteClaimReset = () => (dispatch) => {
+  dispatch(fetchingAdminDeleteClaimReset())
 }

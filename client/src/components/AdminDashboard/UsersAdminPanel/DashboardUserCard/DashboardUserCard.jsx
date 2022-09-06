@@ -79,23 +79,23 @@ function DashboardUserCard(props) {
         </div>
         <div>
           <button onClick={handleModifyStatus} value='premium' name="isPremium">Premium</button>
-          <h4>{isPremium ? "Si" : "No"}</h4>
+          <h4 className={isPremium ? s.yesStatus : s.noStatus}>{isPremium ? "Si" : "No"}</h4>
         </div>
         <div>
           <button onClick={handleModifyStatus} value='updateadmin' name="isAdmin">Admin</button>
-          <h4>{isAdmin ? "Si": "No"}</h4>
+          <h4 className={isAdmin ? s.yesStatus : s.noStatus}>{isAdmin ? "Si": "No"}</h4>
         </div>
         <div>
           <button onClick={handleModifyStatus} value='destroy' name="isActive">Activo</button>
-          <h4>{isActive ? "Si" : "No"}</h4>
+          <h4 className={isActive ? s.yesStatus : s.noStatus}>{isActive ? "Si" : "No"}</h4>
         </div>
         <div>
           <button onClick={handleModifyStatus} value='professional' name='isProfessional'>Profesional</button>
-          <h4>{isProfessional ? "Si" : "No"}</h4>
+          <h4 className={isProfessional ? s.yesStatus : s.noStatus}>{isProfessional ? "Si" : "No"}</h4>
         </div>
         <div>
           <button onClick={handleModifyStatus} value='banned' name='isBanned'>Suspendido</button>
-          <h4>{isBanned ? "Si" : "No"}</h4>
+          <h4 className={isBanned ? s.yesStatus : s.noStatus}>{isBanned ? "Si" : "No"}</h4>
         </div>
         <div>
           <h4>Rating</h4>

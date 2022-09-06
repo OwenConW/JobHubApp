@@ -10,6 +10,11 @@ export const fetchingSlice = createSlice({
 
 		//states for Admin
 		// ============ Users ================
+		//Fetch
+		fetchingUsers: false,
+		fetchingUsersFailure: false, 
+		fetchingUsersSuccess: false, 
+
 		//Delete
 		fetchingAdminDeleteUser: false,
 		fetchingAdminDeleteUserFailure: false, 
@@ -44,7 +49,11 @@ export const fetchingSlice = createSlice({
 		fetchingAdminEditOrderFailure: false,
 		fetchingAdminEditOrderSuccess: false,
 
-
+		// ============ Claims ================
+		//Delete
+		fetchingAdminDeleteClaim: false,
+		fetchingAdminDeleteClaimSuccess: false,
+		fetchingAdminDeleteClaimFailure: false,
 	},
 	reducers: {
 
@@ -69,6 +78,24 @@ export const fetchingSlice = createSlice({
 		//Reducers for Admin
 
 		// =============== Users ===========================
+		//Fetch Handling
+		fetchingUsers: (state, action) => {
+			state.fetchingUsers = true
+		},
+		fetchingUsersSuccess: (state, action) => {
+			state.fetchingUsers = false
+			state.fetchingUsersSuccess = true
+		},
+		fetchingUsersFailure: (state, action) => {
+			state.fetchingUsers = false
+			state.fetchingUsersFailure = true
+		},
+		fetchingUsersReset: (state, action) => {
+			state.fetchingUsers = false
+			state.fetchingUsersFailure = false
+			state.fetchingUsersSuccess = false
+		},
+
 		//DeleteHandling
 		fetchingAdminDeleteUser: (state, action) => {
 			state.fetchingAdminDeleteUser = true
@@ -237,10 +264,34 @@ export const fetchingSlice = createSlice({
 			state.fetchingAdminDeleteProfessionFailure = false
 			state.fetchingAdminDeleteProfessionSuccess = false
 		},
+
+		// =============== Claims ===========================
+		//DeleteHandling
+		fetchingAdminDeleteClaim: (state, action) => {
+			state.fetchingAdminDeleteClaim = true
+		},
+		fetchingAdminDeleteClaimSuccess: (state, action) => {
+			state.fetchingAdminDeleteClaim = false
+			state.fetchingAdminDeleteClaimSuccess = true
+		},
+		fetchingAdminDeleteClaimFailure: (state, action) => {
+			state.fetchingAdminDeleteClaim = false
+			state.fetchingAdminDeleteClaimFailure = true
+		},
+		fetchingAdminDeleteClaimReset: (state, action) => {
+			state.fetchingAdminDeleteClaim = false
+			state.fetchingAdminDeleteClaimFailure = false
+			state.fetchingAdminDeleteClaimSuccess = false
+		},
 	},
 });
 
-export const { fetchingMercadopagoLink, 
+export const { 
+							 fetchingUsers,
+							 fetchingUsersFailure,
+							 fetchingUsersSuccess,
+							 fetchingUsersReset,
+							 fetchingMercadopagoLink, 
 							 fetchingMercadopagoLinkSuccess, 
 							 fetchingMercadopagoLinkFailure,
 							 clearMercadopagoRedirectLink,
@@ -280,6 +331,10 @@ export const { fetchingMercadopagoLink,
 							 fetchingAdminDeleteProfession,
 							 fetchingAdminDeleteProfessionSuccess,
 							 fetchingAdminDeleteProfessionFailure,
-							 fetchingAdminDeleteProfessionReset
+							 fetchingAdminDeleteProfessionReset,
+							 fetchingAdminDeleteClaim,
+							 fetchingAdminDeleteClaimSuccess,
+							 fetchingAdminDeleteClaimFailure,
+							 fetchingAdminDeleteClaimReset
 							} = fetchingSlice.actions;
 export default fetchingSlice.reducer;

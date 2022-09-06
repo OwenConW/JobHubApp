@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getClaimsByProfessionalIdForAdmin, getAllClaimsForAdmin, getClaimsByClientIdForAdmin } from '../../../redux/adminActions'
+import { getClaimsByProfessionalIdForAdmin, getClaimsByTypeForAdmin, getAllClaimsForAdmin, getClaimsByClientIdForAdmin } from '../../../redux/adminActions'
 import ReportCard from './ReportCard/ReportCard'
 import s from './ReportsAdminPanel.module.scss'
 
@@ -18,6 +18,10 @@ export default function ReportsAdminPanel() {
     dispatch(getAllClaimsForAdmin())
   }
 
+  function handleFilterType(e) {
+    dispatch(getClaimsByTypeForAdmin(e.target.value))
+  }
+
   function handleSubmitByUserClientId(e){
     e.preventDefault()
     if (!searchInput.claim_user_client_id) return
@@ -29,12 +33,8 @@ export default function ReportsAdminPanel() {
     dispatch(getClaimsByProfessionalIdForAdmin(searchInput.claim_user_professional_id))
   }
 
-  useEffect(() => {
-    console.log(searchInput);
-  },[searchInput])
-
   return (
-    <div>
+    <div className={s.mainContainer}>
       <div className={s.formsContainer}>
         <form onSubmit={handleSubmitByUserProfessionalId}>
           <label htmlFor="claim_user_professional_id">Buscar reporte por ID del usuario profesional</label>
@@ -46,6 +46,12 @@ export default function ReportsAdminPanel() {
           <input type="text" name="claim_user_client_id" onChange={handleInputChange} />
           <input className={s.submitBtn} type="submit" value="buscar" />
         </form>
+        <div className={s.filterByTypeContainer}>
+          <button onClick={handleFilterType} value='report'>Reportes</button>
+          <button onClick={handleFilterType} value='jobs'>Trabajos</button>
+          <button onClick={handleFilterType} value='recoverAccount'>Recuperación de cuenta</button>
+          <button onClick={handleFilterType} value='otherSubject'>Otros</button>
+        </div>
         <button onClick={handleGetAllClaims}>Traer todos los reportes</button>
       </div>
       <div className={s.cardsContainer}>

@@ -22,10 +22,6 @@ function UsersAdminPanel(props) {
     dispatch(actionGetAllJobs())
   }, [dispatch])
 
-  useEffect(() => {
-    console.log(users);
-  }, [users])
-
   //funcion que trae todos lo usuarios al clickear el boton.
   function getAllUsers() {
     dispatch(getAllUsersForAdmin())

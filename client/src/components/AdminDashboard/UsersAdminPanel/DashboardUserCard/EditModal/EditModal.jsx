@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editUser, actionFetchingAdminEditUserReset } from "../../../../../redux/adminActions";
 import { actionGetAllJobs } from '../../../../../redux/jobActions'
+import Swal from 'sweetalert2'
 import s from './EditModal.module.scss';
 
 
@@ -41,9 +42,23 @@ function EditModal(props) {
   useEffect(() => {
     if (fetchingAdminEditUserSuccess) {
       handleEditOpenModal(!editModalActive)   
-      alert('Usuario editado correctamente')
+      Swal.fire({
+        icon: 'success',
+        title: 'El usuario ha sido modificado correctamente.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     } else if(fetchingAdminEditUserFailure) {
-      alert('Hubo un error al editar el usuario')
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error al modificar el usuario.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     }
     dispatch(actionFetchingAdminEditUserReset())
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,7 +90,7 @@ function EditModal(props) {
           </div>
           <div>
             <label htmlFor="rating">Rating</label>
-            <input type="text" name='rating' value={userData.rating} onChange={handleInputChange} />
+            <h3>{userData.rating}</h3>
           </div>
           <div>
             <label htmlFor="country">Pais</label>
