@@ -9,7 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 //style and utilities
 import s from './Login.module.scss';
-import logo from './assets/logo.svg';
+import logo from './assets/logo.png';
 import background from './assets/background.svg';
 import axios from 'axios';
 import Loader from './Loader/Loader';

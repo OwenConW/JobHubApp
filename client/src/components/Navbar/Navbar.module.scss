@@ -96,8 +96,8 @@
         height: 100%;
 
         img{
-            width: 90%;
-            height: 90%;
+            width: 100%;
+            height: 80%;
         }
     }
 
@@ -230,9 +230,11 @@
             display: flex;
             justify-content: flex-end;
             width: 100%;
+            margin-right: 20px;
 
             img{
-                width: 20%;
+                width: 100px;
+                height: 90%;
             }
         }
         .profile{

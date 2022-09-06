@@ -60,21 +60,23 @@ function ReviewEditModal(props) {
           <div className={s.informationRightSide}>
             <div>
               <label htmlFor="rating">Rating</label>
-              <input type="text" name="rating" value={reviewData.rating} onChange={handleChange}/>
+              <h2>{reviewData.rating}</h2>
             </div>
             <div>
               <label htmlFor="feedback_client">Descripción</label>
-              <input type="text" name="feedback_client" value={reviewData.feedback_client} onChange={handleChange}/>
+              <h2>{reviewData.feedback_client}</h2>
             </div>
             <div>
               <label htmlFor="isActive">Activa?</label>
               <div>
-                <input type="button" name="isActive" value='Si' onClick={handleClick}/>
-                <input type="button" name="isActive" value='No' onClick={handleClick}/>
+                <input className={`${reviewData.isActive ? s.yesBtn : null}`} type="button" name="isActive" value='Si' onClick={handleClick}/>
+                <input className={`${!reviewData.isActive ? s.noBtn : null}`} type="button" name="isActive" value='No' onClick={handleClick}/>
               </div>
             </div>
-            <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>
-            <input type="submit" value="Editar" />
+            <div>
+              <input className={s.editBtn} type="submit" value="Editar" />
+              <button className={s.cancelBtn} name="cancel-btn" onClick={handleEdit}>Cancelar</button>
+            </div>
           </div>
         </form>
     </div>

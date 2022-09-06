@@ -13,7 +13,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+<<<<<<< HEAD
 axios.defaults.baseURL =  process.env.REACT_APP_URL || 'http://localhost:3001';
+=======
+axios.defaults.baseURL = process.env.REACT_APP_URL || 'http://localhost:3001';
+>>>>>>> 8b514319106a23833f2f77e287728935562f45ab
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

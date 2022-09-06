@@ -26,8 +26,8 @@ export default function OrdersDeleteModal(props) {
       <div className={s.infoContainer}>
         <h1>Estas seguro que deseas eliminar la orden?</h1>
         <div className={s.btnContainer}>
-          <button type="button" onClick={handleDelete}>Eliminar</button>
-          <button type="button" name="cancel-btn" onClick={handleDelete}>Cancelar</button>
+          <button className={s.deleteBtn} type="button" onClick={handleDelete}>Eliminar</button>
+          <button className={s.cancelBtn} type="button" name="cancel-btn" onClick={handleDelete}>Cancelar</button>
         </div>
       </div>
     </div>

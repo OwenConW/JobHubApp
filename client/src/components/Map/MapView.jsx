@@ -5,6 +5,7 @@ import AllMarkers from './AllMarkers/AllMarkers';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Preview from './preview/Preview';
+import defaultimage from '../Navbar/assets/deafultimage.png';
 
 //map
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
@@ -94,7 +95,7 @@ const MapView = () => {
 						<h3>Mapa</h3>
 						<div className={s.user}>
 							<div className={activeUser?.isPremium ? s.profileImagePremium : s.profileImage}>
-								<img src={activeUser?.image} alt="userprofile" />
+								<img src={activeUser.image === 'noimage' ? defaultimage : activeUser.image} alt="userprofile" />
 							</div>
 							<div className={s.name}>
 								{activeUser?.name} {activeUser?.last_Name}
@@ -121,7 +122,7 @@ const MapView = () => {
 							return(
 								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
 								<div className={user.isPremium ? s.profileImageP : s.profileImage}>
-									<img src={user.image} alt="userprofile" />
+									<img src={user.image === 'noimage' ? defaultimage : user.image } alt="userprofile" />
 								</div>
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
@@ -150,11 +151,11 @@ const MapView = () => {
 							return(
 								<Link to={`/details/${user.id}`} className={s.link} key={user.id}>
 								<div className={user.isPremium ? s.profileImageP : s.profileImage}>
-									<img src={user.image} alt="userprofile" />
+									<img src={user.image === 'noimage' ?  defaultimage : user.image } alt="userprofile" />
 								</div>
 								<div className={s.name}>
 									<h3>{user.name} {user.last_Name}</h3>
-									<p>{user.professions[0].name}</p>
+									<p>{user.professions[0]?.name}</p>
 									<p>Se encuentra a {Number.parseFloat(pitagorasDistance(activeUser?.coordinate, user.coordinate)).toFixed(2)} KM</p>
 								</div>
 								</Link>

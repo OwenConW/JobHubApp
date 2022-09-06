@@ -51,9 +51,8 @@ function ReviewDashboardCard(props) {
         <h4>Activa?</h4>
         <h4>{isActive ? "Si" : "No"}</h4>
       </div>
-      <button className={s.deleteBtn} onClick={handleDeleteOpenModal}>Eliminar</button>
-
-      <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>
+        <button className={s.deleteBtn} onClick={handleDeleteOpenModal}>Eliminar</button>
+        <button className={s.editBtn} onClick={handleEditOpenModal}>Editar</button>
     </div>
   </div>
   )
