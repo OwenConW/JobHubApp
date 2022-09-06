@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { getDniForm } from '../../redux/userActions'
 import { useDispatch } from 'react-redux';
 
+import Swal from 'sweetalert2';
+
 //auth0
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -22,10 +24,10 @@ const Onboarding = () => {
   const email = getLocalStorage().mail;
   const last_name = getLocalStorage().last_name;
   const name = getLocalStorage().name;
-  
+
   const navigate = useNavigate();
   const { logout } = useAuth0();
-  
+
   const dispatch = useDispatch();
 
   const [user, setUser] = useStateWithCallbackLazy({
@@ -138,7 +140,13 @@ const Onboarding = () => {
         coordinate: [response.data[0].lat, response.data[0].lon]
       }, async (currentUser) => {
           let response = await axios.post('/users', currentUser);
-          alert (response)
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: response.data,
+            showConfirmButton: false,
+            timer: 1500
+          })
           navigate("../", { replace: true })
           axios.get(`/mails/welcome?name=${currentUser.name}&mail=${currentUser.mail}`  )
       })
