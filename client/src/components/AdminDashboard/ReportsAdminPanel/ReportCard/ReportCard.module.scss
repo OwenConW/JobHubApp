@@ -1,0 +1,55 @@
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
+.mainContainer {
+  border-radius: 12px;
+  width: 40%;
+  height: 200px;
+  .descriptionContainer {
+      display: flex;
+      border-radius: 12px;
+      justify-content: flex-start;
+      align-items: flex-start;
+      color: $lightgreen-color;
+      margin: 10px 10px;
+      width: 100%;
+      height: 40%;
+    }
+    .claimDataContainer {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      height: 50%;
+      width: 100%;
+      background-color: $green-color;
+      color: $white-color;
+      display: flex;
+      flex-direction: column;
+        // .deleteBtn {
+        //   position: relative;
+        //   right: -100px;
+        // }
+        .claimId {
+          align-self: center;
+          margin-top: 5px;
+        }
+        .idsContainer {
+          display: flex;
+          justify-content: space-evenly;
+          margin-bottom: 20px;
+          margin-top: 5px;
+        }
+        .dateAndActiveContainer { 
+          display: flex;
+          justify-content: space-evenly;
+          margin-left: -10px;
+            .activeContainer {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: -5px;
+            }
+        }
+    }
+}

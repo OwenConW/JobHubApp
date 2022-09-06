@@ -145,7 +145,6 @@ users.put('/:id', async (req, res, next) => {
     }
 })
 
-    
 //RUTA PARA EDITAR USUARIO SIN JOBS
 users.put("/edit/:id" , async (req, res, next) => {
     const { id } = req.params

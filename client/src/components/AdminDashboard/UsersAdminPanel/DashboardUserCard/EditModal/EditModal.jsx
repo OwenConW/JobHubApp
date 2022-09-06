@@ -2,31 +2,39 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editUser, actionFetchingAdminEditUserReset } from "../../../../../redux/adminActions";
 import { actionGetAllJobs } from '../../../../../redux/jobActions'
+import Swal from 'sweetalert2'
 import s from './EditModal.module.scss';
 
 
 function EditModal(props) {
-  const { editModalActive, handleEditOpenModal } = props;
-  //estado de los datos a enviar a la DB, (professions harcodeado por la misma razon que en el handleRestore)
-  const [userData, setUserData] = useState({...props})
+  const {id, name, last_Name, description, dni, date_of_birth, mail, phone, country, city, street, address, coordinate, isProfessional,rating, image, profession, editModalActive, handleEditOpenModal } = props;
+  //estado de los datos a enviar a la DB, (profession harcodeado por la misma razon que en el handleRestore)
+  const [userData, setUserData] = useState({id, name, last_Name, description, dni, date_of_birth, mail, phone, coordinate, isProfessional, image, country, city, street, address, rating, profession})
   const dispatch = useDispatch()
+  const professionFromDb = useSelector( state => state.jobs.jobs)
 
   //ESTADOS DE HANDLING DE EXITO Y ERROR PARA LA EDICION DE USUARIO
   const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
   const fetchingAdminEditUserFailure = useSelector(state => state.fetching.fetchingAdminEditUserFailure)
 
   //CAMBIA EL ESTADO DE LOS INPUTS (userData), pero para botones.
-  function handleClick(e) {
-    setUserData({...userData, [e.target.name]: e.target.value === "Si" ? true : false})
+  function handleInputChange(e) {
+    if (e.target.name === 'add-profession') {
+      if (userData.profession.includes(e.target.value) || e.target.value === '') return
+      return setUserData({...userData, profession: [...userData.profession, e.target.value]})
+    }
+    setUserData({...userData, [e.target.name]: e.target.value})
+  }
+
+  function handleRemoveProfession(e) {
+    setUserData({...userData, profession: userData.profession.filter(p => p !== e.target.value)})
   }
 
   //funcion onSubmit
   function handleEdit(e){
     if(e.target.name === "cancel-btn") return handleEditOpenModal(!editModalActive) 
-    if(userData?.professions.length) {
-      userData.professions = userData.professions.map( p => p.name)
-    }
     e.preventDefault()
+    console.log(userData.profession);
     dispatch(editUser(userData.id , userData))
   }
   
@@ -34,9 +42,23 @@ function EditModal(props) {
   useEffect(() => {
     if (fetchingAdminEditUserSuccess) {
       handleEditOpenModal(!editModalActive)   
-      alert('Usuario editado correctamente')
+      Swal.fire({
+        icon: 'success',
+        title: 'El usuario ha sido modificado correctamente.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     } else if(fetchingAdminEditUserFailure) {
-      alert('Hubo un error al editar el usuario')
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error al modificar el usuario.',
+        showConfirmButton: false,
+        timer: 2200,
+        position: 'top-end',
+        backdrop: false,
+      })
     }
     dispatch(actionFetchingAdminEditUserReset())
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,35 +74,35 @@ function EditModal(props) {
         <div className={s.informationLeftSide}>
           <div>
             <label htmlFor="name">Nombre</label>
-            <h3>{userData.name}</h3>
+            <input type="text" name='name' value={userData.name} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="last_Name">Apellido</label>
-            <h3>{userData.last_Name}</h3>
+            <input type="text" name='last_Name' value={userData.last_Name} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="dni">DNI</label>
-            <h3>{userData.dni}</h3>
+            <input type="text" name='dni' value={userData.dni} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="date_of_birth">Fecha de nacimiento</label>
-            <h3>{userData.date_of_birth}</h3>
+            <input type="text" name='date_of_birth' value={userData.date_of_birth} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="rating">Rating</label>
-            <h3>{userData.rating === -1 ? "No tiene" : userData.rating}</h3>
+            <h3>{userData.rating}</h3>
           </div>
           <div>
             <label htmlFor="country">Pais</label>
-            <h3>{userData.country}</h3>
+            <input type="text" name='country' value={userData.country} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="city">Ciudad</label>
-            <h3>{userData.city}</h3>
+            <input type="text" name='city'value={userData.city} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="mail">Mail</label>
-            <h3>{userData.mail}</h3>
+            <input type="text" name='mail' value={userData.mail} onChange={handleInputChange} />
           </div>
         </div>
 
@@ -88,73 +110,40 @@ function EditModal(props) {
         <div className={s.informationRightSide}>
           <div>
             <label htmlFor="phone">Telefono</label>
-            <h3>{userData.phone}</h3>
+            <input type="text" name='phone' value={userData.phone} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="description">Descripción</label>
-            <h3>{userData.description}</h3>
+            <input type="text" name='description' value={userData.description} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="street">Calle</label>
-            <h3>{userData.street}</h3>
+            <input type="text" name='street' value={userData.street} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="address">Numero</label>
-            <h3>{userData.address}</h3>
-          </div>
-          <div>
-            <label htmlFor="isActive">Activo?</label>
-            <div className={s.btnsContainer}>
-              <input className={`${userData.isActive ? s.yesBtn : null}`} type="button" name="isActive" value='Si' onClick={handleClick}/>
-              <input className={`${!userData.isActive ? s.noBtn : null}`} type="button" name="isActive" value='No' onClick={handleClick}/>
-            </div>
-          </div>
-          <div>
-            <label htmlFor="isAdmin">Admin?</label>
-            <div>
-              <input className={`${userData.isAdmin ? s.yesBtn : null}`} type="button" name="isAdmin" value='Si' onClick={handleClick}/>
-              <input className={`${!userData.isAdmin ? s.noBtn : null}`} type="button" name="isAdmin" value='No' onClick={handleClick}/>
-            </div>
-          </div>
-          <div>
-            <label htmlFor="isBanned">Suspendido?</label>
-            <div>
-              <input className={`${userData.isBanned ? s.yesBtn : null}`} type="button" name="isBanned" value='Si' onClick={handleClick}/>
-              <input className={`${!userData.isBanned ? s.noBtn : null}`} type="button" name="isBanned" value='No' onClick={handleClick}/>
-            </div>
-          </div>
-          <div>
-            <label htmlFor="isProfessional">Profesional?</label>
-            <div>
-              <input className={`${userData.isProfessional ? s.yesBtn : null}`} type="button" name="isProfessional" value='Si' onClick={handleClick}/>
-              <input className={`${!userData.isProfessional ? s.noBtn : null}`} type="button" name="isProfessional" value='No' onClick={handleClick}/>
-            </div>
-          </div>
-          <div>
-            <label htmlFor="isPremium">Premium?</label>
-            <div>
-              <input className={`${userData.isPremium ? s.yesBtn : null}`} type="button" name="isPremium" value='Si' onClick={handleClick}/>
-              <input className={`${!userData.isPremium ? s.noBtn : null}`} type="button" name="isPremium" value='No' onClick={handleClick}/>
-            </div>
+            <input type="text" name='address' value={userData.address} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="name">Profesiones</label>
-            {userData?.professions?.length && userData?.professions?.map(p => {
+            {userData.profession.length ? userData?.profession?.length && userData?.profession?.map(p => {
               return (
-                <h4>{p.name}</h4>
+                <button onClick={handleRemoveProfession} value={p}>{p}</button>
               )
-            })}
-            {/* <select onClick={handleProfessionsClick} name="add-professions">
+            }) : <h4>No tiene</h4>}
+            <select onClick={handleInputChange} name="add-profession">
                   <option name="main-option" value=''>Selecciona profesiones</option>
               {professionFromDb?.map(p => {
                 return (
-                  <option name="add-professions" value={p.name}>{p.name}</option>
+                  <option name="add-profession" value={p.name}>{p.name}</option>
                 )
               })}
-            </select> */}
+            </select>
           </div>
-          <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>
-          <input type="submit" value='Editar' />
+          <div>
+            <input className={s.editBtn} type="submit" value='Editar' />
+            <button className={s.cancelBtn} name="cancel-btn" onClick={handleEdit}>Cancelar</button>
+          </div>
         </div>
       </form>
     </div>

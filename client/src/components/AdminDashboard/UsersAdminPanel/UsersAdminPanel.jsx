@@ -35,7 +35,7 @@ function UsersAdminPanel(props) {
     setSearchByFiltersInput({...searchByFiltersInput, [e.target.name]:e.target.value})
   }
   
-  //funcion submit del form por ID
+  //funcion submit del form por Nombre
   function handleSearchUserByFilterSubmit(e) {
     e.preventDefault();
     if(!searchByFiltersInput) return
@@ -83,8 +83,11 @@ function UsersAdminPanel(props) {
         users[0] !== '' ? 
         <div className={s.cardsContainer}>  
               {users?.map( u => {
+               const professions = u.professions.map( p => {
+                return p.name
+               })
                 return(
-                  <DashboardUserCard key={u.id} {...u} />
+                  <DashboardUserCard key={u.id} {...u} profession={professions}/>
                 )
               })}
         </div> :
