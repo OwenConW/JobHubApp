@@ -4,6 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import { getAllUsersForAdmin, 
          getAllReviewsForAdmin,
          getAllOrdersForAdmin,
+         getAllClaimsForAdmin,
          actionFetchingAdminDeleteUserReset, 
          actionFetchingAdminRestoreUserReset,
          actionFetchingAdminDeleteReviewReset,
@@ -21,6 +22,7 @@ import ProfessionsCreationPanel from "./ProfessionsCreationPanel/ProfessionsCrea
 import * as functions from '../../handlers/localStorage'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
+import ReportsAdminPanel from "./ReportsAdminPanel/ReportsAdminPanel";
 
 
 function AdminDashboard() {
@@ -31,7 +33,7 @@ function AdminDashboard() {
   //if(!isAuthenticated) navigate('/')
   //if(!activeUser?.isAdmin) navigate('/home')
 
-  const [panelDiplayed, setPanelDisplayed] = useState("usersPanel");
+  const [panelDiplayed, setPanelDisplayed] = useState("claimsPanel");
   const [isActive, setIsActive] = useState({usersPanel: true, reviewsPanel: false, ordersPanel: false, professionsPanel: false})
 
 
@@ -84,6 +86,7 @@ function AdminDashboard() {
     dispatch(getAllReviewsForAdmin())
     dispatch(getAllOrdersForAdmin())
     dispatch(actionGetAllJobs())
+    dispatch(getAllClaimsForAdmin())
   }, [dispatch])
 
   //Alert DELETE USER
@@ -167,6 +170,7 @@ function AdminDashboard() {
                 <button onClick={handlePanelChange} className={isActive.reviewsPanel ? s.selected : null} value="reviewsPanel">Reseñas</button>
                 <button onClick={handlePanelChange} className={isActive.ordersPanel ? s.selected : null} value="ordersPanel">Ordenes</button>
                 <button onClick={handlePanelChange} className={isActive.professionsPanel ? s.selected : null} value="professionsPanel">Profesiones</button>
+                <button onClick={handlePanelChange} className={isActive.claimsPanel ? s.selected : null} value="claimsPanel">Reportes</button>
                 {/* <button onClick={handlePanelChange} value="difussionPanel">Difusión</button> */}
                 {/* <button onClick={handlePanelChange} value="statsPanel">Estadisticas</button> */}
               </div>
@@ -177,7 +181,8 @@ function AdminDashboard() {
                   panelDiplayed === "usersPanel" ? <UsersAdminPanel users={users}/> :
                   panelDiplayed === "reviewsPanel" ? <ReviewsAdminPanel reviews={reviews} /> :
                   panelDiplayed === "ordersPanel" ? <OrdersAdminPanel orders={orders} /> : 
-                  panelDiplayed === "professionsPanel" ? <ProfessionsCreationPanel professions={professions} /> : null
+                  panelDiplayed === "professionsPanel" ? <ProfessionsCreationPanel professions={professions} /> : 
+                  panelDiplayed === "claimsPanel" ? <ReportsAdminPanel /> : null
                   // panelDiplayed === "difussionPanel" ? <DifussionAdminPanel /> : null
                 }
                 

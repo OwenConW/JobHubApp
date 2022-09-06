@@ -5,6 +5,7 @@ $darkgreen-color: #07393C;
 
 
 .mainContainer {
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   height: 100%;

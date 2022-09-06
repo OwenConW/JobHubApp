@@ -8,7 +8,9 @@ import {
   getReviewByUserProfessionalId,
   getReviewById,
   getOrdersById,
-  getReviewByUserClientId
+  getReviewByUserClientId,
+  getAllClaims,
+  getClaimsById
 } from './adminSlice.js';
 import {
   fetchingAdminDeleteUser,
@@ -53,10 +55,8 @@ import {
 
 // ======================= ACTIONS PARA USERS =================================
 export const getAllUsersForAdmin = () => (dispatch) => {
-  console.log('entro');
   axios.get('/users/all')
   .then((res) => {
-      console.log('entr2');
       dispatch(getAllUsers(res.data))
     })
     .catch(e => console.error(e))
@@ -114,7 +114,7 @@ export const restoreUser = (id) => (dispatch) => {
 
 export const editUser = (id, payload) => (dispatch) => {
   dispatch(fetchingAdminEditUser())
-  axios.put(`/users/admin/${id}`, payload)
+  axios.put(`/users/${id}`, payload)
   .then(res => {
     dispatch(getAllUsersForAdmin())
     dispatch(fetchingAdminEditUserSuccess())
@@ -125,6 +125,19 @@ export const editUser = (id, payload) => (dispatch) => {
       dispatch(getAllUsersForAdmin())
     })
 }
+
+export const modifyUserStatus = (field, id, payload) => (dispatch) => {
+  //crear error handler para esta action
+  axios.put(`/users/${field}/${id}`, payload)
+  .then(res => {
+    dispatch(getAllUsersForAdmin())
+  })
+    .catch(e =>{
+      console.error(e)
+      dispatch(getAllUsersForAdmin())
+    })
+}
+
 
 export const actionFetchingAdminDeleteUserReset = () => (dispatch) => {
   dispatch(fetchingAdminDeleteUserReset())
@@ -320,4 +333,32 @@ export const actionFetchingAdminCreateProfessionReset = () => (dispatch) => {
 
 export const actionFetchingAdminDeleteProfessionReset = () => (dispatch) => {
   dispatch(fetchingAdminDeleteProfessionReset())
+}
+
+// ======================= ACTIONS PARA CLAIMS =================================
+
+export const getAllClaimsForAdmin = () => (dispatch) => {
+  axios.get('/claims')
+  .then((res) => {
+      dispatch(getAllClaims(res.data))
+    })
+    .catch(e => console.error(e))
+}
+
+export const getClaimsByProfessionalIdForAdmin = (id) => (dispatch) => {
+  axios.get(`/claims/${id}`)
+  .then((res) => {
+    console.log(res.data);
+      dispatch(getClaimsById(res.data.claims))
+    })
+    .catch(e => console.error(e))
+}
+
+export const getClaimsByClientIdForAdmin = (id) => (dispatch) => {
+  axios.get(`/claims/client/${id}`)
+  .then((res) => {
+    console.log(res.data);
+      dispatch(getClaimsById(res.data))
+    })
+    .catch(e => console.error(e))
 }

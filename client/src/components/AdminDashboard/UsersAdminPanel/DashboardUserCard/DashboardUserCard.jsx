@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import EditModal from "../DashboardUserCard/EditModal/EditModal";
 import DeleteUserModal from "../DashboardUserCard/DeleteUserModal/DeleteUserModal";
 import RestoreUserModal from "../DashboardUserCard/RestoreUserModal/RestoreUserModal";
 import s from './DashboardUserCard.module.scss';
+import { modifyUserStatus } from '../../../../redux/adminActions'
+import { useDispatch } from "react-redux";
 
 function DashboardUserCard(props) {
+  const dispatch = useDispatch()
   const {   id,
             name, 
             last_Name, 
@@ -26,7 +29,7 @@ function DashboardUserCard(props) {
             isAdmin, 
             isBanned, 
             isActive, 
-            professions } = props;
+            profession } = props;
 
   //estado que abre y cierra los DETALLES de la card.
   const [openModal, setOpenModal] = useState(false);
@@ -39,6 +42,11 @@ function DashboardUserCard(props) {
   function handleOpenModal(e) {
     setOpenModal(!openModal)
   }
+
+  function handleModifyStatus(e) {
+    dispatch(modifyUserStatus(e.target.value, id, {[e.target.name]: !props[e.target.name]} ))
+  }
+
   function handleDeleteOpenModal(e) {
     setDeleteModalActive(!DeleteModalActive)
   }
@@ -70,23 +78,23 @@ function DashboardUserCard(props) {
           <h1>{name} {last_Name}</h1>
         </div>
         <div>
-          <h4>Premium</h4>
+          <button onClick={handleModifyStatus} value='premium' name="isPremium">Premium</button>
           <h4>{isPremium ? "Si" : "No"}</h4>
         </div>
         <div>
-          <h4>Admin</h4>
+          <button onClick={handleModifyStatus} value='updateadmin' name="isAdmin">Admin</button>
           <h4>{isAdmin ? "Si": "No"}</h4>
         </div>
         <div>
-          <h4>Activo</h4>
+          <button onClick={handleModifyStatus} value='destroy' name="isActive">Activo</button>
           <h4>{isActive ? "Si" : "No"}</h4>
         </div>
         <div>
-          <h4>Profesional</h4>
+          <button onClick={handleModifyStatus} value='professional' name='isProfessional'>Profesional</button>
           <h4>{isProfessional ? "Si" : "No"}</h4>
         </div>
         <div>
-          <h4>Suspendido</h4>
+          <button onClick={handleModifyStatus} value='banned' name='isBanned'>Suspendido</button>
           <h4>{isBanned ? "Si" : "No"}</h4>
         </div>
         <div>
@@ -151,14 +159,13 @@ function DashboardUserCard(props) {
         </div>
         <div>
         <h4>Profesiones</h4>
-        <h4>{professions?.map(p => {
+        <h4>{profession?.map(p => {
           return (
-            <h4>{p.name}</h4>
+            <h4>{p}</h4>
           )
         })}
         </h4>
         </div>
-        
       </div>
     </div>
   )

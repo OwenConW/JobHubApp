@@ -133,70 +133,7 @@ users.put('/:id', async (req, res, next) => {
     }
 })
 
-// RUTA DEL ADMIN PARA EDITAR EL USUARIO
-users.put('/admin/:id', async (req, res, next) => {
-        const { id } = req.params
-        const { name, 
-                last_Name, 
-                date_of_Birth, 
-                image, 
-                dni, 
-                mail, 
-                phone, 
-                description, 
-                country, 
-                city, 
-                coordinate, 
-                street, 
-                address, 
-                isProfessional, 
-                profession,
-                isPremium,         
-                isActive,
-                isBanned,
-                isAdmin } = req.body;
-        const nameMinuscule = name?.toLowerCase();
-        const lastNameMinuscule = last_Name?.toLowerCase();
-        const mailMinuscule = mail?.toLowerCase();
-    
-        try {
-            const userUpdated = await User.findOne({ where: { id }, include: Profession })
-            const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
-            await userUpdated.removeProfession(oldProfessions)
-            
-            if(profession?.length > 0){
-                const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
-                await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
-            }
-    
-            userUpdated.set({
-                name: nameMinuscule,
-                last_Name: lastNameMinuscule,
-                date_of_Birth,
-                image,
-                dni,
-                mail: mailMinuscule,
-                phone,
-                description,
-                country,
-                city,
-                coordinate,
-                street,
-                address,
-                isPremium,
-                isProfessional,
-                isActive,
-                isBanned,
-                isAdmin
-            })
-            await userUpdated.save()
-            res.status(200).send(`The user "${name}" updated successfully`)
-            } catch (error) {
-            console.log(error);
-            next (error)
-        }
-    })
-    
+
 //RUTA PARA EDITAR USUARIO SIN JOBS
 users.put("/edit/:id" , async (req, res, next) => {
     const { id } = req.params
