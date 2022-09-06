@@ -114,20 +114,20 @@ $darkgreen-color: #07393C;
       margin-top: 10px;
       padding-top: 15px;
       height: auto;
+      font-size: 1.2rem;
          .description {
-            width: 100px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            width: 200px;
+            height: 100px;
+            overflow-y: auto;
+            font-size: 1.3rem;
             h4{
                width: 100%;
-               text-overflow: ellipsis;
-               white-space: initial;
             }
          }
          .userDataContainer{
                display: flex;
                flex-direction: column;
-               gap: 10px;
+               gap: 20px;
          
                .dniEmailContainer {
                   display: flex;
@@ -172,6 +172,6 @@ $darkgreen-color: #07393C;
 
 //Efecto copado para el display del detalle
 .openModal {
-   height: 160px;
+   height: 200px;
    transition: height 1s;
 }

@@ -5,7 +5,7 @@ import s from "./ReportCard.module.scss"
 
 
 export default function ReportCard(props) {
-  const { id, id_user_professional, id_user_client, feedback_claims, date_created } = props;
+  const { id, id_user_professional, id_user_client, feedback_claims, date_created, subject } = props;
   const dipatch = useDispatch();
 
   function handleDeleteClaim(e) {
@@ -20,6 +20,12 @@ export default function ReportCard(props) {
         <div className={s.idsContainer}>
           <h3>ID usuario profesional: {id_user_professional}</h3>
           <h3>ID usuario cliente: {id_user_client}</h3>
+          <h3>Categoria: {
+          subject === 'report' ? 'Reporte': 
+          subject === 'jobs' ? 'Trabajo': 
+          subject === 'recoverAccount' ? 'Recuperación de cuenta': 
+          subject === 'otherSubject' ? 'Otros': null
+          }</h3>
         </div>
         <div className={s.dateAndActiveContainer}>
           <h3>Fecha de creación: {date_created}</h3>

@@ -125,12 +125,16 @@ function EditModal(props) {
             <input type="text" name='address' value={userData.address} onChange={handleInputChange} />
           </div>
           <div>
-            <label htmlFor="name">Profesiones</label>
-            {userData.profession.length ? userData?.profession?.length && userData?.profession?.map(p => {
-              return (
-                <button onClick={handleRemoveProfession} value={p}>{p}</button>
-              )
-            }) : <h4>No tiene</h4>}
+            <div className={s.containerLabelProfessions}>
+              <label htmlFor="name">Profesiones</label>
+              <div className={s.removeProfessionsContainer}>
+                {userData.profession.length ? userData?.profession?.length && userData?.profession?.map(p => {
+                  return (
+                    <button className={s.removeProfessionBtn} onClick={handleRemoveProfession} value={p}>{p}</button>
+                  )
+                }) : <h4>No tiene</h4>}
+              </div>
+            </div>
             <select onClick={handleInputChange} name="add-profession">
                   <option name="main-option" value=''>Selecciona profesiones</option>
               {professionFromDb?.map(p => {

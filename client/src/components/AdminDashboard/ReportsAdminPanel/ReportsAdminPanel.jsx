@@ -46,14 +46,15 @@ export default function ReportsAdminPanel() {
           <input type="text" name="claim_user_client_id" onChange={handleInputChange} />
           <input className={s.submitBtn} type="submit" value="buscar" />
         </form>
-        <div className={s.filterByTypeContainer}>
-          <button onClick={handleFilterType} value='report'>Reportes</button>
-          <button onClick={handleFilterType} value='jobs'>Trabajos</button>
-          <button onClick={handleFilterType} value='recoverAccount'>Recuperación de cuenta</button>
-          <button onClick={handleFilterType} value='otherSubject'>Otros</button>
-        </div>
-        <button onClick={handleGetAllClaims}>Traer todos los reportes</button>
       </div>
+        <div className={s.filterByTypeContainer}>
+          <button className={s.filterBtn} onClick={handleFilterType} value='report'>Reportes</button>
+          <button className={s.filterBtn} onClick={handleFilterType} value='jobs'>Trabajos</button>
+          <button className={s.filterBtn} onClick={handleFilterType} value='recoverAccount'>Recuperación de cuenta</button>
+          <button className={s.filterBtn} onClick={handleFilterType} value='otherSubject'>Otros</button>
+        </div>
+        <button className={s.allClaimsBtn} onClick={handleGetAllClaims}>Traer todos los reportes</button>
+        <div className={s.divisoryLine}></div>
       <div className={s.cardsContainer}>
         {
         claims.length ? claims?.map( c => {
