@@ -1,4 +1,8 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { actionFetchingMercadopagoLink, 
+  actionClearMercadopagoRedirectLink, 
+  actionSetFetchingMercadoPagoLinkFalse } from "../../../../redux/fetchingActions"
 import { useSelector } from "react-redux"
 import * as functions from "../../../../handlers/localStorage"
 import s from "./Premium.module.scss"
@@ -9,45 +13,22 @@ import rocket from "./assets/rocket.png"
 import etiqueta from "./assets/etiqueta-del-precio.png"
 import activo from "./assets/activo.png"
 import calendar from "./assets/calendar.png"
-import { useDispatch } from "react-redux"
-import { actionFetchingMercadopagoLink, 
-  actionClearMercadopagoRedirectLink, 
-  actionSetFetchingMercadoPagoLinkFalse } from "../../../../redux/fetchingActions"
+import PremiumModal from '../../../Profile/premiumModal/PremiumModal'
 
 const Premium = () => {
 
-    const dispatch = useDispatch()
+    const [modalActive, setModalActive] = useState(false)
 
-    const mercadopagoRedirectLink = useSelector(state => state.fetching.mercadopagoRedirectLink)
+    function handlePremiumModal(e) {
+      setModalActive(!modalActive)
+    }
+
     const activeUser = functions.getLocalStorage()
 
-  
-    const handlePremium = () => {
-      if(true){
-        dispatch(actionFetchingMercadopagoLink())
-      }
-      dispatch(actionClearMercadopagoRedirectLink())
-    }
-
-       
-  useEffect(() => {
-    return () => {
-      dispatch(actionClearMercadopagoRedirectLink())
-    }
-  }, [dispatch])
-
-    useEffect(() => {
-      if(mercadopagoRedirectLink) {
-        window.location.replace(mercadopagoRedirectLink)
-      } 
-    }, [mercadopagoRedirectLink])
-
-    useEffect(() => {
-      dispatch(actionSetFetchingMercadoPagoLinkFalse())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
     return (
+      
       <div className={s.contenedorPadre}>
+        {modalActive ? <PremiumModal mail={activeUser.mail} name={activeUser.name} handlePremiumModal={handlePremiumModal}/> : null}
         <h1 className={s.titleActivo}>
           {activeUser.isPremium
             ? `JobHub Premium Activo`
@@ -94,7 +75,7 @@ const Premium = () => {
                     <h2 className={s.pago}>{`Pago realizado el ${activeUser.payment_date}`}</h2>
                   </div>
     
-                  <div className={s.premiumRocketButton} onClick={'handlePremiumModal'}>
+                  <div className={s.premiumRocketButton} >
                     <div>
                       <img src={activo} alt="Premium Logo"></img>
                     </div>
@@ -109,11 +90,13 @@ const Premium = () => {
                 <div className={s.contenedorPrecio}>
                 <img src={etiqueta} alt=""/><h2>AR$4000</h2> 
                 </div>
-                <div className={s.contenedorBotonBuy} onClick={handlePremium}>
+                <div className={s.contenedorBotonBuy} onClick={handlePremiumModal}>
                     <p>Obtener ahora</p>
                 </div>
               </div>
-              <div className={s.premiumRocketButton}>
+
+              <div className={s.premiumRocketButton} >
+
                 <div>
                   <img src={rocket} alt="Premium Logo"></img>
                 </div>

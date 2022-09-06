@@ -48,8 +48,8 @@ $darkgreen-color: #07393C;
           text-align: center;
           gap: 10px;
           width: 90%;
-        
         }
+        
           
         label {
               text-decoration:underline;
@@ -76,6 +76,23 @@ $darkgreen-color: #07393C;
                   background-color: rgba(92, 92, 238, 0.534);
               }
           }
+          .containerLabelProfessions {
+            display: flex;
+            flex-direction: column;
+            .removeProfessionsContainer{
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+              .removeProfessionBtn {
+                width: 100px;
+                border-radius: 5px;
+                height: 20px;
+                background-color: $green-color;
+                color: $white-color;
+              }
+            }
+          }
+
 
           .cancelBtn {
               width: 80px;
