@@ -36,7 +36,7 @@ console.log('ESTE OBJETO ES LO QUE LLEGA COMO USERS DE GOOGLE',user)
 					}
 
 				}else{
-					setUserLocalStorage({mail: user.email, name: user.given_name, last_name: user.family_name, image: user.picture});
+					setUserLocalStorage({mail: user.email, name: user.given_name, last_name: user.family_name});
 					navigate("../onboarding", { replace: true });
 				}
 			}
