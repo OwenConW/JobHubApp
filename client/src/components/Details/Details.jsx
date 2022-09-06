@@ -12,7 +12,7 @@ import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import ReviewBox from "./ReviewBox/ReviewBox.jsx"
 import { useParams, useNavigate } from "react-router-dom";
 import { getChars, getCharsById } from '../../redux/userActions';
-import defaultimage from './assets/deafultimage.png';
+import defaultimage from '../Navbar/assets/deafultimage.png';
 import axios from "axios";
 import corona from "./assets/corona.png"
 
@@ -68,13 +68,13 @@ const Profile = () => {
             {
               professional.isPremium ? (
                 <div className={s.profile_Img_containerPremium}>
-                  {professional.image ? <img src={professional.image} className={s.profile_ImgPremium} alt=""/> : <img src={defaultimage} className={s.profile_Img} alt=""/>}
+                  {professional.image ? <img src={professional.image === 'noimage' ? defaultimage : professional.image} className={s.profile_ImgPremium} alt=""/> : <img src={defaultimage} className={s.profile_Img} alt=""/>}
                   <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
                   <div onClick={() => onReport()} className={s.btnReport}>Reportar</div>
                 </div>
               ) : (
                 <div className={s.profile_Img_container}>
-                  {professional.image ? <img src={professional.image} className={s.profile_Img} alt=""/> : <img src={defaultimage} className={s.profile_Img} alt=""/>}
+                  {professional.image ? <img src={professional.image === 'noimage' ? defaultimage : professional.image} className={s.profile_Img} alt=""/> : <img src={defaultimage} className={s.profile_Img} alt=""/>}
                   <div onClick={() => onCoordinate()} className={s.btnCoordinate}>Contactar</div>
                   <div onClick={() => onReport()} className={s.btnReport}>Reportar</div>
                 </div>
