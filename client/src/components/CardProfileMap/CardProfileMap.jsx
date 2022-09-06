@@ -2,16 +2,20 @@ import React from "react";
 import s from './CardProfileMap.module.scss';
 import star from './assets/star.svg'
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-// let order = { name: 'Nombre 1', profession: 'Diseñador', rating: 4.2, img: userImg}
 
 const CardProfileMap = ({order}) => {
   let allUsers = useSelector((state) => state.users.users)
+  const navigate = useNavigate()
+  const linkClick = () => {
+    navigate('../ProfileConfig/orders')
+  } 
 
   let professional = allUsers?.find(user => user.id === order.id_user_professional)
   console.log(professional)
     return (
-        <div className={s.orders}>
+        <div className={s.orders} onClick={linkClick}>
           <div className={s.imgDetail}><img src={professional?.image} alt="imagen"></img></div>
     
           <div className={s.orderDetail}>
@@ -19,8 +23,8 @@ const CardProfileMap = ({order}) => {
             <h2>{professional?.professions[0]?.name}</h2>
           </div>
           <div className={s.orderDetail2}>
-            {professional?.rating === -1 ? '' : <h3><img src={star} alt="" /> {professional?.rating}</h3>}
-
+            <h3>Orden: {order.id}</h3>
+            {/* {professional?.rating === -1 ? '' : <h3><img src={star} alt="" /> {professional?.rating}</h3>} */}
           </div>
         </div>
     )

@@ -28,7 +28,7 @@ const OrderCard = ({ order, users }) => {
         </div>
         <div className={s.userdata}>
           <p className={s.name}>{professional?.name} {professional?.last_Name}</p>
-          <p className={s.location}>{professional?.city}, {professional?.country}</p>
+          <p className={s.location}>Numero de Orden: {order?.id}</p>
         </div>
         <div className={s.btndiv}>
           <div className={s.btn} onClick={handleorder}>Detalles</div>
@@ -42,7 +42,7 @@ const OrderCard = ({ order, users }) => {
               <h3>{order?.description ? order.description : 'La orden no tiene descripcion'}</h3>
             </div>
             <div className={s.barra}>
-              <label>Codigo de Orden: {order?.id}</label>
+              <label>Fecha de Creacion: {order?.date_created.split('-').reverse().join('/')}</label>
             </div>
           </div>
         </form>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 //assets
-import logo from './assets/logo.svg';
+import logo from './assets/logo.png';
 import defaultimage from './assets/deafultimage.png';
 import chatlogo from './assets/chat.png';
 
@@ -22,6 +22,7 @@ import Menu from './mobile/Menu';
 
 const Navbar = () => {
 	const [notifications, setNotifications] = useState(0);
+	const [notificationsChat, setNotificationsChat] = useState(0);
 	const [openBurger, setOpenBurger] = useState(false);
 	const { isAuthenticated, logout } = useAuth0();
 	const activeUser = getLocalStorage();
@@ -46,7 +47,15 @@ const Navbar = () => {
 				console.log(e);
 			}
 		};
-
+		const fetchConversations = async () => {
+			try{
+				let conversations = await axios.get(`/conversation/${activeUser.id}`)
+				setNotificationsChat(conversations.data.length)
+			}catch(e){
+				console.log(4)
+			}
+		}
+		fetchConversations()
 		fetchOrders();
 	}, []);
 
@@ -94,6 +103,7 @@ const Navbar = () => {
 							Ordenes
 						</Link>
 						<Link to={`/chat`} className={s.link}>
+							{notificationsChat ? <div className={s.notificationsChat}>{notificationsChat}</div> : ''}
 							<img src={chatlogo} alt="chat" />
 						</Link>
 

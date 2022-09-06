@@ -29,8 +29,9 @@ const theme = createTheme({
 
 const Catalog = (props) => {
 	let professionalsArray = useSelector(
-		(state) => state.users.filteredProfessionals
+		(state) => state.users.filteredProfessionals.filter(prof => prof.isProfessional)
 	);
+	
 	const [asideActive, setAsideActive] = useState(false);
     const [activePages, setActivePages] = useState(0)
 	const [currentPage, setCurrentPage] = useState(1)

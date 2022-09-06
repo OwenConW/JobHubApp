@@ -28,7 +28,7 @@ const ProfessionConfig = () => {
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
   const [user, setUser] = useState({
-    professions: comparative.professions,
+    profession: comparative.professions,
   })
 
 
@@ -36,19 +36,19 @@ const ProfessionConfig = () => {
   const deleteProfession = (event) => {
     setUser({
       ...user,
-      professions: user.professions.filter(profession => profession.name !== event.target.name)
+      profession: user.profession.filter(prof => prof.name !== event.target.name)
     })
     console.log(user)
   }
 
   const addProfession = (event) => {
-    console.log(user.professions)
-    if(!user.professions){
-      user.professions = []
+    // console.log(user.professions)
+    if(!user.profession){
+      user.profession = []
     }
     let addValidator = true
-    for(let x = 0; x < user.professions.length; x++){
-      if (user.professions[x].name === event.target.value){
+    for(let x = 0; x < user.profession.length; x++){
+      if (user.profession[x].name === event.target.value){
         addValidator = false
         break
       }
@@ -56,17 +56,16 @@ const ProfessionConfig = () => {
     if(addValidator){
       setUser({
         ...user,
-        professions: [...user.professions, {name: event.target.value}]
+        profession: [...user.profession, {name: event.target.value}]
       })
     }
-
   }
 
 
   const handleSubmit = () => {
-    let newProfessions = user.professions.map(prof => prof.name )
-    modifyProfessions(activeUser.id, {...activeUser, professions: newProfessions})
-    
+    let newProfessions = user.profession.map(prof => prof.name )
+    modifyProfessions(activeUser.id, {...activeUser, profession: newProfessions})
+    console.log('submit professions:', user.profession)
     Swal.fire({
       icon: 'success',
       title: 'Cambios Guardados',
@@ -78,13 +77,13 @@ const ProfessionConfig = () => {
 
 
   useEffect(() => {
-    console.log(user.professions)
+    console.log(user.profession)
   }, [user])
 
   const disableSelector = () => {
     if(activeUser.isPremium){
       return false
-    }else if (user?.professions?.length > 0){
+    }else if (user?.profession?.length > 0){
       return true
     }else{
       return false
@@ -101,24 +100,24 @@ const ProfessionConfig = () => {
 
       <div className={s.inputDiv}>
         <div>Profesiones</div>
-        <select name='professions' value={user.professions} onChange={(event) => addProfession(event)} disabled={disableSelector()}>
+        <select name='professions' value={user.profession} onChange={(event) => addProfession(event)} disabled={disableSelector()}>
 
           <option key={'none'} value=''>Profesiones</option>
           {
-            allProfessions.map(profession => {
+            allProfessions.map(prof => {
               return (
-                <option value={profession.name} key={profession.name}>{profession.name}</option>
+                <option value={prof.name} key={prof.name}>{prof.name}</option>
               )
             })
           }
 
         </select>
       </div>
-      { PremiumValidator(activeUser.isPremium, user.professions) ? <div className={s.premiumSpam}>Contrate premium para mas profesiones!</div> : <></> }
+      { PremiumValidator(activeUser.isPremium, user.profession) ? <div className={s.premiumSpam}>Contrate premium para mas profesiones!</div> : <></> }
 
       <div className={s.professionList}>
-        {user.professions && user.professions.length ? (
-          user.professions.map(job => (
+        {user.profession && user.profession.length ? (
+          user.profession.map(job => (
             <div className={s.individualProfession} key={job}>
               <CardProfessions job={job} />
               <img src={deleteIcon} name={job.name} onClick={deleteProfession} alt=""/>
