@@ -35,7 +35,7 @@ const getAllClaimsByProfessional = async ( id ) =>{
             include:[
                 {
                     model: Claims,
-                    attributes: ['id_user_client','feedback_claims', 'date_created'],
+                    attributes: ['id','id_user_professional','id_user_client','feedback_claims', 'date_created'],
                     through: {attributes: []},
                 },{
                     model: Profession,

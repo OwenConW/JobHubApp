@@ -16,10 +16,10 @@ export default function ReportCard(props) {
         </div>
         <div className={s.dateAndActiveContainer}>
           <h3>Fecha de creación: {date_created}</h3>
-          <div className={s.activeContainer}>
+          {/* <div className={s.activeContainer}>
             <h3>Activa?</h3>
             <h3>{isActive ? "Si" : "No"}</h3>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={s.descriptionContainer}>
