@@ -20,8 +20,7 @@ const Login = () => {
 	const {user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 	const navigate = useNavigate();
 
-console.log('ESTE OBJETO ES LO QUE LLEGA COMO USERS DE GOOGLE',user)
-//family_name, given_name, picture
+
 	const handleValidate = async (user, validate) => {
 		try{
 			if(validate && user){
