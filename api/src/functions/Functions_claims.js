@@ -1,19 +1,21 @@
 const { User, Claims, Profession } = require("../db")
 
 
-const postClaims = async ( id, id_user_client,  feedback_claims ) =>{
+const postClaims = async ( id, id_user_client,  feedback_claims, subject ) =>{
     try {
-        if( id_user_client && feedback_claims ){
+        if( id && id_user_client && feedback_claims && subject ){
             const [newClaims, created] = await Claims.findOrCreate({
                 where:{
                     id_user_client,
                     id_user_professional: id,
                     feedback_claims,
+                    subject,
                 },
                 defaults:{
                     id_user_client,
                     id_user_professional: id,
                     feedback_claims,
+                    subject,
                 }
             })
             let idFind = await User.findByPk(id)
@@ -66,9 +68,25 @@ const getAllClaimsByClient = async ( id ) =>{
     
 }
 
+const getAllClaimsBySubject = async ( subject ) =>{
+    try {
+        const claimsBySubject = await Claims.findAll({
+            where:{
+                subject,
+            }
+        })
+        return claimsBySubject
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+
 
 module.exports = {
     postClaims,
     getAllClaimsByProfessional,
     getAllClaimsByClient,
+    getAllClaimsBySubject,
 }
