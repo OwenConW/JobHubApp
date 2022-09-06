@@ -13,7 +13,6 @@ import calendar from "./assets/calendar.png"
 const Premium = () => {
 
     const activeUser = functions.getLocalStorage()
-  
 
     return (
       <div className={s.contenedorPadre}>
@@ -74,7 +73,7 @@ const Premium = () => {
             <div className={s.bePremium}>
               <div className={s.premiumText}>
                 <h1>Plan Premium</h1>
-                <h2 className={s.descuento}>Contratalo ahora por tan solo <h3>AR$5000</h3></h2>
+                <h2 className="descuento">Contratalo ahora por tan solo por <h3>AR$5000</h3></h2>
                 <div className={s.contenedorPrecio}>
                 <img src={etiqueta} alt=""/><h2>AR$4000</h2> 
                 </div>
