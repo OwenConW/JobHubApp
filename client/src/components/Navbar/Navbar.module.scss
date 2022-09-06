@@ -57,8 +57,18 @@
             border-radius: 50%;
             background-color: rgba(250, 65, 65, 0.7);
             position: absolute;
+            top: 14px;
+            right: -10px;
+        }
+
+        .notificationsChat{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: rgba(250, 65, 65, 0.7);
+            position: absolute;
             top: 10px;
-            right: -5px;
+            right: 10px;
         }
 
         &:hover{
