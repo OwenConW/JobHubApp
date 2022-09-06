@@ -54,17 +54,17 @@ function OrderEditModal(props) {
             </div>
             <div>
               <label htmlFor="description">Descripción</label>
-              <input type="text" name="description" value={orderData.description} onChange={handleChange}/>
+              <h3>{orderData.description}</h3>
             </div>
           </div>
           <div className={s.informationRightSide}>
             <div>
               <label htmlFor="date_created">Fecha de creación</label>
-              <input type="text" name="date_created" value={orderData.date_created} onChange={handleChange}/>
+              <h3>{orderData.date_created}</h3>
             </div>
             <div>
               <label htmlFor="apointment_date">Fecha pactada</label>
-              <input type="text" name="apointment_date" value={orderData.apointment_date} onChange={handleChange}/>
+              <h3>{orderData.apointment_date}</h3>
             </div>
             {/* <div>
               <label htmlFor="isActive">Activa?</label>
@@ -76,19 +76,21 @@ function OrderEditModal(props) {
             <div>
               <label htmlFor="allowReview">Reseña habilitada?</label>
               <div>
-                <input type="button" name="allowReview" value='Si' onClick={handleClick}/>
-                <input type="button" name="allowReview" value='No' onClick={handleClick}/>
+                <input className={`${orderData.allowReview ? s.yesBtn : null}`} type="button" name="allowReview" value='Si' onClick={handleClick}/>
+                <input className={`${!orderData.allowReview ? s.noBtn : null}`} type="button" name="allowReview" value='No' onClick={handleClick}/>
               </div>
             </div>
             <div>
               <label htmlFor="complete">Finalizada?</label>
               <div>
-                <input type="button" name="complete" value='Si' onClick={handleClick}/>
-                <input type="button" name="complete" value='No' onClick={handleClick}/>
+                <input className={`${orderData.complete ? s.yesBtn : null}`} type="button" name="complete" value='Si' onClick={handleClick}/>
+                <input className={`${!orderData.complete ? s.noBtn : null}`} type="button" name="complete" value='No' onClick={handleClick}/>
               </div>
             </div>
-            <button name="cancel-btn" onClick={handleEdit}>Cancelar</button>
-            <button onClick={handleEdit}>Editar</button>
+            <div className={s.editCancelBtnContainer}>
+              <button className={s.editBtn} onClick={handleEdit}>Editar</button>
+              <button className={s.cancelBtn} name="cancel-btn" onClick={handleEdit}>Cancelar</button>
+            </div>
           </div>
         </div>
     </div>

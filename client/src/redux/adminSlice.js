@@ -5,7 +5,8 @@ export const adminSlice = createSlice({
 	initialState: {
     users: [],
     reviews: [],
-    orders: []
+    orders: [],
+    claims: []
 	},
 	reducers: {
     // USERS
@@ -34,7 +35,14 @@ export const adminSlice = createSlice({
 		},
     getOrdersById: (state, action) => {
       state.orders = action.payload
-    }
+    },
+    // CLAIMS
+    getAllClaims: (state, action) => {
+      state.claims = action.payload;
+		},
+    getClaimsById: (state, action) => {
+      state.claims = action.payload;
+		},
 	},
 });
  
@@ -45,5 +53,7 @@ export const { getAllUsers,
                getAllOrders, 
                getUserById, 
                getOrdersById,
-               getReviewByUserClientId } = adminSlice.actions;
+               getReviewByUserClientId,
+               getAllClaims,
+               getClaimsById } = adminSlice.actions;
 export default adminSlice.reducer;

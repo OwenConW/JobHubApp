@@ -217,10 +217,22 @@
 
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 1100px){
 	.card{
         min-height: 35%;
-        min-width: 65%;
+        min-width: 85%;
+        .data{
+            .info{
+                .user{
+                    .image{
+                       width: 38.5%; 
+                    }
+                    .imagePremium{
+                        width: 38.5%; 
+                     }
+                }
+            }
+        }
 	}
 }
 
@@ -228,6 +240,18 @@
 	.card{
         min-height: 35%;
         min-width: 85%;
+        .data{
+            .info{
+                .user{
+                    .image{
+                       width: 38.5%; 
+                    }
+                    .imagePremium{
+                        width: 38.5%; 
+                     }
+                }
+            }
+        }
 	}
 }
 

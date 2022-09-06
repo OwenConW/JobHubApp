@@ -358,11 +358,12 @@ const userPost = async (nameMinuscule, lastNameMinuscule, date_of_Birth, mailMin
 
 //UPDATE USER CON JOB
 const updateUser = async (id, nameMinuscule, lastNameMinuscule, date_of_Birth, image, dni, mailMinuscule, phone, description, country, city, coordinate, street, address, isProfessional, profession)=>{
+    console.log(profession);
     try {
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
         const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
         await userUpdated.removeProfession(oldProfessions)
-        if(profession.length > 0){
+        if(profession?.length > 0){
             const professionsDB = await Profession.findAll({ where: { name: { [Op.or]: profession } } })
             await userUpdated.addProfession(professionsDB.map(obj => obj.dataValues.id))
         }

@@ -31,14 +31,15 @@ function ProfessionsCreationPanel(props) {
           {professions.length ? professions?.map(p => {
             return(
               <Profession {...p}/>
-            )
-          }) :
-          <h1>No hay profesiones existentes.</h1>
+              )
+            }) :
+            <h1>No hay profesiones existentes.</h1>
           }
         </div>
       </div>
-      <div>
+      <div className={s.professionCreationContainer}>
         <h1>Crear Profesión</h1>
+        <div className={s.divisoryLine}></div>
         <form className={s.formContainer} onSubmit={handleProfessionCreationSubmit}>
           <div className={s.professionCreationInputAndLabel}>
             <label htmlFor="profession_name">Nombre de la profesión</label>

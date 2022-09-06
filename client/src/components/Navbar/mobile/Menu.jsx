@@ -1,15 +1,20 @@
 import React from 'react';
 import s from './Menu.module.scss';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import defaultimage from '../assets/deafultimage.png';
 import login from '../assets/Login.png';
 import chatlogo from '../assets/chat.png';
+import { useNavigate } from 'react-router-dom';
 
-const Menu = ({activeUser, isAuthenticated, handleLogout}) => {
-  return (
-    <div className={s.container}>
-      <div className={s.routes}>
-      <Link to="/home" className={s.link}>
+const Menu = ({ activeUser, isAuthenticated, handleLogout }) => {
+	let navigate = useNavigate()
+	const handleConfig = () => {
+		navigate('../profileConfig/edit')
+	}
+	return (
+		<div className={s.container}>
+			<div className={s.routes}>
+				<Link to="/home" className={s.link}>
 					Inicio
 				</Link>
 				<Link to="/map" className={s.link}>
@@ -21,31 +26,35 @@ const Menu = ({activeUser, isAuthenticated, handleLogout}) => {
 				<Link to="/faq" className={s.link}>
 					Faq
 				</Link>
-      </div>
-      <div className={s.profileUser}>
-      {isAuthenticated ? (
+			</div>
+			<div className={s.profileUser}>
+				{isAuthenticated ? (
 					<div className={s.user}>
-            <div className={s.profile}>
-            {
-							activeUser.isPremium ?
-							<Link to={'/profile'} className={s.profileimgPremium}>
-							{activeUser.image ?  <img src={activeUser.image} alt=""/> : <img src={defaultimage} alt=""/>}
+						<div className={s.profile}>
+							{
+								activeUser.isPremium ?
+									<Link to={'/profile'} className={s.profileimgPremium}>
+										{activeUser.image ? <img src={activeUser.image} alt="" /> : <img src={defaultimage} alt="" />}
+									</Link>
+									:
+									<Link to={'/profile'} className={s.profileimg}>
+										{activeUser.image ? <img src={activeUser.image} alt="" /> : <img src={defaultimage} alt="" />}
+									</Link>
+							}
+							<Link to={`/myorders`} className={s.link}>
+								Ordenes
 							</Link>
-							:
-							<Link to={'/profile'} className={s.profileimg}>
-							{activeUser.image ?  <img src={activeUser.image} alt=""/> : <img src={defaultimage} alt=""/>}
+							<Link to={`/chat`} className={s.link}>
+								<img src={chatlogo} alt="chat" />
 							</Link>
-						}
-						<Link to={`/myorders`} className={s.link}>
-							Ordenes
-						</Link>
-						<Link to={`/chat`} className={s.link}>
-							<img src={chatlogo} alt="chat" />
-						</Link>
-            </div>
-
-						<div className={s.link} onClick={handleLogout}>
+						</div>
+						<div className={s.link}>
+						<div onClick={handleConfig}>
+							Panel de configuración
+						</div>	
+						<div onClick={handleLogout}>
 							Cerrar sesión
+						</div>
 						</div>
 					</div>
 				) : (
@@ -56,9 +65,9 @@ const Menu = ({activeUser, isAuthenticated, handleLogout}) => {
 						</Link>
 					</div>
 				)}
-      </div>
-    </div>
-  )
+			</div>
+		</div>
+	)
 }
 
 export default Menu;

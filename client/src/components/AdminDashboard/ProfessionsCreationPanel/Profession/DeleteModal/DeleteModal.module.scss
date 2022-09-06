@@ -1,3 +1,8 @@
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
 .container {
   display: flex;
   position: absolute;
@@ -28,7 +33,30 @@
           display: flex;
           justify-content: space-evenly;
           width: 60%;
-        }
 
+          .deleteBtn {
+            width: 80px;
+            height: 30px;
+            border-radius: 5px;
+            color: $white-color;
+            background-color: rgba(175, 43, 43, 0.829);
+               &:hover{
+                  color: $white-color;
+                  background-color: rgb(190, 39, 39);
+               }
+          }
+
+          .cancelBtn {
+            width: 80px;
+            height: 30px;
+            border-radius: 5px;
+            color: $white-color;
+            background-color: $green-color;
+               &:hover{
+                  color: $white-color;
+                  background-color: #0e4e52c5;
+               }
+          }
+        }
     }
 }
