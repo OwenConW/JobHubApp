@@ -34,7 +34,6 @@ claims.get("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try {
         const allClaimsProfessional = await functions.getAllClaimsByProfessional(id)
-        console.log(allClaimsProfessional);
         res.status(200).json(allClaimsProfessional)
     } catch (error) {
         console.log(error)
