@@ -11,7 +11,7 @@ import CardReview from './CardReview/CardReview.jsx'
 import ProfessionBox from "../ProfessionBox/ProfessionBox";
 import ReviewBox from "./ReviewBox/ReviewBox.jsx"
 import { useParams, useNavigate } from "react-router-dom";
-import { getChars, getCharsById } from '../../redux/userActions';
+import { getChars, getCharsById, clearUserDetail } from '../../redux/userActions';
 import defaultimage from '../Navbar/assets/deafultimage.png';
 import axios from "axios";
 import corona from "./assets/corona.png"
@@ -31,8 +31,13 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getCharsById(id))
     dispatch(getChars())
+
+    return () => {
+      dispatch(clearUserDetail());
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
 
   const onCoordinate = async() => {
     let data = {
