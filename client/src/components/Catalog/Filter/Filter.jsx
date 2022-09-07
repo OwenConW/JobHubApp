@@ -24,8 +24,6 @@ function Filter(props) {
   },[dispatch])
 
 
-  console.log(isActive);
-
   return (
     <div className={s.filterContainer}>
       <div className={s.allButtonsContainer}>

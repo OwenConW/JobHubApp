@@ -52,7 +52,7 @@ const Navbar = () => {
 				let conversations = await axios.get(`/conversation/${activeUser.id}`)
 				setNotificationsChat(conversations.data.length)
 			}catch(e){
-				console.log(4)
+				console.log(e)
 			}
 		}
 		fetchConversations()

@@ -68,6 +68,7 @@ const getAllClaimsByClient = async ( id ) =>{
     
 }
 
+
 const getAllClaimsBySubject = async ( subject ) =>{
     try {
         const claimsBySubject = await Claims.findAll({
