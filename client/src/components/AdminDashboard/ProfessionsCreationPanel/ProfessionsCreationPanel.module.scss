@@ -40,6 +40,20 @@ $darkgreen-color: #07393C;
         }
     }
 
+    .professionCreationContainer{
+
+      h1 {
+        text-align: center;
+      }
+      .divisoryLine {
+        height: 1px;
+        background-color: $green-color;
+        width: 100%;
+        margin-bottom: 5px;
+        margin-left: 6px;
+      }
+    }
+
     .professionDeleteContainer {
      width: 300px;
 

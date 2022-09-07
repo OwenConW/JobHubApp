@@ -19,7 +19,7 @@ claims.get("/", async (req, res, next)=>{
 
 //RUTA PARA FILTRAR LOS REPORTES POR SUBJECT
 claims.get("/reason", async (req, res, next)=>{
-    const {subject} = req.body;
+    const {subject} = req.query;
     try{
         const allClaimsBySubject = await functions.getAllClaimsBySubject(subject);
         res.status(200).json(allClaimsBySubject);
@@ -34,6 +34,7 @@ claims.get("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try {
         const allClaimsProfessional = await functions.getAllClaimsByProfessional(id)
+        console.log(allClaimsProfessional);
         res.status(200).json(allClaimsProfessional)
     } catch (error) {
         console.log(error)
@@ -72,7 +73,7 @@ claims.post("/", async (req, res, next) =>{
 claims.delete("/:id", async (req, res, next)=>{
     const {id} = req.params;
     try {
-        await Orders.destroy({
+        await Claims.destroy({
             where: {id:id}
         })
         res.status(200).send("the Claims was successfully deleted")

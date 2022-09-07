@@ -5,7 +5,8 @@ import s from './Card.module.scss';
 import { Link } from 'react-router-dom';
 import star from './assets/Star.svg';
 import details_interior from './assets/Det_interior.svg';
-import * as functions from "../../handlers/localStorage"
+import * as functions from "../../handlers/localStorage";
+import defaultimage from '../Navbar/assets/deafultimage.png';
 
 
 // const Card = ({ id, name, lastName, city, province, rating, name_job, image }) => {
@@ -34,11 +35,11 @@ function Card(props) {
 						{
 							isPremium? (
 								<div className={s.imagePremium}>
-									<img src={image} alt="user_profile" />
+									<img src={image === 'noimage' ? defaultimage : image} alt="user_profile" />
 								</div>
 							): (
 								<div className={s.image}>
-									<img src={image} alt="user_profile" />
+									<img src={image === 'noimage' ? defaultimage : image} alt="user_profile" />
 								</div>
 							)
 						}
@@ -53,7 +54,7 @@ function Card(props) {
 					</div>
 					<div className={s.detail}>
 						{
-							currentUser?.id * 1 === id * 1 
+							currentUser?.id * 1 === id * 1
 							? (
 							<Link to={`/profile`} className={s.detailLink}>
 								{

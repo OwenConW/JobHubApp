@@ -1,4 +1,9 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { actionFetchingMercadopagoLink, 
+  actionClearMercadopagoRedirectLink, 
+  actionSetFetchingMercadoPagoLinkFalse } from "../../../../redux/fetchingActions"
+import { useSelector } from "react-redux"
 import * as functions from "../../../../handlers/localStorage"
 import s from "./Premium.module.scss"
 import check from "./assets/comprobado.png"
@@ -8,15 +13,22 @@ import rocket from "./assets/rocket.png"
 import etiqueta from "./assets/etiqueta-del-precio.png"
 import activo from "./assets/activo.png"
 import calendar from "./assets/calendar.png"
-
+import PremiumModal from '../../../Profile/premiumModal/PremiumModal'
 
 const Premium = () => {
 
+    const [modalActive, setModalActive] = useState(false)
+
+    function handlePremiumModal(e) {
+      setModalActive(!modalActive)
+    }
+
     const activeUser = functions.getLocalStorage()
-  
 
     return (
+      
       <div className={s.contenedorPadre}>
+        {modalActive ? <PremiumModal mail={activeUser.mail} name={activeUser.name} handlePremiumModal={handlePremiumModal}/> : null}
         <h1 className={s.titleActivo}>
           {activeUser.isPremium
             ? `JobHub Premium Activo`
@@ -63,7 +75,7 @@ const Premium = () => {
                     <h2 className={s.pago}>{`Pago realizado el ${activeUser.payment_date}`}</h2>
                   </div>
     
-                  <div className={s.premiumRocketButton} onClick={'handlePremiumModal'}>
+                  <div className={s.premiumRocketButton} >
                     <div>
                       <img src={activo} alt="Premium Logo"></img>
                     </div>
@@ -74,16 +86,17 @@ const Premium = () => {
             <div className={s.bePremium}>
               <div className={s.premiumText}>
                 <h1>Plan Premium</h1>
-                <h2 className={s.descuento}>Contratalo ahora por tan solo <h3>AR$5000</h3></h2>
+                <h2 className="descuento">Contratalo ahora por tan solo por <h3>AR$5000</h3></h2>
                 <div className={s.contenedorPrecio}>
                 <img src={etiqueta} alt=""/><h2>AR$4000</h2> 
                 </div>
-                <div className={s.contenedorBotonBuy} onClick={""}>
+                <div className={s.contenedorBotonBuy} onClick={handlePremiumModal}>
                     <p>Obtener ahora</p>
                 </div>
               </div>
 
-              <div className={s.premiumRocketButton} onClick={'handlePremiumModal'}>
+              <div className={s.premiumRocketButton} >
+
                 <div>
                   <img src={rocket} alt="Premium Logo"></img>
                 </div>
