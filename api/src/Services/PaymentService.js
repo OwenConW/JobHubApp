@@ -4,7 +4,6 @@
   class PaymentService {
     async createSubscription(mail) {
         const url = "https://api.mercadopago.com/preapproval";
-        console.log("mail: ",mail)
       const body = {
         reason: "Job Hub Premium",
         auto_recurring: {

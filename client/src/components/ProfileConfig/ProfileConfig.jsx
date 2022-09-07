@@ -38,7 +38,6 @@ const ProfileConfig = () => {
   const [configPage, setConfigPage] = useState(id)
 
   const paginado = (event) => {
-    console.log(event.target.name)
     setConfigPage(event.target.name)
   }
 

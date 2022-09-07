@@ -98,7 +98,6 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-                console.log("ACAAAAAAAAAAAAAA:", professional) // "rating"
               }
               {
                 professional?.reviews?.slice().sort((x, y) => {  

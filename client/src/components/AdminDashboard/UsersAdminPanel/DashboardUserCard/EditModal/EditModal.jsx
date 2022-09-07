@@ -12,7 +12,6 @@ function EditModal(props) {
   const [userData, setUserData] = useState({id, name, last_Name, description, dni, date_of_birth, mail, phone, coordinate, isProfessional, image, country, city, street, address, rating, profession})
   const dispatch = useDispatch()
   const professionFromDb = useSelector( state => state.jobs.jobs)
-  const [prof,setProf] = useState('')
 
   //ESTADOS DE HANDLING DE EXITO Y ERROR PARA LA EDICION DE USUARIO
   const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
@@ -33,9 +32,6 @@ function EditModal(props) {
 
   //funcion onSubmit
   function handleEdit(e){
-    console.log('handleEdit');
-    console.log(e.target.name);
-    console.log(e.target.value);
     if(e.target.name === "cancel-btn") return handleEditOpenModal(!editModalActive) 
     e.preventDefault()
     dispatch(editUser(userData.id , userData))

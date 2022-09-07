@@ -44,7 +44,6 @@ const OpinionCard = ({review, users}) => {
       rating: modifiedReview?.rating,
       id_user_professional: parseInt(modifiedReview?.id_user_professional)
     }
-    console.log('sendInfo', sendInfo);
     changeReview(modifiedReview.id_orders , sendInfo);
 
     Swal.fire({

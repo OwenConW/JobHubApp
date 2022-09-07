@@ -116,7 +116,6 @@ const Onboarding = () => {
     handleChange(e);
     const{value} = e.target;
     dispatch(getDniForm(value)).then((res)=>{
-    console.log(res)
     res !== 'El DNI ingresado puede ser utilizado' ? setErrorDni(res): setErrorDni("")
     })
   }
