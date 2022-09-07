@@ -15,7 +15,7 @@ const allUsers = async () =>{
     
     } catch (error) {
         console.log(error)
-        next(error)
+        throw Error(error)
     }
 }
 
@@ -32,10 +32,19 @@ const allUsersActives = async() =>{
                 through: {attributes: []},
             },
         })
-        return allUsers
+
+        return allUsers.sort(function(x, y){  
+            if(x.isPremium){
+                return -1 
+            }
+            if(!x.isPremium){
+                return 1;
+            }
+            return 0
+        })
     } catch (error) {
         console.log(error)
-        next(error)
+        throw new Error(error)
     }
 }
 
@@ -56,7 +65,7 @@ const allProfessionalActives = async() =>{
         return allUsers
     } catch (error) {
         console.log(error)
-        next(error)
+        throw Error(error)
     }
 }
 
@@ -69,7 +78,7 @@ const searchDni = async(dni) =>{
         return "El DNI ingresado puede ser utilizado"
     } catch (error) {
         console.log(error)
-        next(error)
+        throw Error(error)
     }
 }
 
@@ -82,7 +91,7 @@ const searchMail = async(mail) =>{
         return "El DNI ingresado puede ser utilizado"
     } catch (error) {
         console.log(error)
-        next(error)
+        throw Error(error)
     }
 }
 
@@ -168,7 +177,7 @@ const filterByQueris = async(name, profession, rating) => {
         }
     }catch(error){
         console.log(error)
-        throw error
+        throw Error(error)
     }
 }
 
@@ -276,7 +285,7 @@ const getAllUsersAdmin = async ( name, last_Name, profession ) => {
         return options
     } catch (error) {
         console.log(error)
-        throw error
+        throw Error(error)
     }
 }
 
@@ -307,7 +316,7 @@ const getProffesionalById = async(id) => {
         return users
     }catch(error){
         console.log(error)
-        throw error
+        throw Error(error)
     } 
 }
 
@@ -358,7 +367,7 @@ const userPost = async (nameMinuscule, lastNameMinuscule, date_of_Birth, mailMin
 
 //UPDATE USER CON JOB
 const updateUser = async (id, nameMinuscule, lastNameMinuscule, date_of_Birth, image, dni, mailMinuscule, phone, description, country, city, coordinate, street, address, isProfessional, profession)=>{
-    console.log(profession);
+    //console.log(profession);
     try {
         const userUpdated = await User.findOne({ where: { id }, include: Profession })
         const oldProfessions = userUpdated.professions.map(obj => obj.dataValues.id)
@@ -536,32 +545,6 @@ const updatePhotos = async (id, obj) =>{
     } catch (error) {
         console.log(error)
         throw error
-    }
-}
-
-
-//FUNCION PARA SACAR LA DISTANCIA EN CORDENADAS
-const pitagorasDistance = (coord1, coord2) => {
-    let x1 = coord1[0];
-    let y1 = coord1[1];
-
-    let x2 = coord2[0];
-    let y2 = coord2[1];
-
-    let difx = x2 - x1;
-    let dify = y2 - y1;
-
-    let powx = Math.pow(difx, 2);
-    let powy = Math.pow(dify, 2);
-
-    return (Math.sqrt(powx+powy)*100);
-}
-
-const closeToOne = (coords1, coords2) => {
-    if(pitagorasDistance(coords1, coords2) < 5000){ //distancia en kilometros
-        return true;
-    }else{
-        return false;
     }
 }
 
