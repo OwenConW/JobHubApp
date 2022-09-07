@@ -108,12 +108,10 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-                console.log("ACAAAAAAAAAAAAAA:", professional) // "rating"
-              }
-              {
-                professional?.reviews?.slice().sort((x, y) => {
-                  if (x.rating > y.rating) {
-                    return -1
+                professional?.reviews?.slice().sort((x, y) => {  
+                  if(x.rating > y.rating){
+                      return -1 
+
                   }
                   if (x.rating < y.rating) {
                     return 1;

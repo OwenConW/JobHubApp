@@ -61,11 +61,6 @@ const Onboarding = () => {
       loading: false,
   });
 
-  // const [countries, setCountries] = useState({
-  //   names: [],
-  //   loading: false
-  // });
-
 
   const [image, setImage] = useState(null);
   const [isUpload, setIsUpload] = useState({
@@ -116,7 +111,6 @@ const Onboarding = () => {
     handleChange(e);
     const{value} = e.target;
     dispatch(getDniForm(value)).then((res)=>{
-    console.log(res)
     res !== 'El DNI ingresado puede ser utilizado' ? setErrorDni(res): setErrorDni("")
     })
   }
@@ -124,6 +118,7 @@ const Onboarding = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     if(Object.keys(errors).length || errorGeometry.error || errorDni.length ) return alert("casi casi atrevido!! modifica el DNI, sino no se envia nada!")
+    
     setErrorGeometry({
       error: '',
       loading: true,
@@ -271,7 +266,7 @@ const Onboarding = () => {
                 </div>
               </div>
 
-              {errorGeometry.loading ? <Loader/> : <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length || errorGeometry.error || errorDni.length  }/>}
+              {errorGeometry.loading ? <Loader/> : <input type="submit" className={s.submit} onClick={(e) => handleSubmit(e)} disabled={Object.keys(errors).length || errorGeometry.error || errorDni.length }/>}
               {errorGeometry.error ? <p className={s.error}>{errorGeometry.error}</p> : ''}
           </form>
         </div>

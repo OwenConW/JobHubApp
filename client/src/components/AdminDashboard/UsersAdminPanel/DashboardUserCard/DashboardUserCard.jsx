@@ -154,7 +154,7 @@ function DashboardUserCard(props) {
           </div>
         </div>
         <div className={s.description}>
-          <h4>Description</h4>
+          <h4>Descripción</h4>
           <p>{description}</p>
         </div>
         <div>

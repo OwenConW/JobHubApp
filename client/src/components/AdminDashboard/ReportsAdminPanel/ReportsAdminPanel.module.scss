@@ -1,8 +1,79 @@
+$white-color: #F0EDEE;
+$green-color: #0e4e52;
+$lightgreen-color: #2C666E;
+$darkgreen-color: #07393C;
+
 .mainContainer {
-  width: 80%;
   background-color: rgba(192, 192, 192, 0.219);
   margin-right: 15px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .allClaimsBtn {
+    align-self: center;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: $green-color;
+    color: $white-color;
+
+  }
+
+  .divisoryLine {
+    height: 1px;
+    background-color: $green-color;
+    width: 90%;
+    margin-top: 15px;
+    align-self: center;
+  }
+
+  .formsContainer {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+      .submitBtn {
+        background-color: $green-color;
+          color: $white-color;
+          width: 55px;
+          box-shadow: 14px 19px 31px -3px rgba(0,0,0,0.1);
+          transition: 0.2s;
+          border-radius: 5px;
+          &:hover{
+            background-color: $white-color;
+            color: $green-color;
+            scale: 1.03;
+            transition: 0.2s;
+            cursor: pointer;
+          }
+      }
+  }
+
+  .filterByTypeContainer {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px 0;
+
+    .filterBtn {
+      background-color: $green-color;
+        color: $white-color;
+        width: 100px;
+        height: 40px;
+        box-shadow: 14px 19px 31px -3px rgba(0,0,0,0.1);
+        transition: 0.2s;
+        border-radius: 5px;
+        &:hover{
+          background-color: $white-color;
+          color: $green-color;
+          scale: 1.03;
+          transition: 0.2s;
+          cursor: pointer;
+        }
+    }
+  } 
+
   .cardsContainer {
     display: flex;
     flex-wrap: wrap;

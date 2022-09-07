@@ -178,7 +178,7 @@ export const getAllReviewsForAdmin = () => (dispatch) => {
 export const getReviewByUserProfessionalIdForAdmin = (id) => (dispatch) => {
   axios.get(`/review/${id}`)
     .then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       if (!res.data) res.data = { reviews: []}
       dispatch(getReviewByUserProfessionalId(res.data))
     })
@@ -189,7 +189,7 @@ export const getReviewByUserProfessionalIdForAdmin = (id) => (dispatch) => {
 export const getReviewByUserClientIdForAdmin = (id) => (dispatch) => {
   axios.get(`/review/admin/client/${id}`)
     .then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       if (!res.data) res.data = []
       dispatch(getReviewByUserClientId(res.data))
     })
@@ -362,7 +362,7 @@ export const getAllClaimsForAdmin = () => (dispatch) => {
 export const getClaimsByProfessionalIdForAdmin = (id) => (dispatch) => {
   axios.get(`/claims/${id}`)
   .then((res) => {
-    console.log(res.data);
+    //console.log(res.data);
       dispatch(getClaimsById(res.data.claims))
     })
     .catch(e => console.error(e))
@@ -371,7 +371,7 @@ export const getClaimsByProfessionalIdForAdmin = (id) => (dispatch) => {
 export const getClaimsByClientIdForAdmin = (id) => (dispatch) => {
   axios.get(`/claims/client/${id}`)
   .then((res) => {
-    console.log(res.data);
+    //console.log(res.data);
       dispatch(getClaimsById(res.data))
     })
     .catch(e => console.error(e))
@@ -380,7 +380,7 @@ export const getClaimsByClientIdForAdmin = (id) => (dispatch) => {
 export const getClaimsByTypeForAdmin = (type) => (dispatch) => {
   axios.get(`/claims/reason?subject=${type}`)
   .then((res) => {
-    console.log(res.data);
+    //console.log(res.data);
       dispatch(getClaimsById(res.data))
     })
     .catch(e => console.error(e))
@@ -388,14 +388,14 @@ export const getClaimsByTypeForAdmin = (type) => (dispatch) => {
 
 export const deleteClaim = (id) => (dispatch) => {
   dispatch(fetchingAdminDeleteClaim())
-  console.log('action');
+  //console.log('action');
   axios.delete(`/claims/${id}`)
   .then(r => {
     dispatch(fetchingAdminDeleteClaimSuccess())
         dispatch(getAllClaimsForAdmin())
       })
       .catch(e => {
-        console.log('action errors');
+        //console.log('action errors');
         dispatch(fetchingAdminDeleteClaimFailure())
         console.error(e)
       })

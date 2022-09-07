@@ -59,7 +59,6 @@ users.get('/home', async (req, res, next)=>{
     const { id, coordinate } = req.body;
     try {
         const allNearbyUsers = await functions.nearbyUsers( id, coordinate )
-        console.log("ESTO LLEGA DE LA FUNCION",allNearbyUsers)
         res.status(200).json(allNearbyUsers)
 ///////////////
     } catch (error) {
