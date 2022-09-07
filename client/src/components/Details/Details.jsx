@@ -97,9 +97,7 @@ const Profile = () => {
             <p className={s.orderText}>Mejores Reseñas</p>
 
             <div className={s.lastOrders}>
-              {
-                console.log("ACAAAAAAAAAAAAAA:", professional) // "rating"
-              }
+
               {
                 professional?.reviews?.slice().sort((x, y) => {  
                   if(x.rating > y.rating){
@@ -115,7 +113,7 @@ const Profile = () => {
                   <CardReview dataObj={review} reviewer={reviewer} key={review.id_orders}/>
                 )})
               }
-             
+
             </div>
           </div>
           <div className={s.configBox}>
