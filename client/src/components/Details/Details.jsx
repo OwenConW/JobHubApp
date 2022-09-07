@@ -17,6 +17,7 @@ import axios from "axios";
 import corona from "./assets/corona.png"
 import { useAuth0 } from '@auth0/auth0-react';
 
+
 const Profile = () => {
 
   let params = useParams();

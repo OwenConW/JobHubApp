@@ -15,7 +15,7 @@ const allUsers = async () =>{
     
     } catch (error) {
         console.log(error)
-        throw Error(error)
+        throw error
     }
 }
 
@@ -44,7 +44,7 @@ const allUsersActives = async() =>{
         })
     } catch (error) {
         console.log(error)
-        throw new Error(error)
+        throw error
     }
 }
 
@@ -65,7 +65,7 @@ const allProfessionalActives = async() =>{
         return allUsers
     } catch (error) {
         console.log(error)
-        throw Error(error)
+        throw error
     }
 }
 
@@ -78,7 +78,7 @@ const searchDni = async(dni) =>{
         return "El DNI ingresado puede ser utilizado"
     } catch (error) {
         console.log(error)
-        throw Error(error)
+        throw error
     }
 }
 
@@ -91,7 +91,7 @@ const searchMail = async(mail) =>{
         return "El DNI ingresado puede ser utilizado"
     } catch (error) {
         console.log(error)
-        throw Error(error)
+        throw error
     }
 }
 
@@ -177,7 +177,7 @@ const filterByQueris = async(name, profession, rating) => {
         }
     }catch(error){
         console.log(error)
-        throw Error(error)
+        throw error
     }
 }
 
@@ -285,7 +285,7 @@ const getAllUsersAdmin = async ( name, last_Name, profession ) => {
         return options
     } catch (error) {
         console.log(error)
-        throw Error(error)
+        throw error
     }
 }
 
@@ -316,7 +316,7 @@ const getProffesionalById = async(id) => {
         return users
     }catch(error){
         console.log(error)
-        throw Error(error)
+        throw error
     } 
 }
 

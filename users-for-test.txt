@@ -228,3 +228,23 @@ test_user_8943112@testuser.com
     "profession" : ["tecnico de aires acondicionados"]
 }
 holaxdhola
+
+//datos de mar del plata
+
+{
+  "name": "Juan",
+    "last_Name": "Gomes",
+    "mail": "juanchi@gmail.com",
+    "dni": "21325990",
+    "image": "https://i.cbc.ca/1.6323672.1642803333!/cumulusImage/httpImage/image.jpg_gen/derivatives/16x9_780/grade-7-teacher-matthew-morris.jpg",
+    "date_of_Birth":"14/03/1989"
+    "phone": "3584572553",
+    "country": "Argentina",
+    "description": "Hola mi nombre es Victor Cheng, soy tecnico en aires acondicionados, sientase seguro de contactarse conmigo. Trabajos de alta calidad con repuestos de alta calidad.",
+    "city": "Bella Vista",
+    "coordinate": ["-31.329277268154467", "-64.25214605804419"],
+    "isProfessional": true,
+    "street": "O' Brien Juan",
+    "address": "4259",
+    "profession" : ["tecnico de aires acondicionados"]
+}
