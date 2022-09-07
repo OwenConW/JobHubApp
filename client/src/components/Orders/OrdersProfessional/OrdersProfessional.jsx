@@ -143,7 +143,7 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
                     <div className={s.inputs}>
                         <div className={s.description}>
                             <label>Detalle del trabajo</label>
-                            <textarea name='description' value={orderDescription.description} onChange={(e) => handleChange(e)} required></textarea>
+                            <textarea name='description' value={orderDescription.description} onChange={(e) => handleChange(e)} placeholder={'Breve descripción del trabajo a realizar...'} required></textarea>
                         </div>
                         <div className={s.moreInfo}>
                             <div className={s.date}>
@@ -151,8 +151,7 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
                                 <div>
                                 <input type="date" name="appointment_date" value={orderDescription.appointment_date} min={minDate} required onChange={(e) => handleChange(e)}/>
                                 </div>
-                               
-                               
+
                             </div>
                             <div className={s.orderId}>
                                 <h1>Orden: {order.id}</h1>

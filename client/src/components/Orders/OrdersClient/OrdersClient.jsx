@@ -108,7 +108,7 @@ const OrdersClient = ({order, activeUser, setCli, clientOrders}) => {
                 <div className={s.inputs}>
                     <div className={s.description}>
                         <label>Mensaje</label>
-                        <textarea name='feedback_client' value={opinion.feedback_client} onChange={(e) => handleChange(e)} required></textarea>
+                        <textarea placeholder={'Escribe tu reseña sobre el profesional...'} name='feedback_client' value={opinion.feedback_client} onChange={(e) => handleChange(e)} required></textarea>
                     </div>
                     <div className={s.barra}>
                         <label>Puntaje</label>
