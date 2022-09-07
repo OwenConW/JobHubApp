@@ -18,9 +18,12 @@ export const userSlice = createSlice({
 		getFilteredProfessionals: (state, action) => {
 			state.filteredProfessionals = action.payload;
 		},
+		clearDetails: (state) => {
+			state.detail = {};
+		}
 	},
 });
 
-export const { getAllUsers, getUserById, getFilteredProfessionals, setActiveUser } =
+export const { getAllUsers, getUserById, getFilteredProfessionals, setActiveUser, clearDetails } =
 	userSlice.actions;
 export default userSlice.reducer;

@@ -4,6 +4,7 @@ import {
 	getAllUsers,
 	getUserById,
 	getFilteredProfessionals,
+	clearDetails,
 	// setActiveUser
 } from './userSlice.js';
 
@@ -46,6 +47,10 @@ export const filterProfessionals = (filters) => (dispatch) => {
 		})
 		.catch((e) => console.log(e));
 };
+
+export const clearUserDetail = () => (dispatch) => {
+	dispatch(clearDetails());
+}
 
 
 
