@@ -65,7 +65,7 @@ const ProfessionConfig = () => {
   const handleSubmit = () => {
     let newProfessions = user.profession.map(prof => prof.name )
     modifyProfessions(activeUser.id, {...activeUser, profession: newProfessions})
-    console.log('submit professions:', user.profession)
+    //console.log('submit professions:', user.profession)
     Swal.fire({
       icon: 'success',
       title: 'Cambios Guardados',
@@ -77,7 +77,7 @@ const ProfessionConfig = () => {
 
 
   useEffect(() => {
-    console.log(user.profession)
+    //console.log(user.profession)
   }, [user])
 
   const disableSelector = () => {

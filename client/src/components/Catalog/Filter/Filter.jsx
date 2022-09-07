@@ -23,9 +23,6 @@ function Filter(props) {
     dispatch(actionGetAllJobs())
   },[dispatch])
 
-
-  console.log(isActive);
-
   return (
     <div className={s.filterContainer}>
       <div className={s.allButtonsContainer}>
