@@ -12,6 +12,7 @@ function EditModal(props) {
   const [userData, setUserData] = useState({id, name, last_Name, description, dni, date_of_birth, mail, phone, coordinate, isProfessional, image, country, city, street, address, rating, profession})
   const dispatch = useDispatch()
   const professionFromDb = useSelector( state => state.jobs.jobs)
+  const [prof,setProf] = useState('')
 
   //ESTADOS DE HANDLING DE EXITO Y ERROR PARA LA EDICION DE USUARIO
   const fetchingAdminEditUserSuccess = useSelector(state => state.fetching.fetchingAdminEditUserSuccess)
@@ -32,9 +33,11 @@ function EditModal(props) {
 
   //funcion onSubmit
   function handleEdit(e){
+    console.log('handleEdit');
+    console.log(e.target.name);
+    console.log(e.target.value);
     if(e.target.name === "cancel-btn") return handleEditOpenModal(!editModalActive) 
     e.preventDefault()
-    console.log(userData.profession);
     dispatch(editUser(userData.id , userData))
   }
   
@@ -130,12 +133,12 @@ function EditModal(props) {
               <div className={s.removeProfessionsContainer}>
                 {userData.profession.length ? userData?.profession?.length && userData?.profession?.map(p => {
                   return (
-                    <button className={s.removeProfessionBtn} onClick={handleRemoveProfession} value={p}>{p}</button>
+                    <button type="button" className={s.removeProfessionBtn} onClick={handleRemoveProfession} value={p}>{p}</button>
                   )
                 }) : <h4>No tiene</h4>}
               </div>
             </div>
-            <select onClick={handleInputChange} name="add-profession">
+            <select onClick={handleInputChange} name="add-profession" >
                   <option name="main-option" value=''>Selecciona profesiones</option>
               {professionFromDb?.map(p => {
                 return (
