@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { getLocalStorage } from '../../handlers/localStorage';
 import axios from 'axios';
+import Navbar from "../Navbar/Navbar";
 
 import s from './scss/Support.module.scss';
 
@@ -115,10 +115,10 @@ const Support = () => {
 
   return (
     <>
+      <Navbar />
       <div className={s.container}>
         <div className={s.component}>
           <form className={s.form}  onSubmit={(e) => handleSubmit(e)}>
-            <Link to='/home'><button className={s.button}>Volver al Inicio</button></Link>
             <div className={s.contain}>
               <h1 id={s.title}>ENVÍANOS TU CONSULTA</h1>
               <h2 id={s.subtitle}>Un admin se contactará contigo en la brevedad... </h2>

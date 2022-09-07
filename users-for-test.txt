@@ -199,6 +199,7 @@ test_user_8943112@testuser.com
     "mail": "valentinojesuss4@gmail.com",
     "dni": "43229921",
     "image": "https://res.cloudinary.com/jobhubapp/image/upload/v1661474109/jobhub/i2dkayrae3agsxxuwckz.jpg",
+    "date_of_Birth":"10/03/1979"
     "phone": "35845723",
     "country": "Argentina",
     "description": "Hola mi nombre es Valentino Machuca, soy estudiante de Desarrollo web en Henry y uno de los desarrolladores de este proyecto.",

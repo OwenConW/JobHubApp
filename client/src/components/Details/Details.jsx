@@ -98,8 +98,6 @@ const Profile = () => {
 
             <div className={s.lastOrders}>
               {
-              }
-              {
                 professional?.reviews?.slice().sort((x, y) => {  
                   if(x.rating > y.rating){
                       return -1 
@@ -114,7 +112,7 @@ const Profile = () => {
                   <CardReview dataObj={review} reviewer={reviewer} key={review.id_orders}/>
                 )})
               }
-             
+
             </div>
           </div>
           <div className={s.configBox}>
