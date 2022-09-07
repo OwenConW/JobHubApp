@@ -123,7 +123,7 @@ function DashboardUserCard(props) {
           <div className={s.birthDatePhoneContainer}>
             <div>
               <h4>Fecha de nacimiento</h4>
-              <h4>17/03/1999{date_of_Birth}</h4>
+              <h4>{date_of_Birth ? date_of_Birth : "Dato no ingresado."}</h4>
             </div>
             <div>
               <h4>Telefono</h4>

@@ -7,9 +7,9 @@ import s from './EditModal.module.scss';
 
 
 function EditModal(props) {
-  const {id, name, last_Name, description, dni, date_of_birth, mail, phone, country, city, street, address, coordinate, isProfessional,rating, image, profession, editModalActive, handleEditOpenModal } = props;
+  const {id, name, last_Name, description, dni, date_of_Birth, mail, phone, country, city, street, address, coordinate, isProfessional,rating, image, profession, editModalActive, handleEditOpenModal } = props;
   //estado de los datos a enviar a la DB, (profession harcodeado por la misma razon que en el handleRestore)
-  const [userData, setUserData] = useState({id, name, last_Name, description, dni, date_of_birth, mail, phone, coordinate, isProfessional, image, country, city, street, address, rating, profession})
+  const [userData, setUserData] = useState({id, name, last_Name, description, dni, date_of_Birth, mail, phone, coordinate, isProfessional, image, country, city, street, address, rating, profession})
   const dispatch = useDispatch()
   const professionFromDb = useSelector( state => state.jobs.jobs)
 
@@ -84,8 +84,8 @@ function EditModal(props) {
             <input type="text" name='dni' value={userData.dni} onChange={handleInputChange} />
           </div>
           <div>
-            <label htmlFor="date_of_birth">Fecha de nacimiento</label>
-            <input type="text" name='date_of_birth' value={userData.date_of_birth} onChange={handleInputChange} />
+            <label htmlFor="date_of_Birth">Fecha de nacimiento</label>
+            <input type="text" name='date_of_Birth' value={userData.date_of_Birth} onChange={handleInputChange} />
           </div>
           <div>
             <label htmlFor="rating">Rating</label>
@@ -134,7 +134,7 @@ function EditModal(props) {
                 }) : <h4>No tiene</h4>}
               </div>
             </div>
-            <select onClick={handleInputChange} name="add-profession" >
+            <select onChange={handleInputChange} name="add-profession" >
                   <option name="main-option" value=''>Selecciona profesiones</option>
               {professionFromDb?.map(p => {
                 return (

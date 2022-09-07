@@ -54,19 +54,6 @@ users.get('/allprofessional/actives', async (req, res, next)=>{
     }
 })
 
-//RUTA PARA TRAER USUARIOS FILTRADOS POR COORDENADAS CERCANAS AL HOME
-users.get('/home', async (req, res, next)=>{
-    const { id, coordinate } = req.body;
-    try {
-        const allNearbyUsers = await functions.nearbyUsers( id, coordinate )
-        res.status(200).json(allNearbyUsers)
-///////////////
-    } catch (error) {
-        console.log(error)
-        next(error)
-    }
-})
-
 //RUTA PARA VALIDAR SI EL DNI EXISTE EN BASE DE DATOS
 users.get('/searchDni', async (req, res, next) =>{
     const { dni } = req.query 
