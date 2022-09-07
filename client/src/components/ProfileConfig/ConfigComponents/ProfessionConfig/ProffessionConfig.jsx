@@ -3,6 +3,7 @@ import s from './ProfessionConfig.module.scss'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
 
 //Nuestros Archivos
 import { getLocalStorage } from '../../../../handlers/localStorage';
@@ -16,14 +17,16 @@ import { getCharsById, modifyProfessions } from "../../../../redux/userActions";
 import deleteIcon from './assets/Recycle Bin Full.png'
 
 const ProfessionConfig = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  let activeUser = getLocalStorage()
+  const navigate = useNavigate();
 
-  let comparative = useSelector((state) => state.users.detail)
+  let activeUser = getLocalStorage();
+
+  let comparative = useSelector((state) => state.users.detail);
  
 
-  const allProfessions = useSelector((state) => state.jobs.jobs)
+  const allProfessions = useSelector((state) => state.jobs.jobs);
 
 
   //USER LOCAL PARA ENVIAR A BASE DE DATOS EN CASO DE HACER CAMBIOS
@@ -73,6 +76,10 @@ const ProfessionConfig = () => {
       timer: 1500
     })
     dispatch(getCharsById(activeUser.id))
+  }
+
+  const handleNotFound = () => {
+    navigate('/support')
   }
 
 
@@ -131,6 +138,12 @@ const ProfessionConfig = () => {
       </div>
 
       <input type="submit" className={s.submit} onClick={handleSubmit} disabled={changeValidator({professions: comparative.professions}, user)} />
+
+      <div className={s.notfound} onClick={handleNotFound}>
+
+        <p>Mi trabajo no se encuentra en la lista.</p>
+
+      </div>
 
     </div>
   )
