@@ -600,7 +600,7 @@
                 align-items: center;
 
                 .btnSubmit{
-                    transition: 0.3s;
+                    transition: 0.5s;
                     background-color: #1c464c;
                     width: 25%;
                     height: 70%;
@@ -615,11 +615,16 @@
 
                     &:hover{
                         cursor: pointer;
-                        transition: 0.3s;
+                        transition: 0.5s;
                         border: 1px solid #1c464c;
                         background-color: #EEEEEE;
                         color: #0e2427;
                         border-radius: 5px;
+                    }
+                    &:disabled {
+                        background-color: rgba(168, 168, 168, 0.47);
+                        color: #07393c80;
+                        transition: 0.5s;
                     }
                 }
             }
