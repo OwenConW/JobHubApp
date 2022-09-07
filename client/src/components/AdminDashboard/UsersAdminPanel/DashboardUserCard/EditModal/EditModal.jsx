@@ -34,7 +34,6 @@ function EditModal(props) {
   function handleEdit(e){
     if(e.target.name === "cancel-btn") return handleEditOpenModal(!editModalActive) 
     e.preventDefault()
-    console.log(userData.profession);
     dispatch(editUser(userData.id , userData))
   }
   
@@ -130,12 +129,12 @@ function EditModal(props) {
               <div className={s.removeProfessionsContainer}>
                 {userData.profession.length ? userData?.profession?.length && userData?.profession?.map(p => {
                   return (
-                    <button className={s.removeProfessionBtn} onClick={handleRemoveProfession} value={p}>{p}</button>
+                    <button type="button" className={s.removeProfessionBtn} onClick={handleRemoveProfession} value={p}>{p}</button>
                   )
                 }) : <h4>No tiene</h4>}
               </div>
             </div>
-            <select onClick={handleInputChange} name="add-profession">
+            <select onClick={handleInputChange} name="add-profession" >
                   <option name="main-option" value=''>Selecciona profesiones</option>
               {professionFromDb?.map(p => {
                 return (

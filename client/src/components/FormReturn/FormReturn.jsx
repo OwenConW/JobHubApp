@@ -51,7 +51,6 @@ export default function FormReturn(){
             if(seconds === 0){
                 setLoading(null)
                 setSeconds(13)
-                console.log("mail", user)
                 axios.get(`/verify?mail=${user}`)
                 .then(res => {
                     setReset(res.data)
@@ -65,7 +64,6 @@ export default function FormReturn(){
 
 
     React.useEffect(() => {
-        console.log(reset)
         if(reset?.onboarding){
             Swal.fire({
                 icon: 'error',

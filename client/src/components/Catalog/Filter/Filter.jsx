@@ -23,7 +23,6 @@ function Filter(props) {
     dispatch(actionGetAllJobs())
   },[dispatch])
 
-
   return (
     <div className={s.filterContainer}>
       <div className={s.allButtonsContainer}>

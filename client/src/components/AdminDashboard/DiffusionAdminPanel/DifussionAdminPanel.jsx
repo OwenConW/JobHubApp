@@ -11,7 +11,6 @@ function DifussionAdminPanel(){
 
   function handleMailSubmit(e) {
     e.preventDefault();
-    console.log('enviado');
   }
 
   return(

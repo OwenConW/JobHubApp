@@ -9,7 +9,7 @@ const RevCards = (review) => {
     review = review.review
     let users = useSelector((state) => state.users.users)
     let reviewer = users.find(user => user.id === review.id_user_client) 
-    console.log(reviewer)
+    //console.log(reviewer)
 
 return (
     <div className={s.orders} >

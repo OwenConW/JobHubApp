@@ -97,7 +97,6 @@ const Profile = () => {
             <p className={s.orderText}>Mejores Reseñas</p>
 
             <div className={s.lastOrders}>
-
               {
                 professional?.reviews?.slice().sort((x, y) => {  
                   if(x.rating > y.rating){
