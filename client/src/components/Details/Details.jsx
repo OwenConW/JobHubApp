@@ -17,6 +17,7 @@ import axios from "axios";
 import corona from "./assets/corona.png"
 
 
+
 const Profile = () => {
 
   let params = useParams();

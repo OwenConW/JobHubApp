@@ -15,7 +15,7 @@ const allUsers = async () =>{
     
     } catch (error) {
         console.log(error)
-        next(error)
+        throw(error)
     }
 }
 
@@ -35,7 +35,7 @@ const allUsersActives = async() =>{
         return allUsers
     } catch (error) {
         console.log(error)
-        next(error)
+        throw(error)
     }
 }
 
@@ -56,7 +56,7 @@ const allProfessionalActives = async() =>{
         return allUsers
     } catch (error) {
         console.log(error)
-        next(error)
+        throw(error)
     }
 }
 
