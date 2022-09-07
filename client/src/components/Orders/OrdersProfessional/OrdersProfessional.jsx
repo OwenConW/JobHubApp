@@ -16,9 +16,7 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
     useEffect(() => {
         const fetchUser = async () => {
             let response = await axios.get(`/users/${order.id_user_client}`);
-
             setClient(response.data);
-
         }
 
         fetchUser();
@@ -113,24 +111,17 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
 
     let minDate = new Date().toLocaleDateString('en-ca')
     useEffect(() => {
-        console.log(orderDescription)
+        handleDisable()
     }, [orderDescription])
 
+    const handleDisable = () => {
+        if(orderDescription.appointment_date === ''){
+            return true
+        }
+        return false
+    }
 
     return (
-        // <div className={orderView? s.order : s.order} key={client.id}>
-        //     <div className={s.img}>
-        //         <img src={client.image} alt="" />
-        //     </div>
-        //     <div className={s.userdata}>
-        //         <p className={s.name}>{client.name} {client.last_Name}</p>
-        //         <p className={s.location}>{client.city}, {client.country}</p>
-        //     </div>
-        //     <div className={s.btndiv}>
-        //         <div className={s.btn} onClick={() => handleComplete()}>Completar</div>
-        //     </div>
-
-        // </div>
 
         <div className={orderView ? s.review : s.order} key={client.id}>
             <div className={s.info}>
@@ -152,7 +143,7 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
                     <div className={s.inputs}>
                         <div className={s.description}>
                             <label>Detalle del trabajo</label>
-                            <textarea name='description' value={orderDescription.description} onChange={(e) => handleChange(e)} required></textarea>
+                            <textarea name='description' value={orderDescription.description} onChange={(e) => handleChange(e)} placeholder={'Breve descripción del trabajo a realizar...'} required></textarea>
                         </div>
                         <div className={s.moreInfo}>
                             <div className={s.date}>
@@ -160,8 +151,7 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
                                 <div>
                                 <input type="date" name="appointment_date" value={orderDescription.appointment_date} min={minDate} required onChange={(e) => handleChange(e)}/>
                                 </div>
-                               
-                               
+
                             </div>
                             <div className={s.orderId}>
                                 <h1>Orden: {order.id}</h1>
@@ -171,7 +161,7 @@ const OrdersProfessional = ({ order, setProf, profOrders }) => {
                     <div className={s.submit}>
                         {/* {loading ? <Loader/> : } */}
                         <button className={s.btnSubmit} type='submit'onClick={(e) => handleCancel(e)}>Cancelar</button>
-                        <button className={s.btnSubmit} type='submit' onClick={(e) => handleConfirm(e)}>Completar</button>
+                        <button className={s.btnSubmit} type='submit' onClick={(e) => handleConfirm(e)} disabled={handleDisable()}>Completar</button>
                         {/* {error ? <p>{error}</p> : ''} */}
                     </div>
                 </form>

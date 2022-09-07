@@ -20,7 +20,7 @@ const OtherReviews = () => {
 
   let users = useSelector((state) => state.users.users)
 
-  console.log(allReviews[0])
+  //console.log(allReviews[0])
   useEffect(() => {
 
   }, [users])
@@ -51,7 +51,7 @@ const OtherReviews = () => {
   }
 
   useEffect(() => {
-    console.log(allReviews)
+    //console.log(allReviews)
     filterByName(filter)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter])
